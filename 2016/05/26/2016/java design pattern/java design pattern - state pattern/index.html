@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>java design pattern - state pattern | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="场景
+状态模式
+实现过程
+另一种实现方式
+总结
+参考资料
+
+
+场景  在程序中要根据对象的不同状态来执行不同的逻辑的时候可以考虑使用状态模式。下面来看没有使用状态模式的代码  12345678910111213141516171819202122232425  public class NoUseStatePattern &amp;#123;    public int value;    publi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java design pattern - state pattern">
+<meta property="og:url" content="http://yoursite.com/2016/05/26/2016/java design pattern/java design pattern - state pattern/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="场景
+状态模式
+实现过程
+另一种实现方式
+总结
+参考资料
+
+
+场景  在程序中要根据对象的不同状态来执行不同的逻辑的时候可以考虑使用状态模式。下面来看没有使用状态模式的代码  12345678910111213141516171819202122232425  public class NoUseStatePattern &amp;#123;    public int value;    publi">
+<meta property="og:image" content="http://yoursite.com/images/2016/05/State_Design_Pattern_UML_Class_Diagram.svg.png">
+<meta property="og:updated_time" content="2017-02-25T01:12:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java design pattern - state pattern">
+<meta name="twitter:description" content="场景
+状态模式
+实现过程
+另一种实现方式
+总结
+参考资料
+
+
+场景  在程序中要根据对象的不同状态来执行不同的逻辑的时候可以考虑使用状态模式。下面来看没有使用状态模式的代码  12345678910111213141516171819202122232425  public class NoUseStatePattern &amp;#123;    public int value;    publi">
+<meta name="twitter:image" content="http://yoursite.com/images/2016/05/State_Design_Pattern_UML_Class_Diagram.svg.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2016/java design pattern/java design pattern - state pattern" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/26/2016/java design pattern/java design pattern - state pattern/" class="article-date">
+  <time datetime="2016-05-26T01:28:00.000Z" itemprop="datePublished">2016-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      java design pattern - state pattern
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<ul>
+<li><a href="#场景">场景</a></li>
+<li><a href="#状态模式">状态模式</a></li>
+<li><a href="#实现过程">实现过程</a></li>
+<li><a href="#另一种实现方式">另一种实现方式</a></li>
+<li><a href="#总结">总结</a></li>
+<li><a href="#参考资料">参考资料</a></li>
+</ul>
+<!-- /TOC -->
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>  在程序中要根据对象的不同状态来执行不同的逻辑的时候可以考虑使用状态模式。下面来看没有使用状态模式的代码<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">  <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NoUseStatePattern</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> value;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (value &lt; <span class="number">100</span>) &#123;</div><div class="line">            System.out.println(<span class="string">"value begin="</span> + value);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (value &gt;= <span class="number">100</span> &amp;&amp; value &lt;= <span class="number">200</span>) &#123;</div><div class="line">            System.out.println(<span class="string">"value middle="</span> + value);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            System.out.println(<span class="string">"value end="</span> + value);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        NoUseStatePattern noUseStatePattern = <span class="keyword">new</span> NoUseStatePattern();</div><div class="line">        noUseStatePattern.value = <span class="number">10</span>;</div><div class="line">        noUseStatePattern.handle();</div><div class="line"></div><div class="line">        noUseStatePattern.value = <span class="number">120</span>;</div><div class="line">        noUseStatePattern.handle();</div><div class="line"></div><div class="line">        noUseStatePattern.value = <span class="number">220</span>;</div><div class="line">        noUseStatePattern.handle();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>  在这里要根据value的值来执行不同的逻辑，目前来看没什么大问题，但是如果后续要增加多个value的判断或者根据value的不同执行更复杂的<br>  逻辑的时候，上面的代码就会有点力不从心了，这个时候我们可以使用状态模式来替换上面的逻辑。</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">  <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserStatePattern</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> value;</div><div class="line">    <span class="keyword">private</span> State state;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> State <span class="title">getState</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> state;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setState</span><span class="params">(State state)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.state = state;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (getValue() &lt; <span class="number">100</span>) &#123;</div><div class="line">            setState(<span class="keyword">new</span> BeginState());</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (getValue() &gt;= <span class="number">100</span> &amp;&amp; getValue() &lt; <span class="number">200</span>) &#123;</div><div class="line">            setState(<span class="keyword">new</span> MiddleState());</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            setState(<span class="keyword">new</span> EndState());</div><div class="line">        &#125;</div><div class="line">        state.handle(<span class="keyword">this</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getValue</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> value;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setValue</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.value = value;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        UserStatePattern userStatePattern = <span class="keyword">new</span> UserStatePattern();</div><div class="line">        userStatePattern.setValue(<span class="number">10</span>);</div><div class="line">        userStatePattern.handle();</div><div class="line">        userStatePattern.handle();</div><div class="line">        userStatePattern.handle();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  看上去很简单多不对，所白了就是把if else判断封装了一下，方便以后扩展，同时也更加的灵活。<br>  <a id="more"></a></p>
+<h2 id="状态模式"><a href="#状态模式" class="headerlink" title="状态模式"></a>状态模式</h2><p>  状态模式是一种行为模式，可以理解为在面向对象中通过切换不同的状态来调用不同的逻辑。也就是说对象的行为取决于对象内部的不同状态<br>  状态模式由三个角色组成，包括：抽象状态接口，具体状态实现，上下文对象。其中抽象接口是对行为的抽象定义，具体状态实现于抽象状态接口<br>  最后在上下文中来实现状态转化和状态的方法调用。</p>
+<p><img src="/images/2016/05/State_Design_Pattern_UML_Class_Diagram.svg.png" alt="状态模式"></p>
+<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><p>  首先抽象出状态统一接口,来统一行为</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IState</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">void</span> <span class="title">handle</span><span class="params">(UserStatePattern userStatePattern)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  然后不同状态的类去实现状态接口，这里我们定义三个状态，开始，中间，结束<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeginIState</span> <span class="keyword">implements</span> <span class="title">IState</span> </span>&#123;</div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">(UserStatePattern userStatePattern)</span> </span>&#123;</div><div class="line">      System.out.println(<span class="string">"state="</span> + <span class="keyword">this</span>.getClass().getSimpleName());</div><div class="line">      userStatePattern.setValue(<span class="number">120</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MiddleIState</span> <span class="keyword">implements</span> <span class="title">IState</span> </span>&#123;</div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">(UserStatePattern userStatePattern)</span> </span>&#123;</div><div class="line">      System.out.println(<span class="string">"state="</span> + <span class="keyword">this</span>.getClass().getSimpleName());</div><div class="line">      userStatePattern.setValue(<span class="number">220</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">  <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EndIState</span> <span class="keyword">implements</span> <span class="title">IState</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">(UserStatePattern userStatePattern)</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"state="</span>+<span class="keyword">this</span>.getClass().getSimpleName());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  可以根据对应的场景来实现对应的业务逻辑。<br>  最后，通过一个上下文对象来调用不同的状态调用不同的状态实现，参看上面UserStatePattern。</p>
+<h2 id="另一种实现方式"><a href="#另一种实现方式" class="headerlink" title="另一种实现方式"></a>另一种实现方式</h2><pre><code>通过上面的例子，可以看到通过上下午对象的内部handle方法来分发状态，那么我也可以在具体的状态实现来调用其他的状态，也就是说
+可以在状态内部实现状态的转换。
+</code></pre>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeginIState</span> <span class="keyword">implements</span> <span class="title">IState</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">(UserStatePattern userStatePattern)</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"state="</span> + <span class="keyword">this</span>.getClass().getSimpleName());</div><div class="line"><span class="comment">//        userStatePattern.setValue(120);</span></div><div class="line">        userStatePattern.setIState(<span class="keyword">new</span> MiddleIState());</div><div class="line">    &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<pre><code>这也是状态模式的一种实现方法，具体还得看业务需求。
+</code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  通过上面的demo我们看到状态模式非常简单，就是为了减少if else中的逻辑判断来进行的抽象封装。对应着设计模式的开闭原则。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://en.wikipedia.org/wiki/State_pattern" title="state_pattern wiki" target="_blank" rel="external">state_pattern wiki</a></p>
+<p><a href="http://blog.csdn.net/lovelion/article/details/8523062" title="处理对象的多种状态及其相互转换——状态模式" target="_blank" rel="external">处理对象的多种状态及其相互转换——状态模式</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/05/26/2016/java design pattern/java design pattern - state pattern/" data-id="cizy2lg29002bszs6tl5iiqac" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/05/26/2016/java design pattern/java design pattern-memento pattern/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          java design pattern-memento pattern
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/30/2016/编程中遇到的环境问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">编程中遇到的环境问题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-blog-github/">java blog github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-blog-github/">java, blog, github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/android/" style="font-size: 15px;">android</a> <a href="/tags/blog/" style="font-size: 20px;">blog</a> <a href="/tags/github/" style="font-size: 20px;">github</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/java-blog-github/" style="font-size: 10px;">java blog github</a> <a href="/tags/java-blog-github/" style="font-size: 10px;">java, blog, github</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/02/25/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/21/2017/android binder与aidl/">android binder与AIDL</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/17/2017/Android LruMemoryCache源码分析/">Android LruMemoryCache源码分析</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/17/2017/android DiskLruCache源码分析/">android DiskLruCache源码分析</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/15/2017/读书笔记/读书笔记书写技巧/">读书笔记书写技巧</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

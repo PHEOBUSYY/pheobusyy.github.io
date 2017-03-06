@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>java和android中遇到的问题 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="java获取当前的方法名和类名原来真的可以，以前太想当然了，居然光是想着得整体反射才能获取到，没想到在方法内部就可以，遇到问题不能凭感觉，要求证之后再下结论，永远保持怀疑的态度
+12Thread.currentThread().getStackTrace()[1].getClassName();Thread.currentThread().getStackTrace()[1].getMethodN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java和android中遇到的问题">
+<meta property="og:url" content="http://yoursite.com/2016/11/16/2016/java和android中遇到的问题/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="java获取当前的方法名和类名原来真的可以，以前太想当然了，居然光是想着得整体反射才能获取到，没想到在方法内部就可以，遇到问题不能凭感觉，要求证之后再下结论，永远保持怀疑的态度
+12Thread.currentThread().getStackTrace()[1].getClassName();Thread.currentThread().getStackTrace()[1].getMethodN">
+<meta property="og:updated_time" content="2017-02-25T01:12:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java和android中遇到的问题">
+<meta name="twitter:description" content="java获取当前的方法名和类名原来真的可以，以前太想当然了，居然光是想着得整体反射才能获取到，没想到在方法内部就可以，遇到问题不能凭感觉，要求证之后再下结论，永远保持怀疑的态度
+12Thread.currentThread().getStackTrace()[1].getClassName();Thread.currentThread().getStackTrace()[1].getMethodN">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2016/java和android中遇到的问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/16/2016/java和android中遇到的问题/" class="article-date">
+  <time datetime="2016-11-16T06:32:00.000Z" itemprop="datePublished">2016-11-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      java和android中遇到的问题
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="java获取当前的方法名和类名"><a href="#java获取当前的方法名和类名" class="headerlink" title="java获取当前的方法名和类名"></a>java获取当前的方法名和类名</h2><p>原来真的可以，以前太想当然了，居然光是想着得整体反射才能获取到，没想到在方法内部就可以，遇到问题不能凭感觉，要求证之后再下结论，永远保持怀疑的态度</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Thread.currentThread().getStackTrace()[<span class="number">1</span>].getClassName();</div><div class="line">Thread.currentThread().getStackTrace()[<span class="number">1</span>].getMethodName();</div></pre></td></tr></table></figure>
+<h2 id="gson-parse转换带有非法字符的字符串时报错"><a href="#gson-parse转换带有非法字符的字符串时报错" class="headerlink" title="gson parse转换带有非法字符的字符串时报错"></a>gson parse转换带有非法字符的字符串时报错</h2><p>   今天遇到一个问题，服务器返回的HashKey中是通过base64生成的字符串，里面有个“=”，这个时候通过gson parse的时候就会报MalformedJsonException异常<br>   ，后来通过gson的toJson方法来解决，也就是用gson再转一次，这样就会把里面的“=”转化为16进制的字符串了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">toJson</span><span class="params">(Map&lt;String, String&gt; paramMap)</span> </span>&#123;</div><div class="line">        <span class="comment">//所有的参数最终都要拼接成一个JsonObject对象，然后通过一个叫param的参数发送到服务器</span></div><div class="line">        JsonObject jsonObject = <span class="keyword">new</span> JsonObject();</div><div class="line">        <span class="keyword">if</span> (paramMap != <span class="keyword">null</span> &amp;&amp; !paramMap.isEmpty()) &#123;</div><div class="line">            <span class="keyword">for</span> (String key : paramMap.keySet()) &#123;</div><div class="line">                String value = paramMap.get(key);</div><div class="line">                <span class="keyword">if</span> (TextUtils.isEmpty(key) || TextUtils.isEmpty(value)) &#123;</div><div class="line">                    <span class="keyword">continue</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="comment">//通过jsonParser可以解决java的\“转义的问题</span></div><div class="line">                <span class="comment">//如果文本中带空格的，请使用整个对象转json的方式</span></div><div class="line">                JsonParser parser = <span class="keyword">new</span> JsonParser();</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    JsonElement jsonElement = parser.parse(value);</div><div class="line">                    jsonObject.add(key, jsonElement);</div><div class="line">                &#125; <span class="keyword">catch</span> (JsonSyntaxException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                    <span class="comment">//如果字符串不符合格式，gson会报MalformedJsonException异常，比如字符串中包含等号，&lt;,&gt;等特殊符号，不能直接转换</span></div><div class="line">                    <span class="comment">//目前在简报的服务器返回HashKey中发现有等号的清空下无法解析，故在这里增加了处理</span></div><div class="line">                    <span class="keyword">try</span> &#123;</div><div class="line">                        value = GsonUtils.ObjectToJson(value);</div><div class="line">                        JsonElement jsonElement = parser.parse(value);</div><div class="line">                        jsonObject.add(key, jsonElement);</div><div class="line">                    &#125; <span class="keyword">catch</span> (JsonSyntaxException e1) &#123;</div><div class="line">                        e1.printStackTrace();</div><div class="line">                        <span class="comment">//如果再次转换还是失败的话，使用JsonReader的宽容模式</span></div><div class="line">                        <span class="keyword">try</span> &#123;</div><div class="line">                            JsonReader jsonReader = <span class="keyword">new</span> JsonReader(<span class="keyword">new</span> StringReader(value));</div><div class="line">                            jsonReader.setLenient(<span class="keyword">true</span>);</div><div class="line">                            JsonElement jsonElement = parser.parse(jsonReader);</div><div class="line">                            jsonObject.add(key, jsonElement);</div><div class="line">                        &#125; <span class="keyword">catch</span> (Exception e2) &#123;</div><div class="line">                            e2.printStackTrace();</div><div class="line">                            NetLogger.log(<span class="string">"HttpUtil toJson meet error param ,the param is "</span> + value + <span class="string">",please check the value is correct!!!"</span>);</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line"></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        NetLogger.log(<span class="string">"toJson ="</span> + jsonObject.toString());</div><div class="line">        <span class="keyword">return</span> jsonObject.toString();</div><div class="line">      &#125;</div></pre></td></tr></table></figure>
+<h2 id="关于java中BigInteger的原理分析"><a href="#关于java中BigInteger的原理分析" class="headerlink" title="关于java中BigInteger的原理分析"></a>关于java中BigInteger的原理分析</h2><p>  通过内部的数组来分段存放数字集合，最后再拼成一个整体返回<br>  <a href="http://www.hollischuang.com/archives/176" title="BigInteger原理" target="_blank" rel="external">BigInteger原理</a></p>
+<h2 id="为什么在android的api中有些方法明明是public的-但是在外部调用的时候就是编译错误-显示为不可以使用的状态"><a href="#为什么在android的api中有些方法明明是public的-但是在外部调用的时候就是编译错误-显示为不可以使用的状态" class="headerlink" title="为什么在android的api中有些方法明明是public的,但是在外部调用的时候就是编译错误,显示为不可以使用的状态?"></a>为什么在android的api中有些方法明明是public的,但是在外部调用的时候就是编译错误,显示为不可以使用的状态?</h2><p>  原因是在方法或者field的注释中有一个 <em>@hide</em> 的注解,这个注解的作用就是告诉javaDoc,凡是带了这个注解的方法或者field都会把javaDoc忽略,也就是说对外是看不到这个方法.但是在内部是可以使用的.有点像android的internal包,只能手机本身调用,外部是无法直接调用的.这样做的目的是比如有些方法还不是很稳定,就先把它标记为对外暂时不可用,等后期稳定了之后再打开.</p>
+<p>  不过通过java的发射是可以调用这些带有 <em>@hide</em> 的方法和filed的.</p>
+<p><a href="http://stackoverflow.com/questions/17035271/what-does-hide-mean-in-the-android-source-code" title="What does @hide mean in the Android source code?" target="_blank" rel="external">What does @hide mean in the Android source code?</a></p>
+<h2 id="EventBus在子线程中post事件遇到的问题"><a href="#EventBus在子线程中post事件遇到的问题" class="headerlink" title="EventBus在子线程中post事件遇到的问题"></a>EventBus在子线程中post事件遇到的问题</h2><p>  之前遇到一个问题,就是EventBus在post事件的时候如果是在子线程中,同时回到事件更新UI了,就会导致网络请求的数据没有了,不知道为什么.今天看了源码明白了其中的缘由.<br>  源码,在EventBus中,当你没有指定事件回调的ThreadMode的话,回调事件就会在post所在线程中执行了,那如果你在子线程中post事件,在主线程中的回调事件没有修改ThreadMode话回调事件就会在子线程中运行,这个时候如果更新UI,就会报异常,但是由于EventBus把异常给catch到了,所以页面没有什么异常反应.看着就好像没啥变化一样.<br>  然后再说为啥请求就没有数据了呢,是因为有个同事把post事件放在网络请求的回调来发送的,但是网络请求的回调默认不是在主线程中处理的,所以就会导致post的事件是在子线程中发送的,然后就会报异常就是不能在子线程中更新UI.这个时候,activity的UI是就不会响应UI更新了.</p>
+<h2 id="android的子线程中真的不能更新UI吗"><a href="#android的子线程中真的不能更新UI吗" class="headerlink" title="android的子线程中真的不能更新UI吗?"></a>android的子线程中真的不能更新UI吗?</h2><p>  如果在Activity的onCreate方法中直接new子线程然后在里面更新UI是不会报错的.原因是检查线程是否是子线程的方法在onCreate的时候还没有调用呢.<br><a href="http://www.cnblogs.com/xuyinhuan/p/5930287.html" title="Android中子线程真的不能更新UI吗？" target="_blank" rel="external">  Android中子线程真的不能更新UI吗？</a></p>
+<h2 id="在生成android-AIDL的过程中老是提示失败"><a href="#在生成android-AIDL的过程中老是提示失败" class="headerlink" title="在生成android AIDL的过程中老是提示失败"></a>在生成android AIDL的过程中老是提示失败</h2><p>  通过网上的教程尝试通过AIDL传递复杂对象,比如一个序列化对象Book,然后把Book.java,Book.aidl,TestAidlInterface.aidl 这三个文件放在同一个包中,老是无法通过编译,没有生成响应的java文件.后来鼓捣了半天,发现把 Book.java 文件放在其他的java目录中就可以了.也就是说aidl文件放在专用的aidl包中,java类放在普通的java包中.猜测可能是新版的android studio做了调整.</p>
+<h2 id="在android-5-0及以上的版本中直接通过intent调用startService-bindService-stopService等方法的时候报错-java-lang-IllegalArgumentException-Service-Intent-must-be-explicit-Intent-act-XXXXXXXX-flg-0x10000000"><a href="#在android-5-0及以上的版本中直接通过intent调用startService-bindService-stopService等方法的时候报错-java-lang-IllegalArgumentException-Service-Intent-must-be-explicit-Intent-act-XXXXXXXX-flg-0x10000000" class="headerlink" title="在android 5.0及以上的版本中直接通过intent调用startService,bindService,stopService等方法的时候报错 java.lang.IllegalArgumentException: Service Intent must be explicit: Intent { act=XXXXXXXX flg=0x10000000 }"></a>在android 5.0及以上的版本中直接通过intent调用startService,bindService,stopService等方法的时候报错 <em>java.lang.IllegalArgumentException: Service Intent must be explicit: Intent { act=XXXXXXXX flg=0x10000000 }</em></h2><p>  这是因为在5.0的android源码中增加了对intent的package的限制.下面来看bindService的直接调用方 <em>ContextImpl</em> 中的 <em>bindService</em> 方法:<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">bindService</span><span class="params">(Intent service, ServiceConnection conn,</span></span></div><div class="line">         <span class="keyword">int</span> flags) &#123;</div><div class="line">     warnIfCallingFromSystemProcess();</div><div class="line">     <span class="keyword">return</span> bindServiceCommon(service, conn, flags, mMainThread.getHandler(),</div><div class="line">             Process.myUserHandle());</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">bindServiceCommon</span><span class="params">(Intent service, ServiceConnection conn, <span class="keyword">int</span> flags, Handler</span></span></div><div class="line">           handler, UserHandle user) &#123;</div><div class="line">       IServiceConnection sd;</div><div class="line">       <span class="keyword">if</span> (conn == <span class="keyword">null</span>) &#123;</div><div class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"connection is null"</span>);</div><div class="line">       &#125;</div><div class="line">       <span class="keyword">if</span> (mPackageInfo != <span class="keyword">null</span>) &#123;</div><div class="line">           sd = mPackageInfo.getServiceDispatcher(conn, getOuterContext(), handler, flags);</div><div class="line">       &#125; <span class="keyword">else</span> &#123;</div><div class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Not supported in system context"</span>);</div><div class="line">       &#125;</div><div class="line">       validateServiceIntent(service);</div><div class="line">       <span class="keyword">try</span> &#123;</div><div class="line">           IBinder token = getActivityToken();</div><div class="line">           <span class="keyword">if</span> (token == <span class="keyword">null</span> &amp;&amp; (flags&amp;BIND_AUTO_CREATE) == <span class="number">0</span> &amp;&amp; mPackageInfo != <span class="keyword">null</span></div><div class="line">                   &amp;&amp; mPackageInfo.getApplicationInfo().targetSdkVersion</div><div class="line">                   &lt; android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH) &#123;</div><div class="line">               flags |= BIND_WAIVE_PRIORITY;</div><div class="line">           &#125;</div><div class="line">           service.prepareToLeaveProcess(<span class="keyword">this</span>);</div><div class="line">           <span class="keyword">int</span> res = ActivityManagerNative.getDefault().bindService(</div><div class="line">               mMainThread.getApplicationThread(), getActivityToken(), service,</div><div class="line">               service.resolveTypeIfNeeded(getContentResolver()),</div><div class="line">               sd, flags, getOpPackageName(), user.getIdentifier());</div><div class="line">           <span class="keyword">if</span> (res &lt; <span class="number">0</span>) &#123;</div><div class="line">               <span class="keyword">throw</span> <span class="keyword">new</span> SecurityException(</div><div class="line">                       <span class="string">"Not allowed to bind to service "</span> + service);</div><div class="line">           &#125;</div><div class="line">           <span class="keyword">return</span> res != <span class="number">0</span>;</div><div class="line">       &#125; <span class="keyword">catch</span> (RemoteException e) &#123;</div><div class="line">           <span class="keyword">throw</span> e.rethrowFromSystemServer();</div><div class="line">       &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>  注意上面方法中的 <em>validateServiceIntent</em> 方法,这个就是上面报错的原因所在了.<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">validateServiceIntent</span><span class="params">(Intent service)</span> </span>&#123;</div><div class="line">     <span class="keyword">if</span> (service.getComponent() == <span class="keyword">null</span> &amp;&amp; service.getPackage() == <span class="keyword">null</span>) &#123;</div><div class="line">         <span class="keyword">if</span> (getApplicationInfo().targetSdkVersion &gt;= Build.VERSION_CODES.LOLLIPOP) &#123;</div><div class="line">             IllegalArgumentException ex = <span class="keyword">new</span> IllegalArgumentException(</div><div class="line">                     <span class="string">"Service Intent must be explicit: "</span> + service);</div><div class="line">             <span class="keyword">throw</span> ex;</div><div class="line">         &#125; <span class="keyword">else</span> &#123;</div><div class="line">             Log.w(TAG, <span class="string">"Implicit intents with startService are not safe: "</span> + service</div><div class="line">                     + <span class="string">" "</span> + Debug.getCallers(<span class="number">2</span>, <span class="number">3</span>));</div><div class="line">         &#125;</div><div class="line">     &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>  可以看到,这里对intent内部的package属性做了判断,如果大于APIlevel21并且package为空的话就会抛出上面提到的异常.<br>  解决方法很简单,在intent初始化的时候设置一下package就可以了.<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Intent intent = <span class="keyword">new</span> Intent(action);</div><div class="line">intent.setPackage(getPackageName());</div><div class="line">bindService(intent);</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意:如果在使用AIDL时,这里传入的package应该是服务端对应的包名,也就是你想让谁来处理这个intent,这里的package就传谁的.<br>注意:这里getPackageName这个方法返回的是application的包名,也就是apk的包名,不要和java反射的获取包名方法混淆了,java的获取包名是通过class.getPackage().getName() 来获取的.</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/11/16/2016/java和android中遇到的问题/" data-id="cizy2lg0k001dszs6mlzl7y2x" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/11/28/2016/android instant run原理/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          android Instant Run原理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/11/09/2016/git 技巧/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">git 技巧</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-blog-github/">java blog github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-blog-github/">java, blog, github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/android/" style="font-size: 15px;">android</a> <a href="/tags/blog/" style="font-size: 20px;">blog</a> <a href="/tags/github/" style="font-size: 20px;">github</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/java-blog-github/" style="font-size: 10px;">java blog github</a> <a href="/tags/java-blog-github/" style="font-size: 10px;">java, blog, github</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/02/25/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/21/2017/android binder与aidl/">android binder与AIDL</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/17/2017/Android LruMemoryCache源码分析/">Android LruMemoryCache源码分析</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/17/2017/android DiskLruCache源码分析/">android DiskLruCache源码分析</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/15/2017/读书笔记/读书笔记书写技巧/">读书笔记书写技巧</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>android Instant Run原理 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="起因：在android6.0的手机上，app第一次安装的时候启动特别的慢，会黑屏很长时间，开始是以为在application中干的事情太多了，可能还有写耗时的操作影响了启动时长，在最底层的application的onCreate方法加了一句log，然后重新安装，发现log居然很久之后才打印出来，那么排除了是application里面的操作影响，后来上网搜索了一下，说是Instant Run造成">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android Instant Run原理">
+<meta property="og:url" content="http://yoursite.com/2016/11/28/2016/android instant run原理/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="起因：在android6.0的手机上，app第一次安装的时候启动特别的慢，会黑屏很长时间，开始是以为在application中干的事情太多了，可能还有写耗时的操作影响了启动时长，在最底层的application的onCreate方法加了一句log，然后重新安装，发现log居然很久之后才打印出来，那么排除了是application里面的操作影响，后来上网搜索了一下，说是Instant Run造成">
+<meta property="og:image" content="http://yoursite.com/images/2016/11/1.png">
+<meta property="og:image" content="http://yoursite.com/images/2016/11/2.png">
+<meta property="og:image" content="http://yoursite.com/images/2016/11/3.PNG">
+<meta property="og:image" content="http://yoursite.com/images/2016/11/5.PNG">
+<meta property="og:image" content="http://yoursite.com/images/2016/11/6.PNG">
+<meta property="og:image" content="http://yoursite.com/images/2016/11/7.PNG">
+<meta property="og:image" content="http://yoursite.com/images/2016/11/classloader.png">
+<meta property="og:updated_time" content="2017-03-02T07:44:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android Instant Run原理">
+<meta name="twitter:description" content="起因：在android6.0的手机上，app第一次安装的时候启动特别的慢，会黑屏很长时间，开始是以为在application中干的事情太多了，可能还有写耗时的操作影响了启动时长，在最底层的application的onCreate方法加了一句log，然后重新安装，发现log居然很久之后才打印出来，那么排除了是application里面的操作影响，后来上网搜索了一下，说是Instant Run造成">
+<meta name="twitter:image" content="http://yoursite.com/images/2016/11/1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2016/android instant run原理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/28/2016/android instant run原理/" class="article-date">
+  <time datetime="2016-11-28T12:10:00.000Z" itemprop="datePublished">2016-11-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      android Instant Run原理
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  起因：在android6.0的手机上，app第一次安装的时候启动特别的慢，会黑屏很长时间，开始是以为在application中干的事情太多了，可能还有写耗时的操作影响了启动时长，在最底层的application的onCreate方法加了一句log，然后重新安装，发现log居然很久之后才打印出来，那么排除了是application里面的操作影响，后来上网搜索了一下，说是Instant Run造成的，故特意查找了些资料，研究了其内部原理</p>
+<h3 id="Instant-Run-官方说明"><a href="#Instant-Run-官方说明" class="headerlink" title="Instant Run 官方说明"></a>Instant Run 官方说明</h3><blockquote>
+<p> 使用Instant Run，您无需构建新的apk，就可以将更改<em>推送</em>至方法，将现有应用资源<em>推送</em>至正在运行的应用，所以几乎立刻就能看到代码的更改。</p>
+</blockquote>
+<p>这里说明了instant的两个特性，一个是不用生成新的apk几乎立刻就可以看到代码的更改，另一个说是<em>推送</em>至设备。后面会详细说明。</p>
+<h3 id="传统的代码修改及编译部署流程"><a href="#传统的代码修改及编译部署流程" class="headerlink" title="传统的代码修改及编译部署流程"></a>传统的代码修改及编译部署流程</h3><p><img src="/images/2016/11/1.png" alt="andorid 部署流程"></p>
+<p>构建整个apk-&gt;部署app-&gt;app重启-&gt;重启activity<br>而Instant Run会用更少的时间</p>
+<h3 id="Instant-Run编译与部署流程"><a href="#Instant-Run编译与部署流程" class="headerlink" title="Instant Run编译与部署流程"></a>Instant Run编译与部署流程</h3><p><img src="images/2016/11/2.png" alt="Instant Run部署流程"><br>只构建修改的部分-&gt;部署修改的dev或资源-&gt;热部署，温部署，冷部署</p>
+<table>
+<thead>
+<tr>
+<th>代码更改</th>
+<th>Instant Run行为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>更改现有方法的代码实现</td>
+<td>通过热交换支持：这是最快的交换类型，使更改能够更快的显示。您的应用保持运行，下次调用存根方法时会使用具有新实现的存根方法</td>
+</tr>
+<tr>
+<td>更改或移除现有资源</td>
+<td>通过温交换支持：这种交换速度也非常快，但Instant Run在将更改的资源推送至您的应用时必须重新启动当前的行为。您的应用保持运行，只是会出现小的提示，这是正常情况</td>
+</tr>
+<tr>
+<td>结构行代码更改，例如：添加移除或更改 注释，实例字段，静态字段，静态方法签名，实例方法签名，更改当前类从其继承的父类，更改实现的界面列表，更改类的静态初始值设定项，对使用动态资源ID的布局元素重新排序</td>
+<td>通过冷交换支持，这种交换速度有点慢，因为尽管不需要新的apk，Instant Run在推送结构性代码更改的时候必须重启整个应用</td>
+</tr>
+<tr>
+<td>更改应用manifast，更改应用引用的资源，更改andorid的widget</td>
+<td>android studio会重新部署，生成新的apk，这是因为manifast等文件是安装在设备中的，无法通过更新的方式修改</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Instant-Run原理"><a href="#Instant-Run原理" class="headerlink" title="Instant Run原理"></a>Instant Run原理</h3><p>  我们知道app的入口在application中，在manifast中的applcationID就是app的唯一标示，也是程序的入口，如果反编译通过运行Instant Run生成的apk会发现里面的构成是这样的</p>
+<p><img src="images/2016/11/3.PNG" alt="  Instant Run apk构成"></p>
+<p>着重看里面的两个dex和instant-run.zip文件。首先看一下两个dex的源码：<br><img src="images/2016/11/5.PNG" alt=""></p>
+<p>可以看到里面就是简单的app的信息，包括application的class和包名<br>再看第二个dex</p>
+<p><img src="/images/2016/11/6.PNG" alt=""></p>
+<p>里面是一堆class文件，不过没有一个是我们的自己的，那可以猜出来我们自己的代码放在了instant-run.zip文件中，解压之后如下图</p>
+<p><img src="/images/2016/11/7.PNG" alt=""></p>
+<p>真正的代码在这里了。</p>
+<p>同时反编译解码manifast之后，会发现我们的applcationId被替换成instant run的application BootstrapApplication，那么我们可以猜出instant-run代码作为一个宿主程序，将app作为资源加载起来，和插件话一个思路，那么instant run是怎么把代码运行起来的呢？</p>
+<h3 id="对原始代码的处理"><a href="#对原始代码的处理" class="headerlink" title="对原始代码的处理"></a>对原始代码的处理</h3><p>  在第一次构建apk的时候，在每一个类中通过asm修改class文件注入一个$change成员变量，同时在每个方法的顶部增加如下代码<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">IncrementalChange localIncrementalChange = $change;</div><div class="line">      <span class="keyword">if</span> (localIncrementalChange != <span class="keyword">null</span>) &#123;</div><div class="line">          localIncrementalChange.access$dispatch(</div><div class="line">                  <span class="string">"onCreate.(Landroid/os/Bundle;)V"</span>, <span class="keyword">new</span> Object[] &#123; <span class="keyword">this</span>,</div><div class="line">                          ... &#125;);</div><div class="line">          <span class="keyword">return</span>;</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>  每个方法的都有哦，可以理解如果发生变化，那么原始方法就会调用$change中对应的方法，来达到替换方法的目的<br>  后续运行的时候，dx补丁类，生成补丁dex，其中被修改类的补丁类是在类原名后面增加$override复制修改类的大部分代码，然后把原始类的$change赋值，这样就可以在调用原始类方法的时候调用补丁类中的对应方法了。</p>
+<h3 id="application的启动"><a href="#application的启动" class="headerlink" title="application的启动"></a>application的启动</h3><p>  首先程序的入口是BootstrapApplication，通过它来加载classLoader，而classLoader负责加载dex文件，那么如何才能把我们补丁的dex加载到程序中呢？<br>  Instant run是通过在程序classLoader的树状结构中插入补丁dex来解决问题，如下图</p>
+<p><img src="images/2016/11/classloader.png" alt="  "><br>这里有个概念叫双亲委派模式，是一个典型的应用场景，首先是子类如果要加载dex的时候会通过父类去查找，如果父类没有找到，就会去父类的父类去查找，如果一直没有找到就会在子类中加载，并缓存之，instant run就是给pathClassLoader中插入了一个中间父类loader叫IncrementalClassLoader,这样就解决了类加载的问题。</p>
+<p>在BootstrapApplication中先初始化各种loader然后通过反射调用源程序的applcation方法，同时修改<br>1.替换ActivityThread的mInitialApplication为realApplication  </p>
+<p>2.替换mAllApplications 中所有的Application为realApplication  </p>
+<p>3.替换ActivityThread的mPackages,mResourcePackages中的mLoaderApk中的application为realApplication。  </p>
+<p>这样就解决了类加载的问题。热插件的原理也是通过这个来实现</p>
+<h3 id="如何修改资源"><a href="#如何修改资源" class="headerlink" title="如何修改资源"></a>如何修改资源</h3><p>如果resource.ap_文件有改变，那么新建一个AssetManager对象newAssetManager，然后用newAssetManager对象替换所有当前Resource、Resource.Theme的mAssets成员变量。 2.如果当前的已经有Activity启动了，还需要替换所有Activity中mAssets成员变量</p>
+<h3 id="如何把更新载入程序"><a href="#如何把更新载入程序" class="headerlink" title="如何把更新载入程序"></a>如何把更新载入程序</h3><p>instant run会额外加载一个server，server在不断的监听来发现有补丁更新，通过socket传递给app，然后server来完成热更新，冷更新和温更新，最后重启</p>
+<p>1.如果后缀为“.dex”,冷部署处理handleColdSwapPatch<br>2.如果后缀为“classes.dex.3”,热部署处理handleHotSwapPatch<br>3.其他情况,温部署，处理资源handleResourcePatch  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/11/28/2016/android instant run原理/" data-id="cizy2lg0f001aszs62ekod7cj" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/12/09/2016/EventBus源码解析/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          EventBus源码解析
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/11/16/2016/java和android中遇到的问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">java和android中遇到的问题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-blog-github/">java blog github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-blog-github/">java, blog, github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/android/" style="font-size: 15px;">android</a> <a href="/tags/blog/" style="font-size: 20px;">blog</a> <a href="/tags/github/" style="font-size: 20px;">github</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/java-blog-github/" style="font-size: 10px;">java blog github</a> <a href="/tags/java-blog-github/" style="font-size: 10px;">java, blog, github</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/02/25/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/21/2017/android binder与aidl/">android binder与AIDL</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/17/2017/Android LruMemoryCache源码分析/">Android LruMemoryCache源码分析</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/17/2017/android DiskLruCache源码分析/">android DiskLruCache源码分析</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/15/2017/读书笔记/读书笔记书写技巧/">读书笔记书写技巧</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

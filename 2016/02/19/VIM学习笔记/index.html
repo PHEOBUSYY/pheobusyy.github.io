@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>VIM学习笔记 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="vim作为强大的编程工具，可以最大程度的解放鼠标，把更多的关注点放在键盘编程上，本文主要介绍了vim的三种模式以及vim的常用的命令，更多的介绍和教程请查看官方文档">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VIM学习笔记">
+<meta property="og:url" content="http://yoursite.com/2016/02/19/VIM学习笔记/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="vim作为强大的编程工具，可以最大程度的解放鼠标，把更多的关注点放在键盘编程上，本文主要介绍了vim的三种模式以及vim的常用的命令，更多的介绍和教程请查看官方文档">
+<meta property="og:image" content="http://yoursite.com/images/2016/04/vim_sample.png">
+<meta property="og:image" content="http://yoursite.com/images/2016/04/vim_sample_morden.png">
+<meta property="og:image" content="http://yoursite.com/images/2016/04/vim_sample_classic.gif">
+<meta property="og:image" content="http://yoursite.com/images/2016/04/vim_sample_advanced.png">
+<meta property="og:updated_time" content="2017-02-25T01:12:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VIM学习笔记">
+<meta name="twitter:description" content="vim作为强大的编程工具，可以最大程度的解放鼠标，把更多的关注点放在键盘编程上，本文主要介绍了vim的三种模式以及vim的常用的命令，更多的介绍和教程请查看官方文档">
+<meta name="twitter:image" content="http://yoursite.com/images/2016/04/vim_sample.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-VIM学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/19/VIM学习笔记/" class="article-date">
+  <time datetime="2016-02-19T08:00:00.000Z" itemprop="datePublished">2016-02-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      VIM学习笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  vim作为强大的编程工具，可以最大程度的解放鼠标，把更多的关注点放在键盘编程上，本文主要介绍了vim的三种模式<br>以及vim的常用的命令，更多的介绍和教程请查看官方文档</p>
+<p><img src="/images/2016/04/vim_sample.png" alt="vim sample"><br><a id="more"></a><br><img src="/images/2016/04/vim_sample_morden.png" alt="vim sample morden"></p>
+<p><img src="/images/2016/04/vim_sample_classic.gif" alt="vim sample classic"></p>
+<p><img src="/images/2016/04/vim_sample_advanced.png" alt="vim sample advanced"></p>
+<h2 id="vim三种模式"><a href="#vim三种模式" class="headerlink" title="vim三种模式"></a>vim三种模式</h2><ul>
+<li>普通模式（命令模式）</li>
+<li>插入模式</li>
+<li>可视化模式<br>在普通模式下，所有的按键都属于命令按钮，此时所有的输入都是命令操作，so，这个时候是无法直接输入字符编辑文本的，默认应该就是普通模式，如果在其他模式下，摁esc可以进入普通模式，如果不确认是什么模式的话，那就多按几次esc<br>插入模式下，输入和正常的文本一样，可以随便输入，在普通模式下按键 <strong>i</strong> 进入插入模式<br>可视化模式下，是普通的模式的可视化，可以批量选中文本进行批量操作,快捷键 <strong>v</strong> 是对单行的部分文本做选中，<strong>V</strong> 对应多个整行的选中，<strong>ctrl + q</strong> 对应多行的部分选中效果</li>
+</ul>
+<h2 id="通用的命令按键"><a href="#通用的命令按键" class="headerlink" title="通用的命令按键"></a>通用的命令按键</h2><p>  下面列出了部分通用的按键（不定期更新中…）</p>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><h4 id="字符删除"><a href="#字符删除" class="headerlink" title="字符删除"></a>字符删除</h4><blockquote>
+<p>   <strong>x</strong> 删除光标的所在的字符<br>   <strong>X</strong> 删除光标的所在的前一个字符    </p>
+</blockquote>
+<h4 id="单词删除"><a href="#单词删除" class="headerlink" title="单词删除"></a>单词删除</h4><blockquote>
+<p>   <strong>dw</strong> 删除到下一个单词开始<br>   <strong>de</strong> 删除到本单词结束<br>   <strong>dE</strong> 删除到本单词末尾，包含标点在内<br>   <strong>db</strong> 删除到前一个单词<br>   <strong>dB</strong> 删除到前一个单词包括标点在内  </p>
+</blockquote>
+<h4 id="行删除"><a href="#行删除" class="headerlink" title="行删除"></a>行删除</h4><blockquote>
+<p>   <strong>dd</strong> 删除整行<br>   <strong>D</strong> 或 <strong>d$</strong> 删除光标位置到本行结束<br>   <strong>d0</strong> 删除光标位置到本行开头    </p>
+</blockquote>
+<p><strong>PS</strong> 3dd代表删除3行  </p>
+<p>###插入</p>
+<h4 id="字符位置插入"><a href="#字符位置插入" class="headerlink" title="字符位置插入"></a>字符位置插入</h4><blockquote>
+<p>   <strong>i</strong> 在光标之前插入<br>   <strong>a</strong> 在光标之后追加  </p>
+</blockquote>
+<h4 id="行位置插入"><a href="#行位置插入" class="headerlink" title="行位置插入"></a>行位置插入</h4><blockquote>
+<p>   <strong>A</strong> 在一行的结尾处追加<br>   <strong>I</strong> 在一行的开头出插入<br>   <strong>o</strong> 在光标当前行的下一行插入<br>   <strong>O</strong> 在光标当前行的上一行插入<br>   <strong>J</strong> 在光标当前行的上一行插入</p>
+</blockquote>
+<p><strong>PS</strong> 两次个空格之后回车在MARKDOWN中才能起作用</p>
+<h3 id="光标移动"><a href="#光标移动" class="headerlink" title="光标移动"></a>光标移动</h3><blockquote>
+<p>   <strong>h</strong>  光标向前移动<br>   <strong>l</strong>  光标向后移动<br>   <strong>j</strong>  光标向下移动<br>   <strong>k</strong>  光标向x上移动<br>   <strong>k</strong>  光标向上移动  </p>
+<p>   <strong>0</strong>  光标向上移动<br>   <strong>$</strong>  光标向上移动<br>   <strong>w</strong>  光标向上移动<br>   <strong>b</strong>  光标向上移动<br>   <strong>e</strong>  光标向上移动<br>   <strong>g</strong>  光标向上移动<br>   <strong>ge</strong> 光标向上移动<br>   <strong>^</strong>  光标向上移动<br>   <strong>g_</strong> 光标向上移动  </p>
+</blockquote>
+<h3 id="快速选中，删除，复制，更改引号或者括号中的内容"><a href="#快速选中，删除，复制，更改引号或者括号中的内容" class="headerlink" title="快速选中，删除，复制，更改引号或者括号中的内容"></a>快速选中，删除，复制，更改引号或者括号中的内容</h3><blockquote>
+<p>   <strong>vi”</strong>（<strong>vi(</strong>） 快速选中“”中的内容(快速选中()中的内容)<br>   <strong>di”</strong>（<strong>di(</strong>） 快速删除“”中的内容(快速删除()中的内容)<br>   <strong>yi”</strong>（<strong>yi(</strong>） 快速复制“”中的内容(快速复制()中的内容)<br>   <strong>ci”</strong>（<strong>ci(</strong>） 快速替换“”中的内容(快速替换()中的内容)  </p>
+</blockquote>
+<h3 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h3><blockquote>
+<p>   <strong>:[addr]s/source/target/[option]</strong> addr表示替换范围，比如“1，20“表示从1到20行，“%”表示全文，“.$从当前行到结尾”，[option]表示操作类型，比如“g”表示全局替换，”c”表示需要确认，“p”表示替换结果逐行显示，默认不写的话仅对每一个的第一个匹配做替换</p>
+</blockquote>
+<h3 id="切换大小写"><a href="#切换大小写" class="headerlink" title="切换大小写"></a>切换大小写</h3><blockquote>
+<p>   <strong>~</strong>    将光标下的字母大小写转化<br>   <strong>3~</strong>   将光标开始的3个字母大小写转化<br>   <strong>U</strong>    在可视模式下选中的文本大写<br>   <strong>u</strong>    在可视模式下选中的文本小写<br>   <strong>gUw</strong>  将光标下的单词大写<br>   <strong>guw</strong>  将光标下的单词小写  </p>
+</blockquote>
+<h3 id="撤销与恢复"><a href="#撤销与恢复" class="headerlink" title="撤销与恢复"></a>撤销与恢复</h3><blockquote>
+<p>   <strong>U</strong>   撤销<br>   <strong>ctrl+r</strong> 恢复</p>
+</blockquote>
+<p><a href="http://coolshell.cn/articles/5426.html" title="vim教程" target="_blank" rel="external">vim简明教程</a></p>
+<p><a href="http://www.cnblogs.com/nerxious/archive/2012/12/21/2828520.html" title="vim的删除命令" target="_blank" rel="external">vim的删除命令</a></p>
+<p><a href="http://andyss.blog.51cto.com/315552/131652" title="vim全局替换" target="_blank" rel="external">vim全局替换</a></p>
+<p><a href="http://www.linuxsong.org/2010/09/vim-quick-select-copy-delete/" title="vim快速选中括号或者引号" target="_blank" rel="external">vim快速选中括号或者引号</a></p>
+<p><a href="http://blog.csdn.net/yangzhongxuan/article/details/6542808" title="vim光标选中" target="_blank" rel="external">vim光标选中</a></p>
+<p><a href="http://blog.csdn.net/ruixj/article/details/3765385" title="VIM大小写转换" target="_blank" rel="external">  VIM大小写转换</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/02/19/VIM学习笔记/" data-id="cizy2lfy30002szs6t9ijpqtn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java-blog-github/">java, blog, github</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/02/19/android的clean架构分析/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          android的clean架构分析
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/02/19/关于java和android注解解析/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">关于JAVA和ANDROID的注解（ANNOTATION）解析-终极教程(未完)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-blog-github/">java blog github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-blog-github/">java, blog, github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/android/" style="font-size: 15px;">android</a> <a href="/tags/blog/" style="font-size: 20px;">blog</a> <a href="/tags/github/" style="font-size: 20px;">github</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/java-blog-github/" style="font-size: 10px;">java blog github</a> <a href="/tags/java-blog-github/" style="font-size: 10px;">java, blog, github</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/02/25/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/21/2017/android binder与aidl/">android binder与AIDL</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/17/2017/Android LruMemoryCache源码分析/">Android LruMemoryCache源码分析</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/17/2017/android DiskLruCache源码分析/">android DiskLruCache源码分析</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/15/2017/读书笔记/读书笔记书写技巧/">读书笔记书写技巧</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

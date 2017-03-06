@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/page/7/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-java中保留两位小数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/19/java中保留两位小数/" class="article-date">
+  <time datetime="2016-02-19T08:00:00.000Z" itemprop="datePublished">2016-02-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/19/java中保留两位小数/">JAVA中的保留两位小数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在java中，保留两位小数有很多种方法，其中主要思路有痛过NumberFormat等格式化数字或者通过BigDecimal来设置精度处理，下面列出了常用的4种方法。</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/02/19/java中保留两位小数/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/02/19/java中保留两位小数/" data-id="cizy2lfyg0008szs61nqw4l4e" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java-blog-github/">java blog github</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-android的clean架构分析" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/19/android的clean架构分析/" class="article-date">
+  <time datetime="2016-02-19T08:00:00.000Z" itemprop="datePublished">2016-02-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/19/android的clean架构分析/">android的clean架构分析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="结构分层"><a href="#结构分层" class="headerlink" title="结构分层"></a>结构分层</h2><p><img src="/images/2016/02/clean_architecture1.png" alt="  clean-architecture1"></p>
+<p>  首先是分层，分层的目的就是为了解耦合，把整个程序根据一定的方式来划分为不同的层次，每个层次相互独立。<br>  在clean-architecture(以下简称clean)中，把程序分为了四层，分别是：</p>
+<ul>
+<li><p>Frameworks and Drivers:简称UI层，这里是所有具体实现：包括UI,工具类,框架,等等</p>
+</li>
+<li><p>Interface Adapters:适配层，顾名思义就是用来为上层UI层和下层将要说到的用例层做通讯的，并且把上下两层中对象做相互转化，比如我们底层的数据库表结构和服务器传过来的数据结构不太一致的时候<br>就需要我们做相互的转化来达成数据流动</p>
+</li>
+<li><p>Use Cases:简称用例层，这一层主要是处理底层的业务对象的，比如数据库的CRUD等操作，网络请求等等</p>
+</li>
+<li><p>Entities:简称实例层，主要是业务逻辑对象（纯java逻辑对象）</p>
+<p>实际上核心分层思想还是将UI和逻辑分离了，这里的UI层和接口适配层实际上就是干这事儿的，常用的实现是通过MVP来完成的，这里的UI层对应view层，Entities对应module层，中间的适配层和用例层对应Presenter层，核心的业务逻辑应该尽量交给纯java来实现，这样的好处是可以不依赖于环境，内部可以通过各种设计模式来重构和迭代等等。同时在分工上也可以根据不同人员的能力来完成不同的层次逻辑。</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/02/19/android的clean架构分析/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/02/19/android的clean架构分析/" data-id="cizy2lfyj0009szs6yeu2oaid" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/">blog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-VIM学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/19/VIM学习笔记/" class="article-date">
+  <time datetime="2016-02-19T08:00:00.000Z" itemprop="datePublished">2016-02-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/19/VIM学习笔记/">VIM学习笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  vim作为强大的编程工具，可以最大程度的解放鼠标，把更多的关注点放在键盘编程上，本文主要介绍了vim的三种模式<br>以及vim的常用的命令，更多的介绍和教程请查看官方文档</p>
+<p><img src="/images/2016/04/vim_sample.png" alt="vim sample"><br>
+        
+          <p class="article-more-link">
+            <a href="/2016/02/19/VIM学习笔记/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/02/19/VIM学习笔记/" data-id="cizy2lfy30002szs6t9ijpqtn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java-blog-github/">java, blog, github</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-关于java和android注解解析" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/19/关于java和android注解解析/" class="article-date">
+  <time datetime="2016-02-19T08:00:00.000Z" itemprop="datePublished">2016-02-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/19/关于java和android注解解析/">关于JAVA和ANDROID的注解（ANNOTATION）解析-终极教程(未完)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>前言:</strong> 注解在java中是一个重要的特性，每一个开发者都应该知道使用他们.</p>
+<p>  我们在Java Code Geeks提供了大量的教程,比如 <a href="http://www.javacodegeeks.com/2014/07/creating-your-own-java-annotations.html">Creating Your Own Java Annotation</a>,<a href="http://www.javacodegeeks.com/2014/07/creating-your-own-java-annotations.html">Java Annotation Tutorial with Custom Annotation</a> and <a href="http://www.javacodegeeks.com/2012/08/java-annotations-explored-explained.html">Java Annotation;Explored &amp; Explained</a>.</p>
+<p>  我们也精选了在各种框架中使用注解的文章,比如 <a href="http://www.javacodegeeks.com/2012/06/make-your-spring-security-secured.html">Make your Spring Security @Secured annotations more DRY</a> and <a href="http://www.javacodegeeks.com/2012/01/java-annotations-real-world-spring.html">Java Annotation &amp; A Real World Spring Example</a>.</p>
+<p>  现在,为了让你愉快的学习,我们把这些关于注解信息整合到这个帖子中，好好享受吧！<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/02/19/关于java和android注解解析/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/02/19/关于java和android注解解析/" data-id="cizy2lfyl000bszs6semfskw3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/">blog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-android的flux架构分析" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/19/android的flux架构分析/" class="article-date">
+  <time datetime="2016-02-19T08:00:00.000Z" itemprop="datePublished">2016-02-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/19/android的flux架构分析/">android的flux架构分析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>flux是facebook在14年提出的前端框架，旨在从架构层面来解决MVC的在复杂场景下越来越复杂内部逻辑繁重等问题。<br>我们知道在MVC中，通过Controler来控制Modle,view,比如用户点击了view之后，view通知controler，controler来控制model做状态变换，最后再更新view。如图：</p>
+<p><img src="/images/2016/02/flux_mvc.png" alt=""></p>
+<p>当逻辑比较复杂或者层次比较复杂的时候就会出现下面这种情况</p>
+<p><img src="/images/2016/02/flux_mvc_complex.png" alt=""></p>
+<p>flux架构就是在这种情况下提出的。<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/02/19/android的flux架构分析/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/02/19/android的flux架构分析/" data-id="cizy2lfyc0005szs6pnwha7o7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/">blog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/6/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-blog-github/">java blog github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-blog-github/">java, blog, github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/android/" style="font-size: 15px;">android</a> <a href="/tags/blog/" style="font-size: 20px;">blog</a> <a href="/tags/github/" style="font-size: 20px;">github</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/java-blog-github/" style="font-size: 10px;">java blog github</a> <a href="/tags/java-blog-github/" style="font-size: 10px;">java, blog, github</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/02/25/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/21/2017/android binder与aidl/">android binder与AIDL</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/17/2017/Android LruMemoryCache源码分析/">Android LruMemoryCache源码分析</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/17/2017/android DiskLruCache源码分析/">android DiskLruCache源码分析</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/15/2017/读书笔记/读书笔记书写技巧/">读书笔记书写技巧</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
