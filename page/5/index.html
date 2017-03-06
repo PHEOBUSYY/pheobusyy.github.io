@@ -61,6 +61,90 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2016/Object-C 细节" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/17/2016/Object-C 细节/" class="article-date">
+  <time datetime="2016-10-17T06:24:00.000Z" itemprop="datePublished">2016-10-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/17/2016/Object-C 细节/">Object-C 细节</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h2><ul>
+<li>NSMutableDictionary的allKey和allValue方法返回的都是不可变数组</li>
+<li>可以通过NSMutableArray 的arrayToArray来转换数组为可变数组</li>
+<li>可以通过NSString的stringByReplacingOccurrencesOfString方法来替换字符串</li>
+</ul>
+<h2 id="不通过系统自动创建xib的方式来新建xib的时候遇到的问题"><a href="#不通过系统自动创建xib的方式来新建xib的时候遇到的问题" class="headerlink" title="不通过系统自动创建xib的方式来新建xib的时候遇到的问题"></a>不通过系统自动创建xib的方式来新建xib的时候遇到的问题</h2><p>  当新建xib的时候，系统不会自动把controller和xib做关联，第一步就是把xib文件的class指定为对应的controller<br>  第二部就是把xib中的view和controller中的view关联，这样就不会报错了</p>
+<p>  之前之所以报错，是应为xib中的view和controller的view没有绑定在一起导致的，而直接在创建controller的时候创建xib，系统会自动把两个view绑定在一起<br>  所以不会报错！<br>  <a href="http://stackoverflow.com/questions/4763519/loaded-nib-but-the-view-outlet-was-not-set-new-to-interfacebuilder" target="_blank" rel="external">http://stackoverflow.com/questions/4763519/loaded-nib-but-the-view-outlet-was-not-set-new-to-interfacebuilder</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/17/2016/Object-C 细节/" data-id="cizy53xqa00153us6mo14n58i" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2016/linux相关知识" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/05/2016/linux相关知识/" class="article-date">
+  <time datetime="2016-10-05T06:45:00.000Z" itemprop="datePublished">2016-10-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/05/2016/linux相关知识/">linux相关知识</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="linux硬链接-Hard-link-和符号链接-Symbolic-link-的作用和创建方式"><a href="#linux硬链接-Hard-link-和符号链接-Symbolic-link-的作用和创建方式" class="headerlink" title="linux硬链接(Hard link)和符号链接(Symbolic link)的作用和创建方式"></a>linux硬链接(Hard link)和符号链接(Symbolic link)的作用和创建方式</h3><p>  在linux文件系统中,保存在磁盘分区中的文件不管是什么类型都给它分配了一个编号,称为索引节点(Inode index).硬链接指的就是多个文件名指向了同一个索引节点,硬链接的作用就是允许一个文件有多个指向的有效路径名称,这样用户就可以通过硬链接来指向重要文件,当删除了其中一个节点并不会影响文件本身和其他的连接,保证文件的安全,只有当所有的连接全部都删除后,文件才会被真正删除.类似于文件”指针”.符号链接又叫软链接,有点类似于windows的快捷方式,他实际上是一个特殊的文件,文件实际上是一个文本文件,其中包含另一个文件的位置信息.</p>
+<p>  创建一个空文件f1     touch f1<br>  创建一个硬链接f2     ln f1 f2<br>  创建一个软链接f3     ln -s f1 f3<br>  查看文件属性         ls -li<br>  可以看到f1,f2文件的索引节点相同,文件大小相同,而f1,f3文件索引和文件大小都不相同</p>
+<p>  输入文本到f1         echo “I am f1 file” &gt;&gt; f1<br>  输出f1,f2,f3文本    cat f1<br>                     “I am f1 file”<br>                     cat f2<br>                     “I am f1 file”<br>                     cat f3<br>                     “I am f1 file”<br>  删除f1              rm f1<br>  输出f2,f3文本       cat f2<br>                     “I am f1 file”<br>                     cat f3<br>                     No such file or directory</p>
+<h3 id="basename-和-dirname"><a href="#basename-和-dirname" class="headerlink" title="basename 和 dirname"></a>basename 和 dirname</h3><p>basename 命令可以获取到路径最后的文件名<br>dirname 命令可以获取到路径除了文件名的前面部分</p>
+<p>比如:<br>basename /user/yy —&gt; yy<br>dirname /user/yy —&gt; /user                     </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/05/2016/linux相关知识/" data-id="cizy53xqr001f3us6yray0msw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2016/java design pattern/java design pattern - command pattern" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/06/15/2016/java design pattern/java design pattern - command pattern/" class="article-date">
@@ -107,7 +191,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/15/2016/java design pattern/java design pattern - command pattern/" data-id="cizy2lg1z0023szs6kc2sjh2s" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/06/15/2016/java design pattern/java design pattern - command pattern/" data-id="cizy53xrz00233us675iys1p1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -162,7 +246,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/14/2016/java design pattern/java design pattern - strategy pattern/" data-id="cizy2lg2a002cszs6usdxucbs" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/06/14/2016/java design pattern/java design pattern - strategy pattern/" data-id="cizy53xsg002c3us6y2r4op1g" class="article-share-link">Share</a>
       
       
     </footer>
@@ -218,7 +302,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/14/2016/java design pattern/java design pattern - interpreter pattern/" data-id="cizy2lg260028szs641eevof1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/06/14/2016/java design pattern/java design pattern - interpreter pattern/" data-id="cizy53xs500283us6xp3gjvor" class="article-share-link">Share</a>
       
       
     </footer>
@@ -274,7 +358,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/13/2016/java design pattern/java design pattern - mediator pattern/" data-id="cizy2lg270029szs6f2aigzvz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/06/13/2016/java design pattern/java design pattern - mediator pattern/" data-id="cizy53xs600293us6pcumi6f9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -328,7 +412,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/13/2016/java design pattern/java design pattern - chain of responsibility/" data-id="cizy2lg1y0022szs63wj030az" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/06/13/2016/java design pattern/java design pattern - chain of responsibility/" data-id="cizy53xry00223us6jm28snhz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -384,7 +468,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/01/2016/java design pattern/java design pattern - composite pattern/" data-id="cizy2lg200024szs6kednuskf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/06/01/2016/java design pattern/java design pattern - composite pattern/" data-id="cizy53xs100253us6fw15448r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -440,7 +524,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/01/2016/java design pattern/java design pattern - proxy pattern/" data-id="cizy2lg28002aszs6h7sytbm6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/06/01/2016/java design pattern/java design pattern - proxy pattern/" data-id="cizy53xse002a3us6bxfma5nw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -493,122 +577,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/01/2016/java design pattern/java design pattern - flyweight pattern/" data-id="cizy2lg250027szs6dxx5tr14" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2016/java design pattern/java design pattern - bridge pattern" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/30/2016/java design pattern/java design pattern - bridge pattern/" class="article-date">
-  <time datetime="2016-05-30T12:10:00.000Z" itemprop="datePublished">2016-05-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/30/2016/java design pattern/java design pattern - bridge pattern/">java design pattern - bridge pattern</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
-<ul>
-<li><a href="#场景">场景</a></li>
-<li><a href="#桥接模式">桥接模式</a></li>
-<li><a href="#参考资料">参考资料</a></li>
-</ul>
-<!-- /TOC -->
-<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><pre><code>在编程中会遇到一个对象本身的定义和它的行为动作都在变化，这种情况下调整代码是非常痛苦的，实际上是在两个维度上面做调整
-这个时候可以使用桥接模式，将两个维度变化分别抽象，最后通过组合的方式把二者组合起来来最小化的调整代码。
-</code></pre><h2 id="桥接模式"><a href="#桥接模式" class="headerlink" title="桥接模式"></a>桥接模式</h2><p><img src="/images/2016/05/bridge_pattern_uml.svg.png" alt="bridge pattern"></p>
-<p>  桥接模式是一种结构模式，是一种对抽象本质（abstraction）和行为实现(implementaion)的解耦合的设计模式.桥接模式由4个角色组成：</p>
-<ul>
-<li>抽象基类（abstraction） 用在类本身变化的抽象</li>
-<li>重定义基类（RefinedAbstraction） 类本身具体的实现</li>
-<li>行为接口（Implementor） 类行为的抽象接口</li>
-<li><p>具体实现类(ConcreteImplementor) 类行为的具体实现</p>
-<p>比如，手机中有很多软件，同时手机也有很多个品牌，这两个维度都在变化的时候，可以通过桥接模式来实现。最后把抽象和实现通过组合的方式绑定在一起，在这里<br>手机的品牌为主，所以是抽象，而软件是一个功能点，所以是行为抽象。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/05/30/2016/java design pattern/java design pattern - bridge pattern/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/30/2016/java design pattern/java design pattern - bridge pattern/" data-id="cizy2lg1w0021szs6xujxebsz" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2016/java design pattern/java design pattern - adapter pattern" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/28/2016/java design pattern/java design pattern - adapter pattern/" class="article-date">
-  <time datetime="2016-05-28T12:18:00.000Z" itemprop="datePublished">2016-05-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/28/2016/java design pattern/java design pattern - adapter pattern/">java design pattern - adapter pattern</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
-<ul>
-<li><a href="#场景">场景</a></li>
-<li><a href="#适配器模式">适配器模式</a></li>
-<li><a href="#总结">总结</a></li>
-<li><a href="#参考资料">参考资料</a></li>
-</ul>
-<!-- /TOC -->
-<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>  在编程中我们经常会遇到驴头不对马嘴的情况，比如以前是继承A的接口的对象，现在外部调用的时候需要该对象已B接口的形式来调用<br>  ，这个时候我们可以让对象同时集成A和B接口来达到目的，不过，这样又违反了开闭原则，这个时候我们可以使用适配器模式来达到目的。</p>
-<h2 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h2><p>  适配器模式是一种结构模式，可以帮助我们把对象以不同的接口方式来调用。主要由3个角色组成：</p>
-<ul>
-<li>Target 外部调用要求的接口方式</li>
-<li>Adapter 中间用来协调的适配器</li>
-<li><p>Adaptee 原始对象</p>
-<p>首先，我们让Adapter继承实现Target接口，其次在Adapter中构造Adaptee对象，然后在Target方法中调用Adaptee中相应的方法。过程非常简单。</p>
-</li>
-</ul>
-<p><img src="/images/2016/05/adapter_pattern_uml.png" alt="adapter pattern"><br>
-        
-          <p class="article-more-link">
-            <a href="/2016/05/28/2016/java design pattern/java design pattern - adapter pattern/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/28/2016/java design pattern/java design pattern - adapter pattern/" data-id="cizy2lg1v0020szs6l9g33kdn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/06/01/2016/java design pattern/java design pattern - flyweight pattern/" data-id="cizy53xs500273us605pieul1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -653,7 +622,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
     </div>
   </div>
 
@@ -666,6 +635,14 @@
       <ul>
         
           <li>
+            <a href="/2017/03/06/2017/读书笔记/如何高效学习-读书笔记/">&lt;如何高效学习&gt;读书笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/02/2017/读书笔记/2017-03-02-如何阅读一本书/">&lt;如何阅读一本书&gt;</a>
+          </li>
+        
+          <li>
             <a href="/2017/02/25/hello-world/">Hello World</a>
           </li>
         
@@ -675,14 +652,6 @@
         
           <li>
             <a href="/2017/02/17/2017/Android LruMemoryCache源码分析/">Android LruMemoryCache源码分析</a>
-          </li>
-        
-          <li>
-            <a href="/2017/02/17/2017/android DiskLruCache源码分析/">android DiskLruCache源码分析</a>
-          </li>
-        
-          <li>
-            <a href="/2017/02/15/2017/读书笔记/读书笔记书写技巧/">读书笔记书写技巧</a>
           </li>
         
       </ul>

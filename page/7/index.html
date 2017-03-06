@@ -61,6 +61,101 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-android 知识点" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/01/android 知识点/" class="article-date">
+  <time datetime="2016-03-01T14:00:00.000Z" itemprop="datePublished">2016-03-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/01/android 知识点/">android知识点</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>android知识点汇总</p>
+<h2 id="ActivityLifecycleCallbacks的使用"><a href="#ActivityLifecycleCallbacks的使用" class="headerlink" title="ActivityLifecycleCallbacks的使用"></a>ActivityLifecycleCallbacks的使用</h2><p>  ActivityLifecycleCallbacks用来在application中统一监听activity的生命周期回调</p>
+<h2 id="为什么在theme设置layoutmargin等以layout开头的属性无效"><a href="#为什么在theme设置layoutmargin等以layout开头的属性无效" class="headerlink" title="为什么在theme设置layoutmargin等以layout开头的属性无效"></a>为什么在theme设置layout<em>margin等以layout</em>开头的属性无效</h2><p>  这是因为以layout_开头的属性是用来告诉父控件如何放置该控件位置的，必须明确了外部viewGroup的类型之后才可以生效，   所以在theme中设置无效，需要在具体调用的xml中设置对应的style才可以生效</p>
+<p>  <a href="http://stackoverflow.com/questions/3775587/to-use-layout-marginleft-in-a-button-style-applied-as-a-theme" title="To use layout_marginLeft in a button style applied as a theme?">  To use layout_marginLeft in a button style applied as a theme?</a></p>
+<h2 id="如何修改全局的view属性，比如改变当前activity或者application的button背景"><a href="#如何修改全局的view属性，比如改变当前activity或者application的button背景" class="headerlink" title="如何修改全局的view属性，比如改变当前activity或者application的button背景"></a>如何修改全局的view属性，比如改变当前activity或者application的button背景</h2><p>  方法一.theme中引用style，然后设置为当前activity的theme</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">  &lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"MyRedTheme"</span> <span class="attr">parent</span>=<span class="string">"android:Theme.Light"</span>&gt;</span><span class="xml"></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:textAppearance"</span>&gt;</span>@style/MyRedTextAppearance<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"MyRedTextAppearance"</span> <span class="attr">parent</span>=<span class="string">"@android:style/TextAppearance"</span>&gt;</span><span class="xml"></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:textColor"</span>&gt;</span>#F00<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:textStyle"</span>&gt;</span>bold<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>  方法二.自定义一个view</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedTextView</span> <span class="keyword">extends</span> <span class="title">TextView</span></span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">RedTextView</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>(context, attrs);</div><div class="line">      setTextColor(Color.RED);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  <a href="http://stackoverflow.com/questions/3078081/setting-global-styles-for-views-in-android" title="Setting global styles for Views in Android">  Setting global styles for Views in Android</a><br>
+        
+          <p class="article-more-link">
+            <a href="/2016/03/01/android 知识点/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/03/01/android 知识点/" data-id="cizy53xok00043us6aihbk2ur" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/">blog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Linux常用命令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/01/Linux常用命令/" class="article-date">
+  <time datetime="2016-03-01T14:00:00.000Z" itemprop="datePublished">2016-03-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/01/Linux常用命令/">Linux常用命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一些常用的Linux命令</p>
+<h2 id="MV命令—-重命名文件和移动文件"><a href="#MV命令—-重命名文件和移动文件" class="headerlink" title="MV命令—-重命名文件和移动文件"></a>MV命令—-重命名文件和移动文件</h2><p>  mv [-f | -i | -n][-v] source target 重命名文件<br>  mv [-f | -i | -n][-v] source … dictionary 移动文件<br>  -f: 强制覆盖文件，并且会覆盖之前的-i,-n选项<br>  -i: 如果有重复文件的话，提示用户<br>  -n: 如果已经存在文件，不覆盖，并且会覆盖之前的-i，-f选项<br>  -v：可视化选项</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/03/01/Linux常用命令/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/03/01/Linux常用命令/" data-id="cizy53xo700003us6lcsc5jia" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/">blog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-java中保留两位小数" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/02/19/java中保留两位小数/" class="article-date">
@@ -92,10 +187,103 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/02/19/java中保留两位小数/" data-id="cizy2lfyg0008szs61nqw4l4e" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/02/19/java中保留两位小数/" data-id="cizy53xou00093us6is3fue39" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java-blog-github/">java blog github</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-android的flux架构分析" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/19/android的flux架构分析/" class="article-date">
+  <time datetime="2016-02-19T08:00:00.000Z" itemprop="datePublished">2016-02-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/19/android的flux架构分析/">android的flux架构分析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>flux是facebook在14年提出的前端框架，旨在从架构层面来解决MVC的在复杂场景下越来越复杂内部逻辑繁重等问题。<br>我们知道在MVC中，通过Controler来控制Modle,view,比如用户点击了view之后，view通知controler，controler来控制model做状态变换，最后再更新view。如图：</p>
+<p><img src="/images/2016/02/flux_mvc.png" alt=""></p>
+<p>当逻辑比较复杂或者层次比较复杂的时候就会出现下面这种情况</p>
+<p><img src="/images/2016/02/flux_mvc_complex.png" alt=""></p>
+<p>flux架构就是在这种情况下提出的。<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/02/19/android的flux架构分析/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/02/19/android的flux架构分析/" data-id="cizy53xor00083us6oilanhp2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/">blog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-关于java和android注解解析" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/19/关于java和android注解解析/" class="article-date">
+  <time datetime="2016-02-19T08:00:00.000Z" itemprop="datePublished">2016-02-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/19/关于java和android注解解析/">关于JAVA和ANDROID的注解（ANNOTATION）解析-终极教程(未完)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>前言:</strong> 注解在java中是一个重要的特性，每一个开发者都应该知道使用他们.</p>
+<p>  我们在Java Code Geeks提供了大量的教程,比如 <a href="http://www.javacodegeeks.com/2014/07/creating-your-own-java-annotations.html">Creating Your Own Java Annotation</a>,<a href="http://www.javacodegeeks.com/2014/07/creating-your-own-java-annotations.html">Java Annotation Tutorial with Custom Annotation</a> and <a href="http://www.javacodegeeks.com/2012/08/java-annotations-explored-explained.html">Java Annotation;Explored &amp; Explained</a>.</p>
+<p>  我们也精选了在各种框架中使用注解的文章,比如 <a href="http://www.javacodegeeks.com/2012/06/make-your-spring-security-secured.html">Make your Spring Security @Secured annotations more DRY</a> and <a href="http://www.javacodegeeks.com/2012/01/java-annotations-real-world-spring.html">Java Annotation &amp; A Real World Spring Example</a>.</p>
+<p>  现在,为了让你愉快的学习,我们把这些关于注解信息整合到这个帖子中，好好享受吧！<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/02/19/关于java和android注解解析/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/02/19/关于java和android注解解析/" data-id="cizy53xow000b3us6e38yzkrg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/">blog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
 
     </footer>
   </div>
@@ -145,7 +333,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/02/19/android的clean架构分析/" data-id="cizy2lfyj0009szs6yeu2oaid" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/02/19/android的clean架构分析/" data-id="cizy53xon00053us6e6zmvhw2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/">blog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
@@ -189,103 +377,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/02/19/VIM学习笔记/" data-id="cizy2lfy30002szs6t9ijpqtn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/02/19/VIM学习笔记/" data-id="cizy53xod00023us6a788osci" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java-blog-github/">java, blog, github</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-关于java和android注解解析" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/02/19/关于java和android注解解析/" class="article-date">
-  <time datetime="2016-02-19T08:00:00.000Z" itemprop="datePublished">2016-02-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/19/关于java和android注解解析/">关于JAVA和ANDROID的注解（ANNOTATION）解析-终极教程(未完)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>前言:</strong> 注解在java中是一个重要的特性，每一个开发者都应该知道使用他们.</p>
-<p>  我们在Java Code Geeks提供了大量的教程,比如 <a href="http://www.javacodegeeks.com/2014/07/creating-your-own-java-annotations.html">Creating Your Own Java Annotation</a>,<a href="http://www.javacodegeeks.com/2014/07/creating-your-own-java-annotations.html">Java Annotation Tutorial with Custom Annotation</a> and <a href="http://www.javacodegeeks.com/2012/08/java-annotations-explored-explained.html">Java Annotation;Explored &amp; Explained</a>.</p>
-<p>  我们也精选了在各种框架中使用注解的文章,比如 <a href="http://www.javacodegeeks.com/2012/06/make-your-spring-security-secured.html">Make your Spring Security @Secured annotations more DRY</a> and <a href="http://www.javacodegeeks.com/2012/01/java-annotations-real-world-spring.html">Java Annotation &amp; A Real World Spring Example</a>.</p>
-<p>  现在,为了让你愉快的学习,我们把这些关于注解信息整合到这个帖子中，好好享受吧！<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/02/19/关于java和android注解解析/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/02/19/关于java和android注解解析/" data-id="cizy2lfyl000bszs6semfskw3" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/">blog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-android的flux架构分析" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/02/19/android的flux架构分析/" class="article-date">
-  <time datetime="2016-02-19T08:00:00.000Z" itemprop="datePublished">2016-02-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/19/android的flux架构分析/">android的flux架构分析</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>flux是facebook在14年提出的前端框架，旨在从架构层面来解决MVC的在复杂场景下越来越复杂内部逻辑繁重等问题。<br>我们知道在MVC中，通过Controler来控制Modle,view,比如用户点击了view之后，view通知controler，controler来控制model做状态变换，最后再更新view。如图：</p>
-<p><img src="/images/2016/02/flux_mvc.png" alt=""></p>
-<p>当逻辑比较复杂或者层次比较复杂的时候就会出现下面这种情况</p>
-<p><img src="/images/2016/02/flux_mvc_complex.png" alt=""></p>
-<p>flux架构就是在这种情况下提出的。<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/02/19/android的flux架构分析/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/02/19/android的flux架构分析/" data-id="cizy2lfyc0005szs6pnwha7o7" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/">blog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li></ul>
 
     </footer>
   </div>
@@ -329,7 +424,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li></ul>
     </div>
   </div>
 
@@ -342,6 +437,14 @@
       <ul>
         
           <li>
+            <a href="/2017/03/06/2017/读书笔记/如何高效学习-读书笔记/">&lt;如何高效学习&gt;读书笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/02/2017/读书笔记/2017-03-02-如何阅读一本书/">&lt;如何阅读一本书&gt;</a>
+          </li>
+        
+          <li>
             <a href="/2017/02/25/hello-world/">Hello World</a>
           </li>
         
@@ -351,14 +454,6 @@
         
           <li>
             <a href="/2017/02/17/2017/Android LruMemoryCache源码分析/">Android LruMemoryCache源码分析</a>
-          </li>
-        
-          <li>
-            <a href="/2017/02/17/2017/android DiskLruCache源码分析/">android DiskLruCache源码分析</a>
-          </li>
-        
-          <li>
-            <a href="/2017/02/15/2017/读书笔记/读书笔记书写技巧/">读书笔记书写技巧</a>
           </li>
         
       </ul>
