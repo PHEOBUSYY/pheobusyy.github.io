@@ -1,0 +1,38 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 编程中遇到的环境问题 · pheobusyy</title><meta name="description" content="编程中遇到的环境问题 - yanyi"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://pheobusyy.github.io/atom.xml" title="pheobusyy"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">编程中遇到的环境问题</h1><div class="post-info">Mar 30, 2016</div><div class="post-content"><h2 id="纪录一些平时很少遇到的问题"><a href="#纪录一些平时很少遇到的问题" class="headerlink" title="纪录一些平时很少遇到的问题"></a>纪录一些平时很少遇到的问题</h2><h3 id="android"><a href="#android" class="headerlink" title="android"></a>android</h3><blockquote>
+<p>Error: Could not create the Jjavaava Virtual Machine.<br>Error: A fatal exception has occurred. Program will exit.<br>Invalid maximum heap size: -Xmx4gjava<br>The specified size exceeds the maximum representable size.</p>
+</blockquote>
+<p>  64位机器错误的使用了32位的jdk，可以通过java －version命令查看java版本信息，如果里面没有带64位的相关字符，说明是32位的，需要更换jdk版本</p>
+<p>  在android当引入第三方lib或者新建lib之后，可能会出现这种编译错误</p>
+<blockquote>
+<p>java.lang.RuntimeException: Manifest merger failed : &gt;uses-sdk:minSdkVersion 9 cannot be smaller than version 10 &gt;declared in library xxxxx/androidManifest.xml<br>Suggestion: use tools:overrideLibrary=”lib1,lib2,…,libn” to &gt;force usage</p>
+</blockquote>
+<p>  android在merge manifast的时候遇到lib的minSDKversion大于项目本身的minSDKVersion就会报错<br>  解决:在AndroidManifest.xml文件中 标签中添加<uses-sdk tools:overridelibrary="xxx.xxx.xxx">，其中的xxx.xxx.xxx为第三方库包名，如果存在多个库有此异常，则用逗号分割它们，例如：<uses-sdk tools:overridelibrary="xxx.xxx.aaa, xxx.xxx.bbb">，这样做是为了项目中的AndroidManifest.xml和第三方库的AndroidManifest.xml合并时可以忽略最低版本限制。</uses-sdk></uses-sdk></p>
+<p>  <a href="http://blog.csdn.net/zhufuing/article/details/48018147" title="【Android】Suggestion: use tools:overrideLibrary=&quot;&quot; to force usage" target="_blank" rel="external">Android Suggestion: use tools:overrideLibrary=”” to force usage</a></p>
+<blockquote>
+<p>Calendar calendar = Calendar.getInstance();<br>calendar.set(Calendar.MONTH, 2);<br>System.out.println(“moth=”+calendar.get(Calendar.MONTH));</p>
+</blockquote>
+<p>  输出居然不是想要的输出，查了下发现在给calender set之前最好调用一下calender.clear()方法。另外获取某个月有几天可以使用calendar.getActualMaximum(Calendar.DATE);同理，这个方法getActualMaximum，getActualMinimum可以获取各种feild的最大和最小值</p>
+<p>  <a href="http://bbs.csdn.net/topics/260084763" title="java获取某个月有几天" target="_blank" rel="external">java获取某个月有几天</a></p>
+<blockquote>
+<p>UnsupportedMethodException<br>Unsupported method: InstantRun.getRestartDexFile().<br>The version of Gradle you connect to does not support that method.<br>To resolve the problem you can change/upgrade the target version of Gradle you connect to.<br>Alternatively, you can ignore this exception and read other information from the model.</p>
+</blockquote>
+<p>  更新了android gradle2.0.0插件之后android studio报错，是因为旧版的android studio不支持instantRun模式，需要更新android studio到2.0.0版本以上</p>
+<blockquote>
+<p>String.format(“共％d人”,list.size())不起作用，format之后显示的是“共％d人”<br>  原因是括号中的“％d”使用的是汉语的”％号，应该换成英文的”%”,写代码的时候要格外注意。</p>
+</blockquote>
+<blockquote>
+<p>某一天发现android studio下的工程全部变为java工程了，里面找不到android相关的东西，无法按照android项目编译<br>SDK路径没有问题，代码也是最新的也没有问题，那只能是android studio的问题</p>
+</blockquote>
+<p>  后来发现是更新了android studio之后，在plugin里面的gradle插件失效了，没有选中，选中之后问题解决</p>
+<blockquote>
+<p>gradle编译的时候提示“Error:元素内容必须由格式正确的字符数据或标记组成。”，无法编译成功</p>
+</blockquote>
+<p>  网上有说是标签中间带空格的，比如”&lt; string “或者 “&lt; color “,全文搜索了下发现没有，后来查了下是在git合并文件的时候没有解决冲突，导致代码或者xml中有git冲突的标签“=========”和“&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;xxxxxxx”这种，删除之后问题解决</p>
+<blockquote>
+<p>在android studio编译的过程中，mac的dock中总是会出现java图标，手动关闭之后下次编译还是会出来</p>
+</blockquote>
+<p>  通过在.zshrc或者.bashrc中设置‘export JAVA_TOOL_OPTIONS=”-Dapple.awt.UIElement=true”’解决</p>
+<p>  <a href="https://bia.is/android-dev-tip-hide-that-annoying-java-icon/" title="Android Dev Tip: Hide that Annoying Java Icon" target="_blank" rel="external">Android Dev Tip: Hide that Annoying Java Icon</a></p>
+<h3 id="java"><a href="#java" class="headerlink" title="java"></a>java</h3><p>  mac中直接在命令行编译java之后,调用java + 类名称 之后提示 <em>错误: 找不到或无法加载主类 XXXX</em><br>  这是因为我们通过IDE书写的java类顶部带有类名,那么你在执行的时候应该是带上全路径才可以,同时要通过 -cp . 把当前目录加入java的查找路径中才可以.</p>
+<p>  默认情况下通过反射获取class中method中参数名称的时候会获取到的是 <em>arg0</em>  <em>arg1</em> 这样的名称,不是原始代码中名称这是因为jvm在编译的过程中为了节约空间和内存把参数名称给精减了. 如果要获取真正的名称需要在编译的 <em>javac</em> 命令之后加上 <em>-parameters</em> ,要求编译器保留原始的参数名称就可以了</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2016/05/26/2016/java design pattern/java design pattern - state pattern/" class="prev">上一篇</a><a href="/2016/03/29/2016/java 内部类－Nested Classes/" class="next">下一篇</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://pheobusyy.github.io">yanyi</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>

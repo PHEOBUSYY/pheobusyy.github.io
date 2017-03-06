@@ -1,0 +1,235 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> pheobusyy</title><meta name="description" content="A Blog Powered By Hexo"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://pheobusyy.github.io/atom.xml" title="pheobusyy"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><ul class="home post-list"><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/10/17/2016/Object-C 细节/" class="post-title-link">Object-C 细节</a></h2><div class="post-info">Oct 17, 2016</div><div class="post-content"></div><a href="/2016/10/17/2016/Object-C 细节/" class="read-more">...阅读全文</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/10/05/2016/linux相关知识/" class="post-title-link">linux相关知识</a></h2><div class="post-info">Oct 5, 2016</div><div class="post-content"></div><a href="/2016/10/05/2016/linux相关知识/" class="read-more">...阅读全文</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/06/15/2016/java design pattern/java design pattern - command pattern/" class="post-title-link">java design pattern - command pattern</a></h2><div class="post-info">Jun 15, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<ul>
+<li><a href="#场景">场景</a></li>
+<li><a href="#命令模式">命令模式</a></li>
+<li><a href="#参考资料">参考资料</a></li>
+</ul>
+<!-- /TOC -->
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>  在编程中，经常会遇到对一系列操作的封装，比如筛选的时候各种条件的处理，可以把每一种查询条件封装成统一的<br>  命令对象，最后装入一个集合中，完成筛选操作，这个显著的场景就可以使用命令模式来完成。各个操作彼此独立，而且<br>  遵循统一的接口，便于遍历和统一处理。</p>
+<h2 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h2><p>  命令模式是一种结构模式，旨在对一系列操作做封装，统一调用。<br>  命令模式由4个角色组成：</p>
+<ul>
+<li>command 命令接口</li>
+<li>concreteCommand 具体的命令，内部通过行为方法调用了receiver</li>
+<li>receiver 具体的业务逻辑对象</li>
+<li>invoker command的调用者</li>
+</ul>
+<p><img src="/images/2016/06/command_pattern_uml.gif" alt="command pattern"></p></div><a href="/2016/06/15/2016/java design pattern/java design pattern - command pattern/" class="read-more">...阅读全文</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/06/14/2016/java design pattern/java design pattern - strategy pattern/" class="post-title-link">java design pattern - strategy pattern</a></h2><div class="post-info">Jun 14, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<ul>
+<li><a href="#场景">场景</a></li>
+<li><a href="#策略模式">策略模式</a></li>
+<li><a href="#参考资料">参考资料</a></li>
+</ul>
+<!-- /TOC -->
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>  编程中经常会遇到为达到目的有多种策略或者实现方式，这个时候可以使用策略模式来完成。<br>  比如商店打折有多种策略，又比如要实现一种目标可以有多种方法，这些都可以使用策略模式</p>
+<h2 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h2><p>  策略模式是一种非常简单行为模式，旨在提供多种不同实现来满足程序要求，主要由3个角色组成：</p>
+<ul>
+<li>strategy 行为接口</li>
+<li>ConcreteStrategy 不同实现策略</li>
+<li>Context  上下文引用</li>
+</ul>
+<p><img src="/images/2016/06/Strategy_Pattern_uml.png" alt="strategy pattern"></p></div><a href="/2016/06/14/2016/java design pattern/java design pattern - strategy pattern/" class="read-more">...阅读全文</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/06/14/2016/java design pattern/java design pattern - interpreter pattern/" class="post-title-link">java design pattern - interpreter pattern</a></h2><div class="post-info">Jun 14, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<ul>
+<li><a href="#场景">场景</a></li>
+<li><a href="#解释器模式">解释器模式</a></li>
+<li><a href="#参考资料">参考资料</a></li>
+</ul>
+<!-- /TOC -->
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>  解释器模式在编程中很少用到，一般是用来自己定义一套简单的语法语句通过解释器解释执行，在这里简单的实现一下完事。</p>
+<h2 id="解释器模式"><a href="#解释器模式" class="headerlink" title="解释器模式"></a>解释器模式</h2><p>  解释器模式是一种行为模式，用来通过解释器来解析简单语句并执行。<br>  比如可以通过解释器来模拟一个简单的四则运算。<br>  解释器模式主要由4个角色组成：</p>
+<ul>
+<li>abstractExpression 定义了通用的解释行为方法 inerpreter(context)</li>
+<li>TerminalExpression 具体值参数，在四则运算中就是数字</li>
+<li>NonTerminalExpression 操作符 ，对应四则运算的加减乘除</li>
+<li>context 上下文对象，用来保存一些常用的值等中间信息</li>
+</ul>
+<p><img src="/images/2016/06/interpreter_pattern_uml.jpg" alt="interpreter pattern"></p></div><a href="/2016/06/14/2016/java design pattern/java design pattern - interpreter pattern/" class="read-more">...阅读全文</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/06/13/2016/java design pattern/java design pattern - mediator pattern/" class="post-title-link">java design pattern - mediator pattern</a></h2><div class="post-info">Jun 13, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<ul>
+<li><a href="#场景">场景</a></li>
+<li><a href="#中介者模式">中介者模式</a></li>
+<li><a href="#参考资料">参考资料</a></li>
+</ul>
+<!-- /TOC -->
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>  在编程中经常会遇到两个或者多个复杂对象相互通讯的问题，如果对象之后互相引用的话会造成耦合严重，后续无法改动的问题<br>  这个时候可以考虑通过中介者模式来从中间完成中介的作用，来降低耦合度。</p>
+<h2 id="中介者模式"><a href="#中介者模式" class="headerlink" title="中介者模式"></a>中介者模式</h2><p>  中介者模式是一种结构话模式，旨在通过一个中介者对象来完成负责对象之间的通讯。<br>  主要由4个角色组成：</p>
+<ul>
+<li>mediator 中介者接口，定义了通讯的行为方式</li>
+<li>ConcreteMediator 具体实现中介，内部有所有负责对象的引用</li>
+<li>User 抽象的复杂对象，内部引用了中介对象</li>
+<li>ConcreteUser  具体复杂对象，内部的行为调用了中介对象的行为   </li>
+</ul>
+<p><img src="/images/2016/06/mediator_uml.gif" alt="mediator pattern"></p></div><a href="/2016/06/13/2016/java design pattern/java design pattern - mediator pattern/" class="read-more">...阅读全文</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/06/13/2016/java design pattern/java design pattern - chain of responsibility/" class="post-title-link">java design pattern - chain of responsibility</a></h2><div class="post-info">Jun 13, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<ul>
+<li><a href="#场景">场景</a></li>
+<li><a href="#责任链模式">责任链模式</a></li>
+<li><a href="#参考资料">参考资料</a></li>
+</ul>
+<!-- /TOC -->
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>  在编程中，经常会遇到链式处理的结构，比如一个请假流程，需要逐级审批，符合权限的管理角色来决定是否可以处理请求，如果可以<br>  处理就直接处理，不能处理就交由上级或下一个指定人员来处理，这种情况就可以使用责任链模式。</p>
+<h2 id="责任链模式"><a href="#责任链模式" class="headerlink" title="责任链模式"></a>责任链模式</h2><p>  责任链模式是一种结构模式，主要通过Handler抽象方法来完成一个链式操作。主要由两个角色组成：</p>
+<ul>
+<li>Handler 抽象的处理类，内部实现setSuccessor方法和抽象的handleRequest方法</li>
+<li>ConcreteHandler  Handler的具体实现</li>
+</ul>
+<p><img src="/images/2016/06/chain_of_responsibility_uml.gif" alt="chain of responsibility"></p></div><a href="/2016/06/13/2016/java design pattern/java design pattern - chain of responsibility/" class="read-more">...阅读全文</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/06/01/2016/java design pattern/java design pattern - composite pattern/" class="post-title-link">java desigh pattern - composite pattern</a></h2><div class="post-info">Jun 1, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<ul>
+<li><a href="#场景">场景</a></li>
+<li><a href="#组合模式">组合模式</a></li>
+<li><a href="#参考资料">参考资料</a></li>
+</ul>
+<!-- /TOC -->
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>  在编程中遇到树形结构的时候可以优先考虑组合模式，比如文件管理，比如组织结构等。</p>
+<h2 id="组合模式"><a href="#组合模式" class="headerlink" title="组合模式"></a>组合模式</h2><p>  组合模式是一种结构模式，把一组相似或相同对象组合成树状结构来展示，组合模式使得我们可以对不同的结构对象进行相同的操作。</p>
+<p>  组合模式由3个角色组成：</p>
+<ul>
+<li>Component接口或抽象类</li>
+<li>Leaf 叶节点，没有下级对象</li>
+<li>Composite 组合节点，内部包含下属对象的集合</li>
+</ul>
+<p><img src="/images/2016/06/Comosite_pattern_uml.png" alt="composite pattern"><br></div><a href="/2016/06/01/2016/java design pattern/java design pattern - composite pattern/" class="read-more">...阅读全文</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/06/01/2016/java design pattern/java design pattern - proxy pattern/" class="post-title-link">java design pattern - proxy pattern</a></h2><div class="post-info">Jun 1, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<ul>
+<li><a href="#场景">场景</a></li>
+<li><a href="#代理模式">代理模式</a></li>
+<li><a href="#动态代理">动态代理</a></li>
+<li><a href="#参考资料">参考资料</a></li>
+</ul>
+<!-- /TOC -->
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>  在编程中，如果要实现AOP编程或者用到要对对象方法的权限控制的时候，可以使用代理模式</p>
+<h2 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h2><p>  代理模式是一种结构化模式，可以通过调用代理类来间接的调用真实对象的方法，同时可以在调用的同时增加一些扩张。<br>  代理模式由3个角色构成：</p>
+<ul>
+<li>subject 抽象接口</li>
+<li>realSubject 真实对象</li>
+<li>proxy 代理类</li>
+</ul>
+<p><img src="/images/2016/06/proxy_pattern_uml.png" alt="proxy pattern"><br></div><a href="/2016/06/01/2016/java design pattern/java design pattern - proxy pattern/" class="read-more">...阅读全文</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/06/01/2016/java design pattern/java design pattern - flyweight pattern/" class="post-title-link">java design pattern - flyweight pattern</a></h2><div class="post-info">Jun 1, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<ul>
+<li><a href="#场景">场景</a></li>
+<li><a href="#享元模式">享元模式</a></li>
+<li><a href="#总结">总结</a></li>
+<li><a href="#参考资料">参考资料</a></li>
+</ul>
+<!-- /TOC -->
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>  在编程中如果某些对象数目过多会对系统性能造成很大的影响，比如在java中如果只是一味的创建新的对象话，对内存会有很大的压力<br>  这个时候我们可以考虑通过共享数据对象的方法来缓解这一问题，在这里就用到了享元模式。</p>
+<p>  下面是正常的没有使用享元模式的demo：<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NoUserFlyWeight</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> String state;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">NoUserFlyWeight</span><span class="params">(String state)</span> </span>&#123;</div><div class="line">      <span class="keyword">this</span>.state = state;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operator</span><span class="params">()</span> </span>&#123;</div><div class="line">      System.out.println(<span class="string">"NoUserFlyWeight state ="</span> + state);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">      NoUserFlyWeight noUserFlyWeight = <span class="keyword">new</span> NoUserFlyWeight(<span class="string">"state1"</span>);</div><div class="line">      noUserFlyWeight.operator();</div><div class="line">      noUserFlyWeight = <span class="keyword">new</span> NoUserFlyWeight(<span class="string">"state2"</span>);</div><div class="line">      noUserFlyWeight.operator();</div><div class="line"></div><div class="line">      noUserFlyWeight = <span class="keyword">new</span> NoUserFlyWeight(<span class="string">"state3"</span>);</div><div class="line">      noUserFlyWeight.operator();</div><div class="line"></div><div class="line">      noUserFlyWeight = <span class="keyword">new</span> NoUserFlyWeight(<span class="string">"state1"</span>);</div><div class="line">      noUserFlyWeight.operator();</div><div class="line"></div><div class="line">      noUserFlyWeight = <span class="keyword">new</span> NoUserFlyWeight(<span class="string">"state3"</span>);</div><div class="line">      noUserFlyWeight.operator();</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>  在这里每次使用noUserFlyWeight的时候都创建了新的对象，对系统性能会有很大的影响，同时不太满足单例的情景，因为需要使用不同状态“state”。</p>
+<h2 id="享元模式"><a href="#享元模式" class="headerlink" title="享元模式"></a>享元模式</h2><p>  享元模式是一样结构化模式，旨在通过共享技术来重复利用相同或相似的对象。比如在java中String字符串是final的，就是通过享元模式来利用相同字符的字符串，在常量池中<br>  共享相同的字符串来达到减少内存的目的。<br>  享元模式里面有两个概念，外部状态和内部状态。<br>  对象要共享的话就涉及到如何归纳那些对象属性可以共享，就是创建出来打大家都一样，这样就可以共享。那些属性不能共享，需要把它转换成外部状态，通过方法调用来实现，也就是从细粒度上来划分对象的属性。可以共享的就内部状态，对外开放通过方法调用就是外部状态。</p>
+<p><img src="/images/2016/06/flyweight_pattern_uml.png" alt="flyweight pattern"><br></div><a href="/2016/06/01/2016/java design pattern/java design pattern - flyweight pattern/" class="read-more">...阅读全文</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/05/30/2016/java design pattern/java design pattern - bridge pattern/" class="post-title-link">java design pattern - bridge pattern</a></h2><div class="post-info">May 30, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<ul>
+<li><a href="#场景">场景</a></li>
+<li><a href="#桥接模式">桥接模式</a></li>
+<li><a href="#参考资料">参考资料</a></li>
+</ul>
+<!-- /TOC -->
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><pre><code>在编程中会遇到一个对象本身的定义和它的行为动作都在变化，这种情况下调整代码是非常痛苦的，实际上是在两个维度上面做调整
+这个时候可以使用桥接模式，将两个维度变化分别抽象，最后通过组合的方式把二者组合起来来最小化的调整代码。
+</code></pre><h2 id="桥接模式"><a href="#桥接模式" class="headerlink" title="桥接模式"></a>桥接模式</h2><p><img src="/images/2016/05/bridge_pattern_uml.svg.png" alt="bridge pattern"></p>
+<p>  桥接模式是一种结构模式，是一种对抽象本质（abstraction）和行为实现(implementaion)的解耦合的设计模式.桥接模式由4个角色组成：</p>
+<ul>
+<li>抽象基类（abstraction） 用在类本身变化的抽象</li>
+<li>重定义基类（RefinedAbstraction） 类本身具体的实现</li>
+<li>行为接口（Implementor） 类行为的抽象接口</li>
+<li><p>具体实现类(ConcreteImplementor) 类行为的具体实现</p>
+<p>比如，手机中有很多软件，同时手机也有很多个品牌，这两个维度都在变化的时候，可以通过桥接模式来实现。最后把抽象和实现通过组合的方式绑定在一起，在这里<br>手机的品牌为主，所以是抽象，而软件是一个功能点，所以是行为抽象。</p></div><a href="/2016/05/30/2016/java design pattern/java design pattern - bridge pattern/" class="read-more">...阅读全文</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/05/28/2016/java design pattern/java design pattern - adapter pattern/" class="post-title-link">java design pattern - adapter pattern</a></h2><div class="post-info">May 28, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<ul>
+<li><a href="#场景">场景</a></li>
+<li><a href="#适配器模式">适配器模式</a></li>
+<li><a href="#总结">总结</a></li>
+<li><a href="#参考资料">参考资料</a></li>
+</ul>
+<!-- /TOC -->
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>  在编程中我们经常会遇到驴头不对马嘴的情况，比如以前是继承A的接口的对象，现在外部调用的时候需要该对象已B接口的形式来调用<br>  ，这个时候我们可以让对象同时集成A和B接口来达到目的，不过，这样又违反了开闭原则，这个时候我们可以使用适配器模式来达到目的。</p>
+<h2 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h2><p>  适配器模式是一种结构模式，可以帮助我们把对象以不同的接口方式来调用。主要由3个角色组成：</p>
+<ul>
+<li>Target 外部调用要求的接口方式</li>
+<li>Adapter 中间用来协调的适配器</li>
+<li><p>Adaptee 原始对象</p>
+<p>首先，我们让Adapter继承实现Target接口，其次在Adapter中构造Adaptee对象，然后在Target方法中调用Adaptee中相应的方法。过程非常简单。</p>
+</li>
+</ul>
+<p><img src="/images/2016/05/adapter_pattern_uml.png" alt="adapter pattern"><br></div><a href="/2016/05/28/2016/java design pattern/java design pattern - adapter pattern/" class="read-more">...阅读全文</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/05/28/2016/java design pattern/java design pattern - decorator pattern/" class="post-title-link">java design pattern - decorator pattern</a></h2><div class="post-info">May 28, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<ul>
+<li><a href="#场景">场景</a></li>
+<li><a href="#装饰模式">装饰模式</a></li>
+<li><a href="#总结">总结</a></li>
+<li><a href="#参考资料">参考资料</a></li>
+</ul>
+<!-- /TOC -->
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>   在编程中，经常会遇到要对原来的某个对象进行功能上的扩展，这个时候如果直接在原来的类基础上直接修改的话违反了开闭原则<br>   同时可能会影响到原来的功能。这个时候我们可以通过装饰模式来达到功能上的扩展，而不影响原来的功能。</p>
+<h2 id="装饰模式"><a href="#装饰模式" class="headerlink" title="装饰模式"></a>装饰模式</h2><p>  装饰模式顾名思义就是对一个对象进行装饰（wrap）来达到功能扩展的目的。一般由4个角色来组成，分别为：  </p>
+<ul>
+<li>Component 要扩展对象的实现接口  </li>
+<li>ConcreteComponent 要扩展的具体对象  </li>
+<li>Decorator 继承于Component 用来装饰的基础类  </li>
+<li><p>ConcreteDecorator 具体的装饰类，根据功能对Decorator中的方法进行扩展  </p>
+<p>实现的步骤如下：</p>
+</li>
+<li>新建Decorator继承或实现于Component</li>
+<li>在Decorator中添加一个Component类型的变量</li>
+<li>在Decorator的构造函数中传入一个Component对象，来完成上面变量的初始化</li>
+<li>在Decorator中实现所有Component中定义的方法，里面调用Component变量中对应的方法</li>
+<li>ConcreteDecorator继承Decorator，在里面对需要调整的方法进行复写修改</li>
+</ul>
+<p><img src="/images/2016/05/decorator_pattern_uml.png" alt="decorator pattern"><br></div><a href="/2016/05/28/2016/java design pattern/java design pattern - decorator pattern/" class="read-more">...阅读全文</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/05/28/2016/java design pattern/java design pattern - facade pattern/" class="post-title-link">java design pattern - facade pattern</a></h2><div class="post-info">May 28, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<ul>
+<li><a href="#场景">场景</a></li>
+<li><a href="#外观模式">外观模式</a></li>
+<li><a href="#总结">总结</a></li>
+<li><a href="#参考资料">参考资料</a></li>
+</ul>
+<!-- /TOC -->
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>   在编程中当我们遇到一个非常复杂或者难懂的系统的时候，感到很棘手，很多情况是由于系统内部的逻辑相互依赖，或者无法获取到源码所造成的<br>   在这种情况下我们可以使用外观模式或者叫做门面模式来处理。<br>   外观模式提供了一个简单接口供外部调用，而在接口内部来封装了外部要求调用复杂系统的不同行为逻辑，从而实现了外部对复杂系统的隔离。达到解耦合的目的。<br>   下面是一个模拟没有使用外观模式的demo：</p>
+   <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">   public class NoUserFacade &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        PartA partA = new PartA();</div><div class="line">        PartB partB = new PartB();</div><div class="line">        PartC partC = new PartC();</div><div class="line">        partA.doSomething();</div><div class="line">        partB.doSomething();</div><div class="line">        partC.doSomething();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static class PartA &#123;</div><div class="line">        public void doSomething() &#123;</div><div class="line">            System.out.println&lt;!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 --&gt;</div><div class="line"></div><div class="line">- [场景](#场景)</div><div class="line">- [外观模式](#外观模式)</div><div class="line">- [总结](#总结)</div><div class="line">- [参考资料](#参考资料)</div><div class="line"></div><div class="line">&lt;!-- /TOC --&gt;("partA doSomething");</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static class PartB &#123;</div><div class="line">        public void doSomething() &#123;</div><div class="line">            System.out.println("partA doSomething");</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static class PartC &#123;</div><div class="line">        public void doSomething() &#123;</div><div class="line">            System.out.println("partA doSomething");</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>  在这里用partA,partB,partC来表示复杂系统的内部行为逻辑，如果我们在用的时候就象在main函数中的调用，很有能是非常的混乱，同时也对测试造成了很大的困难。下面我们使用外观模式来解决上面遇到的问题。</p>
+<h2 id="外观模式"><a href="#外观模式" class="headerlink" title="外观模式"></a>外观模式</h2><p>  外观模式是一种结构型模式，它提供了一个简单的接口给外部调用，外观模式可以：</p>
+<ul>
+<li>使一个library或者类库方便调用，易懂，方便测试</li>
+<li>减少了对类库内部的逻辑依赖，使的系统更加的灵活</li>
+<li>通过一个设计良好的接口来封装那些设计不规范或者使用不便的API</li>
+</ul>
+<p><img src="/images/2016/05/Facade_design_pattern_in_UML.png" alt="facade pattern"></p></div><a href="/2016/05/28/2016/java design pattern/java design pattern - facade pattern/" class="read-more">...阅读全文</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/05/27/2016/java design pattern/java design pattern - Builder pattern/" class="post-title-link">java design pattern - Builder pattern</a></h2><div class="post-info">May 27, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<ul>
+<li><a href="#场景">场景</a></li>
+<li><a href="#建造者模式">建造者模式</a></li>
+<li><a href="#对象内部builder实现">对象内部builder实现</a></li>
+<li><a href="#总结">总结</a></li>
+<li><a href="#参考资料">参考资料</a></li>
+</ul>
+<!-- /TOC -->
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>  在平时我们会遇到复杂对象的构造过程，对象内部的组成部分属于多个或者一个复杂对象的情况，同时又很在意内部组成的组装顺序<br>  这个时候，我们可以使用构造者模式来把对象内部组成的创建和组装来划分开，达到解耦合。同时对外部隐藏了对象内部的具体实现。</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">  <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GaiFan</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String cai;</div><div class="line">    <span class="keyword">private</span> String rice;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCai</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> cai;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCai</span><span class="params">(String cai)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.cai = cai;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getRice</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> rice;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setRice</span><span class="params">(String rice)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.rice = rice;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"GaiFan&#123;"</span> +</div><div class="line">                <span class="string">"cai='"</span> + cai + <span class="string">'\''</span> +</div><div class="line">                <span class="string">", rice='"</span> + rice + <span class="string">'\''</span> +</div><div class="line">                <span class="string">'&#125;'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NoUserBuilder</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">      GaiFan gaifan = <span class="keyword">new</span> GaiFan();</div><div class="line">      gaifan.setCai(<span class="string">"宫保鸡丁"</span>);</div><div class="line">      gaifan.setRice(<span class="string">"宫保鸡丁米饭"</span>);</div><div class="line">      System.out.println(<span class="string">"gaifan="</span>+gaifan);</div><div class="line">      gaifan = <span class="keyword">new</span> GaiFan();</div><div class="line">      gaifan.setCai(<span class="string">"鱼香肉丝"</span>);</div><div class="line">      gaifan.setRice(<span class="string">"鱼香肉丝米饭"</span>);</div><div class="line">      System.out.println(<span class="string">"gaifan="</span>+gaifan);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  在这里我们使用盖饭来表示要构造的对象。盖饭由两个重要部分组成，菜和米饭，在没有使用建造者模式的时候直接创建盖饭对象<br>  同时设置对应的属性，在这里首先是暴露了盖饭内部的做法实现，同时如果菜和米饭的创建十分复杂的时候这里的逻辑会很混乱<br>  再如果要调整盖饭制作顺序的话，这个单独的创建对象显然无法胜任。这个时候我们可以使用建造者模式来帮组我们解决问题。</p>
+<h2 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h2><p>  建造者模式是一种对象创建模式，不同于工厂和抽象工厂模式，建造者模式主要着眼于对象的内部组成创建和构造顺序。建造者模式由4个主要角色构成：<br>  要创建的对象（Product），抽象的构造对象（Builder），具体的构造对象（concrete builder），导演类（Derector）。其中Builder抽象定义了对象<br>  的构造顺序，具体的构造对象内部实现具体要构造对象的各个组成的创建，导演类负责根据不同创建者来生成不同的对象。</p>
+<p><img src="/images/2016/05/design_pattern_builder.png" alt="builder pattern"><br></div><a href="/2016/05/27/2016/java design pattern/java design pattern - Builder pattern/" class="read-more">...阅读全文</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/05/26/2016/java design pattern/java design pattern-memento pattern/" class="post-title-link">java design pattern-memento pattern</a></h2><div class="post-info">May 26, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<ul>
+<li><a href="#场景">场景</a></li>
+<li><a href="#备忘录模式">备忘录模式</a></li>
+<li><a href="#实现过程">实现过程</a></li>
+<li><a href="#总结">总结</a></li>
+<li><a href="#参考资料">参考资料</a></li>
+</ul>
+<!-- /TOC -->
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>  在编程中经常遇到要回退某一个对象状态的场景，比如游戏中在打架前存盘，如果失败了可以回退到之前的状态，又比如执行了错误<br>  操作之后要回退到之前的某一个操作等等，总之就是在之前保存了对象状态，用户后悔了之后可以回滚，一种“后悔药”的感觉<br>  如果不用设计模式直接实现的话，是这个样子的：</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NoMementoUse</span> </span>&#123;</div><div class="line"> <span class="keyword">private</span> String state;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getState</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> state;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setState</span><span class="params">(String state)</span> </span>&#123;</div><div class="line">      <span class="keyword">this</span>.state = state;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">      <span class="comment">//用来保存状态</span></div><div class="line">      String preState = <span class="string">""</span>;</div><div class="line">      NoMementoUse noMementoUse = <span class="keyword">new</span> NoMementoUse();</div><div class="line">      noMementoUse.setState(<span class="string">"state first"</span>);</div><div class="line">      preState = noMementoUse.getState();</div><div class="line">      noMementoUse.setState(<span class="string">"state second"</span>);</div><div class="line">      <span class="comment">//后悔了</span></div><div class="line">      noMementoUse.setState(preState);</div><div class="line">      System.out.println(<span class="string">"state="</span>+noMementoUse.getState());</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  在上面的实现中，通过一个preState来保存状态，后悔了之后把preState回写到对象中，这里有两个问题：一个是暴露了对象中state属性，另一个是如果要实现更复杂的回退<br>  逻辑的话，不好扩展。在这种场景下，可以使用备忘录模式。<br></div><a href="/2016/05/26/2016/java design pattern/java design pattern-memento pattern/" class="read-more">...阅读全文</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/05/26/2016/java design pattern/java design pattern - state pattern/" class="post-title-link">java design pattern - state pattern</a></h2><div class="post-info">May 26, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<ul>
+<li><a href="#场景">场景</a></li>
+<li><a href="#状态模式">状态模式</a></li>
+<li><a href="#实现过程">实现过程</a></li>
+<li><a href="#另一种实现方式">另一种实现方式</a></li>
+<li><a href="#总结">总结</a></li>
+<li><a href="#参考资料">参考资料</a></li>
+</ul>
+<!-- /TOC -->
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>  在程序中要根据对象的不同状态来执行不同的逻辑的时候可以考虑使用状态模式。下面来看没有使用状态模式的代码<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">  <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NoUseStatePattern</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> value;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (value &lt; <span class="number">100</span>) &#123;</div><div class="line">            System.out.println(<span class="string">"value begin="</span> + value);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (value &gt;= <span class="number">100</span> &amp;&amp; value &lt;= <span class="number">200</span>) &#123;</div><div class="line">            System.out.println(<span class="string">"value middle="</span> + value);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            System.out.println(<span class="string">"value end="</span> + value);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        NoUseStatePattern noUseStatePattern = <span class="keyword">new</span> NoUseStatePattern();</div><div class="line">        noUseStatePattern.value = <span class="number">10</span>;</div><div class="line">        noUseStatePattern.handle();</div><div class="line"></div><div class="line">        noUseStatePattern.value = <span class="number">120</span>;</div><div class="line">        noUseStatePattern.handle();</div><div class="line"></div><div class="line">        noUseStatePattern.value = <span class="number">220</span>;</div><div class="line">        noUseStatePattern.handle();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>  在这里要根据value的值来执行不同的逻辑，目前来看没什么大问题，但是如果后续要增加多个value的判断或者根据value的不同执行更复杂的<br>  逻辑的时候，上面的代码就会有点力不从心了，这个时候我们可以使用状态模式来替换上面的逻辑。</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">  <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserStatePattern</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> value;</div><div class="line">    <span class="keyword">private</span> State state;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> State <span class="title">getState</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> state;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setState</span><span class="params">(State state)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.state = state;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (getValue() &lt; <span class="number">100</span>) &#123;</div><div class="line">            setState(<span class="keyword">new</span> BeginState());</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (getValue() &gt;= <span class="number">100</span> &amp;&amp; getValue() &lt; <span class="number">200</span>) &#123;</div><div class="line">            setState(<span class="keyword">new</span> MiddleState());</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            setState(<span class="keyword">new</span> EndState());</div><div class="line">        &#125;</div><div class="line">        state.handle(<span class="keyword">this</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getValue</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> value;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setValue</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.value = value;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        UserStatePattern userStatePattern = <span class="keyword">new</span> UserStatePattern();</div><div class="line">        userStatePattern.setValue(<span class="number">10</span>);</div><div class="line">        userStatePattern.handle();</div><div class="line">        userStatePattern.handle();</div><div class="line">        userStatePattern.handle();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  看上去很简单多不对，所白了就是把if else判断封装了一下，方便以后扩展，同时也更加的灵活。<br></div><a href="/2016/05/26/2016/java design pattern/java design pattern - state pattern/" class="read-more">...阅读全文</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/03/30/2016/编程中遇到的环境问题/" class="post-title-link">编程中遇到的环境问题</a></h2><div class="post-info">Mar 30, 2016</div><div class="post-content"></div><a href="/2016/03/30/2016/编程中遇到的环境问题/" class="read-more">...阅读全文</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/03/29/2016/java 内部类－Nested Classes/" class="post-title-link">java 内部类－Nested Classes</a></h2><div class="post-info">Mar 29, 2016</div><div class="post-content"><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>在java中允许在一个内内部定义另一个类，这个被定义的类就叫做内部类（很形象嘛）.比如下面示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">OuterClass</span> </span>&#123;</div><div class="line">  ...</div><div class="line">  <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticNestedClass</span></span>&#123;</div><div class="line">    ...</div><div class="line">  &#125;</div><div class="line">  ...</div><div class="line">  <span class="class"><span class="keyword">class</span> <span class="title">NestedClass</span></span>&#123;</div><div class="line">    ...</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其中，StaticNestedClass叫做静态内部类，也叫嵌套类，NestedClass叫做成员内部类。其中成员内部类又包括匿名内部类(Anonymous innerClass)和局部内部类(local innerCalss)内部类是外部类中一个成员;</p>
+<p>成员内部类可以访问其外部类的成员，包括其中的作用于为private的成员,其内部有一个对外部类的引用，所依可以获取到外部类所有的成员。<br>静态内部类和其外部类是平级关系，与一个普通的外部类作用类似，没有对其外部类的引用。</p>
+<h2 id="为什么使用内部类"><a href="#为什么使用内部类" class="headerlink" title="为什么使用内部类"></a>为什么使用内部类</h2><ul>
+<li>一种可以把逻辑按组合整合在一起的方法</li>
+<li>增强封装</li>
+<li>增加代码的可读性和可维护性</li>
+<li>一种变相支持多重继承的方式（后面会讲到）</li>
+<li>闭包（回调）类似lambda</div><a href="/2016/03/29/2016/java 内部类－Nested Classes/" class="read-more">...阅读全文</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/03/07/2016/2016-03-07-《成功，动机与目标》读书笔记－/" class="post-title-link">《成功，动机与目标》读书笔记－</a></h2><div class="post-info">Mar 7, 2016</div><div class="post-content"><h2 id="第九章-“如果…就…”的力量————制定简单有效的计划"><a href="#第九章-“如果…就…”的力量————制定简单有效的计划" class="headerlink" title="第九章 “如果…就…”的力量————制定简单有效的计划"></a>第九章 “如果…就…”的力量————制定简单有效的计划</h2><p><strong>“不做准备，就是在准备失败。” ——————本杰明.富兰克林</strong><br></div><a href="/2016/03/07/2016/2016-03-07-《成功，动机与目标》读书笔记－/" class="read-more">...阅读全文</a></article></li></ul></main><footer><div class="paginator"><a href="/page/2/" class="prev">上一页</a><a href="/page/4/" class="next">下一页</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://pheobusyy.github.io">yanyi</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
