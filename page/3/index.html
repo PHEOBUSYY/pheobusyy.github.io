@@ -1,4 +1,453 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> pheobusyy</title><meta name="description" content="A Blog Powered By Hexo"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://pheobusyy.github.io/atom.xml" title="pheobusyy"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><ul class="home post-list"><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/10/05/2016/linux相关知识/" class="post-title-link">linux相关知识</a></h2><div class="post-info">Oct 5, 2016</div><div class="post-content"></div><a href="/2016/10/05/2016/linux相关知识/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/06/15/2016/java design pattern/java design pattern - command pattern/" class="post-title-link">java design pattern - command pattern</a></h2><div class="post-info">Jun 15, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="pheobusyy" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="pheobusyy">
+<meta property="og:url" content="http://pheobusyy.github.io/page/3/index.html">
+<meta property="og:site_name" content="pheobusyy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="pheobusyy">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://pheobusyy.github.io/page/3/"/>
+
+
+
+
+
+  <title> pheobusyy </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left 
+   page-home 
+ ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">pheobusyy</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/10/05/2016/linux相关知识/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yanyi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pheobusyy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/05/2016/linux相关知识/" itemprop="url">
+                  linux相关知识
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-05T14:45:00+08:00">
+                2016-10-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="linux硬链接-Hard-link-和符号链接-Symbolic-link-的作用和创建方式"><a href="#linux硬链接-Hard-link-和符号链接-Symbolic-link-的作用和创建方式" class="headerlink" title="linux硬链接(Hard link)和符号链接(Symbolic link)的作用和创建方式"></a>linux硬链接(Hard link)和符号链接(Symbolic link)的作用和创建方式</h3><p>  在linux文件系统中,保存在磁盘分区中的文件不管是什么类型都给它分配了一个编号,称为索引节点(Inode index).硬链接指的就是多个文件名指向了同一个索引节点,硬链接的作用就是允许一个文件有多个指向的有效路径名称,这样用户就可以通过硬链接来指向重要文件,当删除了其中一个节点并不会影响文件本身和其他的连接,保证文件的安全,只有当所有的连接全部都删除后,文件才会被真正删除.类似于文件”指针”.符号链接又叫软链接,有点类似于windows的快捷方式,他实际上是一个特殊的文件,文件实际上是一个文本文件,其中包含另一个文件的位置信息.</p>
+<p>  创建一个空文件f1     touch f1<br>  创建一个硬链接f2     ln f1 f2<br>  创建一个软链接f3     ln -s f1 f3<br>  查看文件属性         ls -li<br>  可以看到f1,f2文件的索引节点相同,文件大小相同,而f1,f3文件索引和文件大小都不相同</p>
+<p>  输入文本到f1         echo “I am f1 file” &gt;&gt; f1<br>  输出f1,f2,f3文本    cat f1<br>                     “I am f1 file”<br>                     cat f2<br>                     “I am f1 file”<br>                     cat f3<br>                     “I am f1 file”<br>  删除f1              rm f1<br>  输出f2,f3文本       cat f2<br>                     “I am f1 file”<br>                     cat f3<br>                     No such file or directory</p>
+<h3 id="basename-和-dirname"><a href="#basename-和-dirname" class="headerlink" title="basename 和 dirname"></a>basename 和 dirname</h3><p>basename 命令可以获取到路径最后的文件名<br>dirname 命令可以获取到路径除了文件名的前面部分</p>
+<p>比如:<br>basename /user/yy —&gt; yy<br>dirname /user/yy —&gt; /user                     </p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/06/15/2016/java design pattern/java design pattern - command pattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yanyi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pheobusyy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/15/2016/java design pattern/java design pattern - command pattern/" itemprop="url">
+                  java design pattern - command pattern
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-15T21:13:00+08:00">
+                2016-06-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 <ul>
 <li><a href="#场景">场景</a></li>
 <li><a href="#命令模式">命令模式</a></li>
@@ -13,7 +462,129 @@
 <li>receiver 具体的业务逻辑对象</li>
 <li>invoker command的调用者</li>
 </ul>
-<p><img src="/images/2016/06/command_pattern_uml.gif" alt="command pattern"></p></div><a href="/2016/06/15/2016/java design pattern/java design pattern - command pattern/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/06/14/2016/java design pattern/java design pattern - strategy pattern/" class="post-title-link">java design pattern - strategy pattern</a></h2><div class="post-info">Jun 14, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<p><img src="/images/2016/06/command_pattern_uml.gif" alt="command pattern"></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/06/15/2016/java design pattern/java design pattern - command pattern/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/06/14/2016/java design pattern/java design pattern - strategy pattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yanyi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pheobusyy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/14/2016/java design pattern/java design pattern - strategy pattern/" itemprop="url">
+                  java design pattern - strategy pattern
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-14T21:37:00+08:00">
+                2016-06-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 <ul>
 <li><a href="#场景">场景</a></li>
 <li><a href="#策略模式">策略模式</a></li>
@@ -27,7 +598,129 @@
 <li>ConcreteStrategy 不同实现策略</li>
 <li>Context  上下文引用</li>
 </ul>
-<p><img src="/images/2016/06/Strategy_Pattern_uml.png" alt="strategy pattern"></p></div><a href="/2016/06/14/2016/java design pattern/java design pattern - strategy pattern/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/06/14/2016/java design pattern/java design pattern - interpreter pattern/" class="post-title-link">java design pattern - interpreter pattern</a></h2><div class="post-info">Jun 14, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<p><img src="/images/2016/06/Strategy_Pattern_uml.png" alt="strategy pattern"></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/06/14/2016/java design pattern/java design pattern - strategy pattern/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/06/14/2016/java design pattern/java design pattern - interpreter pattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yanyi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pheobusyy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/14/2016/java design pattern/java design pattern - interpreter pattern/" itemprop="url">
+                  java design pattern - interpreter pattern
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-14T21:12:00+08:00">
+                2016-06-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 <ul>
 <li><a href="#场景">场景</a></li>
 <li><a href="#解释器模式">解释器模式</a></li>
@@ -42,7 +735,129 @@
 <li>NonTerminalExpression 操作符 ，对应四则运算的加减乘除</li>
 <li>context 上下文对象，用来保存一些常用的值等中间信息</li>
 </ul>
-<p><img src="/images/2016/06/interpreter_pattern_uml.jpg" alt="interpreter pattern"></p></div><a href="/2016/06/14/2016/java design pattern/java design pattern - interpreter pattern/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/06/13/2016/java design pattern/java design pattern - mediator pattern/" class="post-title-link">java design pattern - mediator pattern</a></h2><div class="post-info">Jun 13, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<p><img src="/images/2016/06/interpreter_pattern_uml.jpg" alt="interpreter pattern"></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/06/14/2016/java design pattern/java design pattern - interpreter pattern/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/06/13/2016/java design pattern/java design pattern - mediator pattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yanyi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pheobusyy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/13/2016/java design pattern/java design pattern - mediator pattern/" itemprop="url">
+                  java design pattern - mediator pattern
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-13T22:09:00+08:00">
+                2016-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 <ul>
 <li><a href="#场景">场景</a></li>
 <li><a href="#中介者模式">中介者模式</a></li>
@@ -57,7 +872,129 @@
 <li>User 抽象的复杂对象，内部引用了中介对象</li>
 <li>ConcreteUser  具体复杂对象，内部的行为调用了中介对象的行为   </li>
 </ul>
-<p><img src="/images/2016/06/mediator_uml.gif" alt="mediator pattern"></p></div><a href="/2016/06/13/2016/java design pattern/java design pattern - mediator pattern/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/06/13/2016/java design pattern/java design pattern - chain of responsibility/" class="post-title-link">java design pattern - chain of responsibility</a></h2><div class="post-info">Jun 13, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<p><img src="/images/2016/06/mediator_uml.gif" alt="mediator pattern"></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/06/13/2016/java design pattern/java design pattern - mediator pattern/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/06/13/2016/java design pattern/java design pattern - chain of responsibility/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yanyi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pheobusyy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/13/2016/java design pattern/java design pattern - chain of responsibility/" itemprop="url">
+                  java design pattern - chain of responsibility
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-13T21:36:00+08:00">
+                2016-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 <ul>
 <li><a href="#场景">场景</a></li>
 <li><a href="#责任链模式">责任链模式</a></li>
@@ -70,7 +1007,129 @@
 <li>Handler 抽象的处理类，内部实现setSuccessor方法和抽象的handleRequest方法</li>
 <li>ConcreteHandler  Handler的具体实现</li>
 </ul>
-<p><img src="/images/2016/06/chain_of_responsibility_uml.gif" alt="chain of responsibility"></p></div><a href="/2016/06/13/2016/java design pattern/java design pattern - chain of responsibility/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/06/01/2016/java design pattern/java design pattern - composite pattern/" class="post-title-link">java desigh pattern - composite pattern</a></h2><div class="post-info">Jun 1, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<p><img src="/images/2016/06/chain_of_responsibility_uml.gif" alt="chain of responsibility"></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/06/13/2016/java design pattern/java design pattern - chain of responsibility/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/06/01/2016/java design pattern/java design pattern - composite pattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yanyi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pheobusyy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/01/2016/java design pattern/java design pattern - composite pattern/" itemprop="url">
+                  java desigh pattern - composite pattern
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-01T20:25:00+08:00">
+                2016-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 <ul>
 <li><a href="#场景">场景</a></li>
 <li><a href="#组合模式">组合模式</a></li>
@@ -85,7 +1144,129 @@
 <li>Leaf 叶节点，没有下级对象</li>
 <li>Composite 组合节点，内部包含下属对象的集合</li>
 </ul>
-<p><img src="/images/2016/06/Comosite_pattern_uml.png" alt="composite pattern"><br></div><a href="/2016/06/01/2016/java design pattern/java design pattern - composite pattern/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/06/01/2016/java design pattern/java design pattern - proxy pattern/" class="post-title-link">java design pattern - proxy pattern</a></h2><div class="post-info">Jun 1, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<p><img src="/images/2016/06/Comosite_pattern_uml.png" alt="composite pattern"><br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/06/01/2016/java design pattern/java design pattern - composite pattern/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/06/01/2016/java design pattern/java design pattern - proxy pattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yanyi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pheobusyy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/01/2016/java design pattern/java design pattern - proxy pattern/" itemprop="url">
+                  java design pattern - proxy pattern
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-01T16:32:00+08:00">
+                2016-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 <ul>
 <li><a href="#场景">场景</a></li>
 <li><a href="#代理模式">代理模式</a></li>
@@ -100,7 +1281,129 @@
 <li>realSubject 真实对象</li>
 <li>proxy 代理类</li>
 </ul>
-<p><img src="/images/2016/06/proxy_pattern_uml.png" alt="proxy pattern"><br></div><a href="/2016/06/01/2016/java design pattern/java design pattern - proxy pattern/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/06/01/2016/java design pattern/java design pattern - flyweight pattern/" class="post-title-link">java design pattern - flyweight pattern</a></h2><div class="post-info">Jun 1, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<p><img src="/images/2016/06/proxy_pattern_uml.png" alt="proxy pattern"><br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/06/01/2016/java design pattern/java design pattern - proxy pattern/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/06/01/2016/java design pattern/java design pattern - flyweight pattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yanyi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pheobusyy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/01/2016/java design pattern/java design pattern - flyweight pattern/" itemprop="url">
+                  java design pattern - flyweight pattern
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-01T13:49:00+08:00">
+                2016-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 <ul>
 <li><a href="#场景">场景</a></li>
 <li><a href="#享元模式">享元模式</a></li>
@@ -112,7 +1415,129 @@
 <p>  下面是正常的没有使用享元模式的demo：<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NoUserFlyWeight</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> String state;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">NoUserFlyWeight</span><span class="params">(String state)</span> </span>&#123;</div><div class="line">      <span class="keyword">this</span>.state = state;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operator</span><span class="params">()</span> </span>&#123;</div><div class="line">      System.out.println(<span class="string">"NoUserFlyWeight state ="</span> + state);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">      NoUserFlyWeight noUserFlyWeight = <span class="keyword">new</span> NoUserFlyWeight(<span class="string">"state1"</span>);</div><div class="line">      noUserFlyWeight.operator();</div><div class="line">      noUserFlyWeight = <span class="keyword">new</span> NoUserFlyWeight(<span class="string">"state2"</span>);</div><div class="line">      noUserFlyWeight.operator();</div><div class="line"></div><div class="line">      noUserFlyWeight = <span class="keyword">new</span> NoUserFlyWeight(<span class="string">"state3"</span>);</div><div class="line">      noUserFlyWeight.operator();</div><div class="line"></div><div class="line">      noUserFlyWeight = <span class="keyword">new</span> NoUserFlyWeight(<span class="string">"state1"</span>);</div><div class="line">      noUserFlyWeight.operator();</div><div class="line"></div><div class="line">      noUserFlyWeight = <span class="keyword">new</span> NoUserFlyWeight(<span class="string">"state3"</span>);</div><div class="line">      noUserFlyWeight.operator();</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>  在这里每次使用noUserFlyWeight的时候都创建了新的对象，对系统性能会有很大的影响，同时不太满足单例的情景，因为需要使用不同状态“state”。</p>
 <h2 id="享元模式"><a href="#享元模式" class="headerlink" title="享元模式"></a>享元模式</h2><p>  享元模式是一样结构化模式，旨在通过共享技术来重复利用相同或相似的对象。比如在java中String字符串是final的，就是通过享元模式来利用相同字符的字符串，在常量池中<br>  共享相同的字符串来达到减少内存的目的。<br>  享元模式里面有两个概念，外部状态和内部状态。<br>  对象要共享的话就涉及到如何归纳那些对象属性可以共享，就是创建出来打大家都一样，这样就可以共享。那些属性不能共享，需要把它转换成外部状态，通过方法调用来实现，也就是从细粒度上来划分对象的属性。可以共享的就内部状态，对外开放通过方法调用就是外部状态。</p>
-<p><img src="/images/2016/06/flyweight_pattern_uml.png" alt="flyweight pattern"><br></div><a href="/2016/06/01/2016/java design pattern/java design pattern - flyweight pattern/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/05/30/2016/java design pattern/java design pattern - bridge pattern/" class="post-title-link">java design pattern - bridge pattern</a></h2><div class="post-info">May 30, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<p><img src="/images/2016/06/flyweight_pattern_uml.png" alt="flyweight pattern"><br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/06/01/2016/java design pattern/java design pattern - flyweight pattern/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/05/30/2016/java design pattern/java design pattern - bridge pattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yanyi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pheobusyy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/05/30/2016/java design pattern/java design pattern - bridge pattern/" itemprop="url">
+                  java design pattern - bridge pattern
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-30T20:10:00+08:00">
+                2016-05-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 <ul>
 <li><a href="#场景">场景</a></li>
 <li><a href="#桥接模式">桥接模式</a></li>
@@ -128,7 +1553,129 @@
 <li>重定义基类（RefinedAbstraction） 类本身具体的实现</li>
 <li>行为接口（Implementor） 类行为的抽象接口</li>
 <li><p>具体实现类(ConcreteImplementor) 类行为的具体实现</p>
-<p>比如，手机中有很多软件，同时手机也有很多个品牌，这两个维度都在变化的时候，可以通过桥接模式来实现。最后把抽象和实现通过组合的方式绑定在一起，在这里<br>手机的品牌为主，所以是抽象，而软件是一个功能点，所以是行为抽象。</p></div><a href="/2016/05/30/2016/java design pattern/java design pattern - bridge pattern/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/05/28/2016/java design pattern/java design pattern - adapter pattern/" class="post-title-link">java design pattern - adapter pattern</a></h2><div class="post-info">May 28, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<p>比如，手机中有很多软件，同时手机也有很多个品牌，这两个维度都在变化的时候，可以通过桥接模式来实现。最后把抽象和实现通过组合的方式绑定在一起，在这里<br>手机的品牌为主，所以是抽象，而软件是一个功能点，所以是行为抽象。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/05/30/2016/java design pattern/java design pattern - bridge pattern/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/05/28/2016/java design pattern/java design pattern - adapter pattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yanyi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pheobusyy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/05/28/2016/java design pattern/java design pattern - adapter pattern/" itemprop="url">
+                  java design pattern - adapter pattern
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-28T20:18:00+08:00">
+                2016-05-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 <ul>
 <li><a href="#场景">场景</a></li>
 <li><a href="#适配器模式">适配器模式</a></li>
@@ -145,7 +1692,129 @@
 <p>首先，我们让Adapter继承实现Target接口，其次在Adapter中构造Adaptee对象，然后在Target方法中调用Adaptee中相应的方法。过程非常简单。</p>
 </li>
 </ul>
-<p><img src="/images/2016/05/adapter_pattern_uml.png" alt="adapter pattern"><br></div><a href="/2016/05/28/2016/java design pattern/java design pattern - adapter pattern/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/05/28/2016/java design pattern/java design pattern - decorator pattern/" class="post-title-link">java design pattern - decorator pattern</a></h2><div class="post-info">May 28, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<p><img src="/images/2016/05/adapter_pattern_uml.png" alt="adapter pattern"><br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/05/28/2016/java design pattern/java design pattern - adapter pattern/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/05/28/2016/java design pattern/java design pattern - decorator pattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yanyi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pheobusyy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/05/28/2016/java design pattern/java design pattern - decorator pattern/" itemprop="url">
+                  java design pattern - decorator pattern
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-28T18:08:00+08:00">
+                2016-05-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 <ul>
 <li><a href="#场景">场景</a></li>
 <li><a href="#装饰模式">装饰模式</a></li>
@@ -168,7 +1837,129 @@
 <li>在Decorator中实现所有Component中定义的方法，里面调用Component变量中对应的方法</li>
 <li>ConcreteDecorator继承Decorator，在里面对需要调整的方法进行复写修改</li>
 </ul>
-<p><img src="/images/2016/05/decorator_pattern_uml.png" alt="decorator pattern"><br></div><a href="/2016/05/28/2016/java design pattern/java design pattern - decorator pattern/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/05/28/2016/java design pattern/java design pattern - facade pattern/" class="post-title-link">java design pattern - facade pattern</a></h2><div class="post-info">May 28, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<p><img src="/images/2016/05/decorator_pattern_uml.png" alt="decorator pattern"><br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/05/28/2016/java design pattern/java design pattern - decorator pattern/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/05/28/2016/java design pattern/java design pattern - facade pattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yanyi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pheobusyy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/05/28/2016/java design pattern/java design pattern - facade pattern/" itemprop="url">
+                  java design pattern - facade pattern
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-28T15:42:00+08:00">
+                2016-05-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 <ul>
 <li><a href="#场景">场景</a></li>
 <li><a href="#外观模式">外观模式</a></li>
@@ -185,7 +1976,129 @@
 <li>减少了对类库内部的逻辑依赖，使的系统更加的灵活</li>
 <li>通过一个设计良好的接口来封装那些设计不规范或者使用不便的API</li>
 </ul>
-<p><img src="/images/2016/05/Facade_design_pattern_in_UML.png" alt="facade pattern"></p></div><a href="/2016/05/28/2016/java design pattern/java design pattern - facade pattern/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/05/27/2016/java design pattern/java design pattern - Builder pattern/" class="post-title-link">java design pattern - Builder pattern</a></h2><div class="post-info">May 27, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<p><img src="/images/2016/05/Facade_design_pattern_in_UML.png" alt="facade pattern"></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/05/28/2016/java design pattern/java design pattern - facade pattern/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/05/27/2016/java design pattern/java design pattern - Builder pattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yanyi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pheobusyy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/05/27/2016/java design pattern/java design pattern - Builder pattern/" itemprop="url">
+                  java design pattern - Builder pattern
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-27T16:07:00+08:00">
+                2016-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 <ul>
 <li><a href="#场景">场景</a></li>
 <li><a href="#建造者模式">建造者模式</a></li>
@@ -199,7 +2112,129 @@
   <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NoUserBuilder</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">      GaiFan gaifan = <span class="keyword">new</span> GaiFan();</div><div class="line">      gaifan.setCai(<span class="string">"宫保鸡丁"</span>);</div><div class="line">      gaifan.setRice(<span class="string">"宫保鸡丁米饭"</span>);</div><div class="line">      System.out.println(<span class="string">"gaifan="</span>+gaifan);</div><div class="line">      gaifan = <span class="keyword">new</span> GaiFan();</div><div class="line">      gaifan.setCai(<span class="string">"鱼香肉丝"</span>);</div><div class="line">      gaifan.setRice(<span class="string">"鱼香肉丝米饭"</span>);</div><div class="line">      System.out.println(<span class="string">"gaifan="</span>+gaifan);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>  在这里我们使用盖饭来表示要构造的对象。盖饭由两个重要部分组成，菜和米饭，在没有使用建造者模式的时候直接创建盖饭对象<br>  同时设置对应的属性，在这里首先是暴露了盖饭内部的做法实现，同时如果菜和米饭的创建十分复杂的时候这里的逻辑会很混乱<br>  再如果要调整盖饭制作顺序的话，这个单独的创建对象显然无法胜任。这个时候我们可以使用建造者模式来帮组我们解决问题。</p>
 <h2 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h2><p>  建造者模式是一种对象创建模式，不同于工厂和抽象工厂模式，建造者模式主要着眼于对象的内部组成创建和构造顺序。建造者模式由4个主要角色构成：<br>  要创建的对象（Product），抽象的构造对象（Builder），具体的构造对象（concrete builder），导演类（Derector）。其中Builder抽象定义了对象<br>  的构造顺序，具体的构造对象内部实现具体要构造对象的各个组成的创建，导演类负责根据不同创建者来生成不同的对象。</p>
-<p><img src="/images/2016/05/design_pattern_builder.png" alt="builder pattern"><br></div><a href="/2016/05/27/2016/java design pattern/java design pattern - Builder pattern/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/05/26/2016/java design pattern/java design pattern-memento pattern/" class="post-title-link">java design pattern-memento pattern</a></h2><div class="post-info">May 26, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<p><img src="/images/2016/05/design_pattern_builder.png" alt="builder pattern"><br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/05/27/2016/java design pattern/java design pattern - Builder pattern/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/05/26/2016/java design pattern/java design pattern-memento pattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yanyi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pheobusyy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/05/26/2016/java design pattern/java design pattern-memento pattern/" itemprop="url">
+                  java design pattern-memento pattern
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-26T16:22:00+08:00">
+                2016-05-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 <ul>
 <li><a href="#场景">场景</a></li>
 <li><a href="#备忘录模式">备忘录模式</a></li>
@@ -210,7 +2245,129 @@
 <!-- /TOC -->
 <h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>  在编程中经常遇到要回退某一个对象状态的场景，比如游戏中在打架前存盘，如果失败了可以回退到之前的状态，又比如执行了错误<br>  操作之后要回退到之前的某一个操作等等，总之就是在之前保存了对象状态，用户后悔了之后可以回滚，一种“后悔药”的感觉<br>  如果不用设计模式直接实现的话，是这个样子的：</p>
   <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NoMementoUse</span> </span>&#123;</div><div class="line"> <span class="keyword">private</span> String state;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getState</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> state;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setState</span><span class="params">(String state)</span> </span>&#123;</div><div class="line">      <span class="keyword">this</span>.state = state;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">      <span class="comment">//用来保存状态</span></div><div class="line">      String preState = <span class="string">""</span>;</div><div class="line">      NoMementoUse noMementoUse = <span class="keyword">new</span> NoMementoUse();</div><div class="line">      noMementoUse.setState(<span class="string">"state first"</span>);</div><div class="line">      preState = noMementoUse.getState();</div><div class="line">      noMementoUse.setState(<span class="string">"state second"</span>);</div><div class="line">      <span class="comment">//后悔了</span></div><div class="line">      noMementoUse.setState(preState);</div><div class="line">      System.out.println(<span class="string">"state="</span>+noMementoUse.getState());</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>  在上面的实现中，通过一个preState来保存状态，后悔了之后把preState回写到对象中，这里有两个问题：一个是暴露了对象中state属性，另一个是如果要实现更复杂的回退<br>  逻辑的话，不好扩展。在这种场景下，可以使用备忘录模式。<br></div><a href="/2016/05/26/2016/java design pattern/java design pattern-memento pattern/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/05/26/2016/java design pattern/java design pattern - state pattern/" class="post-title-link">java design pattern - state pattern</a></h2><div class="post-info">May 26, 2016</div><div class="post-content"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<p>  在上面的实现中，通过一个preState来保存状态，后悔了之后把preState回写到对象中，这里有两个问题：一个是暴露了对象中state属性，另一个是如果要实现更复杂的回退<br>  逻辑的话，不好扩展。在这种场景下，可以使用备忘录模式。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/05/26/2016/java design pattern/java design pattern-memento pattern/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/05/26/2016/java design pattern/java design pattern - state pattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yanyi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pheobusyy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/05/26/2016/java design pattern/java design pattern - state pattern/" itemprop="url">
+                  java design pattern - state pattern
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-26T09:28:00+08:00">
+                2016-05-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 <ul>
 <li><a href="#场景">场景</a></li>
 <li><a href="#状态模式">状态模式</a></li>
@@ -223,7 +2380,283 @@
 <h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>  在程序中要根据对象的不同状态来执行不同的逻辑的时候可以考虑使用状态模式。下面来看没有使用状态模式的代码<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">  <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NoUseStatePattern</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> value;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (value &lt; <span class="number">100</span>) &#123;</div><div class="line">            System.out.println(<span class="string">"value begin="</span> + value);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (value &gt;= <span class="number">100</span> &amp;&amp; value &lt;= <span class="number">200</span>) &#123;</div><div class="line">            System.out.println(<span class="string">"value middle="</span> + value);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            System.out.println(<span class="string">"value end="</span> + value);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        NoUseStatePattern noUseStatePattern = <span class="keyword">new</span> NoUseStatePattern();</div><div class="line">        noUseStatePattern.value = <span class="number">10</span>;</div><div class="line">        noUseStatePattern.handle();</div><div class="line"></div><div class="line">        noUseStatePattern.value = <span class="number">120</span>;</div><div class="line">        noUseStatePattern.handle();</div><div class="line"></div><div class="line">        noUseStatePattern.value = <span class="number">220</span>;</div><div class="line">        noUseStatePattern.handle();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>  在这里要根据value的值来执行不同的逻辑，目前来看没什么大问题，但是如果后续要增加多个value的判断或者根据value的不同执行更复杂的<br>  逻辑的时候，上面的代码就会有点力不从心了，这个时候我们可以使用状态模式来替换上面的逻辑。</p>
   <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">  <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserStatePattern</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> value;</div><div class="line">    <span class="keyword">private</span> State state;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> State <span class="title">getState</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> state;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setState</span><span class="params">(State state)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.state = state;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (getValue() &lt; <span class="number">100</span>) &#123;</div><div class="line">            setState(<span class="keyword">new</span> BeginState());</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (getValue() &gt;= <span class="number">100</span> &amp;&amp; getValue() &lt; <span class="number">200</span>) &#123;</div><div class="line">            setState(<span class="keyword">new</span> MiddleState());</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            setState(<span class="keyword">new</span> EndState());</div><div class="line">        &#125;</div><div class="line">        state.handle(<span class="keyword">this</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getValue</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> value;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setValue</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.value = value;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        UserStatePattern userStatePattern = <span class="keyword">new</span> UserStatePattern();</div><div class="line">        userStatePattern.setValue(<span class="number">10</span>);</div><div class="line">        userStatePattern.handle();</div><div class="line">        userStatePattern.handle();</div><div class="line">        userStatePattern.handle();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>  看上去很简单多不对，所白了就是把if else判断封装了一下，方便以后扩展，同时也更加的灵活。<br></div><a href="/2016/05/26/2016/java design pattern/java design pattern - state pattern/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/03/30/2016/编程中遇到的环境问题/" class="post-title-link">编程中遇到的环境问题</a></h2><div class="post-info">Mar 30, 2016</div><div class="post-content"></div><a href="/2016/03/30/2016/编程中遇到的环境问题/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/03/29/2016/java 内部类－Nested Classes/" class="post-title-link">java 内部类－Nested Classes</a></h2><div class="post-info">Mar 29, 2016</div><div class="post-content"><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>在java中允许在一个内内部定义另一个类，这个被定义的类就叫做内部类（很形象嘛）.比如下面示例：</p>
+<p>  看上去很简单多不对，所白了就是把if else判断封装了一下，方便以后扩展，同时也更加的灵活。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/05/26/2016/java design pattern/java design pattern - state pattern/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/03/30/2016/编程中遇到的环境问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yanyi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pheobusyy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/30/2016/编程中遇到的环境问题/" itemprop="url">
+                  编程中遇到的环境问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-30T13:31:00+08:00">
+                2016-03-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="纪录一些平时很少遇到的问题"><a href="#纪录一些平时很少遇到的问题" class="headerlink" title="纪录一些平时很少遇到的问题"></a>纪录一些平时很少遇到的问题</h2><h3 id="android"><a href="#android" class="headerlink" title="android"></a>android</h3><blockquote>
+<p>Error: Could not create the Jjavaava Virtual Machine.<br>Error: A fatal exception has occurred. Program will exit.<br>Invalid maximum heap size: -Xmx4gjava<br>The specified size exceeds the maximum representable size.</p>
+</blockquote>
+<p>  64位机器错误的使用了32位的jdk，可以通过java －version命令查看java版本信息，如果里面没有带64位的相关字符，说明是32位的，需要更换jdk版本</p>
+<p>  在android当引入第三方lib或者新建lib之后，可能会出现这种编译错误</p>
+<blockquote>
+<p>java.lang.RuntimeException: Manifest merger failed : &gt;uses-sdk:minSdkVersion 9 cannot be smaller than version 10 &gt;declared in library xxxxx/androidManifest.xml<br>Suggestion: use tools:overrideLibrary=”lib1,lib2,…,libn” to &gt;force usage</p>
+</blockquote>
+<p>  android在merge manifast的时候遇到lib的minSDKversion大于项目本身的minSDKVersion就会报错<br>  解决:在AndroidManifest.xml文件中 标签中添加<uses-sdk tools:overridelibrary="xxx.xxx.xxx">，其中的xxx.xxx.xxx为第三方库包名，如果存在多个库有此异常，则用逗号分割它们，例如：<uses-sdk tools:overridelibrary="xxx.xxx.aaa, xxx.xxx.bbb">，这样做是为了项目中的AndroidManifest.xml和第三方库的AndroidManifest.xml合并时可以忽略最低版本限制。</uses-sdk></uses-sdk></p>
+<p>  <a href="http://blog.csdn.net/zhufuing/article/details/48018147" title="【Android】Suggestion: use tools:overrideLibrary=&quot;&quot; to force usage" target="_blank" rel="external">Android Suggestion: use tools:overrideLibrary=”” to force usage</a></p>
+<blockquote>
+<p>Calendar calendar = Calendar.getInstance();<br>calendar.set(Calendar.MONTH, 2);<br>System.out.println(“moth=”+calendar.get(Calendar.MONTH));</p>
+</blockquote>
+<p>  输出居然不是想要的输出，查了下发现在给calender set之前最好调用一下calender.clear()方法。另外获取某个月有几天可以使用calendar.getActualMaximum(Calendar.DATE);同理，这个方法getActualMaximum，getActualMinimum可以获取各种feild的最大和最小值</p>
+<p>  <a href="http://bbs.csdn.net/topics/260084763" title="java获取某个月有几天" target="_blank" rel="external">java获取某个月有几天</a></p>
+<blockquote>
+<p>UnsupportedMethodException<br>Unsupported method: InstantRun.getRestartDexFile().<br>The version of Gradle you connect to does not support that method.<br>To resolve the problem you can change/upgrade the target version of Gradle you connect to.<br>Alternatively, you can ignore this exception and read other information from the model.</p>
+</blockquote>
+<p>  更新了android gradle2.0.0插件之后android studio报错，是因为旧版的android studio不支持instantRun模式，需要更新android studio到2.0.0版本以上</p>
+<blockquote>
+<p>String.format(“共％d人”,list.size())不起作用，format之后显示的是“共％d人”<br>  原因是括号中的“％d”使用的是汉语的”％号，应该换成英文的”%”,写代码的时候要格外注意。</p>
+</blockquote>
+<blockquote>
+<p>某一天发现android studio下的工程全部变为java工程了，里面找不到android相关的东西，无法按照android项目编译<br>SDK路径没有问题，代码也是最新的也没有问题，那只能是android studio的问题</p>
+</blockquote>
+<p>  后来发现是更新了android studio之后，在plugin里面的gradle插件失效了，没有选中，选中之后问题解决</p>
+<blockquote>
+<p>gradle编译的时候提示“Error:元素内容必须由格式正确的字符数据或标记组成。”，无法编译成功</p>
+</blockquote>
+<p>  网上有说是标签中间带空格的，比如”&lt; string “或者 “&lt; color “,全文搜索了下发现没有，后来查了下是在git合并文件的时候没有解决冲突，导致代码或者xml中有git冲突的标签“=========”和“&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;xxxxxxx”这种，删除之后问题解决</p>
+<blockquote>
+<p>在android studio编译的过程中，mac的dock中总是会出现java图标，手动关闭之后下次编译还是会出来</p>
+</blockquote>
+<p>  通过在.zshrc或者.bashrc中设置‘export JAVA_TOOL_OPTIONS=”-Dapple.awt.UIElement=true”’解决</p>
+<p>  <a href="https://bia.is/android-dev-tip-hide-that-annoying-java-icon/" title="Android Dev Tip: Hide that Annoying Java Icon" target="_blank" rel="external">Android Dev Tip: Hide that Annoying Java Icon</a></p>
+<h3 id="java"><a href="#java" class="headerlink" title="java"></a>java</h3><p>  mac中直接在命令行编译java之后,调用java + 类名称 之后提示 <em>错误: 找不到或无法加载主类 XXXX</em><br>  这是因为我们通过IDE书写的java类顶部带有类名,那么你在执行的时候应该是带上全路径才可以,同时要通过 -cp . 把当前目录加入java的查找路径中才可以.</p>
+<p>  默认情况下通过反射获取class中method中参数名称的时候会获取到的是 <em>arg0</em>  <em>arg1</em> 这样的名称,不是原始代码中名称这是因为jvm在编译的过程中为了节约空间和内存把参数名称给精减了. 如果要获取真正的名称需要在编译的 <em>javac</em> 命令之后加上 <em>-parameters</em> ,要求编译器保留原始的参数名称就可以了</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/03/29/2016/java 内部类－Nested Classes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yanyi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pheobusyy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/29/2016/java 内部类－Nested Classes/" itemprop="url">
+                  java 内部类－Nested Classes
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-29T20:20:00+08:00">
+                2016-03-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>在java中允许在一个内内部定义另一个类，这个被定义的类就叫做内部类（很形象嘛）.比如下面示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">OuterClass</span> </span>&#123;</div><div class="line">  ...</div><div class="line">  <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticNestedClass</span></span>&#123;</div><div class="line">    ...</div><div class="line">  &#125;</div><div class="line">  ...</div><div class="line">  <span class="class"><span class="keyword">class</span> <span class="title">NestedClass</span></span>&#123;</div><div class="line">    ...</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>其中，StaticNestedClass叫做静态内部类，也叫嵌套类，NestedClass叫做成员内部类。其中成员内部类又包括匿名内部类(Anonymous innerClass)和局部内部类(local innerCalss)内部类是外部类中一个成员;</p>
 <p>成员内部类可以访问其外部类的成员，包括其中的作用于为private的成员,其内部有一个对外部类的引用，所依可以获取到外部类所有的成员。<br>静态内部类和其外部类是平级关系，与一个普通的外部类作用类似，没有对其外部类的引用。</p>
@@ -232,5 +2665,546 @@
 <li>增强封装</li>
 <li>增加代码的可读性和可维护性</li>
 <li>一种变相支持多重继承的方式（后面会讲到）</li>
-<li>闭包（回调）类似lambda</div><a href="/2016/03/29/2016/java 内部类－Nested Classes/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/03/07/2016/2016-03-07-《成功，动机与目标》读书笔记－/" class="post-title-link">《成功，动机与目标》读书笔记－</a></h2><div class="post-info">Mar 7, 2016</div><div class="post-content"><h2 id="第九章-“如果…就…”的力量————制定简单有效的计划"><a href="#第九章-“如果…就…”的力量————制定简单有效的计划" class="headerlink" title="第九章 “如果…就…”的力量————制定简单有效的计划"></a>第九章 “如果…就…”的力量————制定简单有效的计划</h2><p><strong>“不做准备，就是在准备失败。” ——————本杰明.富兰克林</strong><br></div><a href="/2016/03/07/2016/2016-03-07-《成功，动机与目标》读书笔记－/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2016/03/01/Linux常用命令/" class="post-title-link">Linux常用命令</a></h2><div class="post-info">Mar 1, 2016</div><div class="post-content"><p>一些常用的Linux命令</p>
-<h2 id="MV命令—-重命名文件和移动文件"><a href="#MV命令—-重命名文件和移动文件" class="headerlink" title="MV命令—-重命名文件和移动文件"></a>MV命令—-重命名文件和移动文件</h2><p>  mv [-f | -i | -n][-v] source target 重命名文件<br>  mv [-f | -i | -n][-v] source … dictionary 移动文件<br>  -f: 强制覆盖文件，并且会覆盖之前的-i,-n选项<br>  -i: 如果有重复文件的话，提示用户<br>  -n: 如果已经存在文件，不覆盖，并且会覆盖之前的-i，-f选项<br>  -v：可视化选项</p></div><a href="/2016/03/01/Linux常用命令/" class="read-more">...more</a></article></li></ul></main><footer><div class="paginator"><a href="/page/2/" class="prev">PREV</a><a href="/page/4/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://pheobusyy.github.io">yanyi</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
+<li>闭包（回调）类似lambda
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/03/29/2016/java 内部类－Nested Classes/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/03/07/2016/2016-03-07-《成功，动机与目标》读书笔记－/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yanyi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pheobusyy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/07/2016/2016-03-07-《成功，动机与目标》读书笔记－/" itemprop="url">
+                  《成功，动机与目标》读书笔记－
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-07T12:41:00+08:00">
+                2016-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="第九章-“如果…就…”的力量————制定简单有效的计划"><a href="#第九章-“如果…就…”的力量————制定简单有效的计划" class="headerlink" title="第九章 “如果…就…”的力量————制定简单有效的计划"></a>第九章 “如果…就…”的力量————制定简单有效的计划</h2><p><strong>“不做准备，就是在准备失败。” ——————本杰明.富兰克林</strong><br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/03/07/2016/2016-03-07-《成功，动机与目标》读书笔记－/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/03/01/android 知识点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yanyi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pheobusyy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/01/android 知识点/" itemprop="url">
+                  android知识点
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-01T22:00:00+08:00">
+                2016-03-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>android知识点汇总</p>
+<h2 id="ActivityLifecycleCallbacks的使用"><a href="#ActivityLifecycleCallbacks的使用" class="headerlink" title="ActivityLifecycleCallbacks的使用"></a>ActivityLifecycleCallbacks的使用</h2><p>  ActivityLifecycleCallbacks用来在application中统一监听activity的生命周期回调</p>
+<h2 id="为什么在theme设置layoutmargin等以layout开头的属性无效"><a href="#为什么在theme设置layoutmargin等以layout开头的属性无效" class="headerlink" title="为什么在theme设置layoutmargin等以layout开头的属性无效"></a>为什么在theme设置layout<em>margin等以layout</em>开头的属性无效</h2><p>  这是因为以layout_开头的属性是用来告诉父控件如何放置该控件位置的，必须明确了外部viewGroup的类型之后才可以生效，   所以在theme中设置无效，需要在具体调用的xml中设置对应的style才可以生效</p>
+<p>  <a href="http://stackoverflow.com/questions/3775587/to-use-layout-marginleft-in-a-button-style-applied-as-a-theme" title="To use layout_marginLeft in a button style applied as a theme?">  To use layout_marginLeft in a button style applied as a theme?</a></p>
+<h2 id="如何修改全局的view属性，比如改变当前activity或者application的button背景"><a href="#如何修改全局的view属性，比如改变当前activity或者application的button背景" class="headerlink" title="如何修改全局的view属性，比如改变当前activity或者application的button背景"></a>如何修改全局的view属性，比如改变当前activity或者application的button背景</h2><p>  方法一.theme中引用style，然后设置为当前activity的theme</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">  &lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"MyRedTheme"</span> <span class="attr">parent</span>=<span class="string">"android:Theme.Light"</span>&gt;</span><span class="xml"></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:textAppearance"</span>&gt;</span>@style/MyRedTextAppearance<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"MyRedTextAppearance"</span> <span class="attr">parent</span>=<span class="string">"@android:style/TextAppearance"</span>&gt;</span><span class="xml"></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:textColor"</span>&gt;</span>#F00<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:textStyle"</span>&gt;</span>bold<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>  方法二.自定义一个view</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedTextView</span> <span class="keyword">extends</span> <span class="title">TextView</span></span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">RedTextView</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>(context, attrs);</div><div class="line">      setTextColor(Color.RED);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  <a href="http://stackoverflow.com/questions/3078081/setting-global-styles-for-views-in-android" title="Setting global styles for Views in Android">  Setting global styles for Views in Android</a><br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/03/01/android 知识点/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+
+          
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="yanyi" />
+          <p class="site-author-name" itemprop="name">yanyi</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">66</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yanyi</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

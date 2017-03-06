@@ -1,4 +1,350 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Programming Principles 翻译 · pheobusyy</title><meta name="description" content="Programming Principles 翻译 - yanyi"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://pheobusyy.github.io/atom.xml" title="pheobusyy"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Programming Principles 翻译</h1><div class="post-info">Nov 5, 2016</div><div class="post-content"><h2 id="编程规则"><a href="#编程规则" class="headerlink" title="编程规则"></a>编程规则</h2><h3 id="通用的"><a href="#通用的" class="headerlink" title="通用的"></a>通用的</h3><h4 id="KISS-keep-It-Simple-Stupid"><a href="#KISS-keep-It-Simple-Stupid" class="headerlink" title="KISS(keep It Simple Stupid)"></a>KISS(keep It Simple Stupid)</h4><p>大部分保持简单的系统要比复杂的系统运行的更好</p>
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="pheobusyy" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="编程规则通用的KISS(keep It Simple Stupid)大部分保持简单的系统要比复杂的系统运行的更好
+为什么呢？
+
+更少的代码消耗更少的时间，有更少的bug，并且更容易修改
+大道至简（Simplicity is the ultimate sophistication）
+最完美的不是没有什么可以增加的，而是没有什么是可以删减的，也就是最终的精简
+
+YAGNIYAGNI是“你不会需要他的：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Programming Principles 翻译">
+<meta property="og:url" content="http://pheobusyy.github.io/2016/11/05/2016/Programming Principles 翻译/index.html">
+<meta property="og:site_name" content="pheobusyy">
+<meta property="og:description" content="编程规则通用的KISS(keep It Simple Stupid)大部分保持简单的系统要比复杂的系统运行的更好
+为什么呢？
+
+更少的代码消耗更少的时间，有更少的bug，并且更容易修改
+大道至简（Simplicity is the ultimate sophistication）
+最完美的不是没有什么可以增加的，而是没有什么是可以删减的，也就是最终的精简
+
+YAGNIYAGNI是“你不会需要他的：">
+<meta property="og:updated_time" content="2017-02-25T01:12:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Programming Principles 翻译">
+<meta name="twitter:description" content="编程规则通用的KISS(keep It Simple Stupid)大部分保持简单的系统要比复杂的系统运行的更好
+为什么呢？
+
+更少的代码消耗更少的时间，有更少的bug，并且更容易修改
+大道至简（Simplicity is the ultimate sophistication）
+最完美的不是没有什么可以增加的，而是没有什么是可以删减的，也就是最终的精简
+
+YAGNIYAGNI是“你不会需要他的：">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://pheobusyy.github.io/2016/11/05/2016/Programming Principles 翻译/"/>
+
+
+
+
+
+  <title> Programming Principles 翻译 | pheobusyy </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">pheobusyy</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/11/05/2016/Programming Principles 翻译/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yanyi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pheobusyy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Programming Principles 翻译
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-05T18:11:00+08:00">
+                2016-11-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="编程规则"><a href="#编程规则" class="headerlink" title="编程规则"></a>编程规则</h2><h3 id="通用的"><a href="#通用的" class="headerlink" title="通用的"></a>通用的</h3><h4 id="KISS-keep-It-Simple-Stupid"><a href="#KISS-keep-It-Simple-Stupid" class="headerlink" title="KISS(keep It Simple Stupid)"></a>KISS(keep It Simple Stupid)</h4><p>大部分保持简单的系统要比复杂的系统运行的更好</p>
 <p>为什么呢？</p>
 <ul>
 <li>更少的代码消耗更少的时间，有更少的bug，并且更容易修改</li>
@@ -159,4 +505,342 @@
 <li>把每一个方法当做一个查询或者命令</li>
 <li>遵循命名定义,隐含的说明该方法是一个命令还是查询.</li>
 </ul>
-</div></article></div></main><footer><div class="paginator"><a href="/2016/11/09/2016/git 技巧/" class="prev">PREV</a><a href="/2016/10/17/2016/Object-C 细节/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2017 <a href="http://pheobusyy.github.io">yanyi</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/17/2016/Object-C 细节/" rel="next" title="Object-C 细节">
+                <i class="fa fa-chevron-left"></i> Object-C 细节
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/09/2016/git 技巧/" rel="prev" title="git 技巧">
+                git 技巧 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="yanyi" />
+          <p class="site-author-name" itemprop="name">yanyi</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">66</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#编程规则"><span class="nav-number">1.</span> <span class="nav-text">编程规则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通用的"><span class="nav-number">1.1.</span> <span class="nav-text">通用的</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#KISS-keep-It-Simple-Stupid"><span class="nav-number">1.1.1.</span> <span class="nav-text">KISS(keep It Simple Stupid)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#YAGNI"><span class="nav-number">1.1.2.</span> <span class="nav-text">YAGNI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#仅仅做可以运行的最简单的事物"><span class="nav-number">1.1.3.</span> <span class="nav-text">仅仅做可以运行的最简单的事物</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关注隔离"><span class="nav-number">1.1.4.</span> <span class="nav-text">关注隔离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#保证事物DRY（dont-repeat-yourself）"><span class="nav-number">1.1.5.</span> <span class="nav-text">保证事物DRY（dont repeat yourself）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为修改人员编写代码"><span class="nav-number">1.1.6.</span> <span class="nav-text">为修改人员编写代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#避免过早优化"><span class="nav-number">1.1.7.</span> <span class="nav-text">避免过早优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最小化耦合"><span class="nav-number">1.1.8.</span> <span class="nav-text">最小化耦合</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#迪米特法则"><span class="nav-number">1.2.</span> <span class="nav-text">迪米特法则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组合优于继承"><span class="nav-number">1.3.</span> <span class="nav-text">组合优于继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正交性"><span class="nav-number">1.4.</span> <span class="nav-text">正交性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#健壮性原则"><span class="nav-number">1.5.</span> <span class="nav-text">健壮性原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高内聚"><span class="nav-number">1.6.</span> <span class="nav-text">高内聚</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LSP里氏替换原则"><span class="nav-number">1.7.</span> <span class="nav-text">LSP里氏替换原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开闭原则"><span class="nav-number">1.8.</span> <span class="nav-text">开闭原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单一职责原则"><span class="nav-number">1.9.</span> <span class="nav-text">单一职责原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#隐藏实现细节"><span class="nav-number">1.10.</span> <span class="nav-text">隐藏实现细节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Curly’s-Law"><span class="nav-number">1.11.</span> <span class="nav-text">Curly’s Law</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#封装变化"><span class="nav-number">1.12.</span> <span class="nav-text">封装变化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口隔离原则"><span class="nav-number">1.13.</span> <span class="nav-text">接口隔离原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#童子军规则"><span class="nav-number">1.14.</span> <span class="nav-text">童子军规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令查询分离"><span class="nav-number">1.15.</span> <span class="nav-text">命令查询分离</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yanyi</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
