@@ -196,7 +196,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -206,7 +206,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -249,7 +249,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/03/01/Linux常用命令/">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/03/01/android 知识点/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yanyi">
@@ -271,8 +271,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/03/01/Linux常用命令/" itemprop="url">
-                  Linux常用命令
+                <a class="post-title-link" href="/2016/03/01/android 知识点/" itemprop="url">
+                  android知识点
                 </a>
               
             
@@ -286,7 +286,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-01T22:00:00+08:00">
                 2016-03-01
@@ -325,135 +325,19 @@
 
       
         
-          <p>一些常用的Linux命令</p>
-<h2 id="MV命令—-重命名文件和移动文件"><a href="#MV命令—-重命名文件和移动文件" class="headerlink" title="MV命令—-重命名文件和移动文件"></a>MV命令—-重命名文件和移动文件</h2><p>  mv [-f | -i | -n][-v] source target 重命名文件<br>  mv [-f | -i | -n][-v] source … dictionary 移动文件<br>  -f: 强制覆盖文件，并且会覆盖之前的-i,-n选项<br>  -i: 如果有重复文件的话，提示用户<br>  -n: 如果已经存在文件，不覆盖，并且会覆盖之前的-i，-f选项<br>  -v：可视化选项</p>
+          <p>android知识点汇总</p>
+<h2 id="ActivityLifecycleCallbacks的使用"><a href="#ActivityLifecycleCallbacks的使用" class="headerlink" title="ActivityLifecycleCallbacks的使用"></a>ActivityLifecycleCallbacks的使用</h2><p>  ActivityLifecycleCallbacks用来在application中统一监听activity的生命周期回调</p>
+<h2 id="为什么在theme设置layoutmargin等以layout开头的属性无效"><a href="#为什么在theme设置layoutmargin等以layout开头的属性无效" class="headerlink" title="为什么在theme设置layoutmargin等以layout开头的属性无效"></a>为什么在theme设置layout<em>margin等以layout</em>开头的属性无效</h2><p>  这是因为以layout_开头的属性是用来告诉父控件如何放置该控件位置的，必须明确了外部viewGroup的类型之后才可以生效，   所以在theme中设置无效，需要在具体调用的xml中设置对应的style才可以生效</p>
+<p>  <a href="http://stackoverflow.com/questions/3775587/to-use-layout-marginleft-in-a-button-style-applied-as-a-theme" title="To use layout_marginLeft in a button style applied as a theme?">  To use layout_marginLeft in a button style applied as a theme?</a></p>
+<h2 id="如何修改全局的view属性，比如改变当前activity或者application的button背景"><a href="#如何修改全局的view属性，比如改变当前activity或者application的button背景" class="headerlink" title="如何修改全局的view属性，比如改变当前activity或者application的button背景"></a>如何修改全局的view属性，比如改变当前activity或者application的button背景</h2><p>  方法一.theme中引用style，然后设置为当前activity的theme</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">  &lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"MyRedTheme"</span> <span class="attr">parent</span>=<span class="string">"android:Theme.Light"</span>&gt;</span><span class="xml"></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:textAppearance"</span>&gt;</span>@style/MyRedTextAppearance<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"MyRedTextAppearance"</span> <span class="attr">parent</span>=<span class="string">"@android:style/TextAppearance"</span>&gt;</span><span class="xml"></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:textColor"</span>&gt;</span>#F00<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:textStyle"</span>&gt;</span>bold<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>  方法二.自定义一个view</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedTextView</span> <span class="keyword">extends</span> <span class="title">TextView</span></span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">RedTextView</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>(context, attrs);</div><div class="line">      setTextColor(Color.RED);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  <a href="http://stackoverflow.com/questions/3078081/setting-global-styles-for-views-in-android" title="Setting global styles for Views in Android">  Setting global styles for Views in Android</a><br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/03/01/Linux常用命令/#more" rel="contents">
-              Weiterlesen &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/02/19/VIM学习笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yanyi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="pheobusyy">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/19/VIM学习笔记/" itemprop="url">
-                  VIM学习笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-19T16:00:00+08:00">
-                2016-02-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>  vim作为强大的编程工具，可以最大程度的解放鼠标，把更多的关注点放在键盘编程上，本文主要介绍了vim的三种模式<br>以及vim的常用的命令，更多的介绍和教程请查看官方文档</p>
-<p><img src="/images/2016/04/vim_sample.png" alt="vim sample"><br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/02/19/VIM学习笔记/#more" rel="contents">
-              Weiterlesen &raquo;
+            <a class="btn" href="/2016/03/01/android 知识点/#more" rel="contents">
+              Read more &raquo;
             </a>
           </div>
           <!--/noindex-->
@@ -532,7 +416,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-19T16:00:00+08:00">
                 2016-02-19
@@ -575,7 +459,7 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2016/02/19/java中保留两位小数/#more" rel="contents">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
           <!--/noindex-->
@@ -617,7 +501,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/02/19/关于java和android注解解析/">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/02/19/VIM学习笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yanyi">
@@ -639,8 +523,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/02/19/关于java和android注解解析/" itemprop="url">
-                  关于JAVA和ANDROID的注解（ANNOTATION）解析-终极教程(未完)
+                <a class="post-title-link" href="/2016/02/19/VIM学习笔记/" itemprop="url">
+                  VIM学习笔记
                 </a>
               
             
@@ -654,7 +538,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-19T16:00:00+08:00">
                 2016-02-19
@@ -693,140 +577,12 @@
 
       
         
-          <p><strong>前言:</strong> 注解在java中是一个重要的特性，每一个开发者都应该知道使用他们.</p>
-<p>  我们在Java Code Geeks提供了大量的教程,比如 <a href="http://www.javacodegeeks.com/2014/07/creating-your-own-java-annotations.html">Creating Your Own Java Annotation</a>,<a href="http://www.javacodegeeks.com/2014/07/creating-your-own-java-annotations.html">Java Annotation Tutorial with Custom Annotation</a> and <a href="http://www.javacodegeeks.com/2012/08/java-annotations-explored-explained.html">Java Annotation;Explored &amp; Explained</a>.</p>
-<p>  我们也精选了在各种框架中使用注解的文章,比如 <a href="http://www.javacodegeeks.com/2012/06/make-your-spring-security-secured.html">Make your Spring Security @Secured annotations more DRY</a> and <a href="http://www.javacodegeeks.com/2012/01/java-annotations-real-world-spring.html">Java Annotation &amp; A Real World Spring Example</a>.</p>
-<p>  现在,为了让你愉快的学习,我们把这些关于注解信息整合到这个帖子中，好好享受吧！<br>
+          <p>  vim作为强大的编程工具，可以最大程度的解放鼠标，把更多的关注点放在键盘编程上，本文主要介绍了vim的三种模式<br>以及vim的常用的命令，更多的介绍和教程请查看官方文档</p>
+<p><img src="/images/2016/04/vim_sample.png" alt="vim sample"><br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/02/19/关于java和android注解解析/#more" rel="contents">
-              Weiterlesen &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/02/19/android的flux架构分析/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yanyi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="pheobusyy">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/19/android的flux架构分析/" itemprop="url">
-                  android的flux架构分析
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-19T16:00:00+08:00">
-                2016-02-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>flux是facebook在14年提出的前端框架，旨在从架构层面来解决MVC的在复杂场景下越来越复杂内部逻辑繁重等问题。<br>我们知道在MVC中，通过Controler来控制Modle,view,比如用户点击了view之后，view通知controler，controler来控制model做状态变换，最后再更新view。如图：</p>
-<p><img src="/images/2016/02/flux_mvc.png" alt=""></p>
-<p>当逻辑比较复杂或者层次比较复杂的时候就会出现下面这种情况</p>
-<p><img src="/images/2016/02/flux_mvc_complex.png" alt=""></p>
-<p>flux架构就是在这种情况下提出的。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/02/19/android的flux架构分析/#more" rel="contents">
-              Weiterlesen &raquo;
+            <a class="btn" href="/2016/02/19/VIM学习笔记/#more" rel="contents">
+              Read more &raquo;
             </a>
           </div>
           <!--/noindex-->
@@ -905,7 +661,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-19T16:00:00+08:00">
                 2016-02-19
@@ -958,7 +714,258 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2016/02/19/android的clean架构分析/#more" rel="contents">
-              Weiterlesen &raquo;
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/02/19/android的flux架构分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yanyi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pheobusyy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/02/19/android的flux架构分析/" itemprop="url">
+                  android的flux架构分析
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-19T16:00:00+08:00">
+                2016-02-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>flux是facebook在14年提出的前端框架，旨在从架构层面来解决MVC的在复杂场景下越来越复杂内部逻辑繁重等问题。<br>我们知道在MVC中，通过Controler来控制Modle,view,比如用户点击了view之后，view通知controler，controler来控制model做状态变换，最后再更新view。如图：</p>
+<p><img src="/images/2016/02/flux_mvc.png" alt=""></p>
+<p>当逻辑比较复杂或者层次比较复杂的时候就会出现下面这种情况</p>
+<p><img src="/images/2016/02/flux_mvc_complex.png" alt=""></p>
+<p>flux架构就是在这种情况下提出的。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/02/19/android的flux架构分析/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/02/19/关于java和android注解解析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yanyi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pheobusyy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/02/19/关于java和android注解解析/" itemprop="url">
+                  关于JAVA和ANDROID的注解（ANNOTATION）解析-终极教程(未完)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-19T16:00:00+08:00">
+                2016-02-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><strong>前言:</strong> 注解在java中是一个重要的特性，每一个开发者都应该知道使用他们.</p>
+<p>  我们在Java Code Geeks提供了大量的教程,比如 <a href="http://www.javacodegeeks.com/2014/07/creating-your-own-java-annotations.html">Creating Your Own Java Annotation</a>,<a href="http://www.javacodegeeks.com/2014/07/creating-your-own-java-annotations.html">Java Annotation Tutorial with Custom Annotation</a> and <a href="http://www.javacodegeeks.com/2012/08/java-annotations-explored-explained.html">Java Annotation;Explored &amp; Explained</a>.</p>
+<p>  我们也精选了在各种框架中使用注解的文章,比如 <a href="http://www.javacodegeeks.com/2012/06/make-your-spring-security-secured.html">Make your Spring Security @Secured annotations more DRY</a> and <a href="http://www.javacodegeeks.com/2012/01/java-annotations-real-world-spring.html">Java Annotation &amp; A Real World Spring Example</a>.</p>
+<p>  现在,为了让你愉快的学习,我们把这些关于注解信息整合到这个帖子中，好好享受吧！<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/02/19/关于java和android注解解析/#more" rel="contents">
+              Read more &raquo;
             </a>
           </div>
           <!--/noindex-->
@@ -1041,7 +1048,7 @@
             <div class="site-state-item site-state-posts">
               <a href="/archives">
                 <span class="site-state-item-count">66</span>
-                <span class="site-state-item-name">Artikel</span>
+                <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
@@ -1054,7 +1061,7 @@
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
                 <span class="site-state-item-count">7</span>
-                <span class="site-state-item-name">Tags</span>
+                <span class="site-state-item-name">tags</span>
               </a>
             </div>
           
@@ -1111,7 +1118,7 @@
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
