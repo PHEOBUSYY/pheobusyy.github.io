@@ -988,135 +988,6 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2017/02/15/2017/读书笔记/<学习之道>读书笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yanyi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="pheobusyy">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/15/2017/读书笔记/<学习之道>读书笔记/" itemprop="url">
-                  <学习之道>读书笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-15T21:04:00+08:00">
-                2017-02-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="lt-学习之道-gt-读书笔记"><a href="#lt-学习之道-gt-读书笔记" class="headerlink" title="&lt;学习之道&gt;读书笔记"></a>&lt;学习之道&gt;读书笔记</h2><h3 id="放松点"><a href="#放松点" class="headerlink" title="放松点"></a>放松点</h3><p>解决拖延的小技巧:</p>
-<blockquote>
-<p>想象一下,如果现在是准备入睡的时候,你正在回顾这一天最重要的任务.你想到的任务是哪一个呢?把它写下来, <em>现在就去做</em> .在这天内,试着用最少三个25分钟(“番茄时间段”)来处理你想到的最重要的一个或几个任务.</p>
-<p>如果我们开始就用专注模式处理新的概念和陌生的问题,很容易止步不前.</p>
-</blockquote>
-<p>这是因为刚开始的时候你根本把相关的概念在脑海有一个清晰的轮廓或者想法,对你来说这些新的东西就和一个外星生物一样,你对它一无所知,只有当你对它有个理解和初步认识的时候你才能把它留在你的脑海中,下次才能在一提到这个东西的时候大脑立马就把它提取出来.so,刚开始不要死记硬背,这样效果很差,也就是在专注模式下学习新东西容易起不到效果</p>
-<blockquote>
-<p>想要发掘新点子,解决问题,不仅需要最初的专注,接着也需要给注意力放个假,让它从眼前的问题上溜开一会儿.<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/02/15/2017/读书笔记/<学习之道>读书笔记/#more" rel="contents">
-              Weiterlesen &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2017/02/15/2017/android loader相关/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1468,427 +1339,6 @@
 <p>  ViewDragHelper的内部流程实现就讲完了,有些细节这里就不展开了,感兴趣的同学可以读一下源码.在额外补充ViewDragHelper的常用方法 <em>settleCapturedViewAt</em> :<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">settleCapturedViewAt</span><span class="params">(<span class="keyword">int</span> finalLeft, <span class="keyword">int</span> finalTop)</span> </span>&#123;</div><div class="line">       <span class="keyword">if</span> (!mReleaseInProgress) &#123;</div><div class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"Cannot settleCapturedViewAt outside of a call to "</span></div><div class="line">                   + <span class="string">"Callback#onViewReleased"</span>);</div><div class="line">       &#125;</div><div class="line"></div><div class="line">       <span class="keyword">return</span> forceSettleCapturedViewAt(finalLeft, finalTop,</div><div class="line">               (<span class="keyword">int</span>) VelocityTrackerCompat.getXVelocity(mVelocityTracker, mActivePointerId),</div><div class="line">               (<span class="keyword">int</span>) VelocityTrackerCompat.getYVelocity(mVelocityTracker, mActivePointerId));</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
 <p>  这个方法,用来直接把拖动的view放在指定的位置上.<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">forceSettleCapturedViewAt</span><span class="params">(<span class="keyword">int</span> finalLeft, <span class="keyword">int</span> finalTop, <span class="keyword">int</span> xvel, <span class="keyword">int</span> yvel)</span> </span>&#123;</div><div class="line">     <span class="keyword">final</span> <span class="keyword">int</span> startLeft = mCapturedView.getLeft();</div><div class="line">     <span class="keyword">final</span> <span class="keyword">int</span> startTop = mCapturedView.getTop();</div><div class="line">     <span class="keyword">final</span> <span class="keyword">int</span> dx = finalLeft - startLeft;</div><div class="line">     <span class="keyword">final</span> <span class="keyword">int</span> dy = finalTop - startTop;</div><div class="line"></div><div class="line">     <span class="keyword">if</span> (dx == <span class="number">0</span> &amp;&amp; dy == <span class="number">0</span>) &#123;</div><div class="line">         <span class="comment">// Nothing to do. Send callbacks, be done.</span></div><div class="line">         mScroller.abortAnimation();</div><div class="line">         setDragState(STATE_IDLE);</div><div class="line">         <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">     &#125;</div><div class="line"></div><div class="line">     <span class="keyword">final</span> <span class="keyword">int</span> duration = computeSettleDuration(mCapturedView, dx, dy, xvel, yvel);</div><div class="line">     mScroller.startScroll(startLeft, startTop, dx, dy, duration);</div><div class="line"></div><div class="line">     setDragState(STATE_SETTLING);</div><div class="line">     <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
 <p>  可以看到这里通过Scroller来完成view的平滑移动的.这个方法 <em>settleCapturedViewAt</em> 在拖动view释放之后让view进入指定位置的时候会非常有用.<br>  注意:一定要在viewGroup调用如下方法来完成view的平滑移动,在调用 <em>settleCapturedViewAt</em> 方法的时候.<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">computeScroll</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.computeScroll();</div><div class="line">    <span class="keyword">if</span> (mDragHelper.continueSettling(<span class="keyword">true</span>)) &#123;</div><div class="line">        ViewCompat.postInvalidateOnAnimation(<span class="keyword">this</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2017/02/06/2017/读书笔记/<刻意练习>读书笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yanyi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="pheobusyy">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/06/2017/读书笔记/<刻意练习>读书笔记/" itemprop="url">
-                  <刻意练习>读书笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-06T16:09:00+08:00">
-                2017-02-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="lt-刻意练习-gt-读书笔记"><a href="#lt-刻意练习-gt-读书笔记" class="headerlink" title="&lt;刻意练习&gt;读书笔记"></a>&lt;刻意练习&gt;读书笔记</h2><p>刻意练习的难度要适中,能收到反馈,有足够的次数重复练习,学习者能纠正自己的错误.</p>
-<ul>
-<li>输入-解码-处理-编码-输出-反馈-输入</li>
-</ul>
-<p>人们的学习受到情景的制约或促进.你要学习的东西将实际运用在什么情景中,那么你就应该在什么样的情境中学习这些东西.</p>
-<ul>
-<li>要学有所用,不能脱离实际</li>
-</ul>
-<p>学习科学大量研究表明,成人的最佳学习方式并非独自学习,而是在情景中学习.</p>
-<ul>
-<li>要明白学习的目的是什么,带着要解决的问题学习</li>
-</ul>
-<h3 id="有目的的练习"><a href="#有目的的练习" class="headerlink" title="有目的的练习"></a>有目的的练习</h3><p>有目的练习的四个特点:</p>
-<ol>
-<li>有目的练习具有定义明确的特定目标</li>
-<li>有目的的练习是专注的</li>
-<li>有目的的练习包含反馈<br>不论你在努力做什么事情,都需要反馈来准确辨别你在哪些方面还有不足,以及怎么会存在这些不足</li>
-<li>有目的的练习需要走出舒适区<br>对于任何类型的练习,这是一条基本的真理:如果你从不迫使你走出舒适区,便永远无法进步.</li>
-</ol>
-<ul>
-<li>两个很重要的关键词,一个是 <em>反馈</em> 一个是 <em>舒适区</em> .前者用来衡量练习效果并加以校正,后者是保证练习效果持续进步的必要条件  </li>
-</ul>
-<h3 id="遇到瓶颈怎么办"><a href="#遇到瓶颈怎么办" class="headerlink" title="遇到瓶颈怎么办"></a>遇到瓶颈怎么办</h3><ol>
-<li>试着做不同的事情,而非更难的事情<br>通常情况下,逾越障碍的方法并不是”试着做更难的事情”,而是”试着做不同的事情”.</li>
-</ol>
-<ul>
-<li><p>遇到困难的时候要讲究不同的策略,不要一直正面突破</p>
-<p>不管遇到什么障碍,越过它的最好办法是从不同的方向想办法,这也是这种方法需要导师或者教练的一个原因.有些人已经熟悉你可能遇到的障碍,于是可以为你提供克服障碍的方法.</p>
-</li>
-<li><p>师傅或者教练的重要性,毕竟经历过的人知道正确的或者失败处理方式.</p>
-</li>
-</ul>
-<ol>
-<li><p>并非达到极限,而是动机不足</p>
-<p>要想有动机,需要两个因素:一个是报酬,一个是勇于自我挑战</p>
-</li>
-</ol>
-<p>我们在这里简单地总结有目的的练习:走出你的舒适区,但要以专注的方式制定明确的目标,未达到那些目标制定一个计划,并且想出检测你进步的方法.哦,还要想办法保持你的动机.</p>
-<ul>
-<li>上面讲的就是练习的基本要求,带着目的或者问题,明白标准在哪里,给自己压力.不断的保持前进</li>
-</ul>
-<h3 id="为什么要走出舒适区"><a href="#为什么要走出舒适区" class="headerlink" title="为什么要走出舒适区"></a>为什么要走出舒适区</h3><p>这就是体育锻炼制造身体变化的一般模式.当身体的系统(比如某些肌肉,心血管系统或者其他系统)感受到压力,一直与原来的体内平衡无法继续保持下去时,身体便会开始响应那些变化,目的是重新建立体内平衡.</p>
-<p>足够努力的锻炼,并且保持足够长的时间,那么,身体将以各种方式来改变,使得那种努力更容易.</p>
-<p>要是改变不断进行下去,你必须不断的加码:跑的更远一些,更快一些,并且爬坡跑.</p>
-<ul>
-<li>肌肉在压力下不断的撕裂不断重塑,身体在不断适应锻炼的强度,这样才会变得更加健康.</li>
-</ul>
-<h3 id="大脑的适应能力"><a href="#大脑的适应能力" class="headerlink" title="大脑的适应能力"></a>大脑的适应能力</h3><p>三个重要细节:</p>
-<ol>
-<li>训练对大脑的影响(越早训练越容易改变)</li>
-<li>通过超长时间的训练来发展大脑中的某些部位,可能得付出一些代价.(一方面的增强就会又另一方面的减弱)</li>
-<li>由训练引起的认知和生理变化需要继续保持(如果停止训练,他们便开始消失)</li>
-</ol>
-<p>传统的方法并不是专门用于挑战体内平衡的.</p>
-<p>对于刻意练习,我们的目标不仅仅是发觉自己的潜能,而是要构筑它,以便从前不可能做到的事情变得可能做到.这要求挑战体内平衡,也就是走出你的舒适区,并迫使你的大脑或身体来适应.一点你做到这一点,学习便不再只是执行某些遗传命运的方式;它变成一种控制你自己命运的方式,就是一种按照你选择的方法构筑潜力的方式.</p>
-<h3 id="心理表征是是什么-非常重要"><a href="#心理表征是是什么-非常重要" class="headerlink" title="心理表征是是什么(非常重要)"></a>心理表征是是什么(非常重要)</h3><p>心理表征是一种与我们大脑正在思考的某个物体,某个观点,某些信息后者其他任何事物相对应的心里结构,或具体或抽象.</p>
-<ul>
-<li>我个人理解的心理表征是指对某个东西的内在影像,也就是一个东西在你大脑中是什么样子的.如果是不太熟悉的东西应该是大概轮廓,如果是熟悉的东西应该它的各种属性,使用方法等等相关的维度分析.如果是概念的话应该是语言描述或个人看法.</li>
-</ul>
-<p>刻意练习包括创建心理表征</p>
-<ul>
-<li>刻意练习包括创建事物在脑海中概念,也包括调整优化脑海中对东西的使用方式</li>
-</ul>
-<p>将杰出人物与其他人区分开来的因素,正式前者的心理表征的质量与数量</p>
-<p>心理表征有助于解释信息,心理表征的一个重要好处在于,可以帮助我们处理信息:理解和解读它,把它保存在记忆之中,组织它,分析它,并用它来决策.</p>
-<p>精心创建的心理表征的一个主要优势是:你可以立即吸收和考虑更多的信息.</p>
-<p>在对杰出人物的研究之中,出色地组织信息是反复出现的主题.</p>
-<p>刻意练习的主要目的是创建有效的心理表征,心理表征反过来再刻意练习中发挥着重要的作用.</p>
-<p>他们检测并评估自己的技能水平,在必要时调整心理表征,使之更加有效.心理表征越有效,水平也越优异.</p>
-<p>学生之间的差别,在很大程度上最有可能取决于他们能有多敏锐地察觉自己所犯的错误,也就是说,他们对音乐作品的心理表征有多么有效.</p>
-<ul>
-<li>与高手招式之间的差距</li>
-</ul>
-<p>磨砺了技能,可以改善心理表征;而更变心理表征,也有助于磨砺技能.</p>
-<p>这类似于一遍盘爬楼梯,一遍搭建新的阶梯.你攀爬的每一步阶梯,都让你来到了需要搭建新阶梯的地方.然后,你搭建了新的阶梯,爬上去之后,你有得准备搭建下一步阶梯了.</p>
-<h3 id="黄金标准"><a href="#黄金标准" class="headerlink" title="黄金标准"></a>黄金标准</h3><p>最杰出的人是那些在各种有目的的联系中花了最多时间的人</p>
-<p>首先辨别出杰出人物,然后推测是什么使他们变得如此杰出,接着再提出训练方法,这些方法使你也能像他们那样表现卓越.</p>
-<p>在任何一个有着悠久历史的行业或领域,要想成就一番事业,致力于变成业内的杰出人士,需要付出多年艰苦卓绝的努力.</p>
-<h3 id="在工作中运用刻意练习原则"><a href="#在工作中运用刻意练习原则" class="headerlink" title="在工作中运用刻意练习原则"></a>在工作中运用刻意练习原则</h3><p>如果你没有进步,并不是你缺少天赋,而是因为你没有用正确的方法练习.</p>
-<p>传统的方法一直是先找出关于正确方法的信息,然后让学生运用那些知识.刻意学习则只聚焦于绩效和表现,以及怎样提高绩效和表现.</p>
-<h3 id="在生活中运用刻意练习原则"><a href="#在生活中运用刻意练习原则" class="headerlink" title="在生活中运用刻意练习原则"></a>在生活中运用刻意练习原则</h3><p>如果你在走神,或者你很放松,并且只是为了好玩,你可能不会进步.</p>
-<p>学会以这种方式投入,即有意地提升和精进你的技能,是提高训练效果的最强大的方式.</p>
-<p>制定明确的目标,把练习课程的时间缩的更短,是更加迅速地提升新的技能水平的最佳方式.</p>
-<p>反复做一件事情,目的是找出你在哪些方面存在不足,并且聚焦于在那些方面取得进步,试着采用不同的方法来提高,知道你最终找到适合自己的方法.</p>
-<p>专注(focus),反馈(feedback)以及纠正(fix).将技能分解成一些组成部分,一边反复的练习,并且有效的分析,确定你的不足之处,然后想出各种方法来解决它们.</p>
-<h4 id="保持动机的两个组成部分"><a href="#保持动机的两个组成部分" class="headerlink" title="保持动机的两个组成部分"></a>保持动机的两个组成部分</h4><p>保持这种推行此类体制运行下去的动机,包括两个组成部分:继续前进的理解和停下脚步的理由.</p>
-<p>你要保持动机,要么强化继续前进的理由,要么弱化停止脚步的理由.</p>
-<ol>
-<li><p>弱化停下脚步的理由<br>人们可以采用多种方式来弱化停下脚步的理由.其中最有效的一种是留出固定时间来练习,不收所有其他义务和分析的事情所干扰.<br>要找出那些可能干扰你练习的事情,并想办法将影响控制在最小.</p>
-<p>杰出人物往往做两件有益的事情,他们看起来视乎与动机无关.第一件事一般的身体保养:保证充足的睡眠并保持健康.如果你疲倦了或生病了,就更难保持专注,更易分心走神.<br>第二件是讲练习课的时间限制在1小时左右.如果比那个时间长的多,你将无法保持高度的专注.</p>
-</li>
-<li><p>增强继续前行的倾向<br>一旦你已经练习了一段时间,并且可以看到结果了,这种技能本身就可以成为你动机的一部分.</p>
-</li>
-</ol>
-<p>外部动机的一种最强烈的方式是社会动机.这可能以几种表现出来.最简单最有效的是其他人的认可和崇拜.</p>
-<p>将对同一件事情感兴趣的所有人聚集起来,或者吸引他们加入一个现有的团体,并且将团体的同志情谊和共同的目标作为打到你自己目标的额外动力.</p>
-<ol>
-<li><p>精心设置目标</p>
-<p>将漫长的旅程分解为一系列可控的目标,并且每次只关注他们中的一个,甚至可以在每次达到一个目标时,给自己小小的奖励.</p>
-</li>
-</ol>
-<h3 id="成为杰出人物路线图"><a href="#成为杰出人物路线图" class="headerlink" title="成为杰出人物路线图"></a>成为杰出人物路线图</h3><p>第一阶段:产生兴趣<br>第二阶段:变得认真<br>第三阶段:全力投入<br>第四阶段:开拓创新</p>
-<h3 id="怎样解释天生才华"><a href="#怎样解释天生才华" class="headerlink" title="怎样解释天生才华"></a>怎样解释天生才华</h3><p>从长远来看,占上风的是那些练习更加勤奋的人,而不是那些一开始在智商或者其他才华方面稍有优势的人.</p>
-<h3 id="用刻意练习创造全新的世界"><a href="#用刻意练习创造全新的世界" class="headerlink" title="用刻意练习创造全新的世界"></a>用刻意练习创造全新的世界</h3><p>所谓”练习人”,是反映人在一生之中能够通过练习掌握自己的命运,使得人生充满各种可能.</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2017/02/06/2017/读书笔记/<小狗钱钱>读书笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yanyi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="pheobusyy">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/06/2017/读书笔记/<小狗钱钱>读书笔记/" itemprop="url">
-                  <小狗钱钱>读书笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-06T15:14:00+08:00">
-                2017-02-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="lt-小狗钱钱-gt-读书笔记"><a href="#lt-小狗钱钱-gt-读书笔记" class="headerlink" title="&lt;小狗钱钱&gt;读书笔记"></a>&lt;小狗钱钱&gt;读书笔记</h2><p>“并非困难使我们放弃,而是因为我们放弃,才显得如此困难.”</p>
-<p>“天下难事,必作于易;天下大事,必作于细.” - 老子</p>
-<p>“大多数人并不清楚自己想要什么,他们只知道,自己想得到更多的东西.你可以把自己的生活想象成一家很大的邮购公司.如果你给一家邮购公司写信说’请给我寄一些好东西来’,你肯定什么也得不到.我们的愿望也是一样的.我们必须确切知道自己内心渴望的是什么才行.”</p>
-<ul>
-<li>目标的明确性很重要,如果只是一个空洞的概念或愿景,是很难有动力去实现的,也无法明确的知道如何去实现,以及最终的实现的效果是什么样的.</li>
-</ul>
-<p>“不要试试看,而是去切实行动!如果你只是抱着试试看的心态,那么你只会以失败而告终,你会一事无成.’尝试’纯粹是一种借口,你还没有做,就已经给自己想好了退路.不能实验,你只有两个选择—做或者不做.”</p>
-<ul>
-<li>‘试试’是一种不自信的表现,是自我推脱的借口,意味着自己并没有准备好全力以赴.要么不做,要做就要尽全力.做人要活的洒脱大气</li>
-</ul>
-<p>“学习就是认识新观念和新想法的工程.假如人们始终以同一种思维方式来思考问题的话,那么始终只会得到同样的结果.因为我对你讲述的许多内容是你以前从未接触过的,所以我建议你,在你还没有做之前,不要轻易的下结论.没有想象力的人很难成就大事的.我们对一件事投入的精力越多,成功的可能性越大.可是大多数人把精力放在自己并不喜欢的事情上,而不去想象自己希望得到的东西.”</p>
-<ul>
-<li><p>大多数人甚至都不知道自己真正喜欢的是什么.没有尝试过,没有走出去舒适圈,你永远不知道外面的世界是什么样的.走出去意味着可能,原地踏步只会困死在原地.做一辈子平凡的人.回想自己之前不敢换工作,就是不敢迈出那一步而已,虽然到现在也不知道自己到底喜欢的是什么,但是最起码意识到了这个问题,并且在通过读书学习来慢慢的找到喜欢的东西,这就是最大的进步.</p>
-</li>
-<li><p>在没有做之前不要一概否定,不试试怎么知道行不行呢?</p>
-</li>
-<li><p>对一件事投入的精力越大,越有可能成功</p>
-</li>
-</ul>
-<p>“有一只海鸥曾经对我说过’在你展翅飞翔之前,你就必须相信自己能够到达目的地.’你必须设想自己拥有了这些东西,这样你的一个小愿望才会变成一种强烈的渴望.你想象的越多,你的愿望就越强烈,那么你就会开始寻找机会来实现自己的梦想.吉娅,机会到处都是,但是只有在你寻找它的时候,你才能看见它.只有当你心中有了强烈的渴望,你才会去寻觅机会.而当你想象的时候,强烈的渴望就产生了.”</p>
-<ul>
-<li>要自信,相信自己可以得到自己想要的.对未来想象的越清晰,越有动力和激情去实现.</li>
-</ul>
-<p>“你的自信程度决定了你是否相信自己的能力,是否相信你自己.假如你根本不相信你能做到的话,那么你就根本不会动手去做,而加入你不开始去做,那么你就什么也得不到.”</p>
-<ul>
-<li>相信自己可以,就一定可以.自我的不断催眠,可以让自己更加的自信强大</li>
-</ul>
-<p>“你去准备一个本子,给它取名叫’成功日记’,然后把所有做成功的事情记录进去.你最好每天都做这件事,每次都写至少5条你的个人成功,任何小事都可以.开始的时候你觉得不太容易,可能会问自己,这件或那件事情是否真的可以算作成果.在这种情况下,你的回答应该是肯定的.过于自信比不够自信要好得多.”</p>
-<ul>
-<li>修改一下每日总结的模板,把下面的那个每天三件事改成成功日记.记录自己每天做成功的事情.</li>
-</ul>
-<p>“商人给了他两个重要的建议:第一,为别人解决一个难题,那么你就可以赚很多的钱;第二,把精力集中在你知道的,能做的和拥有的东西上.”</p>
-<ul>
-<li>致富的秘诀就在于帮别人解决问题,从自己拥有的技能思想或者身边的资源入手.利用信息不对等法则.</li>
-</ul>
-<p>“但是,我想提醒你两件重要的事情.第一,无论什么时候都不要把希望只寄托在一份工作上,它持续的时间不会像你设想的那么长,所以你要立即寻找另一份替代的工作.第二,你肯定会遇到一些困难,这些困难是你现在还难以预料的.”</p>
-<ul>
-<li>鸡蛋不要放在同一个篮子里,要有不同的求胜技能.增加适应风险的能力,墨菲定律,比如车子被剐蹭不可避免,要做好应对措施.</li>
-</ul>
-<p>“我要告诉你三件很重要的事情.首先,在遇到困难的时候,仍然要坚持自己的想法.一些正常的时候,每个人都能做到这一点.只有当真正困难出现时才能见分晓.只有少数人能坚定不移地贯彻自己的计划.那么非常成功的人,甚至有能力在他们最困难的时候作出最杰出的表现.第二点,在一切进展顺利的情况下,你也应该做这些事情.每天记录自己的成功.最后,当你决定做一件事情的时候,你必须在72小时之内完成,否则你很可能永远不会再做了.”</p>
-<ul>
-<li>“风生水起才知天高云淡,沧海横流方显英雄本色”</li>
-<li>遭遇挫折时要坚持自己的想法,顺利更要坚持自己的想法.宠辱不惊</li>
-<li>72小时完成</li>
-</ul>
-<p>“所有的消费贷款都是不明智的.聪明的做法只把以前积累起来的财富用于支出.”</p>
-<ul>
-<li><p>对应&lt;穷爸爸,富爸爸&gt;里面的资产和负债的区别.只有用利息购买的东西才是真正的支出.</p>
-</li>
-<li><p>在购买东西之前,认真的问问自己”这真的有必要吗?”</p>
-</li>
-</ul>
-<p>“金钱能成为我们生活中非常强大的推理.金钱可以在一定程度上提高我们的生活水平-生活的许多方面都是以钱为基础的.有了钱,我们更容易的实现我们的目标和梦想-当然,包括好的目标和梦想,也包括坏的目标和梦想.”</p>
-<ul>
-<li>很多人都把金钱和梦想的关系给颠倒了.是先有钱再去实现梦想才对.而不是把梦想和钱挂钩.好比工作只是用来养家糊口的,事业才是真正实现梦想的途径.</li>
-</ul>
-<p>“我生命中出现了最美好的东西,是因为我做了原本不敢做的事.”<br>“最珍贵的礼物是我们争取来的.克服了丢面子的恐惧,世界就会向你敞开大门.”</p>
-<ul>
-<li>勇敢的迈出那一步,会收获很多惊喜</li>
-</ul>
-<p>“成功会使人骄傲.如果你骄傲自大,你就会停止学习.不学习,人就不会再进步.”</p>
-<ul>
-<li>永远要不断的学习,不断的进步.</li>
-</ul>
-<p>“恐惧总是出现在我们设想事情会如何不顺利的时候.我们的失败的可能性想的越多,就会越害怕.而当你看着自己的成功日记的时,你就会注意到那些成功的事情,自然而然也就会想到应该怎样去做.”<br>“当你朝着积极地目标去思考的时候,就不会心生畏惧.”</p>
-<ul>
-<li>我们唯一恐惧就是恐惧本身.回头想想大多数我们担心的事情都没有发生过.同时即使失败了后果也没有我们想到那么严重.</li>
-</ul>
-<p>“我们的咒语是:</p>
-<ol>
-<li>确定自己希望获得财务上的成功.</li>
-<li>自信,有想法,做自己喜欢的事.</li>
-<li>把钱分为日常开销,梦想目标和金鹅账户三部分.</li>
-<li>进行明智的投资</li>
-<li>享受生活.<br>“</li>
-</ol>
-<ul>
-<li>对待财富的态度和处理方法就是上面说的5个方式.</li>
-</ul>
-<p>“不要为失去的东西而忧伤,而要对拥有它的时光心存感激.对我来说,这句话的意思是:从现在开始,我再也得不到钱钱的建议了,但我还是必须应对各种情况.”</p>
-<ul>
-<li>要学会感恩,感谢现在自己拥有的一切.</li>
-</ul>
 
           
         
@@ -2607,290 +2057,6 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2017/01/21/2017/读书笔记/<搞定-无压工作的艺术>/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yanyi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="pheobusyy">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/01/21/2017/读书笔记/<搞定-无压工作的艺术>/" itemprop="url">
-                  <搞定-无压工作的艺术>
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-21T12:06:00+08:00">
-                2017-01-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="搞定-无压工作的艺术"><a href="#搞定-无压工作的艺术" class="headerlink" title="搞定-无压工作的艺术"></a>搞定-无压工作的艺术</h2><h3 id="原则-有效处理内心的承诺"><a href="#原则-有效处理内心的承诺" class="headerlink" title="原则:有效处理内心的承诺"></a>原则:有效处理内心的承诺</h3><blockquote>
-<p>任何事情如果没有找到应有的位置和恰当存在方式的事物,都会pa盘踞在我们的脑海中,成为悬而未决的问题</p>
-</blockquote>
-<p>为了能够高效应对这一问题,首先,你必须明确并收集所有那些”进场唤醒你模糊记忆”的事情,搞定他们对你而言的真正意义,然后决定如何推动它们.</p>
-<h3 id="管理承诺时的基本要求"><a href="#管理承诺时的基本要求" class="headerlink" title="管理承诺时的基本要求"></a>管理承诺时的基本要求</h3><p>如果希望出色地管理好所有的工作,那么,你需要做到以下几点:</p>
-<ol>
-<li>如果这件事总是占据你的大脑,你的思维就会受阻.任何一件你认为还没有完成的事情,都必须被置于一个客观,可靠地体系中,后者是我成为”文件夹”的工具之中–必须经常回访并予以清理.</li>
-<li>在明白你的工作到底是什么后,你还必须做出判断:需要采取什么行动来推动工作进程</li>
-<li>一旦决定了需要采取的行动方案,你必须在某一个你经常查阅的系统中保存好与这些行动相关的提示信息.</li>
-</ol>
-<h3 id="检验这种模式的一个重要训练"><a href="#检验这种模式的一个重要训练" class="headerlink" title="检验这种模式的一个重要训练"></a>检验这种模式的一个重要训练</h3><blockquote>
-<p>像实干家一样思考,像思想家一样行动</p>
-</blockquote>
-<p>思考,需要构建以结果和行动为导向的思维方式.</p>
-<h3 id="为什么有些事总是萦绕在我们的心头"><a href="#为什么有些事总是萦绕在我们的心头" class="headerlink" title="为什么有些事总是萦绕在我们的心头"></a>为什么有些事总是萦绕在我们的心头</h3><p>通常情况下,你对一些事情总是念念不忘,这是因为你希望他们的情况能有所改善,另外:</p>
-<ul>
-<li>你还没有明确的认定它们的预期结果是什么.</li>
-<li>你还没有确定你下一步的具体行动是什么.</li>
-<li>你还没有把关于预期结果和即将采取行动的提示信息存入你所依赖的系统中去.</li>
-</ul>
-<h3 id="“材料”的转化"><a href="#“材料”的转化" class="headerlink" title="“材料”的转化"></a>“材料”的转化</h3><p>“材料(stuff)”的定义:进入你的精神或现实世界中但尚未找到归属的任何事情,你尚未确定他对你的真正意义,预期结果和下一步具体行动的所有事情.</p>
-<blockquote>
-<p>我们需要把收集和积累的所有”材料”都转化成包含重要行动,项目和有用信息的明确清单.<br>当想法对行动具有推动作用的时候,它就是有益的;当想法成为行动的替代时,它就会成为行动的障碍.</p>
-</blockquote>
-<h3 id="过程-管理你的行动"><a href="#过程-管理你的行动" class="headerlink" title="过程:管理你的行动"></a>过程:管理你的行动</h3><p>你首先要养成一个习惯:清空你的大脑中的所有事物.</p>
-<h3 id="管理行动的重要性"><a href="#管理行动的重要性" class="headerlink" title="管理行动的重要性"></a>管理行动的重要性</h3><p>问题的关键在于,他们无法断定到底要干些什么,下一步需要采取哪些行动.</p>
-<h3 id="对行动的横向管理和纵向管理"><a href="#对行动的横向管理和纵向管理" class="headerlink" title="对行动的横向管理和纵向管理"></a>对行动的横向管理和纵向管理</h3><p>横向控制和纵向控制的目标是一致的:解除你的心理负担,并把事情做好.</p>
-<h3 id="最重要的技巧-把一切事物赶出大脑"><a href="#最重要的技巧-把一切事物赶出大脑" class="headerlink" title="最重要的技巧:把一切事物赶出大脑"></a>最重要的技巧:把一切事物赶出大脑</h3><blockquote>
-<p>通常,盘踞在你脑中问题的数量与解决问题的效率成反比<br>对一件事情不需要进行两次相同的思考,除非你喜欢重复思考<br>任何仅存于内心的”将会,可能或应该”性质的承诺,都会造成非理性和无法排解的全天候压力<br>思想上开小差,将是你最难战胜的敌人.</p>
-</blockquote>
-<h3 id="横向管理-横向管理工作流程的5个步骤"><a href="#横向管理-横向管理工作流程的5个步骤" class="headerlink" title="横向管理:横向管理工作流程的5个步骤"></a>横向管理:横向管理工作流程的5个步骤</h3><p>我们:(1)收集引起我们注意的事务和信息;(2)理清每个项目的意义和相关措施;(3)组织整理结果,提出选项;(4)进行思考回顾;(5)选择行动.这些阶段共同构成了我们生活中的横向管理系统,而且我们还可以随时向其中添加所需要考虑的新事项.</p>
-<h3 id="收集阶段"><a href="#收集阶段" class="headerlink" title="收集阶段"></a>收集阶段</h3><h4 id="影响收集成功的因素"><a href="#影响收集成功的因素" class="headerlink" title="影响收集成功的因素"></a>影响收集成功的因素</h4><p>成功收集的三个必要条件:</p>
-<ol>
-<li>每一件悬而未决的事情都必须存储在你的收集系统中,而不是在你的大脑里</li>
-<li>你应该尽可能地控制收集工具的数量,越少越好,够用即可</li>
-<li>你必须定期清理这些设备</li>
-</ol>
-<h3 id="理清阶段"><a href="#理清阶段" class="headerlink" title="理清阶段"></a>理清阶段</h3><p>流程如下:</p>
-<ol>
-<li>它是什么?</li>
-<li>是否需要采取行动?<ul>
-<li>否<ol>
-<li>无用的垃圾,根本没有必要保留</li>
-<li>目前不需要,但日后可能需要处理(孵化)</li>
-<li>项目具有潜在有用信息,日后可能会排上用场(参考)</li>
-</ol>
-</li>
-<li>是<ol>
-<li>你承诺完成哪些工作?达成哪些目标?(项目)</li>
-<li>下一步需要采取什么行动?<ul>
-<li>立即执行</li>
-<li>指派他人<ol>
-<li>等待别人完成</li>
-</ol>
-</li>
-<li>延迟处理<ol>
-<li>日程表(指定时间完成)</li>
-<li>下一步行动(需要尽快完成的行动)<h3 id="组织整理阶段"><a href="#组织整理阶段" class="headerlink" title="组织整理阶段"></a>组织整理阶段</h3>对你那些可以付诸行动的事物,你需要:一个项目清单,一个保存项目规划和资料的存储系统,一个日程表,一个下一步行动清单,以及一个等待清单(清单中包含的内容是那些等待别人完成的任务)</li>
-</ol>
-</li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-</li>
-</ol>
-<h4 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h4><p>项目就是任何一个需要多个步骤才能完成的任务.<br>我们可以将项目视为一系列未尽之事.</p>
-<h4 id="下一步行动的归类"><a href="#下一步行动的归类" class="headerlink" title="下一步行动的归类"></a>下一步行动的归类</h4><h5 id="日程表"><a href="#日程表" class="headerlink" title="日程表"></a>日程表</h5><p>你的日程表上应该标注三种情况:</p>
-<ul>
-<li>需要在指定时间执行的行动</li>
-<li>需要在制定日期执行的行动</li>
-<li>需要在指定日期获取的信息</li>
-</ul>
-<h3 id="回顾阶段"><a href="#回顾阶段" class="headerlink" title="回顾阶段"></a>回顾阶段</h3><p>如果你按照我所推荐的方法建立起个人的组织整理系统,那么拥有一个”项目”清单,一个日程表,”下一步行动”清单(一个或多个)和一个”等待处理”清单就是回顾的全部内容.<br>成功的关键因素:每周回顾<br>每周回顾应该完成以下任务:</p>
-<ul>
-<li>收集和加工处理所有的”材料”</li>
-<li>回顾整个系统</li>
-<li>更新各种清单</li>
-<li>做到彻底,清楚,实时和完整</li>
-</ul>
-<h3 id="执行阶段"><a href="#执行阶段" class="headerlink" title="执行阶段"></a>执行阶段</h3><h4 id="确定某一个时刻具体行动的”四标准法”"><a href="#确定某一个时刻具体行动的”四标准法”" class="headerlink" title="确定某一个时刻具体行动的”四标准法”"></a>确定某一个时刻具体行动的”四标准法”</h4><ol>
-<li>情景</li>
-<li>有多少时间</li>
-<li>有多少精力</li>
-<li>重要性</li>
-</ol>
-<h3 id="确认每日工作的”三分类法”"><a href="#确认每日工作的”三分类法”" class="headerlink" title="确认每日工作的”三分类法”"></a>确认每日工作的”三分类法”</h3><ol>
-<li>执行实现安排好的工作</li>
-<li>处理突发事件</li>
-<li>安排自己的工作</li>
-</ol>
-<h3 id="总体检视工作的-“六层分发”"><a href="#总体检视工作的-“六层分发”" class="headerlink" title="总体检视工作的 “六层分发”"></a>总体检视工作的 “六层分发”</h3><ul>
-<li>5楼视野:目的和原则</li>
-<li>4楼视野:愿景</li>
-<li>3楼视野:目标</li>
-<li>2楼视野:关注点及责任范围</li>
-<li>1楼视野:当前项目</li>
-<li>地面:当前行动</li>
-</ul>
-<h3 id="控制项目-纵向管理项目的5个阶段"><a href="#控制项目-纵向管理项目的5个阶段" class="headerlink" title="控制项目:纵向管理项目的5个阶段"></a>控制项目:纵向管理项目的5个阶段</h3><p>轻松自如的控制一切的关键是:(1) 明确判定工作的预期结果(目标)以及为实现目标所需要执行的下一步具体行动.(2) 把一切尚未解决的工作的提示信息安置在一个完善可靠的系统中,并定期回顾和审阅.</p>
-<p>人的大脑在面对任何一项任务的时候,都要经过5个步骤:</p>
-<ol>
-<li>定义目标和原则</li>
-<li>展望结果</li>
-<li>头脑风暴/集思广益</li>
-<li>组织整理</li>
-<li>明确下一步的行动方案</li>
-</ol>
-<p>重视原则的另一个重要原因:它能为我们的行为提供清晰明确地指导</p>
-<h4 id="头脑风暴的关键技巧"><a href="#头脑风暴的关键技巧" class="headerlink" title="头脑风暴的关键技巧"></a>头脑风暴的关键技巧</h4><p>这些基本的原则可以归纳为以下3点:</p>
-<ul>
-<li>不判断,不质疑,不评估,不批判</li>
-<li>追求数量,不求质量</li>
-<li>把分析组织工作置于次要的地位</li>
-</ul>
-<h4 id="组织整理的基本要点"><a href="#组织整理的基本要点" class="headerlink" title="组织整理的基本要点"></a>组织整理的基本要点</h4><p>组织整理的关键步骤如下:</p>
-<ul>
-<li>明确事件的重要组成部分</li>
-<li>整理分类(按照下面一个或多个标准)<ul>
-<li>构成因素</li>
-<li>先后顺序</li>
-<li>重要程度</li>
-</ul>
-</li>
-<li>足够详细的描述</li>
-</ul>
-<p>这两个基本层面就是:我们要执行的行动和我们正在推进的项目(折现项目催动了行动).<br>这些模式有一些基本原则- 你必须收集生活中所有悬而未决的问题;然后对这些问题进行预判和处理,并确定下一步行动;接着对这些行动进行组织整理,回顾,最后付诸实施.</p>
-<p>处理阶段的方法指导<br>学习的最佳途径是实践.但是,在开始之前,我还要强调几个基本原则:</p>
-<ol>
-<li>首先要处理工作篮中最上面的事务</li>
-<li>一次一事</li>
-<li>永远不要把事务再次放回工作篮</li>
-</ol>
-<p>下一步行动必须是可执行的具体行动</p>
-<p>如果某个”下一步行动”的用时不会超过两分钟,那么不要犹豫,立刻动手完成它.</p>
-<h4 id="为你创造性的想象力创建一个清单"><a href="#为你创造性的想象力创建一个清单" class="headerlink" title="为你创造性的想象力创建一个清单"></a>为你创造性的想象力创建一个清单</h4><p>典型的事情包括有:</p>
-<ul>
-<li>为你的家庭购买或者建造房屋</li>
-<li>开始从事的业余爱好</li>
-<li>想要学习的技能</li>
-<li>想要表达的创意</li>
-<li>需要购买的服装和饰品</li>
-<li>想要得到的玩物(高科技或其他类型的玩具!)</li>
-<li>计划中的旅行</li>
-<li>打算参与的公益性活动</li>
-<li>想了解的事情,想做的事情</li>
-</ul>
-<h4 id="每周回顾"><a href="#每周回顾" class="headerlink" title="每周回顾"></a>每周回顾</h4><p>如果你拥有自己独立的工作空间,你就可以让自己免于外界的干扰;如果你的工作是周一至周五的标准五天制,那么我建议你在最后工作日下午留出两个小时的时间,专门用于每周回顾.</p>
-<h3 id="大局的回顾"><a href="#大局的回顾" class="headerlink" title="大局的回顾"></a>大局的回顾</h3><p>无论是在生活还是工作中,如何找出合适的范围,如果做出合适的决定,如何确定合理的时间间隔,都只有一个标准,就是让你自己感到一切清清楚楚就可以了.这是对你的终身邀约,也是你的终生义务,旨在让你实现所有未竟使命或者意向.</p>
-<h3 id="检视工作"><a href="#检视工作" class="headerlink" title="检视工作"></a>检视工作</h3><p>你就有必要考虑一下,要做些什么才能让自己在这条路上走的更远,更好.因此,你应该对自己提出的问题是:</p>
-<ol>
-<li>我们机构的长期目标和目的是什么?为了履行我的责任,我需要完成哪些相关的项目?</li>
-<li>我为自己设定的长期目标和目的是什么?为达成此目标,我改执行哪些项目?</li>
-<li>还发生了哪些可能影响到我的行动的重大事情?</li>
-</ol>
-<h3 id="哪些项目需要你进行计划"><a href="#哪些项目需要你进行计划" class="headerlink" title="哪些项目需要你进行计划?"></a>哪些项目需要你进行计划?</h3><ol>
-<li>那些你已经决定了下一步行动,却依然吸引你注意力的事务</li>
-<li>那些意外冒出的新点子或临时出现新细节的项目</li>
-</ol>
-<h3 id="找出需要执行的”下一步行动”"><a href="#找出需要执行的”下一步行动”" class="headerlink" title="找出需要执行的”下一步行动”"></a>找出需要执行的”下一步行动”</h3><p>从最基础的层面入手,定义出行动的具体计划,并将行动提示信息有效地组织和管理起来,这是我们提高工作效率,营造轻松内循环境的关键.</p>
-<h3 id="学会关注结果"><a href="#学会关注结果" class="headerlink" title="学会关注结果"></a>学会关注结果</h3><p>处理日常事务时一个重要的技巧就是:学会在脑海中对结果做出正面的预期,并以此影响实践.</p>
-<h3 id="预期结果的重要性"><a href="#预期结果的重要性" class="headerlink" title="预期结果的重要性"></a>预期结果的重要性</h3><p>生活中只存在两个问题:(1) 你知道你想要达成的目标,但是不知道如何达成它; (2) 你不知道你的目标到底是上面.<br>也就存在两种解决方法:</p>
-<ul>
-<li>找到你的目标(结果)</li>
-<li>找到具体的方法(行动)</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2017/01/19/2017/java反射相关知识/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3355,6 +2521,575 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2017/01/15/2017/读书笔记/2017-01-15-出奇制胜-在快速变化的世界如何加速成功/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yanyi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pheobusyy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/01/15/2017/读书笔记/2017-01-15-出奇制胜-在快速变化的世界如何加速成功/" itemprop="url">
+                  出奇制胜-在快速变化的世界如何加速成功
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-15T10:47:00+08:00">
+                2017-01-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="出奇制胜-在快速变化的世界如何加速成功"><a href="#出奇制胜-在快速变化的世界如何加速成功" class="headerlink" title="出奇制胜-在快速变化的世界如何加速成功"></a>出奇制胜-在快速变化的世界如何加速成功</h2><h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>缩短行程，善于借力，一飞冲天</p>
+<p>借力是超级成功人士运用自己的已知资源获得最大回报的秘诀所在。</p>
+<p>好运和才华是成功的两大要素，但像任何配方一样，他们都可以通过精心的设计为其他因素所代替。然而我发现，一个不可替代的要素就是“肯干”。</p>
+<p>最佳的成功之路-无论你如何定义它-一定每天都在变化。</p>
+<h3 id="换梯术"><a href="#换梯术" class="headerlink" title="换梯术"></a>换梯术</h3><p>串注：累加性质的系列投注，每次赌博获胜的奖金都作为下一次赌注的投注额。</p>
+<p>越快越好，积小胜为大胜</p>
+<p>横向交易：更大或更好</p>
+<h3 id="师傅领进门"><a href="#师傅领进门" class="headerlink" title="师傅领进门"></a>师傅领进门</h3><p>与师傅或者导师培养出良好的人际关系，成为毕生的挚友</p>
+<h3 id="快速反馈"><a href="#快速反馈" class="headerlink" title="快速反馈"></a>快速反馈</h3><p>奥斯卡.王尔德说过：“经验是每个人给自己的错误起的名字”。</p>
+<p>“分析自己的败因时，个人往往从外界找理由，单挑那些他们直接控制不了的因素说事儿，比如运气，其结果是，他们以后在同一任务上继续努力的动力收到了削弱。”</p>
+<p>“即使一个人失败的经验可能包含有价值的只是，但如果以后不对这一经验进行反思，学习的潜力仍将无从发挥。”</p>
+<p>专家，反而普通推崇消极反馈而不是积极反馈。消极反馈能够刺激人们进行最大限度的改进，这是因为批评通常比赞美更具有可操作性。</p>
+<p>关于消极反馈比较难办的部分是如何保护自己不受预知失败的打击，把我们的经验转化为客观的实验。而当我们这样做时，反馈的作用就会变得更加强大。</p>
+<p>第二城市设法做到三件事，以加快其演员的成长：</p>
+<ol>
+<li>提供快速反馈</li>
+<li>使反馈对事不对人</li>
+<li>降低代价和压力</li>
+</ol>
+<h3 id="利用平台"><a href="#利用平台" class="headerlink" title="利用平台"></a>利用平台</h3><p>DHH的“选择性偷懒”：“我的计划是，假设别人得A花的时间为100%，如果我用5%的时间就能得C-，那就很牛了。这样当然够及格了，对吧,然后我就把剩下的95%的时间用来去做我一些真正愿意干的事”</p>
+<p>平台的形式可以是工具，也可以是技术，可以使游戏，轮胎，计算器，更可以是职业赛车联盟或高标准学校提供的环境。无论是哪种形式，平台都发挥了功效增倍的作用，而且能够在人们使用平台的过程中传授给他只是。</p>
+<h3 id="抓住浪潮"><a href="#抓住浪潮" class="headerlink" title="抓住浪潮"></a>抓住浪潮</h3><p>所谓运气，就是“在正确的时间出现在正确的地方”。但是，有些人-以及公司-却像冲浪运动员一样，善于让自己在正确的时间出现在正确的地方。他们寻找机会，而不是等待机会。</p>
+<p>无论是哪个行业，情况都是一样的。行业先驱者沉浸在早期的技术和实践中不能自拔，最后被尾随而来的企业后发制人，完成超越。上船容易下船难，一旦成为第一波的弄潮儿，再想全身而退，代价就太大了。</p>
+<p>去海边观察，然后下水体验。</p>
+<h3 id="超级联系人"><a href="#超级联系人" class="headerlink" title="超级联系人"></a>超级联系人</h3><p>“超连（superconnecting)”的思路，即直接切入具有广泛传播能力的中枢，然后通过它事先大规模的联系。</p>
+<h3 id="创造动能"><a href="#创造动能" class="headerlink" title="创造动能"></a>创造动能</h3><p>要想成功驭势而行，就要善于积累潜在的能量，只有这样，才能让不期而遇的机遇功效成倍放大。</p>
+<p>成功会在你最意想不到的时候降临到你身上，而你要做的就是让这股势头一直保持下去。</p>
+<h3 id="大道至简"><a href="#大道至简" class="headerlink" title="大道至简"></a>大道至简</h3><p>大道至简往往成为从优秀走向卓越的关键。</p>
+<p>颠覆性创新产品的主要特点是节约成本（时间或金钱)。但每一种颠覆性产品成功背后的关键因素这是简化。</p>
+<p>进行大量微不足道的选择，会让一个人的自我控制能力消耗殆尽。</p>
+<h3 id="10被思维"><a href="#10被思维" class="headerlink" title="10被思维"></a>10被思维</h3><p>“尝试做一样新东西或者是更好的东西，做法最终不外乎那么两种情况。一种是小幅变动，不会吓人一跳的版本改进。改变生产模式，如果你愿意的话。从程度上来说，你往往得到的就是10%的改进。但如果想要获得真正的巨大革新，一般来说<br>你就得重新开始，尝试另一种方式或很多种方式。你必须打破一些基本的假设，当然，你不可能未卜先知，只能去摸索，去试。显然，这个时候就得打破常规，违背常理。<br>”</p>
+<p>当我们去争取挂在低枝上的果实时，实际上是不太可能把潜力发挥到极致的。部分原因是，在树的底部，竞争比树的顶部更激烈。而大量的竞争不只会降低获胜的概率，而且还会导致表现欠佳。</p>
+<p>N效应：在竞争中，仅仅知道会有更多的竞争对说参加，就会降低我们的表现。</p>
+<p>人性的本质使我们出乎意料的愿意支持伟大的理想，巨大的改变。这意味着梦想家会赢得更多的客户，更多的投资，以及更多的口碑。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2017/01/13/2017/java class基础知识/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yanyi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pheobusyy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/01/13/2017/java class基础知识/" itemprop="url">
+                  java class基础知识
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-13T15:16:00+08:00">
+                2017-01-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="java-Class对象基础知识"><a href="#java-Class对象基础知识" class="headerlink" title="java Class对象基础知识"></a>java Class对象基础知识</h2><p>这里要说的说Class对象指的是在java源文件完成编译之后生成的.class字节码文件,然后通过JVM的classLoader来把字节码文件载入到虚拟机中生成对应的class对象.也就是平时我们通过 A.class 或者 Class.forName(“className”)等方式生成的Class对象.</p>
+<h3 id="类加载器ClassLoader"><a href="#类加载器ClassLoader" class="headerlink" title="类加载器ClassLoader"></a>类加载器ClassLoader</h3><p>java默认提供了三个ClassLoader,分别是:</p>
+<ol>
+<li>BootStrap ClassLoader 是java类加载层次中最顶层的类加载器,负责加载jdk中的核心类库.</li>
+<li>Extension ClassLoader 成为扩展类加载器,负责加载java的扩展类库,默认加载JAVA_HOME/jre/lib/ext/目录下的所有jar.</li>
+<li>App ClassLoader 称为系统类加载器,负责加载应用程序classPath目录下的所有jar和class文件.</li>
+</ol>
+<p>除了java提供的三个默认的ClassLoader之外,用户还可以创建自定义的ClassLoader,只要继承自java.lang.ClassLoader就可以了.也包括java提供的另外两个ClassLoader(Extension和App classLoader),但是Bootstrap ClassLoader不继承自ClassLoader,因为它不是一个普通的java类,底层由C++编写,已经嵌入到JVM内核中,当JVM启动后,Bootstrap Loader也随之启动,负责加载完核心类库后,并构造Extension 和App ClassLoader.</p>
+<h4 id="类加载器加载类原理"><a href="#类加载器加载类原理" class="headerlink" title="类加载器加载类原理"></a>类加载器加载类原理</h4><p>这里使用了一种叫 <em>双亲委派</em> 的模式来搜索类,每个classLoader对象都有一个父类classLoader对象的引用,每当要加载类的时候,会去父类去找,如果没有找到就去父类的父类去找,一直到顶层的classLoader.如果没有找到,就尝试从顶层开始加载类,如果失败就依次往回返,如果一直都没成功加载,就叫交回到当前的classLoader,直接返回一个 <em>classNotFound</em> 异常.</p>
+<p>这里来看下jdk8的ClassLoader源码:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">protected</span> Class&lt;?&gt; loadClass(String name, <span class="keyword">boolean</span> resolve)</div><div class="line">      <span class="keyword">throws</span> ClassNotFoundException</div><div class="line">  &#123;</div><div class="line">      <span class="keyword">synchronized</span> (getClassLoadingLock(name)) &#123;</div><div class="line">          <span class="comment">// First, check if the class has already been loaded</span></div><div class="line">          Class&lt;?&gt; c = findLoadedClass(name);</div><div class="line">          <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;</div><div class="line">              <span class="keyword">long</span> t0 = System.nanoTime();</div><div class="line">              <span class="keyword">try</span> &#123;</div><div class="line">                  <span class="keyword">if</span> (parent != <span class="keyword">null</span>) &#123;</div><div class="line">                      c = parent.loadClass(name, <span class="keyword">false</span>);</div><div class="line">                  &#125; <span class="keyword">else</span> &#123;</div><div class="line">                      c = findBootstrapClassOrNull(name);</div><div class="line">                  &#125;</div><div class="line">              &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</div><div class="line">                  <span class="comment">// ClassNotFoundException thrown if class not found</span></div><div class="line">                  <span class="comment">// from the non-null parent class loader</span></div><div class="line">              &#125;</div><div class="line"></div><div class="line">              <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;</div><div class="line">                  <span class="comment">// If still not found, then invoke findClass in order</span></div><div class="line">                  <span class="comment">// to find the class.</span></div><div class="line">                  <span class="keyword">long</span> t1 = System.nanoTime();</div><div class="line">                  c = findClass(name);</div><div class="line"></div><div class="line">                  <span class="comment">// this is the defining class loader; record the stats</span></div><div class="line">                  sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);</div><div class="line">                  sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);</div><div class="line">                  sun.misc.PerfCounter.getFindClasses().increment();</div><div class="line">              &#125;</div><div class="line">          &#125;</div><div class="line">          <span class="keyword">if</span> (resolve) &#123;</div><div class="line">              resolveClass(c);</div><div class="line">          &#125;</div><div class="line">          <span class="keyword">return</span> c;</div><div class="line">      &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>代码非常的清晰,就是从下到上的去找,然后再从上到下的加载.<br><img src="images/2017/01/java classloader加载流程.gif" alt="java classLoader加载顺序"></p>
+<h4 id="为什么要使用双亲委派这种模式"><a href="#为什么要使用双亲委派这种模式" class="headerlink" title="为什么要使用双亲委派这种模式?"></a>为什么要使用双亲委派这种模式?</h4><ol>
+<li>为了解决重复加载,当父类已经加载过了,子类就没有必要再去加载了.</li>
+<li>为了安全性,比如如果我们自己定义了和系统中一样的基础类,这两个类就会引起安全隐患.如果通过双亲委派,就会优先加载系统的原生类.放在核心代码被 “污染”</li>
+</ol>
+<h4 id="JVM搜索的时候-如何判断两个class对象是否相同"><a href="#JVM搜索的时候-如何判断两个class对象是否相同" class="headerlink" title="JVM搜索的时候,如何判断两个class对象是否相同"></a>JVM搜索的时候,如何判断两个class对象是否相同</h4><p>JVM在判定两个Class是否相同时,不仅要判断两个类名是否相同,而且要判断是否由同一个类加载器加载出来的.只有两者同时满足,JVM才认为这两个Class是相同的.</p>
+<h3 id="class对象加载注意点"><a href="#class对象加载注意点" class="headerlink" title="class对象加载注意点"></a>class对象加载注意点</h3><p>所有的类都是在对其第一次使用的时候,动态加载到JVM中的.当程序创建第一个对象的静态成员的引用时,就会加载这个类.<br>这个证明构造器也是类的静态方法,即使在构造器之前并没有static关键字.因此,使用new操作符创建类的新对象也会被当做对类的静态成员的引用.</p>
+<h3 id="new-A-getClass-方法"><a href="#new-A-getClass-方法" class="headerlink" title="new A().getClass()方法"></a>new A().getClass()方法</h3><p>Class classA = new A().getClass();<br>class对象提供了一些非常实用的方法,比如getSimpleName用来返回不包含包名的类名称.而getName和getCanonicalName则会返回全限定的类名称<br>还可以通过 newInstance()方法来直接产生类的实例对象,前提是该类有默认的构造函数.<br>最后还有一些是 getInterfaces(),getSupperclass()等等,这里就不展开了.</p>
+<h4 id="A-class-字面量"><a href="#A-class-字面量" class="headerlink" title="A.class 字面量"></a>A.class 字面量</h4><p>这里的字面量指的是通过类名加class后缀之后获得了class对象.这个对象有很多特殊的情况需要特别说明一下.</p>
+<p>当通过使用 “.class”来创建Class对象的引用时,不会自动 <em>初始化</em> 该Class对象.<br>这里的 <em>初始化</em> 是什么意思呢?并不是说这个Class对象是空的,而生成的Class对象并没有调用Class内部的静态方法或者静态代码块.<br>为了使用类而做的准备工作实际上包含了三个步骤:</p>
+<ol>
+<li>加载. 这是由前面讲的类加载器执行的.该步骤讲查找字节码(通常在ClassPath所指定的路径下查找,但这并非必须),并从这些字节码中创建一个class对象.</li>
+<li>链接. 在链接阶段将验证类中的字节码,为静态域分配存储空间,并且如果必需的话,将解析这个类创建的对其他类的所有引用.</li>
+<li>初始化. 如果该类具有超类,则对其初始化,执行静态初始化器和静态代码块.</li>
+</ol>
+<p>初始化被延迟到了对静态方法 (构造器隐式地是静态的) 或者非常数静态域进行首次引用才执行.<br>下面通过几个例子来说明:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestClass</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException </span>&#123;</div><div class="line">        System.out.println(TestInitable.num);</div><div class="line">        System.out.println(TestInitable2.name);</div><div class="line">        System.out.println(TestInitable2.num);</div><div class="line">        System.out.println(Class.forName(<span class="string">"com.justyan.TestInitable3"</span>));</div><div class="line">        System.out.println(TestInitable4.bean);</div><div class="line">        System.out.println(TestInitable5.num);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestInitable</span></span>&#123;</div><div class="line">    <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> num = <span class="number">100</span>;</div><div class="line">    <span class="keyword">static</span>&#123;</div><div class="line">        System.out.println(<span class="string">"TestInitable is init!!!!"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestInitable2</span></span>&#123;</div><div class="line">    <span class="keyword">static</span> <span class="keyword">final</span> String name = <span class="string">"YY"</span>;</div><div class="line">    <span class="keyword">static</span> <span class="keyword">int</span> num = <span class="number">20</span>;</div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        System.out.println(<span class="string">"TestInitable2 is init!!!!!"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestInitable3</span></span>&#123;</div><div class="line">    <span class="keyword">static</span>&#123;</div><div class="line">        System.out.println(<span class="string">"TestInitable3 is init!!!!"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestInitable4</span></span>&#123;</div><div class="line">    <span class="keyword">static</span> <span class="keyword">final</span> TestBean bean = <span class="keyword">new</span> TestBean();</div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        System.out.println(<span class="string">"TestInitable4 is init!!!!!"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestInitable5</span> <span class="keyword">extends</span> <span class="title">TestInitable</span></span>&#123;</div><div class="line">    <span class="keyword">static</span>&#123;</div><div class="line">        System.out.println(<span class="string">"TestInitable5 is init!!!!"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestBean</span> </span>&#123;</div><div class="line">    String name;</div><div class="line">    <span class="keyword">static</span>&#123;</div><div class="line">        System.out.println(<span class="string">"TestBean is init!!!!"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个demo就是通过调用一些类的静态属性,来查看有没有打印类内部的静态代码块,表明这个类对象有没有初始化.<br>先看第一个:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">System.out.println(TestInitable.num);</div></pre></td></tr></table></figure></p>
+<p>由于TestInitable的num属性是 static final的,属于 “编译期常量” ,那么这个值是不需要TestInitable来初始化获取的,所以这个时候 TestInitable对象并不会初始化.内部静态代码块也不会执行,也就不会打印出里面的那条初始化信息.<br>这里只会打印<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">100</div></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">System.out.println(TestInitable2.name);</div><div class="line">System.out.println(TestInitable2.num);</div></pre></td></tr></table></figure>
+<p>第一行和上面的情况一样, <em>name</em> 也是属于 “编译器常量”,所以第一行的时候,TestInitable2是不会初始化,但是第二行的时候由于 <em>num</em> 不是final的,所以不属于 “编译期常量”,那么这个时候就会先执行静态代码块,然后才打印num的值<br>这里会打印:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">YY</div><div class="line">TestInitable2 is init!!!!!</div><div class="line">20</div></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">System.out.println(Class.forName(<span class="string">"com.justyan.TestInitable3"</span>));</div></pre></td></tr></table></figure>
+<p>如果通过 <em>Class.forName</em> 反射调用的话会直接初始化该类<br>这里会打印初始化信息:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TestInitable3 is init!!!!!</div></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">System.out.println(TestInitable4.bean);</div></pre></td></tr></table></figure>
+<p>这里由于用到了TestBean对象,故先去加载TestBean对象,执行TestBean的内部静态代码块,然后才是 TestInitable4的初始化<br>这里会答应:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">TestBean is init!!!!</div><div class="line">TestInitable4 is init!!!!!</div><div class="line">com.justyan.TestBean@610455d6</div></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">System.out.println(TestInitable5.num);</div></pre></td></tr></table></figure>
+<p>这里TestInitable5继承自TestInitable,所以可以获取到里面的num属性.但是不会初始化 TestInitable5,因为那个属性不属于它.<br>这里只会打印<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">100</div></pre></td></tr></table></figure></p>
+<p>这里的这种情况比较特殊,需要注意一下.实际上只要调用的父类的静态属性,这里 TestInitable5都不会初始化.</p>
+<p>一定要理解 <em>编译期常量</em> 指的是static final的基础类型,不能是对象,如果是对象就不属于 <em>编译期常量</em> ,这个时候对该变量的调用都会导致类的初始化.<br>如果一个static域不是final的,那么对它访问时,总会要求在它被读取之前,要先进行链接(为这个域分配空间) 和初始化 (初始化该空间),就像对前面的TestBean的调用一样.</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><java编程思想> 第14章 类型信息</java编程思想></p>
+<p><a href="http://blog.csdn.net/xyang81/article/details/7292380" title="深入分析Java ClassLoader原理" target="_blank" rel="external">深入分析Java ClassLoader原理</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2017/01/12/2017/android 开源库NumberProgressBar源码分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yanyi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pheobusyy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/01/12/2017/android 开源库NumberProgressBar源码分析/" itemprop="url">
+                  android 开源库NumberProgressBar源码分析
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-12T15:12:00+08:00">
+                2017-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="android-开源库NumberProgressBar源码分析"><a href="#android-开源库NumberProgressBar源码分析" class="headerlink" title="android 开源库NumberProgressBar源码分析"></a>android 开源库NumberProgressBar源码分析</h2><p>  这个view是一个简单的自定义view来实现一个横向进度的效果,左边显示完成的进度条,右边显示未完成的进度条,中间是当前的当前的进度说明.实现的思路非常的简单,就是分别画这个view的3部分,完成+文字+未完成的.<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/01/12/2017/android 开源库NumberProgressBar源码分析/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2017/01/11/2017/android 开源Logger库/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yanyi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pheobusyy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/01/11/2017/android 开源Logger库/" itemprop="url">
+                  android 开源Logger库
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-11T09:05:00+08:00">
+                2017-01-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="android-开源Logger库"><a href="#android-开源Logger库" class="headerlink" title="android 开源Logger库"></a>android 开源Logger库</h2><h3 id="需要明白的问题"><a href="#需要明白的问题" class="headerlink" title="需要明白的问题"></a>需要明白的问题</h3><ol>
+<li><p>如何打印当前线程的名称的<br>直接Thread.currentThread.getName调用的</p>
+</li>
+<li><p>如何打印调用方法的名称和行数的<br>通过StackTraceElement来获取到引用的数组</p>
+</li>
+<li><p>StackTraceElement的概念<br>StackTraceElement是java1.5新增的用来输出方法调用栈信息的对象,通过它我们可以打印出当前线程中方法的调用栈,从里面可以可以获取到方法名称,行数,类名称等我们想要的信息</p>
+</li>
+<li><p>如何增加分割线的和边框的<br>为了把打印日志用方框圈起来,这里把整个日志分成了两部分,顶部叫header+剩下的我们真正需要的信息.<br>header又包含了当前顶部分割线,线程名称,方法调用栈信息<br>最后再把底部分割线加上,正好组合成一个方框,这个方框是没有右边的,因为分割线都是顶满整行的</p>
+</li>
+<li><p>如何保证打印日志没有超过最大字符个数限制<br>由于原生api的单次打印最大字符限制是4M,所以判断如果要打印的字符串超过4M就把字符串拆开成多段来分别打印</p>
+</li>
+<li><p>如何处理JSON数据<br>JSONObject原生api居然提供了一个带缩进的toString方法….<br>同时Arrays居然也提供了一个deepToString的方法…..</p>
+</li>
+<li><p>如何处理XML<br>通过java提供的Transformer API来打印XML</p>
+</li>
+</ol>
+<h3 id="主要代码分析"><a href="#主要代码分析" class="headerlink" title="主要代码分析"></a>主要代码分析</h3><p>其他的方法都非常简单,核心方法就是下面这个log方法:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">log</span><span class="params">(<span class="keyword">int</span> priority, String tag, String message, Throwable throwable)</span> </span>&#123;</div><div class="line">   <span class="keyword">if</span> (settings.getLogLevel() == LogLevel.NONE) &#123;</div><div class="line">     <span class="keyword">return</span>;</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">if</span> (throwable != <span class="keyword">null</span> &amp;&amp; message != <span class="keyword">null</span>) &#123;</div><div class="line">     message += <span class="string">" : "</span> + Helper.getStackTraceString(throwable);</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">if</span> (throwable != <span class="keyword">null</span> &amp;&amp; message == <span class="keyword">null</span>) &#123;</div><div class="line">     message = Helper.getStackTraceString(throwable);</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">if</span> (message == <span class="keyword">null</span>) &#123;</div><div class="line">     message = <span class="string">"No message/exception is set"</span>;</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">int</span> methodCount = getMethodCount();</div><div class="line">   <span class="keyword">if</span> (Helper.isEmpty(message)) &#123;</div><div class="line">     message = <span class="string">"Empty/NULL log message"</span>;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   logTopBorder(priority, tag);</div><div class="line">   logHeaderContent(priority, tag, methodCount);</div><div class="line"></div><div class="line">   <span class="comment">//get bytes of message with system's default charset (which is UTF-8 for Android)</span></div><div class="line">   <span class="keyword">byte</span>[] bytes = message.getBytes();</div><div class="line">   <span class="keyword">int</span> length = bytes.length;</div><div class="line">   <span class="keyword">if</span> (length &lt;= CHUNK_SIZE) &#123;</div><div class="line">     <span class="keyword">if</span> (methodCount &gt; <span class="number">0</span>) &#123;</div><div class="line">       logDivider(priority, tag);</div><div class="line">     &#125;</div><div class="line">     logContent(priority, tag, message);</div><div class="line">     logBottomBorder(priority, tag);</div><div class="line">     <span class="keyword">return</span>;</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">if</span> (methodCount &gt; <span class="number">0</span>) &#123;</div><div class="line">     logDivider(priority, tag);</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i += CHUNK_SIZE) &#123;</div><div class="line">     <span class="keyword">int</span> count = Math.min(length - i, CHUNK_SIZE);</div><div class="line">     <span class="comment">//create a new String with system's default charset (which is UTF-8 for Android)</span></div><div class="line">     logContent(priority, tag, <span class="keyword">new</span> String(bytes, i, count));</div><div class="line">   &#125;</div><div class="line">   logBottomBorder(priority, tag);</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>注意,这里加锁来保证数据顺序的正确性<br>通过 <em>logHeaderContent(priority, tag, methodCount);</em> 来打印线程信息和方法调用栈信息.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">logHeaderContent</span><span class="params">(<span class="keyword">int</span> logType, String tag, <span class="keyword">int</span> methodCount)</span> </span>&#123;</div><div class="line">   StackTraceElement[] trace = Thread.currentThread().getStackTrace();</div><div class="line">   <span class="keyword">if</span> (settings.isShowThreadInfo()) &#123;</div><div class="line">     logChunk(logType, tag, HORIZONTAL_DOUBLE_LINE + <span class="string">" Thread: "</span> + Thread.currentThread().getName());</div><div class="line">     logDivider(logType, tag);</div><div class="line">   &#125;</div><div class="line">   String level = <span class="string">""</span>;</div><div class="line"></div><div class="line">   <span class="keyword">int</span> stackOffset = getStackOffset(trace) + settings.getMethodOffset();</div><div class="line"></div><div class="line">   <span class="comment">//corresponding method count with the current stack may exceeds the stack trace. Trims the count</span></div><div class="line">   <span class="keyword">if</span> (methodCount + stackOffset &gt; trace.length) &#123;</div><div class="line">     methodCount = trace.length - stackOffset - <span class="number">1</span>;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="keyword">for</span> (<span class="keyword">int</span> i = methodCount; i &gt; <span class="number">0</span>; i--) &#123;</div><div class="line">     <span class="keyword">int</span> stackIndex = i + stackOffset;</div><div class="line">     <span class="keyword">if</span> (stackIndex &gt;= trace.length) &#123;</div><div class="line">       <span class="keyword">continue</span>;</div><div class="line">     &#125;</div><div class="line">     StringBuilder builder = <span class="keyword">new</span> StringBuilder();</div><div class="line">     builder.append(<span class="string">"║ "</span>)</div><div class="line">         .append(level)</div><div class="line">         .append(getSimpleClassName(trace[stackIndex].getClassName()))</div><div class="line">         .append(<span class="string">"."</span>)</div><div class="line">         .append(trace[stackIndex].getMethodName())</div><div class="line">         .append(<span class="string">" "</span>)</div><div class="line">         .append(<span class="string">" ("</span>)</div><div class="line">         .append(trace[stackIndex].getFileName())</div><div class="line">         .append(<span class="string">":"</span>)</div><div class="line">         .append(trace[stackIndex].getLineNumber())</div><div class="line">         .append(<span class="string">")"</span>);</div><div class="line">     level += <span class="string">"   "</span>;</div><div class="line">     logChunk(logType, tag, builder.toString());</div><div class="line">   &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>获取到调用栈信息,从第三个开始获取,因为前两个都是系统的调用信息,忽略不计,从第三个开始真正的方法调用的.再加上设置里面要求打印的方法个数,组成了要打印的方法的最终个数.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getStackOffset</span><span class="params">(StackTraceElement[] trace)</span> </span>&#123;</div><div class="line">   <span class="keyword">for</span> (<span class="keyword">int</span> i = MIN_STACK_OFFSET; i &lt; trace.length; i++) &#123;</div><div class="line">     StackTraceElement e = trace[i];</div><div class="line">     String name = e.getClassName();</div><div class="line">     <span class="keyword">if</span> (!name.equals(LoggerPrinter.class.getName()) &amp;&amp; !name.equals(Logger.class.getName())) &#123;</div><div class="line">       <span class="keyword">return</span> --i;</div><div class="line">     &#125;</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>剩下的打印主要信息的时候做个容量判断,如果没超过原声API的最大字符串限制直接打印,如果超了就拆成几段分别打印.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">byte</span>[] bytes = message.getBytes();</div><div class="line">   <span class="keyword">int</span> length = bytes.length;</div><div class="line">   <span class="keyword">if</span> (length &lt;= CHUNK_SIZE) &#123;</div><div class="line">     <span class="keyword">if</span> (methodCount &gt; <span class="number">0</span>) &#123;</div><div class="line">       logDivider(priority, tag);</div><div class="line">     &#125;</div><div class="line">     logContent(priority, tag, message);</div><div class="line">     logBottomBorder(priority, tag);</div><div class="line">     <span class="keyword">return</span>;</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">if</span> (methodCount &gt; <span class="number">0</span>) &#123;</div><div class="line">     logDivider(priority, tag);</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i += CHUNK_SIZE) &#123;</div><div class="line">     <span class="keyword">int</span> count = Math.min(length - i, CHUNK_SIZE);</div><div class="line">     <span class="comment">//create a new String with system's default charset (which is UTF-8 for Android)</span></div><div class="line">     logContent(priority, tag, <span class="keyword">new</span> String(bytes, i, count));</div><div class="line">   &#125;</div><div class="line">   logBottomBorder(priority, tag)</div></pre></td></tr></table></figure></p>
+<p>非常的简单.</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="https://github.com/orhanobut/logger" title="logger github" target="_blank" rel="external">logger github</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
@@ -3404,7 +3139,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">66</span>
+                <span class="site-state-item-count">62</span>
                 <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
