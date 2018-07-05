@@ -1,0 +1,162 @@
+<!DOCTYPE html><html class="has-navbar-fixed-top" lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><title></title><script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script><link rel="stylesheet" type="text/css" href="/css/bulma.css"><link rel="stylesheet" type="text/css" href="/css/justyan.css"><link rel="stylesheet" type="text/css" href="/highlight/styles/dracula.css"><link rel="icon" href="/img/favicon.png"></head><body><section class="hero is-info is-medium"><div class="hero-head"><nav class="navbar is-fixed-top is-info"><div class="container"><div class="navbar-brand"><a class="navbar-item"><img class="navbar-circle" src="https://avatars2.githubusercontent.com/u/9360264?s=50&amp;u=5e88482f7319a8ce65ed618bcede72ea97a7f5aa&amp;v=4"></a><span class="navbar-burger burger" data-target="navbarMenuHeroA"><span></span><span></span><span></span></span></div><div class="navbar-menu" id="navbarMenuHeroA"><div class="navbar-end"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/category">Categories</a><a class="navbar-item" href="/contact">Contact</a><span class="navbar-item"><a class="button is-info is-inverted" href="https://github.com/PHEOBUSYY"><span class="icon"><i class="fab fa-github"></i></span><span>Github</span></a></span></div></div></div></nav></div><div class="hero-body"><div class="has-text-centered"><h1 class="title">android ExpectAnim源码分析</h1><h2 class="subtitle">2017-06-07</h2></div></div><div class="hero-foot"></div></section><div id="content-outer"><div id="content-inner"><article id="post"><div id="toc"><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#用法介绍"><span class="toc-number">1.</span> <span class="toc-text">用法介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#核心类-ExpectAnim-和-ViewExpectation"><span class="toc-number">1.1.</span> <span class="toc-text">核心类 ExpectAnim 和 ViewExpectation</span></a></li></ol></li></ol></div></div><div class="post-text"><p>  今天无意中发现了ExpectAnim这个android开源库，主要作用是对android属性动画的封装，希望通过这篇文章来介绍一下它的用法，并且通过源码来分析的一下实现原理。加深对android动画的理解和运用。</p>
+  <a id="more"></a>
+<h2 id="用法介绍"><a href="#用法介绍" class="headerlink" title="用法介绍"></a>用法介绍</h2><p>  通过该项目在github首页中的介绍可以看到它的一般用法如下：</p>
+<pre><code class="java">  new ExpectAnim()
+                .expect(avatar)
+                .toBe(
+                    Expectation...
+                )
+                .toAnimation()
+                .start();
+</code></pre>
+<p>  其中expect方法中传入是执行动画的view，toBe方法中放入的是 <em>Expectation</em> 集合，也就是动画动作的集合。这个后面会详细的讲解。<br>  如果是多个view同时执行动画，可以这样：</p>
+<pre><code class="java">  new ExpectAnim()
+              .expect(avatar)
+              .toBe(
+                  Expectation...
+              )
+              .expect(name)
+              .toBe(
+                  Expectation...
+              )
+              .toAnimation()
+              .start();
+</code></pre>
+<p>  再来看下android属性动画的用法：</p>
+<pre><code class="java">  ObjectAnimator animator = ObjectAnimator.ofFloat(textView,&quot;translationX&quot;,100f);
+  animator.setDuration(1000);
+  animator.start();
+</code></pre>
+<p>  通过上面的示例代码对比可以发现该动画库的核心就是在 <strong>toBe</strong> 方法中的 <strong>Expectation</strong> 对象。最后通过代码把 <strong>Expectation</strong> 对象转换成android api。</p>
+<h3 id="核心类-ExpectAnim-和-ViewExpectation"><a href="#核心类-ExpectAnim-和-ViewExpectation" class="headerlink" title="核心类 ExpectAnim 和 ViewExpectation"></a>核心类 ExpectAnim 和 ViewExpectation</h3><p>  首先来看expect(View view)方法：</p>
+<pre><code class="java">  public ViewExpectation expect(View view) {
+        this.anyView = view;
+        final ViewExpectation viewExpectation = new ViewExpectation(this, view);
+        expectationList.add(viewExpectation);
+        return viewExpectation;
+    }
+</code></pre>
+<p>  这里通过expect方法来生成了一个 <strong>ViewExpectation</strong> 对象。<br>  同时把这个对象放入 <strong>expectationList</strong> 集合中，等到最后调用对应方法来批量处理。<br>  注意：通过expect方法，成功的将 <strong>ExpectAnim</strong> 和 <strong>ViewExpectation</strong> 两个对象绑定到了一起。也就是说在 <strong>ViewExpectation</strong> 对象中是可以获取到 <strong>ExpectAnim</strong> 对象。</p>
+<p>  然后来看 <strong>ViewExpectation</strong> 对象的 <strong>toBe</strong> 方法：</p>
+<pre><code class="java">  public ViewExpectation toBe(AnimExpectation... animExpectations) {
+       this.animExpectations.addAll(Arrays.asList(animExpectations));
+       return this;
+   }
+</code></pre>
+<p>  这里是将动画操作放入它内部的 <strong>animExpectations</strong> 集合中。</p>
+<pre><code class="java">  public ExpectAnim toAnimation() {
+        return expectAnim;
+    }
+</code></pre>
+<p>  这里直接放回了绑定的 <strong>ExpectAnim</strong> 对象。最后来看 <strong>ExpectAnim</strong> 对象的 <strong>start</strong> 方法:</p>
+<pre><code class="java">  public ExpectAnim start() {
+       executeAfterDraw(anyView, new Runnable() {
+           @Override
+           public void run() {
+               calculate();
+               animatorSet.start();
+           }
+       });
+       return this;
+   }
+</code></pre>
+<pre><code class="java">  public void executeAfterDraw(final View view, final Runnable runnable) {
+        view.postDelayed(runnable, 5);
+    }
+</code></pre>
+<p>  通过上面的方法调用我们可以看到核心代码就是 <strong>calculate</strong> 方法了，就是通过它把我们的 <strong>ViewExpectation</strong> 转换成了android原生api的。</p>
+<p>  下面来看 <strong>calculate</strong> 方法的具体实现：</p>
+<pre><code class="java">  private ExpectAnim calculate() {
+        if (animatorSet == null) {
+            animatorSet = new AnimatorSet();
+
+            if (interpolator != null) {
+                animatorSet.setInterpolator(interpolator);
+            }
+
+            animatorSet.setDuration(duration);
+
+            final List&lt;Animator&gt; animatorList = new ArrayList&lt;&gt;();
+
+            final List&lt;ViewExpectation&gt; expectationsToCalculate = new ArrayList&lt;&gt;();
+
+            //&quot;ViewDependencies&quot; = récupérer toutes les vues des &quot;Expectations&quot;
+            for (ViewExpectation viewExpectation : expectationList) {
+                viewExpectation.calculateDependencies();
+                viewToMove.add(viewExpectation.getViewToMove());
+                expectationsToCalculate.add(viewExpectation);
+
+                viewCalculator.setExpectationForView(viewExpectation.getViewToMove(), viewExpectation);
+            }
+
+            while (!expectationsToCalculate.isEmpty()) {
+                //pour chaque expectation dans &quot;Expectations&quot;
+                final Iterator&lt;ViewExpectation&gt; iterator = expectationsToCalculate.iterator();
+                while (iterator.hasNext()) {
+                    final ViewExpectation viewExpectation = iterator.next();
+
+                    //regarder si une de ces dépendance est dans &quot;ViewDependencies&quot;
+                    if (!hasDependency(viewExpectation)) {
+                        //si non
+                        viewExpectation.calculate(viewCalculator);
+                        animatorList.addAll(viewExpectation.getAnimations());
+
+                        final View view = viewExpectation.getViewToMove();
+                        viewToMove.remove(view);
+                        viewCalculator.wasCalculated(viewExpectation);
+
+                        iterator.remove();
+                    } else {
+                        //si oui, attendre le prochain tour
+                    }
+                }
+            }
+
+            animatorSet.addListener(new AnimatorListenerAdapter() {
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    notifyListenerEnd();
+                }
+
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    super.onAnimationStart(animation);
+                    notifyListenerStart();
+                }
+
+            });
+
+            animatorSet.playTogether(animatorList);
+        }
+        return this;
+    }
+</code></pre>
+<p>  还记得上面调用 <strong>expect</strong> 方法把 <strong>ViewExpectation</strong> 对象放入一个 <strong>expectationList</strong> 集合中，这里先遍历这个集合：</p>
+<pre><code class="java">  for (ViewExpectation viewExpectation : expectationList) {
+      viewExpectation.calculateDependencies();
+      viewToMove.add(viewExpectation.getViewToMove());
+      expectationsToCalculate.add(viewExpectation);
+
+      viewCalculator.setExpectationForView(viewExpectation.getViewToMove(), viewExpectation);
+  }
+</code></pre>
+<p>  先调用 <strong>ViewExpectation</strong> 对象的 <strong>calculateDependencies</strong> 方法：</p>
+<pre><code class="java">  List&lt;View&gt; calculateDependencies() {
+      dependencies.clear();
+      if (animExpectations != null) {
+          for (AnimExpectation animExpectation : animExpectations) {
+              dependencies.addAll(animExpectation.getViewsDependencies());
+          }
+      }
+      return dependencies;
+  }
+</code></pre>
+<p>  那在 <strong>ViewExpectation</strong> 中的 <strong>dependencies</strong> 集合到底有什么作用呢？</p>
+<pre><code class="java">   private final List&lt;View&gt; dependencies;
+</code></pre>
+<p>  可以看到在声明的时候其内部放入的是View对象，实际上ExpectAnim这个库中提供了很多根据其他View来调整自身view的属性的方法，比如sameWidthAs，sameScaleAs，sameAlphaAs等等，这些方法都是要依赖另一个view的属性来变换自身的属性的。如果依赖的这个view也是需要做动画的话，那么我们必须得在依赖的这个view之后做动画操作，这样才能保证动画执行的准确。这里的 <strong>dependencies</strong> 集合中放入的就是要依赖的view对象。当然大部分的变换是没有依赖对象的，只有像上面讲那些需要依赖其他view的时候这个集合中的对象才不为空。 通过 <strong>calculateDependencies</strong> 就完成了依赖对象集合的赋值。下面是把要变换的view和动作关联起来，这里通过 <strong>viewCalculator</strong> 中的map <strong>expectationsToCalculate</strong> 来完成。</p>
+<pre><code class="java">  private final Map&lt;View, ViewExpectation&gt; expectationForView;
+</code></pre>
+</div></article><div></div></div></div><div id="bottom-outer"><div id="bottom-inner"><span>Site construction by</span><span> JustYan </span><span>using</span><a href="http://hexo.io"><span>hexo blog framework</span></a><span>.</span><br><a href="/">Home</a></div></div><script src="/js/justyan.js"></script><script src="/highlight/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script></body></html>

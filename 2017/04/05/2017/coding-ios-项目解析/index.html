@@ -1,0 +1,40 @@
+<!DOCTYPE html><html class="has-navbar-fixed-top" lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><title></title><script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script><link rel="stylesheet" type="text/css" href="/css/bulma.css"><link rel="stylesheet" type="text/css" href="/css/justyan.css"><link rel="stylesheet" type="text/css" href="/highlight/styles/dracula.css"><link rel="icon" href="/img/favicon.png"></head><body><section class="hero is-info is-medium"><div class="hero-head"><nav class="navbar is-fixed-top is-info"><div class="container"><div class="navbar-brand"><a class="navbar-item"><img class="navbar-circle" src="https://avatars2.githubusercontent.com/u/9360264?s=50&amp;u=5e88482f7319a8ce65ed618bcede72ea97a7f5aa&amp;v=4"></a><span class="navbar-burger burger" data-target="navbarMenuHeroA"><span></span><span></span><span></span></span></div><div class="navbar-menu" id="navbarMenuHeroA"><div class="navbar-end"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/category">Categories</a><a class="navbar-item" href="/contact">Contact</a><span class="navbar-item"><a class="button is-info is-inverted" href="https://github.com/PHEOBUSYY"><span class="icon"><i class="fab fa-github"></i></span><span>Github</span></a></span></div></div></div></nav></div><div class="hero-body"><div class="has-text-centered"><h1 class="title">Coding(IOS)项目解析</h1><h2 class="subtitle">2017-04-05</h2></div></div><div class="hero-foot"></div></section><div id="content-outer"><div id="content-inner"><article id="post"><div id="toc"><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#需要用到的知识"><span class="toc-number">1.</span> <span class="toc-text">需要用到的知识</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#KVO介绍"><span class="toc-number">1.1.</span> <span class="toc-text">KVO介绍</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xcode中如何创建category"><span class="toc-number">2.</span> <span class="toc-text">xcode中如何创建category</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何给category添加属性property"><span class="toc-number">3.</span> <span class="toc-text">如何给category添加属性property</span></a></li></ol></div></div><div class="post-text"><h3 id="需要用到的知识"><a href="#需要用到的知识" class="headerlink" title="需要用到的知识"></a>需要用到的知识</h3><ol>
+<li>ReactiveCocoa的使用</li>
+<li>KVO的使用原理</li>
+<li>如何给一个类动态添加属性和方法</li>
+<li>RDVTabController的实现原理</li>
+<li>RAC和RACObserve语法糖</li>
+<li>weaky和strongy语法糖</li>
+<li>IOS的runtime相关知识</li>
+</ol>
+<h4 id="KVO介绍"><a href="#KVO介绍" class="headerlink" title="KVO介绍"></a>KVO介绍</h4><p>IOS观察者模式的实现。  观察某一个类的某个属性，当该属性发生变化的时候回调通知。<br>必须满足两个条件：</p>
+<ol>
+<li>必须是通过调用setter方法来修改值才能获取到监听，比如通过调用self.value++这种方式是可以监听到，而如果调用_value++是无法监听到的</li>
+<li>在self中实现监听方法</li>
+</ol>
+<pre><code> -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary&lt;NSKeyValueChangeKey,id&gt; *)change context:(void *)context
+</code></pre><ol>
+<li>记得在最后页面消失或者dealloc中解除监听</li>
+</ol>
+<h3 id="xcode中如何创建category"><a href="#xcode中如何创建category" class="headerlink" title="xcode中如何创建category"></a>xcode中如何创建category</h3><p>首先是cmd+n调出创建对话框，然后选择 <em>Objective-c File</em> 在里面选择 <em>FileType</em> 为 <em>category</em> ，顶上的那一栏输入名称就可以了。<br>注意这里的名称直接写catetory的名称就可以了，不要加上原始类的名称。xcode会自动添加两者的名称为最终名称的。</p>
+<h3 id="如何给category添加属性property"><a href="#如何给category添加属性property" class="headerlink" title="如何给category添加属性property"></a>如何给category添加属性property</h3><p>首先，官方是不支持给category直接添加属性的，不过可以runtime的关联方法来动态的添加属性，具体实现如下：</p>
+<ol>
+<li>在category的interface部分声明property。<pre><code class="Objective-c">@property(strong,nonamatic) NSString *proValue;
+</code></pre>
+</li>
+<li>在category的实现implementation部分，实现get和set方法<pre><code class="Objective-c">-(void)setProValue:(NSString *)proValue
+{
+ objc_setAssociatedObject(self, @selector(proValue), proValue, OBJC_ASSOCIATION_ASSIGN);
+}
+-(NSString *)proValue
+{
+ return objc_getAssociatedObject(self, @selector(proValue));
+}
+</code></pre>
+通过关联来达到一个暂存的属性的目的，这里把方法 <em>proValue</em> 的地址作为key来保存，省去了再额外声明一个属性名称的过程。</li>
+<li>和正常的属性使用一样，直接调用就可以啦。<pre><code class="Objective-c">self.proValue = @&quot;test&quot;;
+NSLog(@&quot;the proValue is %@&quot;,self.proValue);
+</code></pre>
+### </li>
+</ol>
+</div></article><div></div></div></div><div id="bottom-outer"><div id="bottom-inner"><span>Site construction by</span><span> JustYan </span><span>using</span><a href="http://hexo.io"><span>hexo blog framework</span></a><span>.</span><br><a href="/">Home</a></div></div><script src="/js/justyan.js"></script><script src="/highlight/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script></body></html>

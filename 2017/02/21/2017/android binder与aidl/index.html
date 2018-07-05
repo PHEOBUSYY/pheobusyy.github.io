@@ -1,337 +1,4 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="pheobusyy" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
-
-
-
-
-
-
-<meta name="description" content="android binder与AIDL  最近重新研究了一下Activity启动流程,里面主要提到了ActivityManagerService这个类来管理Activity的生命周期,而如何和这个类通讯成为了理解Activity启动流程的关键,而实现与ActivityManagerService通讯的基础就是今天要讲到的Binder知识.
-  我们知道你通过Luncher点击app图标来启动响应的">
-<meta property="og:type" content="article">
-<meta property="og:title" content="android binder与AIDL">
-<meta property="og:url" content="http://pheobusyy.github.io/2017/02/21/2017/android binder与aidl/index.html">
-<meta property="og:site_name" content="pheobusyy">
-<meta property="og:description" content="android binder与AIDL  最近重新研究了一下Activity启动流程,里面主要提到了ActivityManagerService这个类来管理Activity的生命周期,而如何和这个类通讯成为了理解Activity启动流程的关键,而实现与ActivityManagerService通讯的基础就是今天要讲到的Binder知识.
-  我们知道你通过Luncher点击app图标来启动响应的">
-<meta property="og:image" content="http://pheobusyy.github.io/images/2017/02/android binder结构图.gif">
-<meta property="og:image" content="http://pheobusyy.github.io/images/2017/02/android binder调用关系图.jpg">
-<meta property="og:image" content="http://pheobusyy.github.io/images/2017/02/android aidl目录结构.png">
-<meta property="og:image" content="http://pheobusyy.github.io/images/2017/02/android aidl目录2.png">
-<meta property="og:updated_time" content="2017-02-25T01:12:01.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="android binder与AIDL">
-<meta name="twitter:description" content="android binder与AIDL  最近重新研究了一下Activity启动流程,里面主要提到了ActivityManagerService这个类来管理Activity的生命周期,而如何和这个类通讯成为了理解Activity启动流程的关键,而实现与ActivityManagerService通讯的基础就是今天要讲到的Binder知识.
-  我们知道你通过Luncher点击app图标来启动响应的">
-<meta name="twitter:image" content="http://pheobusyy.github.io/images/2017/02/android binder结构图.gif">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://pheobusyy.github.io/2017/02/21/2017/android binder与aidl/"/>
-
-
-
-
-
-  <title> android binder与AIDL | pheobusyy </title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">pheobusyy</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle"></p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Startseite
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archiv
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            Tags
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2017/02/21/2017/android binder与aidl/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yanyi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="pheobusyy">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                android binder与AIDL
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-21T15:59:00+08:00">
-                2017-02-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h2 id="android-binder与AIDL"><a href="#android-binder与AIDL" class="headerlink" title="android binder与AIDL"></a>android binder与AIDL</h2><p>  最近重新研究了一下Activity启动流程,里面主要提到了ActivityManagerService这个类来管理Activity的生命周期,而如何和这个类通讯成为了理解Activity启动流程的关键,而实现与ActivityManagerService通讯的基础就是今天要讲到的Binder知识.</p>
+<!DOCTYPE html><html class="has-navbar-fixed-top" lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><title></title><script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script><link rel="stylesheet" type="text/css" href="/css/bulma.css"><link rel="stylesheet" type="text/css" href="/css/justyan.css"><link rel="stylesheet" type="text/css" href="/highlight/styles/dracula.css"><link rel="icon" href="/img/favicon.png"></head><body><section class="hero is-info is-medium"><div class="hero-head"><nav class="navbar is-fixed-top is-info"><div class="container"><div class="navbar-brand"><a class="navbar-item"><img class="navbar-circle" src="https://avatars2.githubusercontent.com/u/9360264?s=50&amp;u=5e88482f7319a8ce65ed618bcede72ea97a7f5aa&amp;v=4"></a><span class="navbar-burger burger" data-target="navbarMenuHeroA"><span></span><span></span><span></span></span></div><div class="navbar-menu" id="navbarMenuHeroA"><div class="navbar-end"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/category">Categories</a><a class="navbar-item" href="/contact">Contact</a><span class="navbar-item"><a class="button is-info is-inverted" href="https://github.com/PHEOBUSYY"><span class="icon"><i class="fab fa-github"></i></span><span>Github</span></a></span></div></div></div></nav></div><div class="hero-body"><div class="has-text-centered"><h1 class="title">android binder与AIDL</h1><h2 class="subtitle">2017-02-21</h2></div></div><div class="hero-foot"></div></section><div id="content-outer"><div id="content-inner"><article id="post"><div id="toc"><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#android-binder与AIDL"><span class="toc-number">1.</span> <span class="toc-text">android binder与AIDL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#binder机制相比于其他IPC方式的优点"><span class="toc-number">2.</span> <span class="toc-text">binder机制相比于其他IPC方式的优点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#binder的核心原理"><span class="toc-number">3.</span> <span class="toc-text">binder的核心原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#用户空间和内核空间"><span class="toc-number">3.1.</span> <span class="toc-text">用户空间和内核空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内核模块和驱动"><span class="toc-number">3.2.</span> <span class="toc-text">内核模块和驱动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4个角色"><span class="toc-number">3.3.</span> <span class="toc-text">4个角色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#binder通讯模型-binder中4个角色-通过打电话的例子来类比"><span class="toc-number">3.4.</span> <span class="toc-text">binder通讯模型(binder中4个角色,通过打电话的例子来类比)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#binder驱动中的对象"><span class="toc-number">3.5.</span> <span class="toc-text">binder驱动中的对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#aidl实例"><span class="toc-number">4.</span> <span class="toc-text">aidl实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">6.</span> <span class="toc-text">参考资料</span></a></li></ol></div></div><div class="post-text"><h2 id="android-binder与AIDL"><a href="#android-binder与AIDL" class="headerlink" title="android binder与AIDL"></a>android binder与AIDL</h2><p>  最近重新研究了一下Activity启动流程,里面主要提到了ActivityManagerService这个类来管理Activity的生命周期,而如何和这个类通讯成为了理解Activity启动流程的关键,而实现与ActivityManagerService通讯的基础就是今天要讲到的Binder知识.</p>
 <p>  我们知道你通过Luncher点击app图标来启动响应的app的时候,实际上就是相当于在Luncher这个app中取启动另一个app,也就是两个app的通讯,并且这两个app分属于不同的 <em>线程</em> ,在android两个不同线程的通讯有个统一的说法叫做 <em>IPC(inter-process connection)</em> .我们可以想象一下如果你要让两个陌生人之间互相认识,是不是需要一个中间人,那么在这里的进程就好比两个陌生人,而中间人就是我们这里的IPC,binder机制是IPC的一种实现方式.</p>
 <a id="more"></a>
 <h2 id="binder机制相比于其他IPC方式的优点"><a href="#binder机制相比于其他IPC方式的优点" class="headerlink" title="binder机制相比于其他IPC方式的优点"></a>binder机制相比于其他IPC方式的优点</h2><p>  在linux的原有IPC主要有下面几种:</p>
@@ -393,365 +60,323 @@
 <p>  我们最终要实现的效果是在手机会安装好两个app,在其中client的app中点击后可以获取到server的app中的数据,表明我们的aidl调用成功.</p>
 <p>  首先,在AS中创建一个新的工程,里面包含了两个模块,一个代表server,一个代表client,在server中创建两个java 对象,一个叫book,一个叫user.</p>
 <p>  <img src="/images/2017/02/android aidl目录结构.png" alt="android aidl目录结构"></p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">  <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Book</span> <span class="keyword">implements</span> <span class="title">Parcelable</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> bookId;</div><div class="line">    <span class="keyword">public</span> String name;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Book</span><span class="params">(<span class="keyword">int</span> bookId, String name)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.bookId = bookId;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">describeContents</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeToParcel</span><span class="params">(Parcel dest, <span class="keyword">int</span> flags)</span> </span>&#123;</div><div class="line">        dest.writeInt(bookId);</div><div class="line">        dest.writeString(name);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Creator&lt;Book&gt; CREATOR = <span class="keyword">new</span> Creator&lt;Book&gt;()&#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="keyword">public</span> Book[] newArray(<span class="keyword">int</span> size) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Book[size];</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> Book <span class="title">createFromParcel</span><span class="params">(Parcel source)</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Book(source);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Book</span><span class="params">(Parcel parcel)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.bookId = parcel.readInt();</div><div class="line">        <span class="keyword">this</span>.name = parcel.readString();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">  <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">implements</span> <span class="title">Parcelable</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> bookId;</div><div class="line">    <span class="keyword">public</span> String name;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">User</span><span class="params">(<span class="keyword">int</span> bookId, String name)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.bookId = bookId;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">describeContents</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeToParcel</span><span class="params">(Parcel dest, <span class="keyword">int</span> flags)</span> </span>&#123;</div><div class="line">        dest.writeInt(bookId);</div><div class="line">        dest.writeString(name);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Creator&lt;User&gt; CREATOR = <span class="keyword">new</span> Creator&lt;User&gt;()&#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="keyword">public</span> User[] newArray(<span class="keyword">int</span> size) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> User[size];</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> User <span class="title">createFromParcel</span><span class="params">(Parcel source)</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> User(source);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">User</span><span class="params">(Parcel parcel)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.bookId = parcel.readInt();</div><div class="line">        <span class="keyword">this</span>.name = parcel.readString();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="java">  public class Book implements Parcelable {
+    public int bookId;
+    public String name;
+
+    public Book(int bookId, String name) {
+        this.bookId = bookId;
+        this.name = name;
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(bookId);
+        dest.writeString(name);
+    }
+    public static final Creator&lt;Book&gt; CREATOR = new Creator&lt;Book&gt;(){
+        @Override
+        public Book[] newArray(int size) {
+            return new Book[size];
+        }
+
+        @Override
+        public Book createFromParcel(Parcel source) {
+            return new Book(source);
+        }
+    };
+
+    private Book(Parcel parcel) {
+        this.bookId = parcel.readInt();
+        this.name = parcel.readString();
+    }
+}
+</code></pre>
+<pre><code class="java">  public class User implements Parcelable {
+    public int bookId;
+    public String name;
+
+    public User(int bookId, String name) {
+        this.bookId = bookId;
+        this.name = name;
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(bookId);
+        dest.writeString(name);
+    }
+    public static final Creator&lt;User&gt; CREATOR = new Creator&lt;User&gt;(){
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+
+        @Override
+        public User createFromParcel(Parcel source) {
+            return new User(source);
+        }
+    };
+
+    private User(Parcel parcel) {
+        this.bookId = parcel.readInt();
+        this.name = parcel.readString();
+    }
+}
+</code></pre>
 <p>  这两个对象可以自由发挥,只要满足都是实现的 <em>Parcelable</em> 序列化接口就可以.<br>  之后我们开始创建aidl文件,右键新建选择AIDL类型,AS会自动帮我们创建好aidl文件夹并新建好aidl文件.这里写创建三个aidl文件,分别book.aidl,user.aidl,IMyAidlInterface.aidl :</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> yonyou.com.testbinderipc;</div><div class="line">parcelable Book;</div></pre></td></tr></table></figure>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> yonyou.com.testbinderipc;</div><div class="line">parcelable User;</div></pre></td></tr></table></figure>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> yonyou.com.testbinderipc;</div><div class="line"><span class="comment">// Declare any non-default types here with import statements</span></div><div class="line"><span class="keyword">import</span> yonyou.com.testbinderipc.Book;</div><div class="line"><span class="keyword">import</span> yonyou.com.testbinderipc.User;</div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">IMyAidlInterface</span> </span>&#123;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">void</span> <span class="title">addBook</span><span class="params">(in Book book)</span></span>;</div><div class="line"></div><div class="line">    <span class="function">List&lt;User&gt; <span class="title">getUser</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="java">  package yonyou.com.testbinderipc;
+  parcelable Book;
+</code></pre>
+<pre><code class="java">  package yonyou.com.testbinderipc;
+  parcelable User;
+</code></pre>
+<pre><code class="java">  package yonyou.com.testbinderipc;
+  // Declare any non-default types here with import statements
+  import yonyou.com.testbinderipc.Book;
+  import yonyou.com.testbinderipc.User;
+  interface IMyAidlInterface {
+
+     void addBook(in Book book);
+
+      List&lt;User&gt; getUser();
+  }
+</code></pre>
 <p>  注意:千万不要忘了在IMyAidlInterface.aidl中使用对象的时候显示声明import相应的对象,因为aidl只会自动导入基础数据类型和List.</p>
 <p>  这里在IMyAidlInterface中定义两个方法对应我们server具有的行为.注意到这里的addBook中的参数 <em>in</em> 表明是一种输入类型,还有两个分别兑现 <em>out</em> 和 <em>inout</em> .</p>
-<p>  aidl写好之后,我们需要一个service类来用来给其他的app调用.<br>  新建一个android 的service,TestAidlService:<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestAidlService</span> <span class="keyword">extends</span> <span class="title">Service</span> </span>&#123;</div><div class="line"></div><div class="line">  <span class="meta">@Nullable</span></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> IBinder <span class="title">onBind</span><span class="params">(Intent intent)</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> stub;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">private</span> IMyAidlInterface.Stub stub = <span class="keyword">new</span> IMyAidlInterface.Stub() &#123;</div><div class="line"></div><div class="line">      <span class="meta">@Override</span></div><div class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addBook</span><span class="params">(Book book, String a , String b)</span> <span class="keyword">throws</span> RemoteException </span>&#123;</div><div class="line">          Log.e(<span class="string">"yy"</span>, <span class="string">"addBook: book = "</span> + book.name);</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="meta">@Override</span></div><div class="line">      <span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">getUser</span><span class="params">()</span> <span class="keyword">throws</span> RemoteException </span>&#123;</div><div class="line">          <span class="keyword">return</span> Collections.singletonList(<span class="keyword">new</span> User(<span class="number">1</span>,<span class="string">"yy"</span>));</div><div class="line">      &#125;</div><div class="line">  &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>  内部代码非常简单,这里你可能会问,这个 <em>IMyAidlInterface.Stub</em> 是哪里来的呢?当我们在完成了aidl文件之后,编译工程,会发现在/build/generated/source/aidl/debug/目录下有一个新生成的文件MyAidlInterface.java.这个就是编译起帮助我们生成的真正的aidl java文件了.来看下内部代码.<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div></pre></td><td class="code"><pre><div class="line">  <span class="keyword">package</span> yonyou.com.testbinderipc;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IMyAidlInterface</span> <span class="keyword">extends</span> <span class="title">android</span>.<span class="title">os</span>.<span class="title">IInterface</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Local-side IPC implementation stub class.</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Stub</span> <span class="keyword">extends</span> <span class="title">android</span>.<span class="title">os</span>.<span class="title">Binder</span> <span class="keyword">implements</span> <span class="title">yonyou</span>.<span class="title">com</span>.<span class="title">testbinderipc</span>.<span class="title">IMyAidlInterface</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> java.lang.String DESCRIPTOR = <span class="string">"yonyou.com.testbinderipc.IMyAidlInterface"</span>;</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line">         * Construct the stub at attach it to the interface.</div><div class="line">         */</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Stub</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.attachInterface(<span class="keyword">this</span>, DESCRIPTOR);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line">         * Cast an IBinder object into an yonyou.com.testbinderipc.IMyAidlInterface interface,</div><div class="line">         * generating a proxy if needed.</div><div class="line">         */</div><div class="line">        <span class="keyword">public</span> <span class="keyword">static</span> yonyou.com.testbinderipc.<span class="function">IMyAidlInterface <span class="title">asInterface</span><span class="params">(android.os.IBinder obj)</span> </span>&#123;</div><div class="line">            <span class="keyword">if</span> ((obj == <span class="keyword">null</span>)) &#123;</div><div class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">            &#125;</div><div class="line">            android.os.IInterface iin = obj.queryLocalInterface(DESCRIPTOR);</div><div class="line">            <span class="keyword">if</span> (((iin != <span class="keyword">null</span>) &amp;&amp; (iin <span class="keyword">instanceof</span> yonyou.com.testbinderipc.IMyAidlInterface))) &#123;</div><div class="line">                <span class="keyword">return</span> ((yonyou.com.testbinderipc.IMyAidlInterface) iin);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> yonyou.com.testbinderipc.IMyAidlInterface.Stub.Proxy(obj);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="keyword">public</span> android.os.<span class="function">IBinder <span class="title">asBinder</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTransact</span><span class="params">(<span class="keyword">int</span> code, android.os.Parcel data, android.os.Parcel reply, <span class="keyword">int</span> flags)</span> <span class="keyword">throws</span> android.os.RemoteException </span>&#123;</div><div class="line">            <span class="keyword">switch</span> (code) &#123;</div><div class="line">                <span class="keyword">case</span> INTERFACE_TRANSACTION: &#123;</div><div class="line">                    reply.writeString(DESCRIPTOR);</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">case</span> TRANSACTION_addBook: &#123;</div><div class="line">                    data.enforceInterface(DESCRIPTOR);</div><div class="line">                    yonyou.com.testbinderipc.Book _arg0;</div><div class="line">                    <span class="keyword">if</span> ((<span class="number">0</span> != data.readInt())) &#123;</div><div class="line">                        _arg0 = yonyou.com.testbinderipc.Book.CREATOR.createFromParcel(data);</div><div class="line">                    &#125; <span class="keyword">else</span> &#123;</div><div class="line">                        _arg0 = <span class="keyword">null</span>;</div><div class="line">                    &#125;</div><div class="line">                    java.lang.String _arg1;</div><div class="line">                    _arg1 = data.readString();</div><div class="line">                    java.lang.String _arg2;</div><div class="line">                    _arg2 = data.readString();</div><div class="line">                    <span class="keyword">this</span>.addBook(_arg0, _arg1, _arg2);</div><div class="line">                    reply.writeNoException();</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">case</span> TRANSACTION_getUser: &#123;</div><div class="line">                    data.enforceInterface(DESCRIPTOR);</div><div class="line">                    java.util.List&lt;yonyou.com.testbinderipc.User&gt; _result = <span class="keyword">this</span>.getUser();</div><div class="line">                    reply.writeNoException();</div><div class="line">                    reply.writeTypedList(_result);</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">super</span>.onTransact(code, data, reply, flags);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Proxy</span> <span class="keyword">implements</span> <span class="title">yonyou</span>.<span class="title">com</span>.<span class="title">testbinderipc</span>.<span class="title">IMyAidlInterface</span> </span>&#123;</div><div class="line">            <span class="keyword">private</span> android.os.IBinder mRemote;</div><div class="line"></div><div class="line">            Proxy(android.os.IBinder remote) &#123;</div><div class="line">                mRemote = remote;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="keyword">public</span> android.os.<span class="function">IBinder <span class="title">asBinder</span><span class="params">()</span> </span>&#123;</div><div class="line">                <span class="keyword">return</span> mRemote;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">public</span> java.lang.<span class="function">String <span class="title">getInterfaceDescriptor</span><span class="params">()</span> </span>&#123;</div><div class="line">                <span class="keyword">return</span> DESCRIPTOR;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addBook</span><span class="params">(yonyou.com.testbinderipc.Book book, java.lang.String a, java.lang.String b)</span> <span class="keyword">throws</span> android.os.RemoteException </span>&#123;</div><div class="line">                android.os.Parcel _data = android.os.Parcel.obtain();</div><div class="line">                android.os.Parcel _reply = android.os.Parcel.obtain();</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    _data.writeInterfaceToken(DESCRIPTOR);</div><div class="line">                    <span class="keyword">if</span> ((book != <span class="keyword">null</span>)) &#123;</div><div class="line">                        _data.writeInt(<span class="number">1</span>);</div><div class="line">                        book.writeToParcel(_data, <span class="number">0</span>);</div><div class="line">                    &#125; <span class="keyword">else</span> &#123;</div><div class="line">                        _data.writeInt(<span class="number">0</span>);</div><div class="line">                    &#125;</div><div class="line">                    _data.writeString(a);</div><div class="line">                    _data.writeString(b);</div><div class="line">                    mRemote.transact(Stub.TRANSACTION_addBook, _data, _reply, <span class="number">0</span>);</div><div class="line">                    _reply.readException();</div><div class="line">                &#125; <span class="keyword">finally</span> &#123;</div><div class="line">                    _reply.recycle();</div><div class="line">                    _data.recycle();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="keyword">public</span> java.util.List&lt;yonyou.com.testbinderipc.User&gt; getUser() <span class="keyword">throws</span> android.os.RemoteException &#123;</div><div class="line">                android.os.Parcel _data = android.os.Parcel.obtain();</div><div class="line">                android.os.Parcel _reply = android.os.Parcel.obtain();</div><div class="line">                java.util.List&lt;yonyou.com.testbinderipc.User&gt; _result;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    _data.writeInterfaceToken(DESCRIPTOR);</div><div class="line">                    mRemote.transact(Stub.TRANSACTION_getUser, _data, _reply, <span class="number">0</span>);</div><div class="line">                    _reply.readException();</div><div class="line">                    _result = _reply.createTypedArrayList(yonyou.com.testbinderipc.User.CREATOR);</div><div class="line">                &#125; <span class="keyword">finally</span> &#123;</div><div class="line">                    _reply.recycle();</div><div class="line">                    _data.recycle();</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">return</span> _result;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TRANSACTION_addBook = (android.os.IBinder.FIRST_CALL_TRANSACTION + <span class="number">0</span>);</div><div class="line">        <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TRANSACTION_getUser = (android.os.IBinder.FIRST_CALL_TRANSACTION + <span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addBook</span><span class="params">(yonyou.com.testbinderipc.Book book, java.lang.String a, java.lang.String b)</span> <span class="keyword">throws</span> android.os.RemoteException</span>;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> java.util.List&lt;yonyou.com.testbinderipc.User&gt; getUser() <span class="keyword">throws</span> android.os.RemoteException;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>  aidl写好之后,我们需要一个service类来用来给其他的app调用.<br>  新建一个android 的service,TestAidlService:</p>
+<pre><code class="java">  public class TestAidlService extends Service {
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return stub;
+    }
+    private IMyAidlInterface.Stub stub = new IMyAidlInterface.Stub() {
+
+        @Override
+        public void addBook(Book book, String a , String b) throws RemoteException {
+            Log.e(&quot;yy&quot;, &quot;addBook: book = &quot; + book.name);
+        }
+
+        @Override
+        public List&lt;User&gt; getUser() throws RemoteException {
+            return Collections.singletonList(new User(1,&quot;yy&quot;));
+        }
+    };
+  }
+</code></pre>
+<p>  内部代码非常简单,这里你可能会问,这个 <em>IMyAidlInterface.Stub</em> 是哪里来的呢?当我们在完成了aidl文件之后,编译工程,会发现在/build/generated/source/aidl/debug/目录下有一个新生成的文件MyAidlInterface.java.这个就是编译起帮助我们生成的真正的aidl java文件了.来看下内部代码.</p>
+<pre><code class="java">  package yonyou.com.testbinderipc;
+
+public interface IMyAidlInterface extends android.os.IInterface {
+    /**
+     * Local-side IPC implementation stub class.
+     */
+    public static abstract class Stub extends android.os.Binder implements yonyou.com.testbinderipc.IMyAidlInterface {
+        private static final java.lang.String DESCRIPTOR = &quot;yonyou.com.testbinderipc.IMyAidlInterface&quot;;
+
+        /**
+         * Construct the stub at attach it to the interface.
+         */
+        public Stub() {
+            this.attachInterface(this, DESCRIPTOR);
+        }
+
+        /**
+         * Cast an IBinder object into an yonyou.com.testbinderipc.IMyAidlInterface interface,
+         * generating a proxy if needed.
+         */
+        public static yonyou.com.testbinderipc.IMyAidlInterface asInterface(android.os.IBinder obj) {
+            if ((obj == null)) {
+                return null;
+            }
+            android.os.IInterface iin = obj.queryLocalInterface(DESCRIPTOR);
+            if (((iin != null) &amp;&amp; (iin instanceof yonyou.com.testbinderipc.IMyAidlInterface))) {
+                return ((yonyou.com.testbinderipc.IMyAidlInterface) iin);
+            }
+            return new yonyou.com.testbinderipc.IMyAidlInterface.Stub.Proxy(obj);
+        }
+
+        @Override
+        public android.os.IBinder asBinder() {
+            return this;
+        }
+
+        @Override
+        public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException {
+            switch (code) {
+                case INTERFACE_TRANSACTION: {
+                    reply.writeString(DESCRIPTOR);
+                    return true;
+                }
+                case TRANSACTION_addBook: {
+                    data.enforceInterface(DESCRIPTOR);
+                    yonyou.com.testbinderipc.Book _arg0;
+                    if ((0 != data.readInt())) {
+                        _arg0 = yonyou.com.testbinderipc.Book.CREATOR.createFromParcel(data);
+                    } else {
+                        _arg0 = null;
+                    }
+                    java.lang.String _arg1;
+                    _arg1 = data.readString();
+                    java.lang.String _arg2;
+                    _arg2 = data.readString();
+                    this.addBook(_arg0, _arg1, _arg2);
+                    reply.writeNoException();
+                    return true;
+                }
+                case TRANSACTION_getUser: {
+                    data.enforceInterface(DESCRIPTOR);
+                    java.util.List&lt;yonyou.com.testbinderipc.User&gt; _result = this.getUser();
+                    reply.writeNoException();
+                    reply.writeTypedList(_result);
+                    return true;
+                }
+            }
+            return super.onTransact(code, data, reply, flags);
+        }
+
+        private static class Proxy implements yonyou.com.testbinderipc.IMyAidlInterface {
+            private android.os.IBinder mRemote;
+
+            Proxy(android.os.IBinder remote) {
+                mRemote = remote;
+            }
+
+            @Override
+            public android.os.IBinder asBinder() {
+                return mRemote;
+            }
+
+            public java.lang.String getInterfaceDescriptor() {
+                return DESCRIPTOR;
+            }
+
+            @Override
+            public void addBook(yonyou.com.testbinderipc.Book book, java.lang.String a, java.lang.String b) throws android.os.RemoteException {
+                android.os.Parcel _data = android.os.Parcel.obtain();
+                android.os.Parcel _reply = android.os.Parcel.obtain();
+                try {
+                    _data.writeInterfaceToken(DESCRIPTOR);
+                    if ((book != null)) {
+                        _data.writeInt(1);
+                        book.writeToParcel(_data, 0);
+                    } else {
+                        _data.writeInt(0);
+                    }
+                    _data.writeString(a);
+                    _data.writeString(b);
+                    mRemote.transact(Stub.TRANSACTION_addBook, _data, _reply, 0);
+                    _reply.readException();
+                } finally {
+                    _reply.recycle();
+                    _data.recycle();
+                }
+            }
+
+            @Override
+            public java.util.List&lt;yonyou.com.testbinderipc.User&gt; getUser() throws android.os.RemoteException {
+                android.os.Parcel _data = android.os.Parcel.obtain();
+                android.os.Parcel _reply = android.os.Parcel.obtain();
+                java.util.List&lt;yonyou.com.testbinderipc.User&gt; _result;
+                try {
+                    _data.writeInterfaceToken(DESCRIPTOR);
+                    mRemote.transact(Stub.TRANSACTION_getUser, _data, _reply, 0);
+                    _reply.readException();
+                    _result = _reply.createTypedArrayList(yonyou.com.testbinderipc.User.CREATOR);
+                } finally {
+                    _reply.recycle();
+                    _data.recycle();
+                }
+                return _result;
+            }
+        }
+
+        static final int TRANSACTION_addBook = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
+        static final int TRANSACTION_getUser = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
+    }
+
+    public void addBook(yonyou.com.testbinderipc.Book book, java.lang.String a, java.lang.String b) throws android.os.RemoteException;
+
+    public java.util.List&lt;yonyou.com.testbinderipc.User&gt; getUser() throws android.os.RemoteException;
+}
+</code></pre>
 <p>  可以看到IMyAidlInterface表明是一个接口,同时内部有两个内部类sub和proxy,这两个对象就对应了上面个讲到的binder实体对象和binder代理对象.<br>  当client和server属于同一个进程时候,可以直接使用stub本地对象,如果不在同一进程中就只能使用proxy对象.这段逻辑对应这里的 <em>asInterface</em> 方法.</p>
-<p>  写完service之后,我们需要在manifest中注册:<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;service android:name=&quot;.TestAidlService&quot; android:exported=&quot;true&quot; android:process=&quot;:remote&quot; android:enabled=&quot;true&quot;&gt;</div><div class="line">            &lt;intent-filter&gt;</div><div class="line">                &lt;action android:name=&quot;com.yonyou.test.aidl&quot;/&gt;</div><div class="line">            &lt;/intent-filter&gt;</div><div class="line">    &lt;/service&gt;</div></pre></td></tr></table></figure></p>
-<p>  到这里,server端的代码就算完成了.下面来看client端代码.</p>
+<p>  写完service之后,我们需要在manifest中注册:</p>
+<pre><code>  &lt;service android:name=&quot;.TestAidlService&quot; android:exported=&quot;true&quot; android:process=&quot;:remote&quot; android:enabled=&quot;true&quot;&gt;
+              &lt;intent-filter&gt;
+                  &lt;action android:name=&quot;com.yonyou.test.aidl&quot;/&gt;
+              &lt;/intent-filter&gt;
+      &lt;/service&gt;
+</code></pre><p>  到这里,server端的代码就算完成了.下面来看client端代码.</p>
 <p>  client中也有aidl文件夹,里面的内容和server端是一模一样的,只需要把server中的aidl文件夹拷过来就可以了.还有两个java对象放入和server中包名一样的目录中.</p>
 <p>  最终的目录结果应该是这样的:</p>
 <p><img src="/images/2017/02/android aidl目录2.png" alt="android aidl目录结构2  "></p>
-<p>  最后我们在client中的MainActivity来binder server中的service.<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> IMyAidlInterface iMyAidlInterface;</div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">      setContentView(R.layout.activity_main);</div><div class="line">      Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);</div><div class="line">      setSupportActionBar(toolbar);</div><div class="line"></div><div class="line">      FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);</div><div class="line">      fab.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</div><div class="line">          <span class="meta">@Override</span></div><div class="line">          <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>&#123;</div><div class="line">              Intent intent = <span class="keyword">new</span> Intent(<span class="string">"com.yonyou.test.aidl"</span>);</div><div class="line">              intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</div><div class="line">              intent.setPackage(<span class="string">"yonyou.com.testbinderipc"</span>);</div><div class="line">              bindService(intent,sc, BIND_AUTO_CREATE);</div><div class="line">          &#125;</div><div class="line">      &#125;);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">private</span> ServiceConnection sc = <span class="keyword">new</span> ServiceConnection() &#123;</div><div class="line">      <span class="meta">@Override</span></div><div class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onServiceConnected</span><span class="params">(ComponentName name, IBinder service)</span> </span>&#123;</div><div class="line">          iMyAidlInterface = IMyAidlInterface.Stub.asInterface(service);</div><div class="line">          <span class="keyword">try</span> &#123;</div><div class="line">              iMyAidlInterface.addBook(<span class="keyword">new</span> Book(<span class="number">1001</span>,<span class="string">"如何阅读一本书"</span>));</div><div class="line">              List&lt;User&gt; user = iMyAidlInterface.getUser();</div><div class="line">              Toast.makeText(MainActivity.<span class="keyword">this</span>, <span class="string">"user is "</span>+ user.get(<span class="number">0</span>).name, Toast.LENGTH_SHORT).show();</div><div class="line">          &#125; <span class="keyword">catch</span> (RemoteException e) &#123;</div><div class="line">              e.printStackTrace();</div><div class="line">          &#125;</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="meta">@Override</span></div><div class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onServiceDisconnected</span><span class="params">(ComponentName name)</span> </span>&#123;</div><div class="line">          iMyAidlInterface = <span class="keyword">null</span>;</div><div class="line">      &#125;</div><div class="line">  &#125;;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>.onDestroy();</div><div class="line">      unbindService(sc);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>  最后我们在client中的MainActivity来binder server中的service.</p>
+<pre><code class="java">  public class MainActivity extends AppCompatActivity {
+    private IMyAidlInterface iMyAidlInterface;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(&quot;com.yonyou.test.aidl&quot;);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setPackage(&quot;yonyou.com.testbinderipc&quot;);
+                bindService(intent,sc, BIND_AUTO_CREATE);
+            }
+        });
+    }
+    private ServiceConnection sc = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            iMyAidlInterface = IMyAidlInterface.Stub.asInterface(service);
+            try {
+                iMyAidlInterface.addBook(new Book(1001,&quot;如何阅读一本书&quot;));
+                List&lt;User&gt; user = iMyAidlInterface.getUser();
+                Toast.makeText(MainActivity.this, &quot;user is &quot;+ user.get(0).name, Toast.LENGTH_SHORT).show();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            iMyAidlInterface = null;
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(sc);
+    }
+
+  }
+</code></pre>
 <p>  点击FloatingActionButton,绑定server中的service,如果toast成功,并打印出日志表明调用成功.</p>
 <p>  这里有个点需要注意下,在android5.0以后如果要startService或者bindService的时候一定要明确指定对方的包名,否者会抛出异常.这里intent的包名我们就写server的包名就可以了.</p>
 <p>  在onServiceConnected中我们调用了IMyAidlInterface.Stub.asInterface,这里就完成了是否是统一进程的判断,如果不同进程就返回proxy对象,如果是统一进程就直接返回stub对象.</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  要明白的是,这里的讲的代码只是java层的binder实现,真正的binder是在底层通过c++来实现的,要明白真正的binder实现还是要去深入看源码.这里只要明白了binder的实现原理和机制就可以了.</p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="http://weishu.me/2016/01/12/binder-index-for-newer/#comments" title="Binder学习指南" target="_blank" rel="external">Binder学习指南  </a></p>
 <p><a href="http://wangkuiwu.github.io/2014/09/01/Binder-Introduce/" title="Android Binder机制(一) Binder的设计和框架" target="_blank" rel="external">Android Binder机制(一) Binder的设计和框架</a></p>
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/02/17/2017/Android LruMemoryCache源码分析/" rel="next" title="Android LruMemoryCache源码分析">
-                <i class="fa fa-chevron-left"></i> Android LruMemoryCache源码分析
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/02/2017/读书笔记/2017-03-02-如何阅读一本书/" rel="prev" title="<如何阅读一本书>">
-                <如何阅读一本书> <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-          
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
-    
-  </div>
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Inhaltsverzeichnis
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            Übersicht
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
-               alt="yanyi" />
-          <p class="site-author-name" itemprop="name">yanyi</p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">62</span>
-                <span class="site-state-item-name">Artikel</span>
-              </a>
-            </div>
-          
-
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">7</span>
-                <span class="site-state-item-name">Tags</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#android-binder与AIDL"><span class="nav-number">1.</span> <span class="nav-text">android binder与AIDL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#binder机制相比于其他IPC方式的优点"><span class="nav-number">2.</span> <span class="nav-text">binder机制相比于其他IPC方式的优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#binder的核心原理"><span class="nav-number">3.</span> <span class="nav-text">binder的核心原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用户空间和内核空间"><span class="nav-number">3.1.</span> <span class="nav-text">用户空间和内核空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内核模块和驱动"><span class="nav-number">3.2.</span> <span class="nav-text">内核模块和驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4个角色"><span class="nav-number">3.3.</span> <span class="nav-text">4个角色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#binder通讯模型-binder中4个角色-通过打电话的例子来类比"><span class="nav-number">3.4.</span> <span class="nav-text">binder通讯模型(binder中4个角色,通过打电话的例子来类比)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#binder驱动中的对象"><span class="nav-number">3.5.</span> <span class="nav-text">binder驱动中的对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#aidl实例"><span class="nav-number">4.</span> <span class="nav-text">aidl实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2017</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">yanyi</span>
-</div>
-
-
-<div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
-</div>
-
-<div class="theme-info">
-  Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
-  </a>
-</div>
-
-
-        
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-    
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
-
-
-
-  
-
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-</body>
-</html>
+</div></article><div></div></div></div><div id="bottom-outer"><div id="bottom-inner"><span>Site construction by</span><span> JustYan </span><span>using</span><a href="http://hexo.io"><span>hexo blog framework</span></a><span>.</span><br><a href="/">Home</a></div></div><script src="/js/justyan.js"></script><script src="/highlight/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script></body></html>

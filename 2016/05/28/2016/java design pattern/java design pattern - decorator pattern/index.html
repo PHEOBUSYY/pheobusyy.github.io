@@ -1,358 +1,4 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="pheobusyy" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
-
-
-
-
-
-
-<meta name="description" content="场景
-装饰模式
-总结
-参考资料
-
-
-场景   在编程中，经常会遇到要对原来的某个对象进行功能上的扩展，这个时候如果直接在原来的类基础上直接修改的话违反了开闭原则   同时可能会影响到原来的功能。这个时候我们可以通过装饰模式来达到功能上的扩展，而不影响原来的功能。
-装饰模式  装饰模式顾名思义就是对一个对象进行装饰（wrap）来达到功能扩展的目的。一般由4个角色来组成，分别为：  
-
-Compo">
-<meta property="og:type" content="article">
-<meta property="og:title" content="java design pattern - decorator pattern">
-<meta property="og:url" content="http://pheobusyy.github.io/2016/05/28/2016/java design pattern/java design pattern - decorator pattern/index.html">
-<meta property="og:site_name" content="pheobusyy">
-<meta property="og:description" content="场景
-装饰模式
-总结
-参考资料
-
-
-场景   在编程中，经常会遇到要对原来的某个对象进行功能上的扩展，这个时候如果直接在原来的类基础上直接修改的话违反了开闭原则   同时可能会影响到原来的功能。这个时候我们可以通过装饰模式来达到功能上的扩展，而不影响原来的功能。
-装饰模式  装饰模式顾名思义就是对一个对象进行装饰（wrap）来达到功能扩展的目的。一般由4个角色来组成，分别为：  
-
-Compo">
-<meta property="og:image" content="http://pheobusyy.github.io/images/2016/05/decorator_pattern_uml.png">
-<meta property="og:updated_time" content="2017-02-25T01:12:01.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java design pattern - decorator pattern">
-<meta name="twitter:description" content="场景
-装饰模式
-总结
-参考资料
-
-
-场景   在编程中，经常会遇到要对原来的某个对象进行功能上的扩展，这个时候如果直接在原来的类基础上直接修改的话违反了开闭原则   同时可能会影响到原来的功能。这个时候我们可以通过装饰模式来达到功能上的扩展，而不影响原来的功能。
-装饰模式  装饰模式顾名思义就是对一个对象进行装饰（wrap）来达到功能扩展的目的。一般由4个角色来组成，分别为：  
-
-Compo">
-<meta name="twitter:image" content="http://pheobusyy.github.io/images/2016/05/decorator_pattern_uml.png">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://pheobusyy.github.io/2016/05/28/2016/java design pattern/java design pattern - decorator pattern/"/>
-
-
-
-
-
-  <title> java design pattern - decorator pattern | pheobusyy </title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">pheobusyy</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle"></p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Startseite
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archiv
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            Tags
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/05/28/2016/java design pattern/java design pattern - decorator pattern/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yanyi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="pheobusyy">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                java design pattern - decorator pattern
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-28T18:08:00+08:00">
-                2016-05-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<!DOCTYPE html><html class="has-navbar-fixed-top" lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><title></title><script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script><link rel="stylesheet" type="text/css" href="/css/bulma.css"><link rel="stylesheet" type="text/css" href="/css/justyan.css"><link rel="stylesheet" type="text/css" href="/highlight/styles/dracula.css"><link rel="icon" href="/img/favicon.png"></head><body><section class="hero is-info is-medium"><div class="hero-head"><nav class="navbar is-fixed-top is-info"><div class="container"><div class="navbar-brand"><a class="navbar-item"><img class="navbar-circle" src="https://avatars2.githubusercontent.com/u/9360264?s=50&amp;u=5e88482f7319a8ce65ed618bcede72ea97a7f5aa&amp;v=4"></a><span class="navbar-burger burger" data-target="navbarMenuHeroA"><span></span><span></span><span></span></span></div><div class="navbar-menu" id="navbarMenuHeroA"><div class="navbar-end"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/category">Categories</a><a class="navbar-item" href="/contact">Contact</a><span class="navbar-item"><a class="button is-info is-inverted" href="https://github.com/PHEOBUSYY"><span class="icon"><i class="fab fa-github"></i></span><span>Github</span></a></span></div></div></div></nav></div><div class="hero-body"><div class="has-text-centered"><h1 class="title">java design pattern - decorator pattern</h1><h2 class="subtitle">2016-05-28</h2></div></div><div class="hero-foot"></div></section><div id="content-outer"><div id="content-inner"><article id="post"><div id="toc"><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#场景"><span class="toc-number">1.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#装饰模式"><span class="toc-number">2.</span> <span class="toc-text">装饰模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li></ol></div></div><div class="post-text"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 <ul>
 <li><a href="#场景">场景</a></li>
 <li><a href="#装饰模式">装饰模式</a></li>
@@ -376,352 +22,75 @@ Compo">
 <li>ConcreteDecorator继承Decorator，在里面对需要调整的方法进行复写修改</li>
 </ul>
 <p><img src="/images/2016/05/decorator_pattern_uml.png" alt="decorator pattern"><br><a id="more"></a><br>  下面是一个简单的demo实现：</p>
-<p>  基础接口<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Component</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">void</span> <span class="title">operator</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>  要调整的对象<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteComponent</span> <span class="keyword">implements</span> <span class="title">Component</span> </span>&#123;</div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operator</span><span class="params">()</span> </span>&#123;</div><div class="line">      System.out.println(<span class="string">"ConcreteComponent operator"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>  装饰基类<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">  <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Decorator</span> <span class="keyword">implements</span> <span class="title">Component</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> Component component;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Decorator</span><span class="params">(Component component)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.component = component;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operator</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.component.operator();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>  具体装饰类A<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteDecoratorA</span> <span class="keyword">extends</span> <span class="title">Decorator</span></span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">ConcreteDecoratorA</span><span class="params">(Component component)</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>(component);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operator</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>.operator();</div><div class="line">      System.out.println(<span class="string">"ConcreteDecoratorA  operator"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>  具体装饰类B<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteDecoratorB</span> <span class="keyword">extends</span> <span class="title">Decorator</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">ConcreteDecoratorB</span><span class="params">(Component component)</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>(component);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operator</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>.operator();</div><div class="line">      System.out.println(<span class="string">"ConcreteDecoratorB operator "</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>  测试类<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">      ConcreteComponent concreteComponent = <span class="keyword">new</span> ConcreteComponent();</div><div class="line">      ConcreteDecoratorA concreteDecoratorA = <span class="keyword">new</span> ConcreteDecoratorA(concreteComponent);</div><div class="line">      ConcreteDecoratorB concreteDecoratorB = <span class="keyword">new</span> ConcreteDecoratorB(concreteDecoratorA);</div><div class="line">      concreteDecoratorB.operator();</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>  输出：<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ConcreteComponent operator</div><div class="line">ConcreteDecoratorA  operator</div><div class="line">ConcreteDecoratorB operator</div></pre></td></tr></table></figure></p>
+<p>  基础接口</p>
+<pre><code class="java">  public interface Component {
+    void operator();
+  }
+</code></pre>
+<p>  要调整的对象</p>
+<pre><code class="java">  public class ConcreteComponent implements Component {
+    @Override
+    public void operator() {
+        System.out.println(&quot;ConcreteComponent operator&quot;);
+    }
+  }
+</code></pre>
+<p>  装饰基类</p>
+<pre><code class="java">  public class Decorator implements Component {
+    private Component component;
+
+    public Decorator(Component component) {
+        this.component = component;
+    }
+
+    @Override
+    public void operator() {
+        this.component.operator();
+    }
+}
+</code></pre>
+<p>  具体装饰类A</p>
+<pre><code class="java">  public class ConcreteDecoratorA extends Decorator{
+    public ConcreteDecoratorA(Component component) {
+        super(component);
+    }
+
+    @Override
+    public void operator() {
+        super.operator();
+        System.out.println(&quot;ConcreteDecoratorA  operator&quot;);
+    }
+  }
+</code></pre>
+<p>  具体装饰类B</p>
+<pre><code class="java">  public class ConcreteDecoratorB extends Decorator {
+    public ConcreteDecoratorB(Component component) {
+        super(component);
+    }
+
+    @Override
+    public void operator() {
+        super.operator();
+        System.out.println(&quot;ConcreteDecoratorB operator &quot;);
+    }
+  }
+</code></pre>
+<p>  测试类</p>
+<pre><code class="java">  public class Test {
+    public static void main(String[] args) {
+        ConcreteComponent concreteComponent = new ConcreteComponent();
+        ConcreteDecoratorA concreteDecoratorA = new ConcreteDecoratorA(concreteComponent);
+        ConcreteDecoratorB concreteDecoratorB = new ConcreteDecoratorB(concreteDecoratorA);
+        concreteDecoratorB.operator();
+    }
+  }
+</code></pre>
+<p>  输出：</p>
+<pre><code class="java">  ConcreteComponent operator
+  ConcreteDecoratorA  operator
+  ConcreteDecoratorB operator
+</code></pre>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  可以看到装饰模式在没有影响以前逻辑的基础上，完成了功能扩展，在java中IO相关的api大量的用到了装饰模式。<br>  同时我们可以发现如果没有Component或者只有一个要调整的ConcreteDecorator的时候装饰模式会退化为一个简单<br>  的继承方式，也就是继承一下要要调整类，在里面复写要扩展的方法。另外，装饰模式我觉得是AOP编程概念的一种具体实现。</p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="http://www.tutorialspoint.com/design_pattern/decorator_pattern.htm" title="Design Patterns - Decorator Pattern" target="_blank" rel="external">Design Patterns - Decorator Pattern</a></p>
 <p><a href="https://en.wikipedia.org/wiki/Decorator_pattern" title="Decorator pattern" target="_blank" rel="external">Decorator pattern</a></p>
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/05/28/2016/java design pattern/java design pattern - facade pattern/" rel="next" title="java design pattern - facade pattern">
-                <i class="fa fa-chevron-left"></i> java design pattern - facade pattern
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/28/2016/java design pattern/java design pattern - adapter pattern/" rel="prev" title="java design pattern - adapter pattern">
-                java design pattern - adapter pattern <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-          
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
-    
-  </div>
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Inhaltsverzeichnis
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            Übersicht
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
-               alt="yanyi" />
-          <p class="site-author-name" itemprop="name">yanyi</p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">62</span>
-                <span class="site-state-item-name">Artikel</span>
-              </a>
-            </div>
-          
-
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">7</span>
-                <span class="site-state-item-name">Tags</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#场景"><span class="nav-number">1.</span> <span class="nav-text">场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#装饰模式"><span class="nav-number">2.</span> <span class="nav-text">装饰模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2017</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">yanyi</span>
-</div>
-
-
-<div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
-</div>
-
-<div class="theme-info">
-  Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
-  </a>
-</div>
-
-
-        
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-    
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
-
-
-
-  
-
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-</body>
-</html>
+</div></article><div></div></div></div><div id="bottom-outer"><div id="bottom-inner"><span>Site construction by</span><span> JustYan </span><span>using</span><a href="http://hexo.io"><span>hexo blog framework</span></a><span>.</span><br><a href="/">Home</a></div></div><script src="/js/justyan.js"></script><script src="/highlight/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script></body></html>

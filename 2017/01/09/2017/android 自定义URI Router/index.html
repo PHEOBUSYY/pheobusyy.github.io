@@ -1,337 +1,4 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="pheobusyy" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
-
-
-
-
-
-
-<meta name="description" content="android 自定义URI Router关于自定义Router学习之前的预备知识
-为什么要使用google的auto-service这个包如何才能获取一个接口的所有实现类?通过反射来遍历所有的类,然后判断该类是否是实现指定的接口,不过这样效率不太高,毕竟得对所有的类进行遍历;还有一种方法就是就是把实现了该接口的类的全路径名称放入一个配置文件中,这样在使用的时候,从配置文件中获取实现类就可以了.有">
-<meta property="og:type" content="article">
-<meta property="og:title" content="android 自定义URI Router">
-<meta property="og:url" content="http://pheobusyy.github.io/2017/01/09/2017/android 自定义URI Router/index.html">
-<meta property="og:site_name" content="pheobusyy">
-<meta property="og:description" content="android 自定义URI Router关于自定义Router学习之前的预备知识
-为什么要使用google的auto-service这个包如何才能获取一个接口的所有实现类?通过反射来遍历所有的类,然后判断该类是否是实现指定的接口,不过这样效率不太高,毕竟得对所有的类进行遍历;还有一种方法就是就是把实现了该接口的类的全路径名称放入一个配置文件中,这样在使用的时候,从配置文件中获取实现类就可以了.有">
-<meta property="og:image" content="http://pheobusyy.github.io/images/2017/01/auto-service生成的配置文件.png">
-<meta property="og:image" content="http://pheobusyy.github.io/images/2017/01/router工程目录结构.png">
-<meta property="og:image" content="http://pheobusyy.github.io/images/2017/01/annotation项目类定义.png">
-<meta property="og:image" content="http://pheobusyy.github.io/images/2017/01/processor生成的java源码.png">
-<meta property="og:updated_time" content="2017-02-25T01:12:01.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="android 自定义URI Router">
-<meta name="twitter:description" content="android 自定义URI Router关于自定义Router学习之前的预备知识
-为什么要使用google的auto-service这个包如何才能获取一个接口的所有实现类?通过反射来遍历所有的类,然后判断该类是否是实现指定的接口,不过这样效率不太高,毕竟得对所有的类进行遍历;还有一种方法就是就是把实现了该接口的类的全路径名称放入一个配置文件中,这样在使用的时候,从配置文件中获取实现类就可以了.有">
-<meta name="twitter:image" content="http://pheobusyy.github.io/images/2017/01/auto-service生成的配置文件.png">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://pheobusyy.github.io/2017/01/09/2017/android 自定义URI Router/"/>
-
-
-
-
-
-  <title> android 自定义URI Router | pheobusyy </title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">pheobusyy</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle"></p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Startseite
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archiv
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            Tags
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2017/01/09/2017/android 自定义URI Router/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yanyi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="pheobusyy">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                android 自定义URI Router
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-09T10:25:00+08:00">
-                2017-01-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h2 id="android-自定义URI-Router"><a href="#android-自定义URI-Router" class="headerlink" title="android 自定义URI Router"></a>android 自定义URI Router</h2><h3 id="关于自定义Router学习之前的预备知识"><a href="#关于自定义Router学习之前的预备知识" class="headerlink" title="关于自定义Router学习之前的预备知识"></a>关于自定义Router学习之前的预备知识</h3><ol>
+<!DOCTYPE html><html class="has-navbar-fixed-top" lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><title></title><script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script><link rel="stylesheet" type="text/css" href="/css/bulma.css"><link rel="stylesheet" type="text/css" href="/css/justyan.css"><link rel="stylesheet" type="text/css" href="/highlight/styles/dracula.css"><link rel="icon" href="/img/favicon.png"></head><body><section class="hero is-info is-medium"><div class="hero-head"><nav class="navbar is-fixed-top is-info"><div class="container"><div class="navbar-brand"><a class="navbar-item"><img class="navbar-circle" src="https://avatars2.githubusercontent.com/u/9360264?s=50&amp;u=5e88482f7319a8ce65ed618bcede72ea97a7f5aa&amp;v=4"></a><span class="navbar-burger burger" data-target="navbarMenuHeroA"><span></span><span></span><span></span></span></div><div class="navbar-menu" id="navbarMenuHeroA"><div class="navbar-end"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/category">Categories</a><a class="navbar-item" href="/contact">Contact</a><span class="navbar-item"><a class="button is-info is-inverted" href="https://github.com/PHEOBUSYY"><span class="icon"><i class="fab fa-github"></i></span><span>Github</span></a></span></div></div></div></nav></div><div class="hero-body"><div class="has-text-centered"><h1 class="title">android 自定义URI Router</h1><h2 class="subtitle">2017-01-09</h2></div></div><div class="hero-foot"></div></section><div id="content-outer"><div id="content-inner"><article id="post"><div id="toc"><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#android-自定义URI-Router"><span class="toc-number">1.</span> <span class="toc-text">android 自定义URI Router</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关于自定义Router学习之前的预备知识"><span class="toc-number">1.1.</span> <span class="toc-text">关于自定义Router学习之前的预备知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#别人写的Router框架解析"><span class="toc-number">1.2.</span> <span class="toc-text">别人写的Router框架解析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#annotation工程"><span class="toc-number">1.2.1.</span> <span class="toc-text">annotation工程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#routerhelper工程"><span class="toc-number">1.2.2.</span> <span class="toc-text">routerhelper工程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#router工程"><span class="toc-number">1.3.</span> <span class="toc-text">router工程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#app工程的router调用"><span class="toc-number">1.4.</span> <span class="toc-text">app工程的router调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shop工程"><span class="toc-number">1.5.</span> <span class="toc-text">shop工程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bbs工程"><span class="toc-number">1.6.</span> <span class="toc-text">bbs工程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">1.7.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-number">1.8.</span> <span class="toc-text">参考资料</span></a></li></ol></li></ol></div></div><div class="post-text"><h2 id="android-自定义URI-Router"><a href="#android-自定义URI-Router" class="headerlink" title="android 自定义URI Router"></a>android 自定义URI Router</h2><h3 id="关于自定义Router学习之前的预备知识"><a href="#关于自定义Router学习之前的预备知识" class="headerlink" title="关于自定义Router学习之前的预备知识"></a>关于自定义Router学习之前的预备知识</h3><ol>
 <li>为什么要使用google的auto-service这个包<br>如何才能获取一个接口的所有实现类?通过反射来遍历所有的类,然后判断该类是否是实现指定的接口,不过这样效率不太高,毕竟得对所有的类进行遍历;还有一种方法就是就是把实现了该接口的类的全路径名称放入一个配置文件中,这样在使用的时候,从配置文件中获取实现类就可以了.有点反着来的意思.那这里配置文件放在哪里呢?放在了jar包里面的META-INF这个文件夹中,这个文件夹中放的是jar包的一些签名和说明文件,通用的定义是把实现接口类的描述文件放在 META-INF/service/接口名称/中.注意,前面的这种方式是需要人工来完成的,每当你调整了实现接口的数量的话,就需要手动更新一下 META-INF文件,但是 auto-service可以自动完成这些工作,这个就是它的作用.<br><img src="images/2017/01/auto-service生成的配置文件.png" alt="auto-service生成的配置文件"></li>
 </ol>
 <ol>
@@ -342,30 +9,109 @@
 </li>
 <li><p>java的serviceLoader类作用</p>
 <p>可以从 METE-INF 中取出指定接口的实现类名称列表,方便直接调用</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">     ServiceLoader&lt;ITest&gt; serviceLoader = ServiceLoader.load(ITest.class);</div><div class="line">     <span class="keyword">for</span> (ITest iTest : serviceLoader) &#123;</div><div class="line">         iTest.test();</div><div class="line">     &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<pre><code class="java">public static void main(String[] args) {
+
+    ServiceLoader&lt;ITest&gt; serviceLoader = ServiceLoader.load(ITest.class);
+    for (ITest iTest : serviceLoader) {
+        iTest.test();
+    }
+}
+</code></pre>
 </li>
 <li><p>自定义的注解是怎么起作用的<br>实现步骤如下:</p>
 <ol>
-<li><p>顶部工程的gradle中配置:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">    classpath <span class="string">'com.android.tools.build:gradle:2.2.2'</span></div><div class="line">    ....</div><div class="line">    <span class="comment">//引入apt插件</span></div><div class="line">    classpath <span class="string">'com.neenbedankt.gradle.plugins:android-apt:1.8'</span></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>主工程的gradle中配置:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">apply plugin: <span class="string">'com.neenbedankt.android-apt'</span></div><div class="line">.....</div><div class="line"><span class="function">compile <span class="title">project</span> <span class="params">(<span class="string">':annotationprocessor'</span>)</span></span></div><div class="line">apt <span class="title">project</span> <span class="params">(<span class="string">':annotationprocessor'</span>)</span></div></pre></td></tr></table></figure>
-</li>
+<li>顶部工程的gradle中配置:<br>```java<br>dependencies {<br>classpath ‘com.android.tools.build:gradle:2.2.2’<br>….<br>//引入apt插件<br>classpath ‘com.neenbedankt.gradle.plugins:android-apt:1.8’</li>
 </ol>
-<p>这里的 <em>annotationprocessor</em> 用来包含自定义的processor的java子工程</p>
+<p>}</p>
+<pre><code>2. 主工程的gradle中配置:
+```java
+apply plugin: &#39;com.neenbedankt.android-apt&#39;
+.....
+compile project (&#39;:annotationprocessor&#39;)
+apt project (&#39;:annotationprocessor&#39;)
+</code></pre><p>这里的 <em>annotationprocessor</em> 用来包含自定义的processor的java子工程</p>
 <ol>
-<li>用来包含自定义processor的java工程中的gradle中配置:<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">  dependencies &#123;</div><div class="line">    <span class="function">compile <span class="title">fileTree</span><span class="params">(dir: <span class="string">'libs'</span>, include: [<span class="string">'*.jar'</span>])</span></span></div><div class="line">    compile <span class="title">project</span><span class="params">(<span class="string">':annotation'</span>)</span></div><div class="line">    compile 'com.google.auto.service:auto-service:1.0-rc2'</div><div class="line">    compile 'com.squareup:javapoet:1.7.0'</div><div class="line">&#125;</div><div class="line"></div><div class="line">sourceCompatibility = <span class="string">"1.7"</span></div><div class="line">targetCompatibility = <span class="string">"1.7"</span></div></pre></td></tr></table></figure>
-</li>
+<li>用来包含自定义processor的java工程中的gradle中配置:<br>```java<br>dependencies {<br>compile fileTree(dir: ‘libs’, include: [‘*.jar’])<br>compile project(‘:annotation’)<br>compile ‘com.google.auto.service:auto-service:1.0-rc2’<br>compile ‘com.squareup:javapoet:1.7.0’<br>}</li>
 </ol>
 </li>
 </ol>
-<p>这里的 <em>javapoet</em> 根据需求添加,默认可以不适用.<br><em>annotation</em> 工程中存放的是自定义的 <em>annotation</em> 类文件</p>
-<ol>
-<li>最后就是java代码的书写了,首先是一个自定义的java注解类<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Target</span>(ElementType.TYPE)</div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.CLASS)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> YYAnnotation &#123;</div><div class="line">    <span class="function">String <span class="title">value</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>然后是自定义的解析processor<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@AutoService</span>(Processor.class)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">YYAnnotationProcessor</span> <span class="keyword">extends</span> <span class="title">AbstractProcessor</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> Filer filer;</div><div class="line">    <span class="keyword">private</span> Messager messager;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(ProcessingEnvironment processingEnvironment)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.init(processingEnvironment);</div><div class="line">        filer = processingEnvironment.getFiler();</div><div class="line">        messager = processingEnvironment.getMessager();</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> SourceVersion <span class="title">getSupportedSourceVersion</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> SourceVersion.latestSupported();</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Set&lt;String&gt; <span class="title">getSupportedAnnotationTypes</span><span class="params">()</span> </span>&#123;</div><div class="line">        Set&lt;String&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</div><div class="line">        <span class="comment">//这里是你要处理注解的集合</span></div><div class="line">        set.add(YYAnnotation.class.getCanonicalName());</div><div class="line">        <span class="keyword">return</span> set;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">process</span><span class="params">(Set&lt;? extends TypeElement&gt; annotations, RoundEnvironment roundEnv)</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Set&lt;? extends Element&gt; mainAppElement = roundEnv.getElementsAnnotatedWith(YYAnnotation.class);</div><div class="line">            <span class="keyword">if</span> (!mainAppElement.isEmpty()) &#123;</div><div class="line">                <span class="comment">//这里实现自己的需求</span></div><div class="line">                process(mainAppElement);</div><div class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            messager.printMessage(Diagnostic.Kind.ERROR, e.getMessage());</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(Set&lt;? extends Element&gt; elementsAnnotatedWith)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">      TypeElement typeElement = (TypeElement) elementsAnnotatedWith.iterator().next();</div><div class="line">      <span class="comment">//这里的Config.FILE_NAME是你要生成的java源文件的名称</span></div><div class="line">      JavaFileObject javaFileObject = filer.createSourceFile(Config.FILE_NAME, typeElement);</div><div class="line">      <span class="comment">//通过printWriter来生成java源文件</span></div><div class="line">      PrintWriter writer = <span class="keyword">new</span> PrintWriter(javaFileObject.openWriter());</div><div class="line">      <span class="comment">//这里的Config.PACKAGE_NAME你要生成的java源文件的包名</span></div><div class="line">      writer.println(<span class="string">"package "</span> + Config.PACKAGE_NAME + <span class="string">";"</span>);</div><div class="line">      writer.println(<span class="string">"public class TestProcessor &#123;"</span>);</div><div class="line">      writer.println(<span class="string">"public static void test () &#123;"</span>);</div><div class="line"></div><div class="line">      YYAnnotation componentsAnnotation = typeElement.getAnnotation(YYAnnotation.class);</div><div class="line">      String components = componentsAnnotation.value();</div><div class="line">      writer.println(<span class="string">"System.out.println(\""</span>+components+<span class="string">"\");"</span>);</div><div class="line"></div><div class="line">      writer.println(<span class="string">"&#125;"</span>);</div><div class="line">      writer.println(<span class="string">"&#125;"</span>);</div><div class="line"></div><div class="line">      writer.flush();</div><div class="line">      writer.close();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>sourceCompatibility = “1.7”<br>targetCompatibility = “1.7”</p>
+<pre><code>这里的 *javapoet* 根据需求添加,默认可以不适用.
+*annotation* 工程中存放的是自定义的 *annotation* 类文件
+
+4. 最后就是java代码的书写了,首先是一个自定义的java注解类
+```java
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.CLASS)
+public @interface YYAnnotation {
+    String value();
+}
+</code></pre><p>然后是自定义的解析processor</p>
+<pre><code class="java">@AutoService(Processor.class)
+public class YYAnnotationProcessor extends AbstractProcessor {
+
+    private Filer filer;
+    private Messager messager;
+
+    @Override
+    public synchronized void init(ProcessingEnvironment processingEnvironment) {
+        super.init(processingEnvironment);
+        filer = processingEnvironment.getFiler();
+        messager = processingEnvironment.getMessager();
+    }
+
+
+    @Override
+    public SourceVersion getSupportedSourceVersion() {
+        return SourceVersion.latestSupported();
+    }
+    @Override
+    public Set&lt;String&gt; getSupportedAnnotationTypes() {
+        Set&lt;String&gt; set = new HashSet&lt;&gt;();
+        //这里是你要处理注解的集合
+        set.add(YYAnnotation.class.getCanonicalName());
+        return set;
+    }
+
+    @Override
+    public boolean process(Set&lt;? extends TypeElement&gt; annotations, RoundEnvironment roundEnv) {
+        try {
+            Set&lt;? extends Element&gt; mainAppElement = roundEnv.getElementsAnnotatedWith(YYAnnotation.class);
+            if (!mainAppElement.isEmpty()) {
+                //这里实现自己的需求
+                process(mainAppElement);
+                return true;
+            }
+        } catch (Exception e) {
+            messager.printMessage(Diagnostic.Kind.ERROR, e.getMessage());
+        }
+
+        return true;
+    }
+    private void process(Set&lt;? extends Element&gt; elementsAnnotatedWith) throws IOException {
+      TypeElement typeElement = (TypeElement) elementsAnnotatedWith.iterator().next();
+      //这里的Config.FILE_NAME是你要生成的java源文件的名称
+      JavaFileObject javaFileObject = filer.createSourceFile(Config.FILE_NAME, typeElement);
+      //通过printWriter来生成java源文件
+      PrintWriter writer = new PrintWriter(javaFileObject.openWriter());
+      //这里的Config.PACKAGE_NAME你要生成的java源文件的包名
+      writer.println(&quot;package &quot; + Config.PACKAGE_NAME + &quot;;&quot;);
+      writer.println(&quot;public class TestProcessor {&quot;);
+      writer.println(&quot;public static void test () {&quot;);
+
+      YYAnnotation componentsAnnotation = typeElement.getAnnotation(YYAnnotation.class);
+      String components = componentsAnnotation.value();
+      writer.println(&quot;System.out.println(\&quot;&quot;+components+&quot;\&quot;);&quot;);
+
+      writer.println(&quot;}&quot;);
+      writer.println(&quot;}&quot;);
+
+      writer.flush();
+      writer.close();
+    }
+
+}
+</code></pre>
 <p>是不是非常的神奇,你可以再编译之前做一些事情,比如生成一个java文件,或者对一些java源文件做处理等等,给了我们很大的灵活性,在这里我们是通过apt生成了可以打印信息的java类,非常的简单,后期可以根据需求调整成更加复杂的逻辑.</p>
 <ol>
 <li>如何某个接口的所有实现类或者某个父类的所有子类<br>反射遍历所有的java类文件,找到实现该接口的类名称.</li>
@@ -373,378 +119,646 @@
 <h3 id="别人写的Router框架解析"><a href="#别人写的Router框架解析" class="headerlink" title="别人写的Router框架解析"></a>别人写的Router框架解析</h3><p>首先要明白,Router的真正的作用是用在模块之间的解耦上,我们都知道android可以分为主工程+多个library,多个library可以作为单独module的体现,这里Router的作用就是可以让多个library互相之间调用各自的页面,service或者广播,而不用互相知道对方的具体类名称等信息,达到了内部解耦的功能.<br>先看工程目录结构:<br><img src="/images/2017/01/router工程目录结构.png" alt="router工程目录结构"></p>
 <p>这里主要的功能实现就在 annotation,router,routerhelper中实现的.其他的两个shoplib和bbslib代表了两个独立模块.主工程app,uitlslib和reslib内部定义了一些工具类,这里不过多的介绍了.</p>
 <h4 id="annotation工程"><a href="#annotation工程" class="headerlink" title="annotation工程"></a>annotation工程</h4><p>首先来看annotation,这个工程主要放置的是关于Router定义的各种注解.是一个纯java工程.<br><img src="/images/2017/01/annotation项目类定义.png" alt=""></p>
-<p>其中, <em>AutoRouter</em> , <em>StaticRouter</em> 是router注解的两种模式,分别对应自动根据绑定的class类型来给URI添加对应的前缀,比如如果绑定的是activity则前缀为 <em>activity://</em> ,而后者则是完全按照注解的value值来作为绑定的URI.这个后续在代码中就明白怎么用了.<br><em>Components</em> 对应所有模块的注解,主要用在application中声明都有那几个需要Router的模块.<br><em>Component</em> 对应每个独立的模块<br>下面来看代码定义,非常的简单,就是普通的java注解声明:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Target</span>(ElementType.TYPE)</div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.CLASS)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> AutoRouter &#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Target</span>(ElementType.TYPE)</div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.CLASS)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> StaticRouter &#123;</div><div class="line">    <span class="function">String <span class="title">value</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Target</span>(ElementType.TYPE)</div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.CLASS)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Component &#123;</div><div class="line">    <span class="function">String <span class="title">value</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.CLASS)</div><div class="line"><span class="meta">@Target</span>(ElementType.TYPE)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Components &#123;</div><div class="line">    String[] value();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="routerhelper工程"><a href="#routerhelper工程" class="headerlink" title="routerhelper工程"></a>routerhelper工程</h4><p>上面再 <em>annotation</em> 项目中完成了注解的定义,那势必会有一个 <em>processor</em> 来完成注解的解析和逻辑处理,这里如果对注解的处理流程不是很熟悉的话可以看下相关的java注解处理的资源.这里就不重点介绍了.直接进入 <em>RouterHelper</em> 这个解析注解类中.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@AutoService</span>(Processor.class)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RouterProcessor</span> <span class="keyword">extends</span> <span class="title">AbstractProcessor</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> Filer mFiler;</div><div class="line">    <span class="keyword">private</span> Messager mMessager;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> Map&lt;String, String&gt; mStaticRouterMap = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">    <span class="keyword">private</span> List&lt;String&gt; mAutoRouterList = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(ProcessingEnvironment processingEnvironment)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.init(processingEnvironment);</div><div class="line">        mFiler = processingEnvironment.getFiler();</div><div class="line">        mMessager = processingEnvironment.getMessager();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> SourceVersion <span class="title">getSupportedSourceVersion</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> SourceVersion.latestSupported();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Set&lt;String&gt; <span class="title">getSupportedAnnotationTypes</span><span class="params">()</span> </span>&#123;</div><div class="line">        Set&lt;String&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</div><div class="line">        set.add(AutoRouter.class.getCanonicalName());</div><div class="line">        set.add(StaticRouter.class.getCanonicalName());</div><div class="line">        set.add(Component.class.getCanonicalName());</div><div class="line">        set.add(Components.class.getCanonicalName());</div><div class="line">        <span class="keyword">return</span> set;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">process</span><span class="params">(Set&lt;? extends TypeElement&gt; set, RoundEnvironment roundEnvironment)</span> </span>&#123;</div><div class="line">        mStaticRouterMap.clear();</div><div class="line">        mAutoRouterList.clear();</div><div class="line"></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Set&lt;? extends Element&gt; mainAppElement = roundEnvironment.getElementsAnnotatedWith(Components.class);</div><div class="line">            <span class="keyword">if</span> (!mainAppElement.isEmpty()) &#123;</div><div class="line">                processInstaller(mainAppElement);</div><div class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">            &#125;</div><div class="line">            processComponent(roundEnvironment);</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            mMessager.printMessage(Diagnostic.Kind.ERROR, e.getMessage());</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">processInstaller</span><span class="params">(Set&lt;? extends Element&gt; mainAppElement)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">        TypeElement typeElement = (TypeElement) mainAppElement.iterator().next();</div><div class="line">        JavaFileObject javaFileObject = mFiler.createSourceFile(Config.ROUTER_MANAGER, typeElement);</div><div class="line">        PrintWriter writer = <span class="keyword">new</span> PrintWriter(javaFileObject.openWriter());</div><div class="line"></div><div class="line">        writer.println(<span class="string">"package "</span> + Config.PACKAGE_NAME + <span class="string">";"</span>);</div><div class="line">        writer.println(<span class="string">"public class "</span> + Config.ROUTER_MANAGER + <span class="string">" &#123;"</span>);</div><div class="line">        writer.println(<span class="string">"public static void "</span> + Config.ROUTER_MANAGER_METHOD + <span class="string">"() &#123;"</span>);</div><div class="line"></div><div class="line">        Components componentsAnnotation = typeElement.getAnnotation(Components.class);</div><div class="line">        String[] components = componentsAnnotation.value();</div><div class="line">        <span class="keyword">for</span> (String item : components) &#123;</div><div class="line">            writer.println(Config.FILE_PREFIX + item + <span class="string">".router();"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        writer.println(<span class="string">"&#125;"</span>);</div><div class="line">        writer.println(<span class="string">"&#125;"</span>);</div><div class="line"></div><div class="line">        writer.flush();</div><div class="line">        writer.close();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">processComponent</span><span class="params">(RoundEnvironment roundEnvironment)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        Set&lt;? extends Element&gt; compElements = roundEnvironment.getElementsAnnotatedWith(Component.class);</div><div class="line">        <span class="keyword">if</span> (compElements.isEmpty()) &#123; <span class="keyword">return</span>;&#125;</div><div class="line"></div><div class="line">        Element item = compElements.iterator().next();</div><div class="line">        String componentName = item.getAnnotation(Component.class).value();</div><div class="line"></div><div class="line">        Set&lt;? extends Element&gt; routerElements = roundEnvironment.getElementsAnnotatedWith(StaticRouter.class);</div><div class="line">        <span class="keyword">for</span> (Element e : routerElements) &#123;</div><div class="line">            <span class="keyword">if</span> (! (e <span class="keyword">instanceof</span> TypeElement)) &#123; <span class="keyword">continue</span>;&#125;</div><div class="line">            TypeElement typeElement = (TypeElement) e;</div><div class="line">            String pattern = typeElement.getAnnotation(StaticRouter.class).value();</div><div class="line">            mStaticRouterMap.put(pattern, typeElement.getQualifiedName().toString());</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        Set&lt;? extends Element&gt; autoRouterElements = roundEnvironment.getElementsAnnotatedWith(AutoRouter.class);</div><div class="line">        <span class="keyword">for</span> (Element e : autoRouterElements) &#123;</div><div class="line">            <span class="keyword">if</span> (!(e <span class="keyword">instanceof</span> TypeElement)) &#123; <span class="keyword">continue</span>;&#125;</div><div class="line">            TypeElement typeElement = (TypeElement) e;</div><div class="line">            mAutoRouterList.add(typeElement.getQualifiedName().toString());</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        writeComponentFile(componentName);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">writeComponentFile</span><span class="params">(String componentName)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        String className = Config.FILE_PREFIX + componentName;</div><div class="line">        JavaFileObject javaFileObject = mFiler.createSourceFile(className);</div><div class="line"><span class="comment">//        javaFileObject.delete();</span></div><div class="line"></div><div class="line">        PrintWriter printWriter = <span class="keyword">new</span> PrintWriter(javaFileObject.openWriter());</div><div class="line"></div><div class="line">        printWriter.println(<span class="string">"package "</span> + Config.PACKAGE_NAME + <span class="string">";"</span>);</div><div class="line"></div><div class="line">        printWriter.println(<span class="string">"import android.app.Activity;"</span>);</div><div class="line">        printWriter.println(<span class="string">"import android.app.Service;"</span>);</div><div class="line">        printWriter.println(<span class="string">"import android.content.BroadcastReceiver;"</span>);</div><div class="line"></div><div class="line">        printWriter.println(<span class="string">"public class "</span> + className + <span class="string">" &#123;"</span>);</div><div class="line">        printWriter.println(<span class="string">"public static void router() &#123;"</span>);</div><div class="line"></div><div class="line">        <span class="comment">// // Router.router(ActivityRule.ACTIVITY_SCHEME + "shop.main", ShopActivity.class);</span></div><div class="line">        <span class="keyword">for</span>(Map.Entry&lt;String, String&gt; entry : mStaticRouterMap.entrySet()) &#123;</div><div class="line">            printWriter.println(<span class="string">"org.loader.router.Router.router(\""</span> + entry.getKey()</div><div class="line">                    +<span class="string">"\", "</span>+entry.getValue()+<span class="string">".class);"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">for</span> (String klass : mAutoRouterList) &#123;</div><div class="line">            printWriter.println(<span class="string">"if (Activity.class.isAssignableFrom("</span> + klass + <span class="string">".class)) &#123;"</span>);</div><div class="line">            printWriter.println(<span class="string">"org.loader.router.Router.router(org.loader.router.rule.ActivityRule.ACTIVITY_SCHEME + \""</span></div><div class="line">                    +klass+<span class="string">"\", "</span> + klass + <span class="string">".class);"</span>);</div><div class="line">            printWriter.println(<span class="string">"&#125;"</span>);</div><div class="line"></div><div class="line">            printWriter.println(<span class="string">"else if (Service.class.isAssignableFrom("</span> + klass + <span class="string">".class)) &#123;"</span>);</div><div class="line">            printWriter.println(<span class="string">"org.loader.router.Router.router(org.loader.router.rule.ServiceRule.SERVICE_SCHEME + \""</span></div><div class="line">                    +klass+<span class="string">"\", "</span> + klass + <span class="string">".class);"</span>);</div><div class="line">            printWriter.println(<span class="string">"&#125;"</span>);</div><div class="line"></div><div class="line">            printWriter.println(<span class="string">"else if (BroadcastReceiver.class.isAssignableFrom("</span> + klass + <span class="string">".class)) &#123;"</span>);</div><div class="line">            printWriter.println(<span class="string">"org.loader.router.Router.router(org.loader.router.rule.ReceiverRule.RECEIVER_SCHEME + \""</span></div><div class="line">                    +klass+<span class="string">"\", "</span>+klass+<span class="string">".class);"</span>);</div><div class="line">            printWriter.println(<span class="string">"&#125;"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        printWriter.println(<span class="string">"&#125;"</span>);</div><div class="line">        printWriter.println(<span class="string">"&#125;"</span>);</div><div class="line">        printWriter.flush();</div><div class="line">        printWriter.close();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>其中, <em>AutoRouter</em> , <em>StaticRouter</em> 是router注解的两种模式,分别对应自动根据绑定的class类型来给URI添加对应的前缀,比如如果绑定的是activity则前缀为 <em>activity://</em> ,而后者则是完全按照注解的value值来作为绑定的URI.这个后续在代码中就明白怎么用了.<br><em>Components</em> 对应所有模块的注解,主要用在application中声明都有那几个需要Router的模块.<br><em>Component</em> 对应每个独立的模块<br>下面来看代码定义,非常的简单,就是普通的java注解声明:</p>
+<pre><code class="java">@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.CLASS)
+public @interface AutoRouter {
+}
+</code></pre>
+<pre><code class="java">@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.CLASS)
+public @interface StaticRouter {
+    String value();
+}
+</code></pre>
+<pre><code class="java">@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.CLASS)
+public @interface Component {
+    String value();
+}
+</code></pre>
+<pre><code class="java">@Retention(RetentionPolicy.CLASS)
+@Target(ElementType.TYPE)
+public @interface Components {
+    String[] value();
+}
+</code></pre>
+<h4 id="routerhelper工程"><a href="#routerhelper工程" class="headerlink" title="routerhelper工程"></a>routerhelper工程</h4><p>上面再 <em>annotation</em> 项目中完成了注解的定义,那势必会有一个 <em>processor</em> 来完成注解的解析和逻辑处理,这里如果对注解的处理流程不是很熟悉的话可以看下相关的java注解处理的资源.这里就不重点介绍了.直接进入 <em>RouterHelper</em> 这个解析注解类中.</p>
+<pre><code class="java">@AutoService(Processor.class)
+public class RouterProcessor extends AbstractProcessor {
+
+    private Filer mFiler;
+    private Messager mMessager;
+
+    private Map&lt;String, String&gt; mStaticRouterMap = new HashMap&lt;&gt;();
+    private List&lt;String&gt; mAutoRouterList = new ArrayList&lt;&gt;();
+
+    @Override
+    public synchronized void init(ProcessingEnvironment processingEnvironment) {
+        super.init(processingEnvironment);
+        mFiler = processingEnvironment.getFiler();
+        mMessager = processingEnvironment.getMessager();
+    }
+
+    @Override
+    public SourceVersion getSupportedSourceVersion() {
+        return SourceVersion.latestSupported();
+    }
+
+    @Override
+    public Set&lt;String&gt; getSupportedAnnotationTypes() {
+        Set&lt;String&gt; set = new HashSet&lt;&gt;();
+        set.add(AutoRouter.class.getCanonicalName());
+        set.add(StaticRouter.class.getCanonicalName());
+        set.add(Component.class.getCanonicalName());
+        set.add(Components.class.getCanonicalName());
+        return set;
+    }
+
+    @Override
+    public boolean process(Set&lt;? extends TypeElement&gt; set, RoundEnvironment roundEnvironment) {
+        mStaticRouterMap.clear();
+        mAutoRouterList.clear();
+
+        try {
+            Set&lt;? extends Element&gt; mainAppElement = roundEnvironment.getElementsAnnotatedWith(Components.class);
+            if (!mainAppElement.isEmpty()) {
+                processInstaller(mainAppElement);
+                return true;
+            }
+            processComponent(roundEnvironment);
+        } catch (Exception e) {
+            mMessager.printMessage(Diagnostic.Kind.ERROR, e.getMessage());
+        }
+
+        return true;
+    }
+
+    private void processInstaller(Set&lt;? extends Element&gt; mainAppElement) throws IOException {
+        TypeElement typeElement = (TypeElement) mainAppElement.iterator().next();
+        JavaFileObject javaFileObject = mFiler.createSourceFile(Config.ROUTER_MANAGER, typeElement);
+        PrintWriter writer = new PrintWriter(javaFileObject.openWriter());
+
+        writer.println(&quot;package &quot; + Config.PACKAGE_NAME + &quot;;&quot;);
+        writer.println(&quot;public class &quot; + Config.ROUTER_MANAGER + &quot; {&quot;);
+        writer.println(&quot;public static void &quot; + Config.ROUTER_MANAGER_METHOD + &quot;() {&quot;);
+
+        Components componentsAnnotation = typeElement.getAnnotation(Components.class);
+        String[] components = componentsAnnotation.value();
+        for (String item : components) {
+            writer.println(Config.FILE_PREFIX + item + &quot;.router();&quot;);
+        }
+
+        writer.println(&quot;}&quot;);
+        writer.println(&quot;}&quot;);
+
+        writer.flush();
+        writer.close();
+    }
+
+    private void processComponent(RoundEnvironment roundEnvironment) throws Exception {
+        Set&lt;? extends Element&gt; compElements = roundEnvironment.getElementsAnnotatedWith(Component.class);
+        if (compElements.isEmpty()) { return;}
+
+        Element item = compElements.iterator().next();
+        String componentName = item.getAnnotation(Component.class).value();
+
+        Set&lt;? extends Element&gt; routerElements = roundEnvironment.getElementsAnnotatedWith(StaticRouter.class);
+        for (Element e : routerElements) {
+            if (! (e instanceof TypeElement)) { continue;}
+            TypeElement typeElement = (TypeElement) e;
+            String pattern = typeElement.getAnnotation(StaticRouter.class).value();
+            mStaticRouterMap.put(pattern, typeElement.getQualifiedName().toString());
+        }
+
+        Set&lt;? extends Element&gt; autoRouterElements = roundEnvironment.getElementsAnnotatedWith(AutoRouter.class);
+        for (Element e : autoRouterElements) {
+            if (!(e instanceof TypeElement)) { continue;}
+            TypeElement typeElement = (TypeElement) e;
+            mAutoRouterList.add(typeElement.getQualifiedName().toString());
+        }
+
+        writeComponentFile(componentName);
+    }
+
+    private void writeComponentFile(String componentName) throws Exception {
+        String className = Config.FILE_PREFIX + componentName;
+        JavaFileObject javaFileObject = mFiler.createSourceFile(className);
+//        javaFileObject.delete();
+
+        PrintWriter printWriter = new PrintWriter(javaFileObject.openWriter());
+
+        printWriter.println(&quot;package &quot; + Config.PACKAGE_NAME + &quot;;&quot;);
+
+        printWriter.println(&quot;import android.app.Activity;&quot;);
+        printWriter.println(&quot;import android.app.Service;&quot;);
+        printWriter.println(&quot;import android.content.BroadcastReceiver;&quot;);
+
+        printWriter.println(&quot;public class &quot; + className + &quot; {&quot;);
+        printWriter.println(&quot;public static void router() {&quot;);
+
+        // // Router.router(ActivityRule.ACTIVITY_SCHEME + &quot;shop.main&quot;, ShopActivity.class);
+        for(Map.Entry&lt;String, String&gt; entry : mStaticRouterMap.entrySet()) {
+            printWriter.println(&quot;org.loader.router.Router.router(\&quot;&quot; + entry.getKey()
+                    +&quot;\&quot;, &quot;+entry.getValue()+&quot;.class);&quot;);
+        }
+
+        for (String klass : mAutoRouterList) {
+            printWriter.println(&quot;if (Activity.class.isAssignableFrom(&quot; + klass + &quot;.class)) {&quot;);
+            printWriter.println(&quot;org.loader.router.Router.router(org.loader.router.rule.ActivityRule.ACTIVITY_SCHEME + \&quot;&quot;
+                    +klass+&quot;\&quot;, &quot; + klass + &quot;.class);&quot;);
+            printWriter.println(&quot;}&quot;);
+
+            printWriter.println(&quot;else if (Service.class.isAssignableFrom(&quot; + klass + &quot;.class)) {&quot;);
+            printWriter.println(&quot;org.loader.router.Router.router(org.loader.router.rule.ServiceRule.SERVICE_SCHEME + \&quot;&quot;
+                    +klass+&quot;\&quot;, &quot; + klass + &quot;.class);&quot;);
+            printWriter.println(&quot;}&quot;);
+
+            printWriter.println(&quot;else if (BroadcastReceiver.class.isAssignableFrom(&quot; + klass + &quot;.class)) {&quot;);
+            printWriter.println(&quot;org.loader.router.Router.router(org.loader.router.rule.ReceiverRule.RECEIVER_SCHEME + \&quot;&quot;
+                    +klass+&quot;\&quot;, &quot;+klass+&quot;.class);&quot;);
+            printWriter.println(&quot;}&quot;);
+        }
+
+        printWriter.println(&quot;}&quot;);
+        printWriter.println(&quot;}&quot;);
+        printWriter.flush();
+        printWriter.close();
+    }
+}
+</code></pre>
 <p>首先在顶部声明了 <em>AutoService</em> 对应本文最上面提到的它的作用用来更新METE-INF中接口的列表文件的.这样可以快速找到工程都有哪些 <em>processor</em> .</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> Set&lt;String&gt; <span class="title">getSupportedAnnotationTypes</span><span class="params">()</span> </span>&#123;</div><div class="line">    Set&lt;String&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</div><div class="line">    set.add(AutoRouter.class.getCanonicalName());</div><div class="line">    set.add(StaticRouter.class.getCanonicalName());</div><div class="line">    set.add(Component.class.getCanonicalName());</div><div class="line">    set.add(Components.class.getCanonicalName());</div><div class="line">    <span class="keyword">return</span> set;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>用来声明这个processor可以支持处理哪些注解.是一个set集合<br>mFiler可以用来生成一些自定义的源文件,class或其他文件.<br>mMessager 可以把错误信息打印出来<br>重点解析注解的逻辑就在 <em>process</em> 方法中.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Set&lt;? extends Element&gt; mainAppElement = roundEnvironment.getElementsAnnotatedWith(Components.class);</div><div class="line"><span class="keyword">if</span> (!mainAppElement.isEmpty()) &#123;</div><div class="line">    processInstaller(mainAppElement);</div><div class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>来看第一个关键点,先是找到所有声明 <em>Components</em> 的类对象,这里注意由于 <em>Components</em> 声明的是 <em>ElementType.TYPE</em> 表明只能在类顶部定义,那么这里找到的element都是TypeElement表示类元素.<br>前面说到 <em>Components</em> 的作用是用来表示都有哪些模块需要Router的.比如这里在Application顶部声明了:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">@Components</span>(&#123;<span class="string">"shop"</span>, <span class="string">"bbs"</span>&#125;)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">MultiDexApplication</span> </span>&#123;</div><div class="line">  ....</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>说明了有两个工程工程需要Router功能,对应上面说的 shop和bbs两个模块.<br>回到 <em>process</em> 方法中,找到了 <em>Components</em> 的声明类并且不为空的话就进入 <em>processInstaller</em> 方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">processInstaller</span><span class="params">(Set&lt;? extends Element&gt; mainAppElement)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">       TypeElement typeElement = (TypeElement) mainAppElement.iterator().next();</div><div class="line">       JavaFileObject javaFileObject = mFiler.createSourceFile(Config.ROUTER_MANAGER, typeElement);</div><div class="line">       PrintWriter writer = <span class="keyword">new</span> PrintWriter(javaFileObject.openWriter());</div><div class="line"></div><div class="line">       writer.println(<span class="string">"package "</span> + Config.PACKAGE_NAME + <span class="string">";"</span>);</div><div class="line">       writer.println(<span class="string">"public class "</span> + Config.ROUTER_MANAGER + <span class="string">" &#123;"</span>);</div><div class="line">       writer.println(<span class="string">"public static void "</span> + Config.ROUTER_MANAGER_METHOD + <span class="string">"() &#123;"</span>);</div><div class="line"></div><div class="line">       Components componentsAnnotation = typeElement.getAnnotation(Components.class);</div><div class="line">       String[] components = componentsAnnotation.value();</div><div class="line">       <span class="keyword">for</span> (String item : components) &#123;</div><div class="line">           writer.println(Config.FILE_PREFIX + item + <span class="string">".router();"</span>);</div><div class="line">       &#125;</div><div class="line"></div><div class="line">       writer.println(<span class="string">"&#125;"</span>);</div><div class="line">       writer.println(<span class="string">"&#125;"</span>);</div><div class="line"></div><div class="line">       writer.flush();</div><div class="line">       writer.close();</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<pre><code class="java">@Override
+public Set&lt;String&gt; getSupportedAnnotationTypes() {
+    Set&lt;String&gt; set = new HashSet&lt;&gt;();
+    set.add(AutoRouter.class.getCanonicalName());
+    set.add(StaticRouter.class.getCanonicalName());
+    set.add(Component.class.getCanonicalName());
+    set.add(Components.class.getCanonicalName());
+    return set;
+}
+</code></pre>
+<p>用来声明这个processor可以支持处理哪些注解.是一个set集合<br>mFiler可以用来生成一些自定义的源文件,class或其他文件.<br>mMessager 可以把错误信息打印出来<br>重点解析注解的逻辑就在 <em>process</em> 方法中.</p>
+<pre><code class="java">Set&lt;? extends Element&gt; mainAppElement = roundEnvironment.getElementsAnnotatedWith(Components.class);
+if (!mainAppElement.isEmpty()) {
+    processInstaller(mainAppElement);
+    return true;
+}
+</code></pre>
+<p>来看第一个关键点,先是找到所有声明 <em>Components</em> 的类对象,这里注意由于 <em>Components</em> 声明的是 <em>ElementType.TYPE</em> 表明只能在类顶部定义,那么这里找到的element都是TypeElement表示类元素.<br>前面说到 <em>Components</em> 的作用是用来表示都有哪些模块需要Router的.比如这里在Application顶部声明了:</p>
+<pre><code class="java">
+@Components({&quot;shop&quot;, &quot;bbs&quot;})
+public class App extends MultiDexApplication {
+  ....
+}
+</code></pre>
+<p>说明了有两个工程工程需要Router功能,对应上面说的 shop和bbs两个模块.<br>回到 <em>process</em> 方法中,找到了 <em>Components</em> 的声明类并且不为空的话就进入 <em>processInstaller</em> 方法</p>
+<pre><code class="java">private void processInstaller(Set&lt;? extends Element&gt; mainAppElement) throws IOException {
+       TypeElement typeElement = (TypeElement) mainAppElement.iterator().next();
+       JavaFileObject javaFileObject = mFiler.createSourceFile(Config.ROUTER_MANAGER, typeElement);
+       PrintWriter writer = new PrintWriter(javaFileObject.openWriter());
+
+       writer.println(&quot;package &quot; + Config.PACKAGE_NAME + &quot;;&quot;);
+       writer.println(&quot;public class &quot; + Config.ROUTER_MANAGER + &quot; {&quot;);
+       writer.println(&quot;public static void &quot; + Config.ROUTER_MANAGER_METHOD + &quot;() {&quot;);
+
+       Components componentsAnnotation = typeElement.getAnnotation(Components.class);
+       String[] components = componentsAnnotation.value();
+       for (String item : components) {
+           writer.println(Config.FILE_PREFIX + item + &quot;.router();&quot;);
+       }
+
+       writer.println(&quot;}&quot;);
+       writer.println(&quot;}&quot;);
+
+       writer.flush();
+       writer.close();
+   }
+</code></pre>
 <p>可以看到这里,通过mFiler对象创建了新的java源文件,位于 <em>Config.PACKAGE_NAME</em> 中的叫做 <em>Config.ROUTER_MANAGER</em> 的java文件,其内部定义了一个 <em>Config.ROUTER_MANAGER_METHOD</em> 方法,我们可以在编译完成后,在我们的工程中对应的目录中找到这个生成的源文件.<br><img src="/images/2017/01/processor生成的java源码.png" alt="processor生成的java源码"></p>
-<p>看到这里就发现我们居然可以自己生成java源文件,简直是打开了新世界的大门啊,用java来写java源文件,这本身就有种递归的感觉在里边,通过想象,我们可以做很多事情了,这个后续我们可以研究一下更多的用法.<br>生成的java类中的方法调用了每个模块的Router类的Router方法.可以看到这个Router是红色的,但是搜索一下发现,这个类居然也是生成的.那我们可以发现这个类肯定是通过 <em>processor</em> 方法中剩下那句代码来完成, 进入 <em>processComponent(roundEnvironment);</em><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">processComponent</span><span class="params">(RoundEnvironment roundEnvironment)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">       Set&lt;? extends Element&gt; compElements = roundEnvironment.getElementsAnnotatedWith(Component.class);</div><div class="line">       <span class="keyword">if</span> (compElements.isEmpty()) &#123; <span class="keyword">return</span>;&#125;</div><div class="line"></div><div class="line">       Element item = compElements.iterator().next();</div><div class="line">       String componentName = item.getAnnotation(Component.class).value();</div><div class="line"></div><div class="line">       Set&lt;? extends Element&gt; routerElements = roundEnvironment.getElementsAnnotatedWith(StaticRouter.class);</div><div class="line">       <span class="keyword">for</span> (Element e : routerElements) &#123;</div><div class="line">           <span class="keyword">if</span> (! (e <span class="keyword">instanceof</span> TypeElement)) &#123; <span class="keyword">continue</span>;&#125;</div><div class="line">           TypeElement typeElement = (TypeElement) e;</div><div class="line">           String pattern = typeElement.getAnnotation(StaticRouter.class).value();</div><div class="line">           mStaticRouterMap.put(pattern, typeElement.getQualifiedName().toString());</div><div class="line">       &#125;</div><div class="line"></div><div class="line">       Set&lt;? extends Element&gt; autoRouterElements = roundEnvironment.getElementsAnnotatedWith(AutoRouter.class);</div><div class="line">       <span class="keyword">for</span> (Element e : autoRouterElements) &#123;</div><div class="line">           <span class="keyword">if</span> (!(e <span class="keyword">instanceof</span> TypeElement)) &#123; <span class="keyword">continue</span>;&#125;</div><div class="line">           TypeElement typeElement = (TypeElement) e;</div><div class="line">           mAutoRouterList.add(typeElement.getQualifiedName().toString());</div><div class="line">       &#125;</div><div class="line"></div><div class="line">       writeComponentFile(componentName);</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
-<p>可以看到,这里也很好理解,把所有的router声明类和URI放入集合中.通过后面的 <em>writeComponentFile</em> 方法来完成每个工程自己的router类生成.<br>之前读到这里这里的时候有个问题一直不明白:就是很明显关于 <em>Component</em> 注解应该有两个啊,但是这里却只是通过iterator的next方法获取注解集合中的一个然就去生成router类,那不就少了另外一个 <em>Component</em> 吗?,也就是说一个shop,一个bbs,都是注册了 <em>Component</em> 注解的,但是这里确只是从集合中取了一个,那后面那个就没人管了,岂不是少了一个.后来想明白了:<br>每个工程都是单独的调用 <em>processor</em> 来完成注解解析的,也就是说 shop工程中会调用一次这个 <em>processor</em> ,bbs工程中也会调用一次这个 <em>processor</em> ,这样关于 <em>component</em> 注解的处理就会执行两次,同时为每个模块各自生成一个 Router类.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">writeComponentFile</span><span class="params">(String componentName)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">      String className = Config.FILE_PREFIX + componentName;</div><div class="line">      JavaFileObject javaFileObject = mFiler.createSourceFile(className);</div><div class="line"><span class="comment">//        javaFileObject.delete();</span></div><div class="line"></div><div class="line">      PrintWriter printWriter = <span class="keyword">new</span> PrintWriter(javaFileObject.openWriter());</div><div class="line"></div><div class="line">      printWriter.println(<span class="string">"package "</span> + Config.PACKAGE_NAME + <span class="string">";"</span>);</div><div class="line"></div><div class="line">      printWriter.println(<span class="string">"import android.app.Activity;"</span>);</div><div class="line">      printWriter.println(<span class="string">"import android.app.Service;"</span>);</div><div class="line">      printWriter.println(<span class="string">"import android.content.BroadcastReceiver;"</span>);</div><div class="line"></div><div class="line">      printWriter.println(<span class="string">"public class "</span> + className + <span class="string">" &#123;"</span>);</div><div class="line">      printWriter.println(<span class="string">"public static void router() &#123;"</span>);</div><div class="line"></div><div class="line">      <span class="comment">// // Router.router(ActivityRule.ACTIVITY_SCHEME + "shop.main", ShopActivity.class);</span></div><div class="line">      <span class="keyword">for</span>(Map.Entry&lt;String, String&gt; entry : mStaticRouterMap.entrySet()) &#123;</div><div class="line">          printWriter.println(<span class="string">"org.loader.router.Router.router(\""</span> + entry.getKey()</div><div class="line">                  +<span class="string">"\", "</span>+entry.getValue()+<span class="string">".class);"</span>);</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="keyword">for</span> (String klass : mAutoRouterList) &#123;</div><div class="line">          printWriter.println(<span class="string">"if (Activity.class.isAssignableFrom("</span> + klass + <span class="string">".class)) &#123;"</span>);</div><div class="line">          printWriter.println(<span class="string">"org.loader.router.Router.router(org.loader.router.rule.ActivityRule.ACTIVITY_SCHEME + \""</span></div><div class="line">                  +klass+<span class="string">"\", "</span> + klass + <span class="string">".class);"</span>);</div><div class="line">          printWriter.println(<span class="string">"&#125;"</span>);</div><div class="line"></div><div class="line">          printWriter.println(<span class="string">"else if (Service.class.isAssignableFrom("</span> + klass + <span class="string">".class)) &#123;"</span>);</div><div class="line">          printWriter.println(<span class="string">"org.loader.router.Router.router(org.loader.router.rule.ServiceRule.SERVICE_SCHEME + \""</span></div><div class="line">                  +klass+<span class="string">"\", "</span> + klass + <span class="string">".class);"</span>);</div><div class="line">          printWriter.println(<span class="string">"&#125;"</span>);</div><div class="line"></div><div class="line">          printWriter.println(<span class="string">"else if (BroadcastReceiver.class.isAssignableFrom("</span> + klass + <span class="string">".class)) &#123;"</span>);</div><div class="line">          printWriter.println(<span class="string">"org.loader.router.Router.router(org.loader.router.rule.ReceiverRule.RECEIVER_SCHEME + \""</span></div><div class="line">                  +klass+<span class="string">"\", "</span>+klass+<span class="string">".class);"</span>);</div><div class="line">          printWriter.println(<span class="string">"&#125;"</span>);</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      printWriter.println(<span class="string">"&#125;"</span>);</div><div class="line">      printWriter.println(<span class="string">"&#125;"</span>);</div><div class="line">      printWriter.flush();</div><div class="line">      printWriter.close();</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
-<p>这个 <em>writeComponentFile</em> 方法就是用来完成Router注册的,可以看到很直白的java代码,把java代码作为输入交给pritWriter来写入指定的文件中.<br>来看下两个生成的Router类的代码:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> org.loader.router;</div><div class="line"><span class="keyword">import</span> android.app.Activity;</div><div class="line"><span class="keyword">import</span> android.app.Service;</div><div class="line"><span class="keyword">import</span> android.content.BroadcastReceiver;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Router_bbs</span> </span>&#123;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">router</span><span class="params">()</span> </span>&#123;</div><div class="line"><span class="keyword">if</span> (Activity.class.isAssignableFrom(org.loader.bbslib.BBSActivity.class)) &#123;</div><div class="line">org.loader.router.Router.router(org.loader.router.rule.ActivityRule.ACTIVITY_SCHEME + <span class="string">"org.loader.bbslib.BBSActivity"</span>, org.loader.bbslib.BBSActivity.class);</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span> <span class="keyword">if</span> (Service.class.isAssignableFrom(org.loader.bbslib.BBSActivity.class)) &#123;</div><div class="line">org.loader.router.Router.router(org.loader.router.rule.ServiceRule.SERVICE_SCHEME + <span class="string">"org.loader.bbslib.BBSActivity"</span>, org.loader.bbslib.BBSActivity.class);</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span> <span class="keyword">if</span> (BroadcastReceiver.class.isAssignableFrom(org.loader.bbslib.BBSActivity.class)) &#123;</div><div class="line">org.loader.router.Router.router(org.loader.router.rule.ReceiverRule.RECEIVER_SCHEME + <span class="string">"org.loader.bbslib.BBSActivity"</span>, org.loader.bbslib.BBSActivity.class);</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> org.loader.router;</div><div class="line"><span class="keyword">import</span> android.app.Activity;</div><div class="line"><span class="keyword">import</span> android.app.Service;</div><div class="line"><span class="keyword">import</span> android.content.BroadcastReceiver;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Router_shop</span> </span>&#123;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">router</span><span class="params">()</span> </span>&#123;</div><div class="line">org.loader.router.Router.router(<span class="string">"activity://shop.main"</span>, org.loader.shoplib.ShopActivity.class);</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>看到这里就发现我们居然可以自己生成java源文件,简直是打开了新世界的大门啊,用java来写java源文件,这本身就有种递归的感觉在里边,通过想象,我们可以做很多事情了,这个后续我们可以研究一下更多的用法.<br>生成的java类中的方法调用了每个模块的Router类的Router方法.可以看到这个Router是红色的,但是搜索一下发现,这个类居然也是生成的.那我们可以发现这个类肯定是通过 <em>processor</em> 方法中剩下那句代码来完成, 进入 <em>processComponent(roundEnvironment);</em></p>
+<pre><code class="java">private void processComponent(RoundEnvironment roundEnvironment) throws Exception {
+       Set&lt;? extends Element&gt; compElements = roundEnvironment.getElementsAnnotatedWith(Component.class);
+       if (compElements.isEmpty()) { return;}
+
+       Element item = compElements.iterator().next();
+       String componentName = item.getAnnotation(Component.class).value();
+
+       Set&lt;? extends Element&gt; routerElements = roundEnvironment.getElementsAnnotatedWith(StaticRouter.class);
+       for (Element e : routerElements) {
+           if (! (e instanceof TypeElement)) { continue;}
+           TypeElement typeElement = (TypeElement) e;
+           String pattern = typeElement.getAnnotation(StaticRouter.class).value();
+           mStaticRouterMap.put(pattern, typeElement.getQualifiedName().toString());
+       }
+
+       Set&lt;? extends Element&gt; autoRouterElements = roundEnvironment.getElementsAnnotatedWith(AutoRouter.class);
+       for (Element e : autoRouterElements) {
+           if (!(e instanceof TypeElement)) { continue;}
+           TypeElement typeElement = (TypeElement) e;
+           mAutoRouterList.add(typeElement.getQualifiedName().toString());
+       }
+
+       writeComponentFile(componentName);
+   }
+</code></pre>
+<p>可以看到,这里也很好理解,把所有的router声明类和URI放入集合中.通过后面的 <em>writeComponentFile</em> 方法来完成每个工程自己的router类生成.<br>之前读到这里这里的时候有个问题一直不明白:就是很明显关于 <em>Component</em> 注解应该有两个啊,但是这里却只是通过iterator的next方法获取注解集合中的一个然就去生成router类,那不就少了另外一个 <em>Component</em> 吗?,也就是说一个shop,一个bbs,都是注册了 <em>Component</em> 注解的,但是这里确只是从集合中取了一个,那后面那个就没人管了,岂不是少了一个.后来想明白了:<br>每个工程都是单独的调用 <em>processor</em> 来完成注解解析的,也就是说 shop工程中会调用一次这个 <em>processor</em> ,bbs工程中也会调用一次这个 <em>processor</em> ,这样关于 <em>component</em> 注解的处理就会执行两次,同时为每个模块各自生成一个 Router类.</p>
+<pre><code class="java">private void writeComponentFile(String componentName) throws Exception {
+      String className = Config.FILE_PREFIX + componentName;
+      JavaFileObject javaFileObject = mFiler.createSourceFile(className);
+//        javaFileObject.delete();
+
+      PrintWriter printWriter = new PrintWriter(javaFileObject.openWriter());
+
+      printWriter.println(&quot;package &quot; + Config.PACKAGE_NAME + &quot;;&quot;);
+
+      printWriter.println(&quot;import android.app.Activity;&quot;);
+      printWriter.println(&quot;import android.app.Service;&quot;);
+      printWriter.println(&quot;import android.content.BroadcastReceiver;&quot;);
+
+      printWriter.println(&quot;public class &quot; + className + &quot; {&quot;);
+      printWriter.println(&quot;public static void router() {&quot;);
+
+      // // Router.router(ActivityRule.ACTIVITY_SCHEME + &quot;shop.main&quot;, ShopActivity.class);
+      for(Map.Entry&lt;String, String&gt; entry : mStaticRouterMap.entrySet()) {
+          printWriter.println(&quot;org.loader.router.Router.router(\&quot;&quot; + entry.getKey()
+                  +&quot;\&quot;, &quot;+entry.getValue()+&quot;.class);&quot;);
+      }
+
+      for (String klass : mAutoRouterList) {
+          printWriter.println(&quot;if (Activity.class.isAssignableFrom(&quot; + klass + &quot;.class)) {&quot;);
+          printWriter.println(&quot;org.loader.router.Router.router(org.loader.router.rule.ActivityRule.ACTIVITY_SCHEME + \&quot;&quot;
+                  +klass+&quot;\&quot;, &quot; + klass + &quot;.class);&quot;);
+          printWriter.println(&quot;}&quot;);
+
+          printWriter.println(&quot;else if (Service.class.isAssignableFrom(&quot; + klass + &quot;.class)) {&quot;);
+          printWriter.println(&quot;org.loader.router.Router.router(org.loader.router.rule.ServiceRule.SERVICE_SCHEME + \&quot;&quot;
+                  +klass+&quot;\&quot;, &quot; + klass + &quot;.class);&quot;);
+          printWriter.println(&quot;}&quot;);
+
+          printWriter.println(&quot;else if (BroadcastReceiver.class.isAssignableFrom(&quot; + klass + &quot;.class)) {&quot;);
+          printWriter.println(&quot;org.loader.router.Router.router(org.loader.router.rule.ReceiverRule.RECEIVER_SCHEME + \&quot;&quot;
+                  +klass+&quot;\&quot;, &quot;+klass+&quot;.class);&quot;);
+          printWriter.println(&quot;}&quot;);
+      }
+
+      printWriter.println(&quot;}&quot;);
+      printWriter.println(&quot;}&quot;);
+      printWriter.flush();
+      printWriter.close();
+  }
+</code></pre>
+<p>这个 <em>writeComponentFile</em> 方法就是用来完成Router注册的,可以看到很直白的java代码,把java代码作为输入交给pritWriter来写入指定的文件中.<br>来看下两个生成的Router类的代码:</p>
+<pre><code class="java">package org.loader.router;
+import android.app.Activity;
+import android.app.Service;
+import android.content.BroadcastReceiver;
+public class Router_bbs {
+public static void router() {
+if (Activity.class.isAssignableFrom(org.loader.bbslib.BBSActivity.class)) {
+org.loader.router.Router.router(org.loader.router.rule.ActivityRule.ACTIVITY_SCHEME + &quot;org.loader.bbslib.BBSActivity&quot;, org.loader.bbslib.BBSActivity.class);
+}
+else if (Service.class.isAssignableFrom(org.loader.bbslib.BBSActivity.class)) {
+org.loader.router.Router.router(org.loader.router.rule.ServiceRule.SERVICE_SCHEME + &quot;org.loader.bbslib.BBSActivity&quot;, org.loader.bbslib.BBSActivity.class);
+}
+else if (BroadcastReceiver.class.isAssignableFrom(org.loader.bbslib.BBSActivity.class)) {
+org.loader.router.Router.router(org.loader.router.rule.ReceiverRule.RECEIVER_SCHEME + &quot;org.loader.bbslib.BBSActivity&quot;, org.loader.bbslib.BBSActivity.class);
+}
+}
+}
+</code></pre>
+<pre><code class="java">package org.loader.router;
+import android.app.Activity;
+import android.app.Service;
+import android.content.BroadcastReceiver;
+public class Router_shop {
+public static void router() {
+org.loader.router.Router.router(&quot;activity://shop.main&quot;, org.loader.shoplib.ShopActivity.class);
+}
+}
+</code></pre>
 <p>可以看到这两个通过代码生成源文件最后都是进入了Router类的router方法.<br>到这里关于注解的解析就完成,下面开始进入的Router的核心实现.</p>
-<h3 id="router工程"><a href="#router工程" class="headerlink" title="router工程"></a>router工程</h3><p>到这里,才算真正开始Router核心实现,要知道两个模块互相调用对方的元素,而又不直接调用,势必会有一个中间的东西来完成Router功能,首先是每个模块把自己的对外开放的元素注册到中间人,然后在需要调用别的模块的元素的时候,通过URI从中间人中来匹配找到对方的元素.这就是一个完成的Router流程.<br>很明显,需要一个map结构,key是URI,value是对应的class对象或者className.<br>上面每个模块的Router类都是最终调用的这个工程的Router类的router方法:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Router</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 添加自定义路由规则</div><div class="line">     * <span class="doctag">@param</span> scheme 路由scheme</div><div class="line">     * <span class="doctag">@param</span> rule 路由规则</div><div class="line">     * <span class="doctag">@return</span> &#123;<span class="doctag">@code</span> RouterInternal&#125; Router真实调用类</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> RouterInternal <span class="title">addRule</span><span class="params">(String scheme, Rule rule)</span> </span>&#123;</div><div class="line">        RouterInternal router = RouterInternal.get();</div><div class="line">        router.addRule(scheme, rule);</div><div class="line">        <span class="keyword">return</span> router;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 添加路由</div><div class="line">     * <span class="doctag">@param</span> pattern 路由uri</div><div class="line">     * <span class="doctag">@param</span> klass 路由class</div><div class="line">     * <span class="doctag">@return</span> &#123;<span class="doctag">@code</span> RouterInternal&#125; Router真实调用类</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">RouterInternal <span class="title">router</span><span class="params">(String pattern, Class&lt;T&gt; klass)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> RouterInternal.get().router(pattern, klass);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 路由调用</div><div class="line">     * <span class="doctag">@param</span> ctx Context</div><div class="line">     * <span class="doctag">@param</span> pattern 路由uri</div><div class="line">     * <span class="doctag">@return</span> &#123;<span class="doctag">@code</span> V&#125; 返回对应的返回值</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;V&gt; <span class="function">V <span class="title">invoke</span><span class="params">(Context ctx, String pattern)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> RouterInternal.get().invoke(ctx, pattern);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 是否存在该路由</div><div class="line">     * <span class="doctag">@param</span> pattern</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">resolveRouter</span><span class="params">(String pattern)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> RouterInternal.get().resolveRouter(pattern);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>这个router方法就是用来注册URI的.<br>可以看到所有的逻辑都是在 <em>RouterInternal</em> 中实现的.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RouterInternal</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> RouterInternal sInstance;</div><div class="line"></div><div class="line">    <span class="comment">/** scheme-&gt;路由规则 */</span></div><div class="line">    <span class="keyword">private</span> HashMap&lt;String, Rule&gt; mRules;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">RouterInternal</span><span class="params">()</span> </span>&#123;</div><div class="line">        mRules = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">        initDefaultRouter();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 添加默认的Activity，Service，Receiver路由</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initDefaultRouter</span><span class="params">()</span> </span>&#123;</div><div class="line">        addRule(ActivityRule.ACTIVITY_SCHEME, <span class="keyword">new</span> ActivityRule());</div><div class="line">        addRule(ServiceRule.SERVICE_SCHEME, <span class="keyword">new</span> ServiceRule());</div><div class="line">        addRule(ReceiverRule.RECEIVER_SCHEME, <span class="keyword">new</span> ReceiverRule());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/*package */</span> <span class="function"><span class="keyword">static</span> RouterInternal <span class="title">get</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (sInstance == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">synchronized</span> (RouterInternal.class) &#123;</div><div class="line">                <span class="keyword">if</span> (sInstance == <span class="keyword">null</span>) &#123;</div><div class="line">                    sInstance = <span class="keyword">new</span> RouterInternal();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> sInstance;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 添加自定义路由规则</div><div class="line">     * <span class="doctag">@param</span> scheme 路由scheme</div><div class="line">     * <span class="doctag">@param</span> rule 路由规则</div><div class="line">     * <span class="doctag">@return</span> &#123;<span class="doctag">@code</span> RouterInternal&#125; Router真实调用类</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> RouterInternal <span class="title">addRule</span><span class="params">(String scheme, Rule rule)</span> </span>&#123;</div><div class="line">        mRules.put(scheme, rule);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> &lt;T, V&gt; <span class="function">Rule&lt;T, V&gt; <span class="title">getRule</span><span class="params">(String pattern)</span> </span>&#123;</div><div class="line">        HashMap&lt;String, Rule&gt; rules = mRules;</div><div class="line">        Set&lt;String&gt; keySet = rules.keySet();</div><div class="line">        Rule&lt;T, V&gt; rule = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">for</span> (String scheme : keySet) &#123;</div><div class="line">            <span class="keyword">if</span> (pattern.startsWith(scheme)) &#123;</div><div class="line">                rule = rules.get(scheme);</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> rule;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 添加路由</div><div class="line">     * <span class="doctag">@param</span> pattern 路由uri</div><div class="line">     * <span class="doctag">@param</span> klass 路由class</div><div class="line">     * <span class="doctag">@return</span> &#123;<span class="doctag">@code</span> RouterInternal&#125; Router真实调用类</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">final</span> &lt;T&gt; <span class="function">RouterInternal <span class="title">router</span><span class="params">(String pattern, Class&lt;T&gt; klass)</span> </span>&#123;</div><div class="line">        Rule&lt;T, ?&gt; rule = getRule(pattern);</div><div class="line">        <span class="keyword">if</span> (rule == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NotRouteException(<span class="string">"unknown"</span>, pattern);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        rule.router(pattern, klass);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 路由调用</div><div class="line">     * <span class="doctag">@param</span> ctx Context</div><div class="line">     * <span class="doctag">@param</span> pattern 路由uri</div><div class="line">     * <span class="doctag">@return</span> &#123;<span class="doctag">@code</span> V&#125; 返回对应的返回值</div><div class="line">     */</div><div class="line">    <span class="comment">/*package*/</span> <span class="keyword">final</span> &lt;V&gt; <span class="function">V <span class="title">invoke</span><span class="params">(Context ctx, String pattern)</span> </span>&#123;</div><div class="line">        Rule&lt;?, V&gt; rule = getRule(pattern);</div><div class="line">        <span class="keyword">if</span> (rule == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NotRouteException(<span class="string">"unknown"</span>, pattern);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> rule.invoke(ctx, pattern);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 是否存在该路由</div><div class="line">     * <span class="doctag">@param</span> pattern</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">resolveRouter</span><span class="params">(String pattern)</span> </span>&#123;</div><div class="line">        Rule&lt;?, ?&gt; rule = getRule(pattern);</div><div class="line">        <span class="keyword">return</span> rule != <span class="keyword">null</span> &amp;&amp; rule.resolveRule(pattern);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="router工程"><a href="#router工程" class="headerlink" title="router工程"></a>router工程</h3><p>到这里,才算真正开始Router核心实现,要知道两个模块互相调用对方的元素,而又不直接调用,势必会有一个中间的东西来完成Router功能,首先是每个模块把自己的对外开放的元素注册到中间人,然后在需要调用别的模块的元素的时候,通过URI从中间人中来匹配找到对方的元素.这就是一个完成的Router流程.<br>很明显,需要一个map结构,key是URI,value是对应的class对象或者className.<br>上面每个模块的Router类都是最终调用的这个工程的Router类的router方法:</p>
+<pre><code class="java">public class Router {
+
+    /**
+     * 添加自定义路由规则
+     * @param scheme 路由scheme
+     * @param rule 路由规则
+     * @return {@code RouterInternal} Router真实调用类
+     */
+    public static RouterInternal addRule(String scheme, Rule rule) {
+        RouterInternal router = RouterInternal.get();
+        router.addRule(scheme, rule);
+        return router;
+    }
+
+    /**
+     * 添加路由
+     * @param pattern 路由uri
+     * @param klass 路由class
+     * @return {@code RouterInternal} Router真实调用类
+     */
+    public static &lt;T&gt; RouterInternal router(String pattern, Class&lt;T&gt; klass) {
+        return RouterInternal.get().router(pattern, klass);
+    }
+
+    /**
+     * 路由调用
+     * @param ctx Context
+     * @param pattern 路由uri
+     * @return {@code V} 返回对应的返回值
+     */
+    public static &lt;V&gt; V invoke(Context ctx, String pattern) {
+        return RouterInternal.get().invoke(ctx, pattern);
+    }
+
+    /**
+     * 是否存在该路由
+     * @param pattern
+     * @return
+     */
+    public static boolean resolveRouter(String pattern) {
+        return RouterInternal.get().resolveRouter(pattern);
+    }
+}
+</code></pre>
+<p>这个router方法就是用来注册URI的.<br>可以看到所有的逻辑都是在 <em>RouterInternal</em> 中实现的.</p>
+<pre><code class="java">public class RouterInternal {
+
+    private static RouterInternal sInstance;
+
+    /** scheme-&gt;路由规则 */
+    private HashMap&lt;String, Rule&gt; mRules;
+
+    private RouterInternal() {
+        mRules = new HashMap&lt;&gt;();
+        initDefaultRouter();
+    }
+
+    /**
+     * 添加默认的Activity，Service，Receiver路由
+     */
+    private void initDefaultRouter() {
+        addRule(ActivityRule.ACTIVITY_SCHEME, new ActivityRule());
+        addRule(ServiceRule.SERVICE_SCHEME, new ServiceRule());
+        addRule(ReceiverRule.RECEIVER_SCHEME, new ReceiverRule());
+    }
+
+    /*package */ static RouterInternal get() {
+        if (sInstance == null) {
+            synchronized (RouterInternal.class) {
+                if (sInstance == null) {
+                    sInstance = new RouterInternal();
+                }
+            }
+        }
+
+        return sInstance;
+    }
+
+    /**
+     * 添加自定义路由规则
+     * @param scheme 路由scheme
+     * @param rule 路由规则
+     * @return {@code RouterInternal} Router真实调用类
+     */
+    public final RouterInternal addRule(String scheme, Rule rule) {
+        mRules.put(scheme, rule);
+        return this;
+    }
+
+    private &lt;T, V&gt; Rule&lt;T, V&gt; getRule(String pattern) {
+        HashMap&lt;String, Rule&gt; rules = mRules;
+        Set&lt;String&gt; keySet = rules.keySet();
+        Rule&lt;T, V&gt; rule = null;
+        for (String scheme : keySet) {
+            if (pattern.startsWith(scheme)) {
+                rule = rules.get(scheme);
+                break;
+            }
+        }
+
+        return rule;
+    }
+
+    /**
+     * 添加路由
+     * @param pattern 路由uri
+     * @param klass 路由class
+     * @return {@code RouterInternal} Router真实调用类
+     */
+    public final &lt;T&gt; RouterInternal router(String pattern, Class&lt;T&gt; klass) {
+        Rule&lt;T, ?&gt; rule = getRule(pattern);
+        if (rule == null) {
+            throw new NotRouteException(&quot;unknown&quot;, pattern);
+        }
+
+        rule.router(pattern, klass);
+        return this;
+    }
+
+    /**
+     * 路由调用
+     * @param ctx Context
+     * @param pattern 路由uri
+     * @return {@code V} 返回对应的返回值
+     */
+    /*package*/ final &lt;V&gt; V invoke(Context ctx, String pattern) {
+        Rule&lt;?, V&gt; rule = getRule(pattern);
+        if (rule == null) {
+            throw new NotRouteException(&quot;unknown&quot;, pattern);
+        }
+
+        return rule.invoke(ctx, pattern);
+    }
+
+    /**
+     * 是否存在该路由
+     * @param pattern
+     * @return
+     */
+    final boolean resolveRouter(String pattern) {
+        Rule&lt;?, ?&gt; rule = getRule(pattern);
+        return rule != null &amp;&amp; rule.resolveRule(pattern);
+    }
+}
+</code></pre>
 <p>这里 <em>RouterInternal</em> 对象通过一个两层map结构来完成路由功能,第一层就是pattern—&gt;rule对象,第二次是rule对象内部的pattern—–&gt;class对象.这样有什么好处呢?可以看到通过 <em>initDefaultRouter</em> 预置了3个默认的rule对象在 <em>RouterInternal</em> 内部的map中,分别对应activity,service和广播.然后每次先通过pattern来找到这3个内置rule中的一个,然后才把pattern和class对象放入rule对象中.<br>这样的好处是便于管理,所有的activity都放入一个rule对象的,所有的service都放入同一个rule中,结构非常的清晰,同时也节约了内存.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Rule</span>&lt;<span class="title">T</span>, <span class="title">V</span>&gt; </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 添加路由</div><div class="line">     * <span class="doctag">@param</span> pattern 路由uri</div><div class="line">     * <span class="doctag">@param</span> klass 路由class</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">router</span><span class="params">(String pattern, Class&lt;T&gt; klass)</span></span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 路由调用</div><div class="line">     * <span class="doctag">@param</span> ctx Context</div><div class="line">     * <span class="doctag">@param</span> pattern 路由uri</div><div class="line">     * <span class="doctag">@return</span> &#123;<span class="doctag">@code</span> V&#125; 返回对应的返回值</div><div class="line">     */</div><div class="line">    <span class="function">V <span class="title">invoke</span><span class="params">(Context ctx, String pattern)</span></span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 查看是否存在pattern对应的路由</div><div class="line">     * <span class="doctag">@param</span> pattern</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">resolveRule</span><span class="params">(String pattern)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>rule是一个map结构的对象,用来URI匹配的细分,具体实现在 <em>BaseInternRule</em> 中<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseIntentRule</span>&lt;<span class="title">T</span>&gt; <span class="keyword">implements</span> <span class="title">Rule</span>&lt;<span class="title">T</span>, <span class="title">Intent</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> HashMap&lt;String, Class&lt;T&gt;&gt; mIntentRules;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BaseIntentRule</span><span class="params">()</span> </span>&#123;</div><div class="line">        mIntentRules = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * &#123;<span class="doctag">@inheritDoc</span>&#125;</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">router</span><span class="params">(String pattern, Class&lt;T&gt; klass)</span> </span>&#123;</div><div class="line">        mIntentRules.put(pattern, klass);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * &#123;<span class="doctag">@inheritDoc</span>&#125;</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Intent <span class="title">invoke</span><span class="params">(Context ctx, String pattern)</span> </span>&#123;</div><div class="line">        Class&lt;T&gt; klass = mIntentRules.get(pattern);</div><div class="line">        <span class="keyword">if</span> (klass == <span class="keyword">null</span>) &#123; throwException(pattern);&#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Intent(ctx, klass);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">resolveRule</span><span class="params">(String pattern)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> mIntentRules.get(pattern) != <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 当找不到路由规则时抛出异常</div><div class="line">     * <span class="doctag">@param</span> pattern 路由pattern</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">throwException</span><span class="params">(String pattern)</span></span>;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<pre><code class="java">public interface Rule&lt;T, V&gt; {
+    /**
+     * 添加路由
+     * @param pattern 路由uri
+     * @param klass 路由class
+     */
+    void router(String pattern, Class&lt;T&gt; klass);
+
+    /**
+     * 路由调用
+     * @param ctx Context
+     * @param pattern 路由uri
+     * @return {@code V} 返回对应的返回值
+     */
+    V invoke(Context ctx, String pattern);
+
+    /**
+     * 查看是否存在pattern对应的路由
+     * @param pattern
+     * @return
+     */
+    boolean resolveRule(String pattern);
+}
+</code></pre>
+<p>rule是一个map结构的对象,用来URI匹配的细分,具体实现在 <em>BaseInternRule</em> 中</p>
+<pre><code class="java">public abstract class BaseIntentRule&lt;T&gt; implements Rule&lt;T, Intent&gt; {
+
+    private HashMap&lt;String, Class&lt;T&gt;&gt; mIntentRules;
+
+    public BaseIntentRule() {
+        mIntentRules = new HashMap&lt;&gt;();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void router(String pattern, Class&lt;T&gt; klass) {
+        mIntentRules.put(pattern, klass);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Intent invoke(Context ctx, String pattern) {
+        Class&lt;T&gt; klass = mIntentRules.get(pattern);
+        if (klass == null) { throwException(pattern);}
+        return new Intent(ctx, klass);
+    }
+
+    @Override
+    public boolean resolveRule(String pattern) {
+        return mIntentRules.get(pattern) != null;
+    }
+
+    /**
+     * 当找不到路由规则时抛出异常
+     * @param pattern 路由pattern
+     */
+    public abstract void throwException(String pattern);
+
+}
+</code></pre>
 <p>可以看到这里就是一个简单的map结构<br>剩下的 <em>ActivityRule</em> ,<em>ReceiverRule</em> ,<em>ServiceRule</em> 都是继承自 <em>BaseIntentRule</em> 中,内部定义了各自的前缀.</p>
 <p>到这里router的核心逻辑就完成了,下面来看怎么用的</p>
-<h3 id="app工程的router调用"><a href="#app工程的router调用" class="headerlink" title="app工程的router调用"></a>app工程的router调用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">@Components</span>(&#123;<span class="string">"shop"</span>, <span class="string">"bbs"</span>&#125;)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">MultiDexApplication</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate();</div><div class="line">        setupRouter();</div><div class="line">        Logger.dump(<span class="string">"TAG"</span>, <span class="string">"application: "</span> + getClass().getName());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">setupRouter</span><span class="params">()</span> </span>&#123;</div><div class="line">        RouterHelper.install();</div><div class="line"></div><div class="line"><span class="comment">//        Router.router(ActivityRule.ACTIVITY_SCHEME + "shop.main", ShopActivity.class);</span></div><div class="line"><span class="comment">//        Router.router(ActivityRule.ACTIVITY_SCHEME + "bbs.main", BBSActivity.class);</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在工程的总入口application对象中完成了模块的注册,同是调用了 <em>RouterHelper.install();</em><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RouterHelper</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">install</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Class&lt;?&gt; klass = Class.forName(Config.PACKAGE_NAME + <span class="string">"."</span> + Config.ROUTER_MANAGER);</div><div class="line">            Method method = klass.getDeclaredMethod(Config.ROUTER_MANAGER_METHOD);</div><div class="line">            method.invoke(<span class="keyword">null</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125; <span class="keyword">catch</span> (NoSuchMethodException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125; <span class="keyword">catch</span> (InvocationTargetException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="app工程的router调用"><a href="#app工程的router调用" class="headerlink" title="app工程的router调用"></a>app工程的router调用</h3><pre><code class="java">
+@Components({&quot;shop&quot;, &quot;bbs&quot;})
+public class App extends MultiDexApplication {
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        setupRouter();
+        Logger.dump(&quot;TAG&quot;, &quot;application: &quot; + getClass().getName());
+    }
+
+    private void setupRouter() {
+        RouterHelper.install();
+
+//        Router.router(ActivityRule.ACTIVITY_SCHEME + &quot;shop.main&quot;, ShopActivity.class);
+//        Router.router(ActivityRule.ACTIVITY_SCHEME + &quot;bbs.main&quot;, BBSActivity.class);
+    }
+}
+</code></pre>
+<p>在工程的总入口application对象中完成了模块的注册,同是调用了 <em>RouterHelper.install();</em></p>
+<pre><code class="java">public class RouterHelper {
+
+    public static void install() {
+        try {
+            Class&lt;?&gt; klass = Class.forName(Config.PACKAGE_NAME + &quot;.&quot; + Config.ROUTER_MANAGER);
+            Method method = klass.getDeclaredMethod(Config.ROUTER_MANAGER_METHOD);
+            method.invoke(null);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+    }
+}
+</code></pre>
 <p>这里就是通过反射来找到上面那个 <em>processor</em> 生成的java源文件,调用里面的唯一方法.完成router的注册的.</p>
 <p>再看两个子模块是怎么互相调用对方的</p>
-<h3 id="shop工程"><a href="#shop工程" class="headerlink" title="shop工程"></a>shop工程</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span>(<span class="string">"shop"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Shop</span> </span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@StaticRouter</span>(ActivityRule.ACTIVITY_SCHEME + <span class="string">"shop.main"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ShopActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(@Nullable Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        TextView tv = <span class="keyword">new</span> TextView(<span class="keyword">this</span>);</div><div class="line">        tv.setTextSize(<span class="number">50</span>);</div><div class="line">        tv.setText(<span class="string">"SHOP!!!"</span>);</div><div class="line">        setContentView(tv);</div><div class="line"></div><div class="line">        Logger.dump(<span class="string">"TAG"</span>, <span class="string">"Hei! I am shop!!!"</span>);</div><div class="line">        UseContext.use(Application.get());</div><div class="line"></div><div class="line">        tv.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">                Toast.makeText(ShopActivity.<span class="keyword">this</span>, getResources().getString(R.string.click_notice), Toast.LENGTH_SHORT).show();</div><div class="line">                <span class="keyword">if</span> (Router.resolveRouter(ActivityRule.ACTIVITY_SCHEME + <span class="string">"org.loader.bbslib.BBSActivity"</span>)) &#123;</div><div class="line">                    Intent it = org.loader.router.Router.invoke(ShopActivity.<span class="keyword">this</span>, ActivityRule.ACTIVITY_SCHEME + <span class="string">"org.loader.bbslib.BBSActivity"</span>);</div><div class="line">                    startActivity(it);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="shop工程"><a href="#shop工程" class="headerlink" title="shop工程"></a>shop工程</h3><pre><code class="java">@Component(&quot;shop&quot;)
+public class Shop {
+}
+</code></pre>
+<pre><code class="java">@StaticRouter(ActivityRule.ACTIVITY_SCHEME + &quot;shop.main&quot;)
+public class ShopActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        TextView tv = new TextView(this);
+        tv.setTextSize(50);
+        tv.setText(&quot;SHOP!!!&quot;);
+        setContentView(tv);
+
+        Logger.dump(&quot;TAG&quot;, &quot;Hei! I am shop!!!&quot;);
+        UseContext.use(Application.get());
+
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ShopActivity.this, getResources().getString(R.string.click_notice), Toast.LENGTH_SHORT).show();
+                if (Router.resolveRouter(ActivityRule.ACTIVITY_SCHEME + &quot;org.loader.bbslib.BBSActivity&quot;)) {
+                    Intent it = org.loader.router.Router.invoke(ShopActivity.this, ActivityRule.ACTIVITY_SCHEME + &quot;org.loader.bbslib.BBSActivity&quot;);
+                    startActivity(it);
+                }
+            }
+        });
+    }
+}
+</code></pre>
 <p>可以看到这里通过Shop对象完成模块的注册,最后在textView的跳转是调用 <em>Router的invoke</em> 方法来找到bbs的制定页面.<br>这里的注册用是 <em>StaticRouter</em> 所以要写完整的URI路径.</p>
-<h3 id="bbs工程"><a href="#bbs工程" class="headerlink" title="bbs工程"></a>bbs工程</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span>(<span class="string">"bbs"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BBS</span> </span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">@AutoRouter</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BBSActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(@Nullable Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        TextView tv = <span class="keyword">new</span> TextView(<span class="keyword">this</span>);</div><div class="line">        tv.setTextSize(<span class="number">50</span>);</div><div class="line">        tv.setText(<span class="string">"BBS!!!"</span>);</div><div class="line">        setContentView(tv);</div><div class="line"></div><div class="line">        Logger.dump(<span class="string">"TAG"</span>, <span class="string">"Hei! I am bbs!!!"</span>);</div><div class="line">        UseContext.use(Application.get());</div><div class="line"></div><div class="line">        tv.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">                Toast.makeText(BBSActivity.<span class="keyword">this</span>, getResources().getString(R.string.click_notice), Toast.LENGTH_SHORT).show();</div><div class="line">                <span class="keyword">if</span> (Router.resolveRouter(ActivityRule.ACTIVITY_SCHEME + <span class="string">"shop.main"</span>)) &#123;</div><div class="line">                    Intent it = Router.invoke(BBSActivity.<span class="keyword">this</span>, ActivityRule.ACTIVITY_SCHEME + <span class="string">"shop.main"</span>);</div><div class="line">                    startActivity(it);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="bbs工程"><a href="#bbs工程" class="headerlink" title="bbs工程"></a>bbs工程</h3><pre><code class="java">@Component(&quot;bbs&quot;)
+public class BBS {
+}
+</code></pre>
+<pre><code class="java">
+@AutoRouter
+public class BBSActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        TextView tv = new TextView(this);
+        tv.setTextSize(50);
+        tv.setText(&quot;BBS!!!&quot;);
+        setContentView(tv);
+
+        Logger.dump(&quot;TAG&quot;, &quot;Hei! I am bbs!!!&quot;);
+        UseContext.use(Application.get());
+
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(BBSActivity.this, getResources().getString(R.string.click_notice), Toast.LENGTH_SHORT).show();
+                if (Router.resolveRouter(ActivityRule.ACTIVITY_SCHEME + &quot;shop.main&quot;)) {
+                    Intent it = Router.invoke(BBSActivity.this, ActivityRule.ACTIVITY_SCHEME + &quot;shop.main&quot;);
+                    startActivity(it);
+                }
+            }
+        });
+    }
+}
+</code></pre>
 <p>这里的注册用的 <em>AutoRouter</em> 所以不需要写URI,自动生成的URI是 类型+类的全路径</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>可以看到 Router结构实际上就是通过一个URI找到对方的制定类.结构非常简单.之所以用了多点的时间主要是用来消化注解的相关处理逻辑,用着方便,但是要理解还是要话点时间的.<br>不过这种通过注解来生成中间类,最终达到解耦目的的思路非常值得尝试.开阔了视野.</p>
 <h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="https://github.com/qibin0506/Module2Module" title="Module2Module" target="_blank" rel="external">Module2Module</a></p>
 <p><a href="http://blog.csdn.net/qibin0506/article/details/53373412" title="Android路由实现" target="_blank" rel="external">Android路由实现</a></p>
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/01/04/2017/java线程池源码分析/" rel="next" title="java线程池源码分析">
-                <i class="fa fa-chevron-left"></i> java线程池源码分析
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/01/09/2017/读书笔记/另外8小时/" rel="prev" title="另外8小时">
-                另外8小时 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-          
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
-    
-  </div>
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Inhaltsverzeichnis
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            Übersicht
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
-               alt="yanyi" />
-          <p class="site-author-name" itemprop="name">yanyi</p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">62</span>
-                <span class="site-state-item-name">Artikel</span>
-              </a>
-            </div>
-          
-
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">7</span>
-                <span class="site-state-item-name">Tags</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#android-自定义URI-Router"><span class="nav-number">1.</span> <span class="nav-text">android 自定义URI Router</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于自定义Router学习之前的预备知识"><span class="nav-number">1.1.</span> <span class="nav-text">关于自定义Router学习之前的预备知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#别人写的Router框架解析"><span class="nav-number">1.2.</span> <span class="nav-text">别人写的Router框架解析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#annotation工程"><span class="nav-number">1.2.1.</span> <span class="nav-text">annotation工程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#routerhelper工程"><span class="nav-number">1.2.2.</span> <span class="nav-text">routerhelper工程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#router工程"><span class="nav-number">1.3.</span> <span class="nav-text">router工程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#app工程的router调用"><span class="nav-number">1.4.</span> <span class="nav-text">app工程的router调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shop工程"><span class="nav-number">1.5.</span> <span class="nav-text">shop工程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bbs工程"><span class="nav-number">1.6.</span> <span class="nav-text">bbs工程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">1.8.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2017</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">yanyi</span>
-</div>
-
-
-<div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
-</div>
-
-<div class="theme-info">
-  Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
-  </a>
-</div>
-
-
-        
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-    
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
-
-
-
-  
-
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-</body>
-</html>
+</div></article><div></div></div></div><div id="bottom-outer"><div id="bottom-inner"><span>Site construction by</span><span> JustYan </span><span>using</span><a href="http://hexo.io"><span>hexo blog framework</span></a><span>.</span><br><a href="/">Home</a></div></div><script src="/js/justyan.js"></script><script src="/highlight/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script></body></html>

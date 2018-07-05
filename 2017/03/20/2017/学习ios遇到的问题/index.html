@@ -1,0 +1,47 @@
+<!DOCTYPE html><html class="has-navbar-fixed-top" lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><title></title><script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script><link rel="stylesheet" type="text/css" href="/css/bulma.css"><link rel="stylesheet" type="text/css" href="/css/justyan.css"><link rel="stylesheet" type="text/css" href="/highlight/styles/dracula.css"><link rel="icon" href="/img/favicon.png"></head><body><section class="hero is-info is-medium"><div class="hero-head"><nav class="navbar is-fixed-top is-info"><div class="container"><div class="navbar-brand"><a class="navbar-item"><img class="navbar-circle" src="https://avatars2.githubusercontent.com/u/9360264?s=50&amp;u=5e88482f7319a8ce65ed618bcede72ea97a7f5aa&amp;v=4"></a><span class="navbar-burger burger" data-target="navbarMenuHeroA"><span></span><span></span><span></span></span></div><div class="navbar-menu" id="navbarMenuHeroA"><div class="navbar-end"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/category">Categories</a><a class="navbar-item" href="/contact">Contact</a><span class="navbar-item"><a class="button is-info is-inverted" href="https://github.com/PHEOBUSYY"><span class="icon"><i class="fab fa-github"></i></span><span>Github</span></a></span></div></div></div></nav></div><div class="hero-body"><div class="has-text-centered"><h1 class="title">学习IOS遇到的问题</h1><h2 class="subtitle">2017-03-20</h2></div></div><div class="hero-foot"></div></section><div id="content-outer"><div id="content-inner"><article id="post"><div id="toc"><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#调用-addObjectsFromArray-后报错-unrecognized-selector-sent-to-instance-XXXXXX-error"><span class="toc-number">1.</span> <span class="toc-text">调用 addObjectsFromArray 后报错 : unrecognized selector sent to instance XXXXXX error</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何强制要求view刷新"><span class="toc-number">2.</span> <span class="toc-text">如何强制要求view刷新</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sdwebimage不显示图片"><span class="toc-number">3.</span> <span class="toc-text">sdwebimage不显示图片</span></a></li></ol></div></div><div class="post-text"><p>下面是在学习IOS过程中遇到的问题以及对应的解决方案：<br><a id="more"></a></p>
+<h3 id="调用-addObjectsFromArray-后报错-unrecognized-selector-sent-to-instance-XXXXXX-error"><a href="#调用-addObjectsFromArray-后报错-unrecognized-selector-sent-to-instance-XXXXXX-error" class="headerlink" title="调用 addObjectsFromArray 后报错 : unrecognized selector sent to instance XXXXXX error"></a>调用 <em>addObjectsFromArray</em> 后报错 : unrecognized selector sent to instance XXXXXX error</h3><p>在刚开始学习的TableView的过程中，在获取第二页或者之后的数据的时候想当然的认为直接把获取到的网络数组直接添加到当前的数据源数组中就可以了。不过试了好好多次一直在报错。</p>
+<p>开始以为是返回数据的问题，打印了下发现是就是一个正常的NSArray，然后怀疑本身的数据源为空，打印了下发现是有值的。这就诡异了按照API说明：</p>
+<pre><code class="c">- (void)addObjectsFromArray:(NSArray&lt;ObjectType&gt; *)otherArray;
+</code></pre>
+<p>只要是个数组就可以啊。后来发现了问题所在，来看下代码的实现逻辑：</p>
+<pre><code class="c">if (self.page2 &gt; 1) {
+            [self.data2 addObjectsFromArray:responseObject];
+            [self.footer endRefreshing];
+        }else{
+             self.data2 = responseObject;
+            [self.header endRefreshing];
+        }
+</code></pre>
+<p>首先是第一次获取数据的时候，直接把 <em>responseObject</em> 这个数组赋给了 <em>data2</em>，然后第二次调用 <em>addObjectsFromArray</em> 完成添加。问题出现在了第一次赋值的时候，这里 <em>responseObject</em> 是一个不可变的NSArray，经过了第一次的赋值后，把 <em>data2</em> 也给变成了不可变的了。这个时候再调用 <em>addObjectsFromArray</em> 就会报错了。也算是自己的粗心大意吧。</p>
+<p>下面是修改方案：</p>
+<pre><code class="c">if (self.page2 &gt; 1) {
+            [self.data2 addObjectsFromArray:responseObject];
+            [self.footer endRefreshing];
+        }else{
+             self.data2 =  [[NSMutableArray alloc] initWithArray: responseObject];
+            [self.header endRefreshing];
+        }
+</code></pre>
+<p>问题解决。</p>
+<h3 id="如何强制要求view刷新"><a href="#如何强制要求view刷新" class="headerlink" title="如何强制要求view刷新"></a>如何强制要求view刷新</h3><p>今天在实现一个自定义view的时候遇到一个场景：比如这个自定义view有3个按钮，需要根据一个属性动态的计算view中按钮的位置和显示的按钮个数。<br>之前在学习别人的自定义view的时候把所有的view初始化alloc和frame都放在了自定义view的 <em>initWithFrame</em> 方法中。之所以要放在这里而不放在 <em>init</em> 方法中的原因是 <em>init</em> 最终还是会调用 <em>initWithFrame</em> 方法，所以写在 <em>initWithFrame</em> 中是合适的。<br>但这样就无法实现上面说的动态调整view内容的目的了。后来上网查了下资料发现应该是通过view的 <em>layoutSubView</em> 方法来控制其中所有的子view的frame。应为这个方法主要在一下场景下触发：</p>
+<ol>
+<li>初始化（init）并不会触发这个方法。（LOL）</li>
+<li>调用 <em>addSubView</em> 的时候会触发。</li>
+<li>设置view <em>setFrame</em> 的时候会触发。前提是view的前后frame值发生了变化。</li>
+<li>滚动ScrollView的时候会触发scrollView的这个方法。</li>
+<li>旋转屏幕的时候会触发父view（当前viewController的view）中的这个方法。</li>
+<li>view的大小发生变化的时候会触发view的父类的这个方法。</li>
+</ol>
+<p>同时在官方文档中也说明，不要直接调用 <em>layoutSubView</em> 来更新view，应该通过 <em>setNeedsLayout</em> 来告诉系统在下一次更新UI的时候刷新view。如果需要立即刷新view的话，可以在调用完 <em>setNeedsLayout</em> 方法后调用 <em>layoutIfNeeded</em> 方法。</p>
+<h3 id="sdwebimage不显示图片"><a href="#sdwebimage不显示图片" class="headerlink" title="sdwebimage不显示图片"></a>sdwebimage不显示图片</h3><p>今天新写了个工程，想通过sdwebimage加载网络图片，结果图片就是不出来，看了打印日志提示：</p>
+<blockquote>
+<p>The resource could not be loaded because the App Transport Security policy requires the use of a secure connection</p>
+</blockquote>
+<p>细细一看发现图片的url不是https的，难怪了，把这个给忽略了。默认情况下在IOS9上是不支持http的。如果要增加支持需要在 <strong>Info.plist</strong> 中增加如下代码：</p>
+<pre><code>&lt;key&gt;NSAppTransportSecurity&lt;/key&gt;
+&lt;dict&gt;
+    &lt;key&gt;NSAllowsArbitraryLoads&lt;/key&gt;
+    &lt;true/&gt;
+&lt;/dict&gt;
+</code></pre><p>添加之后clean工程，图片就正常显示了。同理，在网络请求如果没有增加这个配置的话也是不行的。</p>
+</div></article><div></div></div></div><div id="bottom-outer"><div id="bottom-inner"><span>Site construction by</span><span> JustYan </span><span>using</span><a href="http://hexo.io"><span>hexo blog framework</span></a><span>.</span><br><a href="/">Home</a></div></div><script src="/js/justyan.js"></script><script src="/highlight/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script></body></html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html><html class="has-navbar-fixed-top" lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><title></title><script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script><link rel="stylesheet" type="text/css" href="/css/bulma.css"><link rel="stylesheet" type="text/css" href="/css/justyan.css"><link rel="stylesheet" type="text/css" href="/highlight/styles/dracula.css"><link rel="icon" href="/img/favicon.png"></head><body><section class="hero is-info is-medium"><div class="hero-head"><nav class="navbar is-fixed-top is-info"><div class="container"><div class="navbar-brand"><a class="navbar-item"><img class="navbar-circle" src="https://avatars2.githubusercontent.com/u/9360264?s=50&amp;u=5e88482f7319a8ce65ed618bcede72ea97a7f5aa&amp;v=4"></a><span class="navbar-burger burger" data-target="navbarMenuHeroA"><span></span><span></span><span></span></span></div><div class="navbar-menu" id="navbarMenuHeroA"><div class="navbar-end"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/category">Categories</a><a class="navbar-item" href="/contact">Contact</a><span class="navbar-item"><a class="button is-info is-inverted" href="https://github.com/PHEOBUSYY"><span class="icon"><i class="fab fa-github"></i></span><span>Github</span></a></span></div></div></div></nav></div><div class="hero-body"><div class="has-text-centered"><h1 class="title">IOS知识点集合</h1><h2 class="subtitle">2017-04-13</h2></div></div><div class="hero-foot"></div></section><div id="content-outer"><div id="content-inner"><article id="post"><div id="toc"><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#NSCharacterSet的用法"><span class="toc-number">1.</span> <span class="toc-text">NSCharacterSet的用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSPredicate的用法"><span class="toc-number">2.</span> <span class="toc-text">NSPredicate的用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSScanner的用法"><span class="toc-number">3.</span> <span class="toc-text">NSScanner的用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xcode中的图片资源管理"><span class="toc-number">4.</span> <span class="toc-text">xcode中的图片资源管理</span></a></li></ol></div></div><div class="post-text"><p>这里主要列出一些在IOS学习工程中用到的知识点，包括他们的使用场景和注意事项等等。<br><a id="more"></a></p>
+<h3 id="NSCharacterSet的用法"><a href="#NSCharacterSet的用法" class="headerlink" title="NSCharacterSet的用法"></a>NSCharacterSet的用法</h3><p>  首先要明白 <em>NSCharacterSet</em> 与 <em>NSSet</em> 二者之间没有关系，不要以为前者是后者的子集。<br>  <em>NSCharacterSet</em> 主要是用来预置一下char在里面作为一个集合，方便做过滤与对比。它的内部预置了很多默认的集合类型，比如：</p>
+<blockquote>
+<p>controlCharacterSet<br>whitespaceCharacterSet<br>whitespaceAndNewlineCharacterSet<br>decimalDigitCharacterSet<br>letterCharacterSet<br>lowercaseLetterCharacterSet<br>uppercaseLetterCharacterSet<br>nonBaseCharacterSet<br>alphanumericCharacterSet<br>decomposableCharacterSet<br>illegalCharacterSe;<br>punctuationCharacterSet<br>capitalizedLetterCharacterSet<br>symbolCharacterSet</p>
+</blockquote>
+<p>  通过字面很容易理解这些类型都是有什么作用。我们可以在对字符串做trim处理的时候通过它来完成一些操作。下面是常用的示例代码：</p>
+<ol>
+<li>去掉字符串两边的空格<pre><code class="Objective-c">NSString * testStr = @&quot; this is a test string &quot;;
+testStr = [testStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+</code></pre>
+注意：上面的处理方法只会去掉两边的空格，中间是没有处理，如果需要处理中间的空格，可以通过把字符串拆分成数组，通过NSPredicate处理完数组之后再合并成字符串来完成。</li>
+<li>去掉字符串所有的空格<pre><code class="Objective-c">NSString * testStr = @&quot; this is a test string &quot;;
+NSArray *array = [testStr componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+[array filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@&quot;self &lt;&gt; &#39;&#39;&quot;]];
+testStr = [array componentsJoinedByString:@&quot;&quot;];
+NSLog(@&quot;the test string is %@&quot;,testStr);
+</code></pre>
+</li>
+</ol>
+<h3 id="NSPredicate的用法"><a href="#NSPredicate的用法" class="headerlink" title="NSPredicate的用法"></a>NSPredicate的用法</h3><p>  <em>NSPredicate</em> 直译过来就是 <em>谓词</em> 的意思，常用对集合做各种符合条件的过滤，在一点上感觉OC比java方便很多，在java中你还得自己去实现数组过滤器也就是谓词，OC是预置好了的，使用起来非常方便。</p>
+<p>  常用的方法主要有两个：</p>
+<ol>
+<li>NSPredicate predicateWithFormat</li>
+<li><p>NSPredicate predicateWithBlock</p>
+<p>第一个后面需要输入格式化字符串，后面那个是直接通过一个block来完成的。后面那个有点像java8提供的predicate接口方法。<br>如果要熟练使用第一种格式化方式，需要了解一下类似sql的语法规则：</p>
+</li>
+<li>self代指集合中遍历的单个item</li>
+<li>&lt; ,&gt; ,&lt;=,&gt;= 表示了小于，大于这些比较</li>
+<li>&lt;&gt; 和 != 是一样的，都表示不等于</li>
+<li>字符串相关：BEGINSWITH、ENDSWITH、CONTAINS,表示字符串的比较关系，下面的示例会有体现</li>
+<li>通配符LIKE</li>
+<li><p>正则 MATCHS</p>
+<pre><code class="Objective-c">NSArray *testArr = @[@&quot;lucy&quot;,@&quot;jack&quot;,@&quot;david&quot;,@&quot;justyan&quot;];
+
+NSPredicate *predicate = [NSPredicate predicateWithFormat:@&quot; self like %@&quot;,@&quot;*y*&quot;];
+NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@&quot; self &lt;&gt; %@&quot;,@&quot;lucy&quot;];
+
+NSArray *newArr = [testArr filteredArrayUsingPredicate:predicate];
+NSLog(@&quot;the newArr is %@&quot;,newArr);
+</code></pre>
+<p>在上面的示例中第一个predicate表示只保留数组中包含该字母 “y” 的item。<br>第二个predicate表示保留不等于 “lucy” 的item。<br>可以看到用法还是很容易理解的。</p>
+</li>
+</ol>
+<h3 id="NSScanner的用法"><a href="#NSScanner的用法" class="headerlink" title="NSScanner的用法"></a>NSScanner的用法</h3><p>  NSScanner是用来对字符串做各种匹配赋值操作的类。有点类似javaScript中的 <em>eval</em> 方法，比如当你输入一个字符串 “1+1” 的时候，如果通过eval函数处理它会直接输出 ”2”，相当于智能的理解了字符串的含义。</p>
+<p>  NSScanner常用来获取字符串中想要的值，比如int，string，等等。常用的主要有下面几个方法：</p>
+<ol>
+<li>(BOOL)scanString:string intoString:result;</li>
+<li>(BOOL)scanUpToString:string intoString:result;</li>
+<li>(BOOL)scanInt:result;</li>
+<li><p>(BOOL)scanUpToCharactersFromSet:set intoString:result;</p>
+<p>首先来看第一个方法 <em>scanString</em> 表示把第一个参数识别的字符串放入后面的result中。如果后面的result传入null表示跳过前面一个参数的字符串。</p>
+<p>第二个方法 <em>scanUpToString</em> 表示截取字符串到第一个参数。比如“ the test string” 如果传入第一个参数是 “test” 的话表示截取到 “test” 为止，那么第二个参数的值就是 “ the “</p>
+<p>第三个方法 <em>scanInt</em> 表示截取字符串里面的int值，并把int值放入第二个参数中。比如 ”123 test” 会返回123</p>
+<p>第四个方法 <em>scanUpToCharactersFromSet</em> 与第二个方法类似，只是截取的节点用的传入的CharcterSet中预置的字符</p>
+<p>下面通过一个示例来完成展现一个上面方法的用法：</p>
+<pre><code class="Objective-c">NSString *str = @&quot;product: the apple mac ;price: 20000 ;number:5 &quot;;
+NSString *str2 = @&quot;product: the apple iphone ;price: 6999 ;number:10 &quot;;
+NSString *str3 = @&quot;product: the apple ipad ;price: 4000 ;number:20 &quot;;
+
+str = [str stringByAppendingString:str2];
+str = [str stringByAppendingString:str3];
+NSScanner *scanner = [NSScanner scannerWithString:str];
+  NSString *productName;
+  int price ;
+  int count;
+  NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@&quot;;&quot;];
+  while (![scanner isAtEnd]) {
+      [scanner scanString:@&quot;product:&quot; intoString:nil];
+      [scanner scanUpToCharactersFromSet:set intoString:&amp;productName];
+//         [scanner scanUpToString:@&quot;;&quot; intoString:&amp;productName];
+      [scanner scanString:@&quot;;price:&quot; intoString:nil];
+      [scanner scanInt:&amp;price];
+      [scanner scanUpToString:@&quot;;number:&quot; intoString:nil];
+      [scanner scanString:@&quot;;number:&quot; intoString:nil];
+      [scanner scanInt:&amp;count];
+
+      NSLog(@&quot;the product is %@,the price is %d ,the number is %d&quot;,productName,price,count);
+  }
+</code></pre>
+<p>输出：</p>
+<pre><code>the product is the apple mac ,the price is 20000 ,the number is 5
+the product is the apple iphone ,the price is 6999 ,the number is 10
+the product is the apple ipad ,the price is 4000 ,the number is 20
+</code></pre></li>
+</ol>
+<h3 id="xcode中的图片资源管理"><a href="#xcode中的图片资源管理" class="headerlink" title="xcode中的图片资源管理"></a>xcode中的图片资源管理</h3><p>  系统中的Images.xcassets目录中只能放入 <em>.png</em> 图片，普通的jpg图片只能放入普通文件夹中。</p>
+</div></article><div></div></div></div><div id="bottom-outer"><div id="bottom-inner"><span>Site construction by</span><span> JustYan </span><span>using</span><a href="http://hexo.io"><span>hexo blog framework</span></a><span>.</span><br><a href="/">Home</a></div></div><script src="/js/justyan.js"></script><script src="/highlight/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script></body></html>

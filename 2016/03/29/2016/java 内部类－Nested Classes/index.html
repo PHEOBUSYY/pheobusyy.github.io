@@ -1,336 +1,15 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="pheobusyy" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
-
-
-
-
-
-
-<meta name="description" content="定义在java中允许在一个内内部定义另一个类，这个被定义的类就叫做内部类（很形象嘛）.比如下面示例：
-12345678910class OuterClass &amp;#123;  ...  static class StaticNestedClass&amp;#123;    ...  &amp;#125;  ...  class NestedClass&amp;#123;    ...  &amp;#125;&amp;#125;
-其中，St">
-<meta property="og:type" content="article">
-<meta property="og:title" content="java 内部类－Nested Classes">
-<meta property="og:url" content="http://pheobusyy.github.io/2016/03/29/2016/java 内部类－Nested Classes/index.html">
-<meta property="og:site_name" content="pheobusyy">
-<meta property="og:description" content="定义在java中允许在一个内内部定义另一个类，这个被定义的类就叫做内部类（很形象嘛）.比如下面示例：
-12345678910class OuterClass &amp;#123;  ...  static class StaticNestedClass&amp;#123;    ...  &amp;#125;  ...  class NestedClass&amp;#123;    ...  &amp;#125;&amp;#125;
-其中，St">
-<meta property="og:updated_time" content="2017-02-25T01:12:01.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java 内部类－Nested Classes">
-<meta name="twitter:description" content="定义在java中允许在一个内内部定义另一个类，这个被定义的类就叫做内部类（很形象嘛）.比如下面示例：
-12345678910class OuterClass &amp;#123;  ...  static class StaticNestedClass&amp;#123;    ...  &amp;#125;  ...  class NestedClass&amp;#123;    ...  &amp;#125;&amp;#125;
-其中，St">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://pheobusyy.github.io/2016/03/29/2016/java 内部类－Nested Classes/"/>
-
-
-
-
-
-  <title> java 内部类－Nested Classes | pheobusyy </title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">pheobusyy</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle"></p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Startseite
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archiv
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            Tags
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/03/29/2016/java 内部类－Nested Classes/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yanyi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="pheobusyy">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                java 内部类－Nested Classes
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-29T20:20:00+08:00">
-                2016-03-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>在java中允许在一个内内部定义另一个类，这个被定义的类就叫做内部类（很形象嘛）.比如下面示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">OuterClass</span> </span>&#123;</div><div class="line">  ...</div><div class="line">  <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticNestedClass</span></span>&#123;</div><div class="line">    ...</div><div class="line">  &#125;</div><div class="line">  ...</div><div class="line">  <span class="class"><span class="keyword">class</span> <span class="title">NestedClass</span></span>&#123;</div><div class="line">    ...</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<!DOCTYPE html><html class="has-navbar-fixed-top" lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><title></title><script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script><link rel="stylesheet" type="text/css" href="/css/bulma.css"><link rel="stylesheet" type="text/css" href="/css/justyan.css"><link rel="stylesheet" type="text/css" href="/highlight/styles/dracula.css"><link rel="icon" href="/img/favicon.png"></head><body><section class="hero is-info is-medium"><div class="hero-head"><nav class="navbar is-fixed-top is-info"><div class="container"><div class="navbar-brand"><a class="navbar-item"><img class="navbar-circle" src="https://avatars2.githubusercontent.com/u/9360264?s=50&amp;u=5e88482f7319a8ce65ed618bcede72ea97a7f5aa&amp;v=4"></a><span class="navbar-burger burger" data-target="navbarMenuHeroA"><span></span><span></span><span></span></span></div><div class="navbar-menu" id="navbarMenuHeroA"><div class="navbar-end"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/category">Categories</a><a class="navbar-item" href="/contact">Contact</a><span class="navbar-item"><a class="button is-info is-inverted" href="https://github.com/PHEOBUSYY"><span class="icon"><i class="fab fa-github"></i></span><span>Github</span></a></span></div></div></div></nav></div><div class="hero-body"><div class="has-text-centered"><h1 class="title">java 内部类－Nested Classes</h1><h2 class="subtitle">2016-03-29</h2></div></div><div class="hero-foot"></div></section><div id="content-outer"><div id="content-inner"><article id="post"><div id="toc"><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#定义"><span class="toc-number">1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么使用内部类"><span class="toc-number">2.</span> <span class="toc-text">为什么使用内部类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内部类初始化"><span class="toc-number">3.</span> <span class="toc-text">内部类初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Shadowing-这里不知道如何翻译？阴影？"><span class="toc-number">4.</span> <span class="toc-text">Shadowing(这里不知道如何翻译？阴影？)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一个内部类实现迭代器的demo"><span class="toc-number">5.</span> <span class="toc-text">一个内部类实现迭代器的demo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#local-Classes"><span class="toc-number">6.</span> <span class="toc-text">local Classes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#匿名内部类"><span class="toc-number">7.</span> <span class="toc-text">匿名内部类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lambda-表达式"><span class="toc-number">8.</span> <span class="toc-text">lambda 表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lambda语法"><span class="toc-number">9.</span> <span class="toc-text">lambda语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Target-Typing"><span class="toc-number">10.</span> <span class="toc-text">Target Typing</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#method-references-方法引用"><span class="toc-number">11.</span> <span class="toc-text">method references (方法引用)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">12.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">13.</span> <span class="toc-text">参考</span></a></li></ol></div></div><div class="post-text"><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>在java中允许在一个内内部定义另一个类，这个被定义的类就叫做内部类（很形象嘛）.比如下面示例：</p>
+<pre><code class="java"> class OuterClass {
+   ...
+   static class StaticNestedClass{
+     ...
+   }
+   ...
+   class NestedClass{
+     ...
+   }
+ }
+</code></pre>
 <p>其中，StaticNestedClass叫做静态内部类，也叫嵌套类，NestedClass叫做成员内部类。其中成员内部类又包括匿名内部类(Anonymous innerClass)和局部内部类(local innerCalss)内部类是外部类中一个成员;</p>
 <p>成员内部类可以访问其外部类的成员，包括其中的作用于为private的成员,其内部有一个对外部类的引用，所依可以获取到外部类所有的成员。<br>静态内部类和其外部类是平级关系，与一个普通的外部类作用类似，没有对其外部类的引用。</p>
 <h2 id="为什么使用内部类"><a href="#为什么使用内部类" class="headerlink" title="为什么使用内部类"></a>为什么使用内部类</h2><ul>
@@ -341,43 +20,277 @@
 <li>闭包（回调）类似lambda<a id="more"></a>
 <h2 id="内部类初始化"><a href="#内部类初始化" class="headerlink" title="内部类初始化"></a>内部类初始化</h2>一个成员内部类对象必须基于外部类对象而存活，不能独立存在，通过.new Instance()的方式来初始化<br>比如上面成员内部类NetstedClass初始化  new OuterClass().new NestedClass()<h2 id="Shadowing-这里不知道如何翻译？阴影？"><a href="#Shadowing-这里不知道如何翻译？阴影？" class="headerlink" title="Shadowing(这里不知道如何翻译？阴影？)"></a>Shadowing(这里不知道如何翻译？阴影？)</h2></li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ShadowTest</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> x = <span class="number">0</span>;</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">FirstLevel</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="keyword">public</span> <span class="keyword">int</span> x = <span class="number">1</span>;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">methodInFirstLevel</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</div><div class="line">            System.out.println(<span class="string">"x = "</span> + x);</div><div class="line">            System.out.println(<span class="string">"this.x = "</span> + <span class="keyword">this</span>.x);</div><div class="line">            System.out.println(<span class="string">"ShadowTest.this.x = "</span> + ShadowTest.<span class="keyword">this</span>.x);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String... args)</span> </span>&#123;</div><div class="line">        ShadowTest st = <span class="keyword">new</span> ShadowTest();</div><div class="line">        ShadowTest.FirstLevel fl = st.new FirstLevel();</div><div class="line">        fl.methodInFirstLevel(<span class="number">23</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="java">public class ShadowTest {
+
+    public int x = 0;
+
+    class FirstLevel {
+
+        public int x = 1;
+
+        void methodInFirstLevel(int x) {
+            System.out.println(&quot;x = &quot; + x);
+            System.out.println(&quot;this.x = &quot; + this.x);
+            System.out.println(&quot;ShadowTest.this.x = &quot; + ShadowTest.this.x);
+        }
+    }
+
+    public static void main(String... args) {
+        ShadowTest st = new ShadowTest();
+        ShadowTest.FirstLevel fl = st.new FirstLevel();
+        fl.methodInFirstLevel(23);
+    }
+}
+</code></pre>
 <p>output:</p>
 <blockquote>
 <p>x =23 普通的初始化<br>this.x =1   对自己本身的引用方式，和普通类一样<br>ShadowTest.this.x = 0  对外部类的引用方式</p>
 </blockquote>
 <p>不管嵌套多少层，都可以使用这种方式来获取对应的变量。</p>
 <h2 id="一个内部类实现迭代器的demo"><a href="#一个内部类实现迭代器的demo" class="headerlink" title="一个内部类实现迭代器的demo"></a>一个内部类实现迭代器的demo</h2><p>外部类实现Iterable接口，返回一个Iterator对象，通过一个内部类实现Iterator接口的next和hasNext方法，来遍历容器中的对象</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestIteratorClass</span> <span class="keyword">implements</span> <span class="title">Iterable</span>&lt;<span class="title">String</span>&gt;</span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String[] arr = <span class="keyword">new</span> String[]&#123;<span class="string">"apple"</span>,<span class="string">"orange"</span>,<span class="string">"banana"</span>,<span class="string">"lemon"</span>&#125;;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Iterator&lt;String&gt; <span class="title">iterator</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> TestIterator();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        TestIteratorClass test = <span class="keyword">new</span> TestIteratorClass();</div><div class="line">        Iterator&lt;String&gt; iterator = test.iterator();</div><div class="line">        <span class="keyword">while</span> (iterator.hasNext()) &#123;</div><div class="line">            System.out.println(<span class="string">"name="</span>+iterator.next());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">TestIterator</span> <span class="keyword">implements</span> <span class="title">Iterator</span>&lt;<span class="title">String</span>&gt; </span>&#123;</div><div class="line">       <span class="keyword">private</span> <span class="keyword">int</span> index = <span class="number">0</span>;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> index &lt; arr.length;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">next</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> arr[index ++];</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="java">public class TestIteratorClass implements Iterable&lt;String&gt;{
+    public static final String[] arr = new String[]{&quot;apple&quot;,&quot;orange&quot;,&quot;banana&quot;,&quot;lemon&quot;};
+    @Override
+    public Iterator&lt;String&gt; iterator() {
+        return new TestIterator();
+    }
+
+    public static void main(String[] args) {
+        TestIteratorClass test = new TestIteratorClass();
+        Iterator&lt;String&gt; iterator = test.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(&quot;name=&quot;+iterator.next());
+        }
+    }
+    class TestIterator implements Iterator&lt;String&gt; {
+       private int index = 0;
+        @Override
+        public boolean hasNext() {
+            return index &lt; arr.length;
+        }
+
+        @Override
+        public String next() {
+            return arr[index ++];
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+    }
+}
+</code></pre>
 <h2 id="local-Classes"><a href="#local-Classes" class="headerlink" title="local Classes"></a>local Classes</h2><p>local Classes是可以定义在一组或者多组配对括号组成的代码块中的内部类，一般出现在方法的内部。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestLocalClass2</span> </span>&#123;</div><div class="line">    &#123;</div><div class="line">        <span class="comment">//这个也属于local classes</span></div><div class="line">        <span class="class"><span class="keyword">class</span> <span class="title">Test2</span></span>&#123;</div><div class="line">          <span class="keyword">private</span> <span class="keyword">int</span> x = <span class="number">0</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</div><div class="line">      <span class="comment">//local class不能定义接口 编译无法通过</span></div><div class="line">      <span class="class"><span class="keyword">interface</span> <span class="title">Itest</span></span>&#123;</div><div class="line">           <span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>;</div><div class="line">       &#125;</div><div class="line">        <span class="keyword">if</span> (x &gt; <span class="number">10</span>) &#123;</div><div class="line">            <span class="comment">//LcalClass的生命周期仅限于if块内</span></div><div class="line">            <span class="class"><span class="keyword">class</span> <span class="title">LocalClass</span> </span>&#123;</div><div class="line">                <span class="keyword">private</span> <span class="keyword">int</span> gender;</div><div class="line"></div><div class="line">                <span class="comment">//可以声明一些静态常量 可以编译通过</span></div><div class="line">                <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> id = <span class="number">10</span>;</div><div class="line">                <span class="comment">//必须加上final的static才可以</span></div><div class="line">                <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> id2 = <span class="number">10</span>;<span class="comment">//error 无法编译通过</span></div><div class="line"></div><div class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">innerTest</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">                &#125;</div><div class="line">                <span class="comment">//可以继续添加内部类，层次不限</span></div><div class="line">                <span class="class"><span class="keyword">class</span> <span class="title">InnerClass</span> </span>&#123;</div><div class="line">                    <span class="keyword">private</span> <span class="keyword">int</span> k;</div><div class="line">                &#125;</div><div class="line">                <span class="comment">//不能有静态方法 编译无法通过</span></div><div class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">innerTest2</span><span class="params">()</span></span>&#123;</div><div class="line"></div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            LocalClass localClass = <span class="keyword">new</span> LocalClass();</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="comment">//这里已经获取不到LocalClass 了</span></div><div class="line">            LocalClass localClass = <span class="keyword">new</span> LocalClass();<span class="comment">//编译无法通过</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="java">public class TestLocalClass2 {
+    {
+        //这个也属于local classes
+        class Test2{
+          private int x = 0;
+        }
+    }
+    public void test(int x) {
+      //local class不能定义接口 编译无法通过
+      interface Itest{
+           void test();
+       }
+        if (x &gt; 10) {
+            //LcalClass的生命周期仅限于if块内
+            class LocalClass {
+                private int gender;
+
+                //可以声明一些静态常量 可以编译通过
+                public static final int id = 10;
+                //必须加上final的static才可以
+                public static int id2 = 10;//error 无法编译通过
+
+                public void innerTest() {
+
+                }
+                //可以继续添加内部类，层次不限
+                class InnerClass {
+                    private int k;
+                }
+                //不能有静态方法 编译无法通过
+                public static void innerTest2(){
+
+                }
+            }
+            LocalClass localClass = new LocalClass();
+        } else {
+            //这里已经获取不到LocalClass 了
+            LocalClass localClass = new LocalClass();//编译无法通过
+        }
+    }
+}
+</code></pre>
 <p>通过上面demo的注释可以发现：不能声明接口，可以定义静态常量，不能定义静态方法</p>
 <h2 id="匿名内部类"><a href="#匿名内部类" class="headerlink" title="匿名内部类"></a>匿名内部类</h2><p>匿名内部类可以是代码更加的精简易读，通常在各种回调函数中使用，这个就不多做介绍了。</p>
-<h2 id="lambda-表达式"><a href="#lambda-表达式" class="headerlink" title="lambda 表达式"></a>lambda 表达式</h2><p>通过匿名内部类的使用过程中，会发现实际上它就是一个可以执行的代码块函数，就是一段可执行代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">button.setOnClickListener(<span class="keyword">new</span> View.OnClickListener&#123;</div><div class="line">  <span class="function"><span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span></span>&#123;</div><div class="line">      <span class="comment">//do something;</span></div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>在jdk1.8中正式引入了lambda表达式，来简化代码并且是代码的可读性进一步加强。实际上在python中lambda的概念很早就有了，函数式编程的思想后续再讨论。下面通过一个demo的演变来展示lambda的简化过程<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">enum</span> Sex &#123;</div><div class="line">        MALE, FEMALE</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    String name;</div><div class="line">    LocalDate birthday;</div><div class="line">    Sex gender;</div><div class="line">    String emailAddress;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// ...</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printPerson</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// ...</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="lambda-表达式"><a href="#lambda-表达式" class="headerlink" title="lambda 表达式"></a>lambda 表达式</h2><p>通过匿名内部类的使用过程中，会发现实际上它就是一个可以执行的代码块函数，就是一段可执行代码</p>
+<pre><code class="java">button.setOnClickListener(new View.OnClickListener{
+  void onClick(View view){
+      //do something;
+  }
+});
+</code></pre>
+<p>在jdk1.8中正式引入了lambda表达式，来简化代码并且是代码的可读性进一步加强。实际上在python中lambda的概念很早就有了，函数式编程的思想后续再讨论。下面通过一个demo的演变来展示lambda的简化过程</p>
+<pre><code class="java">public class Person {
+
+    public enum Sex {
+        MALE, FEMALE
+    }
+
+    String name;
+    LocalDate birthday;
+    Sex gender;
+    String emailAddress;
+
+    public int getAge() {
+        // ...
+    }
+
+    public void printPerson() {
+        // ...
+    }
+}
+</code></pre>
 <p>person是一个标准的java bean，下面实现一个过滤器，通过属性过滤来得到适合的person对象,刚开始的代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printPersonsOlderThan</span><span class="params">(List&lt;Person&gt; list, <span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">       <span class="keyword">for</span> (Person p : list) &#123;</div><div class="line">           <span class="keyword">if</span> (p.getAge() &gt;= age) &#123;</div><div class="line">               p.printPerson();</div><div class="line">           &#125;</div><div class="line">       &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="java"> public static void printPersonsOlderThan(List&lt;Person&gt; list, int age) {
+        for (Person p : list) {
+            if (p.getAge() &gt;= age) {
+                p.printPerson();
+            }
+        }
+ }
+</code></pre>
 <p>不过这样的代码很脆弱，没有很好的达到隔离和封装，如果要修改筛选属性条件的话就很难受，下面是更普遍得做法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printPersonsOlderThan</span><span class="params">(List&lt;Person&gt; list, CheckPerson checkPerson)</span> </span>&#123;</div><div class="line">       <span class="keyword">for</span> (Person p : list) &#123;</div><div class="line">           <span class="keyword">if</span> (checkPerson.test(p)) &#123;</div><div class="line">               p.printPerson();</div><div class="line">           &#125;</div><div class="line">       &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">CheckPerson</span></span>&#123;</div><div class="line">   <span class="function"><span class="keyword">boolean</span> <span class="title">test</span><span class="params">(Person person)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>通过定义CheckPerson接口来定义筛选行为，在代码中实现该接口来完成筛选，这样可以很好的封装和整合代码，下面是匿名内部类的方式实现：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">printPersonsOlderThan(list, <span class="keyword">new</span> CheckPerson() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">test</span><span class="params">(Person person)</span> </span>&#123;</div><div class="line">          <span class="keyword">return</span> p.getGender() == Person.Sex.MALE</div><div class="line">                        &amp;&amp; p.getAge() &gt;= <span class="number">18</span></div><div class="line">                        &amp;&amp; p.getAge() &lt;= <span class="number">25</span>;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125;);</div></pre></td></tr></table></figure></p>
-<p>像上面的定义的CheckPerson接口这样的只有一个抽象方法，传入一个对象返回boolean的结果在java中很普遍，所以jdk中已经提前内置了标准的接口Predicate（位于java.util.function中），可以直接使用，同时function包中还有很多的内置接口，以后可以看下使用方法，很简单。上面的定义改为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printPersonsOlderThan</span><span class="params">(List&lt;Person&gt; list, Predicate&lt;Person&gt; checkPerson)</span> </span>&#123;</div><div class="line">       <span class="keyword">for</span> (Person p : list) &#123;</div><div class="line">           <span class="keyword">if</span> (checkPerson.test(p)) &#123;</div><div class="line">               p.printPerson();</div><div class="line">           &#125;</div><div class="line">       &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>来看lambda简化后的代码调用：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">printPersonsOlderThan(</div><div class="line">              list,</div><div class="line">              person -&gt; person.getAge()&gt;<span class="number">10</span></div><div class="line">                        &amp;&amp; person.gender == Person.Sex.FEMALE</div><div class="line">                        &amp;&amp; person.getAge()&lt;<span class="number">50</span></div><div class="line">              );</div></pre></td></tr></table></figure></p>
-<p>可以替换掉函数内部的printPerson方法，更改匹配之后的行为，在java中提供了Consumer<t>接口，内部提供了accept<t t="">方法。代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">processPerson</span><span class="params">(List&lt;Person&gt; list, Predicate&lt;Person&gt; predicate, Consumer&lt;Person&gt; consumer)</span> </span>&#123;</div><div class="line">        <span class="keyword">for</span> (Person person : list) &#123;</div><div class="line">            <span class="keyword">if</span> (predicate.test(person)) &#123;</div><div class="line">                consumer.accept(person);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></t></t></p>
-<p>lambda之后的调用格式为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">processPerson(list,</div><div class="line">               person -&gt; person.getAge() &gt; <span class="number">10</span></div><div class="line">                       &amp;&amp; person.gender == Person.Sex.FEMALE</div><div class="line">                       &amp;&amp; person.getAge() &lt; <span class="number">50</span>,</div><div class="line">               person -&gt; person.printPerson()</div><div class="line">               );</div></pre></td></tr></table></figure></p>
-<p>再次变更方法，如果需要获取联系人的name并打印出来，你需要一个抽象方法传入person对象并输出对应的name，可以使用java提供的Function的apply<t t="" ,="" r="">方法,代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">processPersonWithFunction</span><span class="params">(List&lt;Person&gt; list, Predicate&lt;Person&gt; predicate, Function&lt;Person, String&gt; mapper, Consumer&lt;String&gt; consumer)</span> </span>&#123;</div><div class="line">        <span class="keyword">for</span> (Person p : list) &#123;</div><div class="line">            <span class="keyword">if</span> (predicate.test(p)) &#123;</div><div class="line">                String data = mapper.apply(p);</div><div class="line">                consumer.accept(data);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></t></p>
-<p>lambda之后调用如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">processPersonWithFunction(list,</div><div class="line">               person -&gt; person.getAge() &gt; <span class="number">10</span></div><div class="line">                       &amp;&amp; person.gender == Person.Sex.FEMALE</div><div class="line">                       &amp;&amp; person.getAge() &lt; <span class="number">50</span>,</div><div class="line">               person -&gt; person.name,</div><div class="line">               name -&gt; &#123;</div><div class="line">                  <span class="comment">//这里是为了说明lambda里面可以包含多行语句的常用格式</span></div><div class="line">                   System.out.println(<span class="string">"name="</span>+name);</div><div class="line">                   System.out.println(<span class="string">"name2="</span>+name + <span class="string">"test"</span>);</div><div class="line">               &#125;</div><div class="line">               );</div></pre></td></tr></table></figure></p>
-<p>经过上面的一番需求变动，我们可以写出通用范型格式的处理element方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;X,Y&gt; <span class="function"><span class="keyword">void</span> <span class="title">processElements</span><span class="params">(Iterable&lt;X&gt; source, Predicate&lt;X&gt; predicate , Function&lt;X,Y&gt; mapper , Consumer&lt;Y&gt; consumer)</span> </span>&#123;</div><div class="line">        <span class="keyword">for</span> (X x : source) &#123;</div><div class="line">            <span class="keyword">if</span> (predicate.test(x)) &#123;</div><div class="line">                Y data = mapper.apply(x);</div><div class="line">                consumer.accept(data);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<pre><code class="java"> public static void printPersonsOlderThan(List&lt;Person&gt; list, CheckPerson checkPerson) {
+        for (Person p : list) {
+            if (checkPerson.test(p)) {
+                p.printPerson();
+            }
+        }
+ }
+ public interface CheckPerson{
+    boolean test(Person person);
+ }
+</code></pre>
+<p>通过定义CheckPerson接口来定义筛选行为，在代码中实现该接口来完成筛选，这样可以很好的封装和整合代码，下面是匿名内部类的方式实现：</p>
+<pre><code class="java">printPersonsOlderThan(list, new CheckPerson() {
+        @Override
+        public boolean test(Person person) {
+          return p.getGender() == Person.Sex.MALE
+                        &amp;&amp; p.getAge() &gt;= 18
+                        &amp;&amp; p.getAge() &lt;= 25;
+
+        }
+    });
+</code></pre>
+<p>像上面的定义的CheckPerson接口这样的只有一个抽象方法，传入一个对象返回boolean的结果在java中很普遍，所以jdk中已经提前内置了标准的接口Predicate（位于java.util.function中），可以直接使用，同时function包中还有很多的内置接口，以后可以看下使用方法，很简单。上面的定义改为：</p>
+<pre><code class="java">public static void printPersonsOlderThan(List&lt;Person&gt; list, Predicate&lt;Person&gt; checkPerson) {
+       for (Person p : list) {
+           if (checkPerson.test(p)) {
+               p.printPerson();
+           }
+       }
+}
+</code></pre>
+<p>来看lambda简化后的代码调用：</p>
+<pre><code class="java">printPersonsOlderThan(
+              list,
+              person -&gt; person.getAge()&gt;10
+                        &amp;&amp; person.gender == Person.Sex.FEMALE
+                        &amp;&amp; person.getAge()&lt;50
+              );
+</code></pre>
+<p>可以替换掉函数内部的printPerson方法，更改匹配之后的行为，在java中提供了Consumer<t>接口，内部提供了accept<t t="">方法。代码如下：</t></t></p>
+<pre><code class="java">public static void processPerson(List&lt;Person&gt; list, Predicate&lt;Person&gt; predicate, Consumer&lt;Person&gt; consumer) {
+        for (Person person : list) {
+            if (predicate.test(person)) {
+                consumer.accept(person);
+            }
+        }
+    }
+</code></pre>
+<p>lambda之后的调用格式为：</p>
+<pre><code class="java">processPerson(list,
+               person -&gt; person.getAge() &gt; 10
+                       &amp;&amp; person.gender == Person.Sex.FEMALE
+                       &amp;&amp; person.getAge() &lt; 50,
+               person -&gt; person.printPerson()
+               );
+</code></pre>
+<p>再次变更方法，如果需要获取联系人的name并打印出来，你需要一个抽象方法传入person对象并输出对应的name，可以使用java提供的Function的apply<t t="" ,="" r="">方法,代码如下：</t></p>
+<pre><code class="java">public static void processPersonWithFunction(List&lt;Person&gt; list, Predicate&lt;Person&gt; predicate, Function&lt;Person, String&gt; mapper, Consumer&lt;String&gt; consumer) {
+        for (Person p : list) {
+            if (predicate.test(p)) {
+                String data = mapper.apply(p);
+                consumer.accept(data);
+            }
+        }
+    }
+</code></pre>
+<p>lambda之后调用如下：</p>
+<pre><code class="java">processPersonWithFunction(list,
+               person -&gt; person.getAge() &gt; 10
+                       &amp;&amp; person.gender == Person.Sex.FEMALE
+                       &amp;&amp; person.getAge() &lt; 50,
+               person -&gt; person.name,
+               name -&gt; {
+                  //这里是为了说明lambda里面可以包含多行语句的常用格式
+                   System.out.println(&quot;name=&quot;+name);
+                   System.out.println(&quot;name2=&quot;+name + &quot;test&quot;);
+               }
+               );
+</code></pre>
+<p>经过上面的一番需求变动，我们可以写出通用范型格式的处理element方法：</p>
+<pre><code class="java">public static &lt;X,Y&gt; void processElements(Iterable&lt;X&gt; source, Predicate&lt;X&gt; predicate , Function&lt;X,Y&gt; mapper , Consumer&lt;Y&gt; consumer) {
+        for (X x : source) {
+            if (predicate.test(x)) {
+                Y data = mapper.apply(x);
+                consumer.accept(data);
+            }
+        }
+    }
+</code></pre>
 <p>lambda调用如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">processElements(list,</div><div class="line">                person -&gt; person.getAge() &gt; <span class="number">10</span></div><div class="line">                        &amp;&amp; person.gender == Person.Sex.FEMALE</div><div class="line">                        &amp;&amp; person.getAge() &lt; <span class="number">50</span>,</div><div class="line">                person -&gt; person.name,</div><div class="line">                name -&gt; &#123;</div><div class="line">                    System.out.println(<span class="string">"name="</span>+name);</div><div class="line">                    System.out.println(<span class="string">"name2="</span>+name + <span class="string">"test"</span>);</div><div class="line">                &#125;</div><div class="line">        );</div></pre></td></tr></table></figure>
-<p>在jdk8中新增了聚合操作的概念，可以简化上面的processElement方法，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">list</div><div class="line">    .stream()</div><div class="line">    .filter(person -&gt; person.getAge() &gt; <span class="number">10</span></div><div class="line">                &amp;&amp; person.gender == Person.Sex.FEMALE</div><div class="line">                &amp;&amp; person.getAge() &lt; <span class="number">50</span>)</div><div class="line">    .map(person1 -&gt; person1.name)</div><div class="line">    .forEach(name -&gt; System.out.println(<span class="string">"name="</span>+name));</div></pre></td></tr></table></figure></p>
+<pre><code class="java">processElements(list,
+                person -&gt; person.getAge() &gt; 10
+                        &amp;&amp; person.gender == Person.Sex.FEMALE
+                        &amp;&amp; person.getAge() &lt; 50,
+                person -&gt; person.name,
+                name -&gt; {
+                    System.out.println(&quot;name=&quot;+name);
+                    System.out.println(&quot;name2=&quot;+name + &quot;test&quot;);
+                }
+        );
+</code></pre>
+<p>在jdk8中新增了聚合操作的概念，可以简化上面的processElement方法，代码如下：</p>
+<pre><code class="java">list
+    .stream()
+    .filter(person -&gt; person.getAge() &gt; 10
+                &amp;&amp; person.gender == Person.Sex.FEMALE
+                &amp;&amp; person.getAge() &lt; 50)
+    .map(person1 -&gt; person1.name)
+    .forEach(name -&gt; System.out.println(&quot;name=&quot;+name));
+</code></pre>
 <p>上面的操作和rxjava的处理模式是一样的，都是基于事件流的方式。参考 <a href="https://docs.oracle.com/javase/tutorial/collections/streams/index.html" title="Aggregate Operations(聚合操作)" target="_blank" rel="external">Aggregate Operations（聚合操作）</a></p>
 <h2 id="lambda语法"><a href="#lambda语法" class="headerlink" title="lambda语法"></a>lambda语法</h2><ul>
 <li>一个括号包含的逗号分隔的参数集合 类似 （String a，Integer b）,在lambda中可以省略数据类型，（a,b）,如果只有一个参数可以省略括号 省略为 a。</li>
 <li>一个指向箭头  -&gt;</li>
 <li>一段代码块，可以是一行代码也可以是一个代码片段，如果是方法块需要包含在｛｝中，如果只有一行可以省略｛｝，如果是返回整个表达式，可以省略return关键字</li>
 </ul>
-<p>一个普通示例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">(Person person) -&gt; &#123;</div><div class="line">                   <span class="keyword">return</span> person.getAge() &gt; <span class="number">10</span></div><div class="line">                       &amp;&amp; person.gender == Person.Sex.FEMALE</div><div class="line">                       &amp;&amp; person.getAge() &lt; <span class="number">50</span>;&#125;</div></pre></td></tr></table></figure></p>
-<p>经过省略之后变成：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">person -&gt; person.getAge() &gt; <span class="number">10</span></div><div class="line">    &amp;&amp; person.gender == Person.Sex.FEMALE</div><div class="line">    &amp;&amp; person.getAge() &lt; <span class="number">50</span></div></pre></td></tr></table></figure></p>
+<p>一个普通示例：</p>
+<pre><code class="java">(Person person) -&gt; {
+                   return person.getAge() &gt; 10
+                       &amp;&amp; person.gender == Person.Sex.FEMALE
+                       &amp;&amp; person.getAge() &lt; 50;}
+</code></pre>
+<p>经过省略之后变成：</p>
+<pre><code class="java">person -&gt; person.getAge() &gt; 10
+    &amp;&amp; person.gender == Person.Sex.FEMALE
+    &amp;&amp; person.getAge() &lt; 50
+</code></pre>
 <h2 id="Target-Typing"><a href="#Target-Typing" class="headerlink" title="Target Typing"></a>Target Typing</h2><p>如何确定一个lambda表达式的类型呢？java编译器通过以下的匹配来决定的：</p>
 <ul>
 <li>变量声明</li>
@@ -389,357 +302,76 @@
 <li>条件判断</li>
 <li>转型表达式</li>
 </ul>
-<p>举例，比如Runable和Callable<v>，分别通过invoke方法来调用<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">invoke</span><span class="params">(Runnable r)</span> </span>&#123;</div><div class="line">    r.run();</div><div class="line">&#125;</div><div class="line"></div><div class="line">&lt;T&gt; <span class="function">T <span class="title">invoke</span><span class="params">(Callable&lt;T&gt; c)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> c.call();</div><div class="line">&#125;</div></pre></td></tr></table></figure></v></p>
-<p>lambda调用：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String s = invoke(() -&gt; <span class="string">"done"</span>);</div></pre></td></tr></table></figure></p>
+<p>举例，比如Runable和Callable<v>，分别通过invoke方法来调用</v></p>
+<pre><code class="java">void invoke(Runnable r) {
+    r.run();
+}
+
+&lt;T&gt; T invoke(Callable&lt;T&gt; c) {
+    return c.call();
+}
+</code></pre>
+<p>lambda调用：</p>
+<pre><code class="java">String s = invoke(() -&gt; &quot;done&quot;);
+</code></pre>
 <p>通过返回值确定是调用的Callable。</p>
-<h2 id="method-references-方法引用"><a href="#method-references-方法引用" class="headerlink" title="method references (方法引用)"></a>method references (方法引用)</h2><p>方法引用就是我们经常看到的lambda的”::”这种感觉特别诡异的lambda格式，通常的使用情况是这样的：<br>如果在lambda表达式中直接去调用其他的方法，那么就可以省略为“::”这种格式。比如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">PersonAgeComparator</span> <span class="keyword">implements</span> <span class="title">Comparator</span>&lt;<span class="title">Person</span>&gt; </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Person a, Person b)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> a.getBirthday().compareTo(b.getBirthday());</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Arrays.sort(rosterAsArray, <span class="keyword">new</span> PersonAgeComparator());</div></pre></td></tr></table></figure></p>
-<p>封装成方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">sort</span><span class="params">(T[] a, Comparator&lt;? <span class="keyword">super</span> T&gt; c)</span></span></div></pre></td></tr></table></figure></p>
-<p>lambda调用：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Arrays.sort(rosterAsArray,</div><div class="line">    (Person a, Person b) -&gt; &#123;</div><div class="line">        <span class="keyword">return</span> a.getBirthday().compareTo(b.getBirthday());</div><div class="line">    &#125;</div><div class="line">);</div></pre></td></tr></table></figure></p>
-<p>这里在lambda中可以直接调用person的comparebyage方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Arrays.sort(rosterAsArray,</div><div class="line">    (a, b) -&gt; Person.compareByAge(a, b)</div><div class="line">);</div></pre></td></tr></table></figure></p>
-<p>上面这种情况就满足方法引用的情况，可以直接省略为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Arrays.sort(rosterAsArray, Person::compareByAge);</div></pre></td></tr></table></figure></p>
-<p>再比如，传入一个外部比较器：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ComparisonProvider</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareByName</span><span class="params">(Person a, Person b)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> a.getName().compareTo(b.getName());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareByAge</span><span class="params">(Person a, Person b)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> a.getBirthday().compareTo(b.getBirthday());</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">ComparisonProvider myComparisonProvider = <span class="keyword">new</span> ComparisonProvider();</div><div class="line">Arrays.sort(rosterAsArray, myComparisonProvider::compareByName);</div></pre></td></tr></table></figure></p>
+<h2 id="method-references-方法引用"><a href="#method-references-方法引用" class="headerlink" title="method references (方法引用)"></a>method references (方法引用)</h2><p>方法引用就是我们经常看到的lambda的”::”这种感觉特别诡异的lambda格式，通常的使用情况是这样的：<br>如果在lambda表达式中直接去调用其他的方法，那么就可以省略为“::”这种格式。比如：</p>
+<pre><code class="java">class PersonAgeComparator implements Comparator&lt;Person&gt; {
+    public int compare(Person a, Person b) {
+        return a.getBirthday().compareTo(b.getBirthday());
+    }
+}
+
+Arrays.sort(rosterAsArray, new PersonAgeComparator());
+</code></pre>
+<p>封装成方法：</p>
+<pre><code class="java">static &lt;T&gt; void sort(T[] a, Comparator&lt;? super T&gt; c)
+</code></pre>
+<p>lambda调用：</p>
+<pre><code class="java">Arrays.sort(rosterAsArray,
+    (Person a, Person b) -&gt; {
+        return a.getBirthday().compareTo(b.getBirthday());
+    }
+);
+</code></pre>
+<p>这里在lambda中可以直接调用person的comparebyage方法</p>
+<pre><code class="java">Arrays.sort(rosterAsArray,
+    (a, b) -&gt; Person.compareByAge(a, b)
+);
+</code></pre>
+<p>上面这种情况就满足方法引用的情况，可以直接省略为：</p>
+<pre><code class="java">Arrays.sort(rosterAsArray, Person::compareByAge);
+</code></pre>
+<p>再比如，传入一个外部比较器：</p>
+<pre><code class="java">class ComparisonProvider {
+    public int compareByName(Person a, Person b) {
+        return a.getName().compareTo(b.getName());
+    }
+
+    public int compareByAge(Person a, Person b) {
+        return a.getBirthday().compareTo(b.getBirthday());
+    }
+}
+ComparisonProvider myComparisonProvider = new ComparisonProvider();
+Arrays.sort(rosterAsArray, myComparisonProvider::compareByName);
+</code></pre>
 <p>通常的方法参考有下面4中情况：<br>kind  |example<br>–|–<br>引用静态方法  | ContainClass::staticMethodName<br>引用特定对象的一个实例方法  |containingObj:instanceMethodName<br>引用任意对象的一个特定类型的实例方法 | ContainingType:methodName<br>引用一个构造函数  | ClassName:new  </p>
-<p>这里面第三个不太好理解，根据字面的理解就是只要是对象中的实例方法符合特定类型就可以使用方法引用。比如<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">String[] stringArray = &#123; <span class="string">"Barbara"</span>, <span class="string">"James"</span>, <span class="string">"Mary"</span>, <span class="string">"John"</span>,</div><div class="line">               <span class="string">"Patricia"</span>, <span class="string">"Robert"</span>, <span class="string">"Michael"</span>, <span class="string">"Linda"</span> &#125;;</div><div class="line">       Arrays.sort(stringArray, <span class="keyword">new</span> Comparator&lt;String&gt;() &#123;</div><div class="line">           <span class="meta">@Override</span></div><div class="line">           <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(String o1, String o2)</span> </span>&#123;</div><div class="line">               <span class="keyword">return</span> o1.compareToIgnoreCase(o2);</div><div class="line">           &#125;</div><div class="line">       &#125;);</div></pre></td></tr></table></figure></p>
-<p>经过lambda后，可以缩写为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Arrays.sort(stringArray, (o1, o2) -&gt; o1.compareToIgnoreCase(o2));</div></pre></td></tr></table></figure></p>
-<p>满足方法引用的的情况3，可以简写为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Arrays.sort(stringArray, String::compareToIgnoreCase);</div></pre></td></tr></table></figure></p>
+<p>这里面第三个不太好理解，根据字面的理解就是只要是对象中的实例方法符合特定类型就可以使用方法引用。比如</p>
+<pre><code class="java">String[] stringArray = { &quot;Barbara&quot;, &quot;James&quot;, &quot;Mary&quot;, &quot;John&quot;,
+               &quot;Patricia&quot;, &quot;Robert&quot;, &quot;Michael&quot;, &quot;Linda&quot; };
+       Arrays.sort(stringArray, new Comparator&lt;String&gt;() {
+           @Override
+           public int compare(String o1, String o2) {
+               return o1.compareToIgnoreCase(o2);
+           }
+       });
+</code></pre>
+<p>经过lambda后，可以缩写为：</p>
+<pre><code class="java">Arrays.sort(stringArray, (o1, o2) -&gt; o1.compareToIgnoreCase(o2));
+</code></pre>
+<p>满足方法引用的的情况3，可以简写为：</p>
+<pre><code class="java">Arrays.sort(stringArray, String::compareToIgnoreCase);
+</code></pre>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>lambda实际上就是匿名方法的一种简写，适用于匿名内部类的简写等情况。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html" title="Nested Classes" target="_blank" rel="external">Nested Classes</a></p>
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/03/07/2016/2016-03-07-《成功，动机与目标》读书笔记－/" rel="next" title="《成功，动机与目标》读书笔记－">
-                <i class="fa fa-chevron-left"></i> 《成功，动机与目标》读书笔记－
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/30/2016/编程中遇到的环境问题/" rel="prev" title="编程中遇到的环境问题">
-                编程中遇到的环境问题 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-          
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
-    
-  </div>
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Inhaltsverzeichnis
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            Übersicht
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
-               alt="yanyi" />
-          <p class="site-author-name" itemprop="name">yanyi</p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">62</span>
-                <span class="site-state-item-name">Artikel</span>
-              </a>
-            </div>
-          
-
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">7</span>
-                <span class="site-state-item-name">Tags</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么使用内部类"><span class="nav-number">2.</span> <span class="nav-text">为什么使用内部类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内部类初始化"><span class="nav-number">3.</span> <span class="nav-text">内部类初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shadowing-这里不知道如何翻译？阴影？"><span class="nav-number">4.</span> <span class="nav-text">Shadowing(这里不知道如何翻译？阴影？)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个内部类实现迭代器的demo"><span class="nav-number">5.</span> <span class="nav-text">一个内部类实现迭代器的demo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#local-Classes"><span class="nav-number">6.</span> <span class="nav-text">local Classes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#匿名内部类"><span class="nav-number">7.</span> <span class="nav-text">匿名内部类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lambda-表达式"><span class="nav-number">8.</span> <span class="nav-text">lambda 表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lambda语法"><span class="nav-number">9.</span> <span class="nav-text">lambda语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Target-Typing"><span class="nav-number">10.</span> <span class="nav-text">Target Typing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#method-references-方法引用"><span class="nav-number">11.</span> <span class="nav-text">method references (方法引用)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">12.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">13.</span> <span class="nav-text">参考</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2017</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">yanyi</span>
-</div>
-
-
-<div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
-</div>
-
-<div class="theme-info">
-  Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
-  </a>
-</div>
-
-
-        
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-    
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
-
-
-
-  
-
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-</body>
-</html>
+</div></article><div></div></div></div><div id="bottom-outer"><div id="bottom-inner"><span>Site construction by</span><span> JustYan </span><span>using</span><a href="http://hexo.io"><span>hexo blog framework</span></a><span>.</span><br><a href="/">Home</a></div></div><script src="/js/justyan.js"></script><script src="/highlight/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script></body></html>

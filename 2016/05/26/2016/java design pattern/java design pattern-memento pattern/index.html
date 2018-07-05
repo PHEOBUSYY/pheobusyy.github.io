@@ -1,355 +1,4 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="pheobusyy" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
-
-
-
-
-
-
-<meta name="description" content="场景
-备忘录模式
-实现过程
-总结
-参考资料
-
-
-场景  在编程中经常遇到要回退某一个对象状态的场景，比如游戏中在打架前存盘，如果失败了可以回退到之前的状态，又比如执行了错误  操作之后要回退到之前的某一个操作等等，总之就是在之前保存了对象状态，用户后悔了之后可以回滚，一种“后悔药”的感觉  如果不用设计模式直接实现的话，是这个样子的：
-  123456789101112131415161718">
-<meta property="og:type" content="article">
-<meta property="og:title" content="java design pattern-memento pattern">
-<meta property="og:url" content="http://pheobusyy.github.io/2016/05/26/2016/java design pattern/java design pattern-memento pattern/index.html">
-<meta property="og:site_name" content="pheobusyy">
-<meta property="og:description" content="场景
-备忘录模式
-实现过程
-总结
-参考资料
-
-
-场景  在编程中经常遇到要回退某一个对象状态的场景，比如游戏中在打架前存盘，如果失败了可以回退到之前的状态，又比如执行了错误  操作之后要回退到之前的某一个操作等等，总之就是在之前保存了对象状态，用户后悔了之后可以回滚，一种“后悔药”的感觉  如果不用设计模式直接实现的话，是这个样子的：
-  123456789101112131415161718">
-<meta property="og:image" content="http://pheobusyy.github.io/images/2016/05/memento_pattern_uml_diagram.jpg">
-<meta property="og:updated_time" content="2017-02-25T01:12:01.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java design pattern-memento pattern">
-<meta name="twitter:description" content="场景
-备忘录模式
-实现过程
-总结
-参考资料
-
-
-场景  在编程中经常遇到要回退某一个对象状态的场景，比如游戏中在打架前存盘，如果失败了可以回退到之前的状态，又比如执行了错误  操作之后要回退到之前的某一个操作等等，总之就是在之前保存了对象状态，用户后悔了之后可以回滚，一种“后悔药”的感觉  如果不用设计模式直接实现的话，是这个样子的：
-  123456789101112131415161718">
-<meta name="twitter:image" content="http://pheobusyy.github.io/images/2016/05/memento_pattern_uml_diagram.jpg">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://pheobusyy.github.io/2016/05/26/2016/java design pattern/java design pattern-memento pattern/"/>
-
-
-
-
-
-  <title> java design pattern-memento pattern | pheobusyy </title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">pheobusyy</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle"></p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Startseite
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archiv
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            Tags
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/05/26/2016/java design pattern/java design pattern-memento pattern/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yanyi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="pheobusyy">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                java design pattern-memento pattern
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-26T16:22:00+08:00">
-                2016-05-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<!DOCTYPE html><html class="has-navbar-fixed-top" lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><title></title><script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script><link rel="stylesheet" type="text/css" href="/css/bulma.css"><link rel="stylesheet" type="text/css" href="/css/justyan.css"><link rel="stylesheet" type="text/css" href="/highlight/styles/dracula.css"><link rel="icon" href="/img/favicon.png"></head><body><section class="hero is-info is-medium"><div class="hero-head"><nav class="navbar is-fixed-top is-info"><div class="container"><div class="navbar-brand"><a class="navbar-item"><img class="navbar-circle" src="https://avatars2.githubusercontent.com/u/9360264?s=50&amp;u=5e88482f7319a8ce65ed618bcede72ea97a7f5aa&amp;v=4"></a><span class="navbar-burger burger" data-target="navbarMenuHeroA"><span></span><span></span><span></span></span></div><div class="navbar-menu" id="navbarMenuHeroA"><div class="navbar-end"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/category">Categories</a><a class="navbar-item" href="/contact">Contact</a><span class="navbar-item"><a class="button is-info is-inverted" href="https://github.com/PHEOBUSYY"><span class="icon"><i class="fab fa-github"></i></span><span>Github</span></a></span></div></div></div></nav></div><div class="hero-body"><div class="has-text-centered"><h1 class="title">java design pattern-memento pattern</h1><h2 class="subtitle">2016-05-26</h2></div></div><div class="hero-foot"></div></section><div id="content-outer"><div id="content-inner"><article id="post"><div id="toc"><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#场景"><span class="toc-number">1.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#备忘录模式"><span class="toc-number">2.</span> <span class="toc-text">备忘录模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li></ol></div></div><div class="post-text"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 <ul>
 <li><a href="#场景">场景</a></li>
 <li><a href="#备忘录模式">备忘录模式</a></li>
@@ -359,356 +8,105 @@
 </ul>
 <!-- /TOC -->
 <h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>  在编程中经常遇到要回退某一个对象状态的场景，比如游戏中在打架前存盘，如果失败了可以回退到之前的状态，又比如执行了错误<br>  操作之后要回退到之前的某一个操作等等，总之就是在之前保存了对象状态，用户后悔了之后可以回滚，一种“后悔药”的感觉<br>  如果不用设计模式直接实现的话，是这个样子的：</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NoMementoUse</span> </span>&#123;</div><div class="line"> <span class="keyword">private</span> String state;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getState</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> state;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setState</span><span class="params">(String state)</span> </span>&#123;</div><div class="line">      <span class="keyword">this</span>.state = state;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">      <span class="comment">//用来保存状态</span></div><div class="line">      String preState = <span class="string">""</span>;</div><div class="line">      NoMementoUse noMementoUse = <span class="keyword">new</span> NoMementoUse();</div><div class="line">      noMementoUse.setState(<span class="string">"state first"</span>);</div><div class="line">      preState = noMementoUse.getState();</div><div class="line">      noMementoUse.setState(<span class="string">"state second"</span>);</div><div class="line">      <span class="comment">//后悔了</span></div><div class="line">      noMementoUse.setState(preState);</div><div class="line">      System.out.println(<span class="string">"state="</span>+noMementoUse.getState());</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="java">  public class NoMementoUse {
+   private String state;
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public static void main(String[] args) {
+        //用来保存状态
+        String preState = &quot;&quot;;
+        NoMementoUse noMementoUse = new NoMementoUse();
+        noMementoUse.setState(&quot;state first&quot;);
+        preState = noMementoUse.getState();
+        noMementoUse.setState(&quot;state second&quot;);
+        //后悔了
+        noMementoUse.setState(preState);
+        System.out.println(&quot;state=&quot;+noMementoUse.getState());
+    }
+  }
+</code></pre>
 <p>  在上面的实现中，通过一个preState来保存状态，后悔了之后把preState回写到对象中，这里有两个问题：一个是暴露了对象中state属性，另一个是如果要实现更复杂的回退<br>  逻辑的话，不好扩展。在这种场景下，可以使用备忘录模式。<br>  <a id="more"></a></p>
 <h2 id="备忘录模式"><a href="#备忘录模式" class="headerlink" title="备忘录模式"></a>备忘录模式</h2><p>  备忘录模式是一种行为模式，是一种具备保存对象之前状态能力的模式。<br>  备忘录模式由三个对象组成：一个是原始对象（originator），一个是备忘对象（memento），一个备忘管理对象（careTaker）。<br>  其中，原始对象就是要需要保存状态的对象，备忘对象是对要保存状态的抽象，备忘管理对象用来管理备忘对象供原始对象使用。</p>
 <p><img src="/images/2016/05/memento_pattern_uml_diagram.jpg" alt="memento pattern"></p>
 <p>##实现过程<br>  首先是原始对象：</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Originator</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> String state;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> Memento <span class="title">saveToMemento</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">new</span> Memento(state);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">restoreFromMemento</span><span class="params">(Memento memento)</span> </span>&#123;</div><div class="line">      <span class="keyword">this</span>.state = memento.getState();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getState</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> state;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setState</span><span class="params">(String state)</span> </span>&#123;</div><div class="line">      <span class="keyword">this</span>.state = state;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>  通过restoreFromMemento和saveToMemento方法来存放状态和恢复状态。状态对应下面的Memento对象，memento对象内部<br>  可以扩展更复杂的属性和逻辑。<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Memento</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Memento</span><span class="params">(String state)</span> </span>&#123;</div><div class="line">      <span class="keyword">this</span>.state = state;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">private</span> String state;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getState</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> state;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setState</span><span class="params">(String state)</span> </span>&#123;</div><div class="line">      <span class="keyword">this</span>.state = state;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<pre><code class="java">  public class Originator {
+    private String state;
+
+    public Memento saveToMemento() {
+        return new Memento(state);
+    }
+
+    public void restoreFromMemento(Memento memento) {
+        this.state = memento.getState();
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+  }
+</code></pre>
+<p>  通过restoreFromMemento和saveToMemento方法来存放状态和恢复状态。状态对应下面的Memento对象，memento对象内部<br>  可以扩展更复杂的属性和逻辑。</p>
+<pre><code class="java">  public class Memento {
+    public Memento(String state) {
+        this.state = state;
+    }
+
+    private String state;
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+  }
+</code></pre>
 <p>  然后是状态管理对象；</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CareTaker</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> List&lt;Memento&gt; mementoList = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(Memento memento)</span> </span>&#123;</div><div class="line">      mementoList.add(memento);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> Memento <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> mementoList.get(index);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="java">  public class CareTaker {
+    private List&lt;Memento&gt; mementoList = new ArrayList&lt;&gt;();
+
+    public void add(Memento memento) {
+        mementoList.add(memento);
+    }
+
+    public Memento get(int index) {
+        return mementoList.get(index);
+    }
+  }
+</code></pre>
 <p>  通过状态管理对象来管理memento，可以实现更复杂的逻辑。</p>
-<p>  最后，调用实现：<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">      Originator originator = <span class="keyword">new</span> Originator();</div><div class="line">      CareTaker careTaker = <span class="keyword">new</span> CareTaker();</div><div class="line"></div><div class="line">      originator.setState(<span class="string">"first state"</span>);</div><div class="line">      originator.setState(<span class="string">"second state"</span>);</div><div class="line">      careTaker.add(originator.saveToMemento());</div><div class="line">      originator.setState(<span class="string">"three state"</span>);</div><div class="line">      careTaker.add(originator.saveToMemento());</div><div class="line"></div><div class="line">      originator.restoreFromMemento(careTaker.get(<span class="number">0</span>));</div><div class="line">      System.out.println(<span class="string">"state="</span>+originator.getState());</div><div class="line">      originator.restoreFromMemento(careTaker.get(<span class="number">1</span>));</div><div class="line">      System.out.println(<span class="string">"state="</span>+originator.getState());</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>  最后，调用实现：</p>
+<pre><code class="java">  public class Test {
+    public static void main(String[] args) {
+        Originator originator = new Originator();
+        CareTaker careTaker = new CareTaker();
+
+        originator.setState(&quot;first state&quot;);
+        originator.setState(&quot;second state&quot;);
+        careTaker.add(originator.saveToMemento());
+        originator.setState(&quot;three state&quot;);
+        careTaker.add(originator.saveToMemento());
+
+        originator.restoreFromMemento(careTaker.get(0));
+        System.out.println(&quot;state=&quot;+originator.getState());
+        originator.restoreFromMemento(careTaker.get(1));
+        System.out.println(&quot;state=&quot;+originator.getState());
+    }
+  }
+</code></pre>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>   通过上面的实现来看，备忘录模式非常简单，说白了就是一种状态回退机制的实现，把状态的保存和调用交给一个新的<br>   类去处理，达到了解耦的目的。比如在创建页面，如果用户做了一些无效操作之后想回滚的话就可以使用备忘录模式。</p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="http://www.tutorialspoint.com/design_pattern/memento_pattern.htm" title="Design Patterns - Memento Pattern" target="_blank" rel="external">Design Patterns - Memento Pattern</a></p>
 <p><a href="https://en.wikipedia.org/wiki/Memento_pattern" title="Memento pattern" target="_blank" rel="external">Memento pattern</a></p>
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/05/26/2016/java design pattern/java design pattern - state pattern/" rel="next" title="java design pattern - state pattern">
-                <i class="fa fa-chevron-left"></i> java design pattern - state pattern
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/27/2016/java design pattern/java design pattern - Builder pattern/" rel="prev" title="java design pattern - Builder pattern">
-                java design pattern - Builder pattern <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-          
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
-    
-  </div>
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Inhaltsverzeichnis
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            Übersicht
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
-               alt="yanyi" />
-          <p class="site-author-name" itemprop="name">yanyi</p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">62</span>
-                <span class="site-state-item-name">Artikel</span>
-              </a>
-            </div>
-          
-
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">7</span>
-                <span class="site-state-item-name">Tags</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#场景"><span class="nav-number">1.</span> <span class="nav-text">场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备忘录模式"><span class="nav-number">2.</span> <span class="nav-text">备忘录模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2017</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">yanyi</span>
-</div>
-
-
-<div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
-</div>
-
-<div class="theme-info">
-  Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
-  </a>
-</div>
-
-
-        
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-    
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
-
-
-
-  
-
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-</body>
-</html>
+</div></article><div></div></div></div><div id="bottom-outer"><div id="bottom-inner"><span>Site construction by</span><span> JustYan </span><span>using</span><a href="http://hexo.io"><span>hexo blog framework</span></a><span>.</span><br><a href="/">Home</a></div></div><script src="/js/justyan.js"></script><script src="/highlight/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script></body></html>

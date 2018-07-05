@@ -1,355 +1,4 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="pheobusyy" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
-
-
-
-
-
-
-<meta name="description" content="场景
-建造者模式
-对象内部builder实现
-总结
-参考资料
-
-
-场景  在平时我们会遇到复杂对象的构造过程，对象内部的组成部分属于多个或者一个复杂对象的情况，同时又很在意内部组成的组装顺序  这个时候，我们可以使用构造者模式来把对象内部组成的创建和组装来划分开，达到解耦合。同时对外部隐藏了对象内部的具体实现。
-  123456789101112131415161718192021222324">
-<meta property="og:type" content="article">
-<meta property="og:title" content="java design pattern - Builder pattern">
-<meta property="og:url" content="http://pheobusyy.github.io/2016/05/27/2016/java design pattern/java design pattern - Builder pattern/index.html">
-<meta property="og:site_name" content="pheobusyy">
-<meta property="og:description" content="场景
-建造者模式
-对象内部builder实现
-总结
-参考资料
-
-
-场景  在平时我们会遇到复杂对象的构造过程，对象内部的组成部分属于多个或者一个复杂对象的情况，同时又很在意内部组成的组装顺序  这个时候，我们可以使用构造者模式来把对象内部组成的创建和组装来划分开，达到解耦合。同时对外部隐藏了对象内部的具体实现。
-  123456789101112131415161718192021222324">
-<meta property="og:image" content="http://pheobusyy.github.io/images/2016/05/design_pattern_builder.png">
-<meta property="og:updated_time" content="2017-02-25T01:12:01.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java design pattern - Builder pattern">
-<meta name="twitter:description" content="场景
-建造者模式
-对象内部builder实现
-总结
-参考资料
-
-
-场景  在平时我们会遇到复杂对象的构造过程，对象内部的组成部分属于多个或者一个复杂对象的情况，同时又很在意内部组成的组装顺序  这个时候，我们可以使用构造者模式来把对象内部组成的创建和组装来划分开，达到解耦合。同时对外部隐藏了对象内部的具体实现。
-  123456789101112131415161718192021222324">
-<meta name="twitter:image" content="http://pheobusyy.github.io/images/2016/05/design_pattern_builder.png">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://pheobusyy.github.io/2016/05/27/2016/java design pattern/java design pattern - Builder pattern/"/>
-
-
-
-
-
-  <title> java design pattern - Builder pattern | pheobusyy </title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">pheobusyy</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle"></p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Startseite
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archiv
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            Tags
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/05/27/2016/java design pattern/java design pattern - Builder pattern/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yanyi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="pheobusyy">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                java design pattern - Builder pattern
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-27T16:07:00+08:00">
-                2016-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<!DOCTYPE html><html class="has-navbar-fixed-top" lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><title></title><script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script><link rel="stylesheet" type="text/css" href="/css/bulma.css"><link rel="stylesheet" type="text/css" href="/css/justyan.css"><link rel="stylesheet" type="text/css" href="/highlight/styles/dracula.css"><link rel="icon" href="/img/favicon.png"></head><body><section class="hero is-info is-medium"><div class="hero-head"><nav class="navbar is-fixed-top is-info"><div class="container"><div class="navbar-brand"><a class="navbar-item"><img class="navbar-circle" src="https://avatars2.githubusercontent.com/u/9360264?s=50&amp;u=5e88482f7319a8ce65ed618bcede72ea97a7f5aa&amp;v=4"></a><span class="navbar-burger burger" data-target="navbarMenuHeroA"><span></span><span></span><span></span></span></div><div class="navbar-menu" id="navbarMenuHeroA"><div class="navbar-end"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/category">Categories</a><a class="navbar-item" href="/contact">Contact</a><span class="navbar-item"><a class="button is-info is-inverted" href="https://github.com/PHEOBUSYY"><span class="icon"><i class="fab fa-github"></i></span><span>Github</span></a></span></div></div></div></nav></div><div class="hero-body"><div class="has-text-centered"><h1 class="title">java design pattern - Builder pattern</h1><h2 class="subtitle">2016-05-27</h2></div></div><div class="hero-foot"></div></section><div id="content-outer"><div id="content-inner"><article id="post"><div id="toc"><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#场景"><span class="toc-number">1.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建造者模式"><span class="toc-number">2.</span> <span class="toc-text">建造者模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象内部builder实现"><span class="toc-number">3.</span> <span class="toc-text">对象内部builder实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">5.</span> <span class="toc-text">参考资料</span></a></li></ol></div></div><div class="post-text"><!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 <ul>
 <li><a href="#场景">场景</a></li>
 <li><a href="#建造者模式">建造者模式</a></li>
@@ -359,359 +8,146 @@
 </ul>
 <!-- /TOC -->
 <h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>  在平时我们会遇到复杂对象的构造过程，对象内部的组成部分属于多个或者一个复杂对象的情况，同时又很在意内部组成的组装顺序<br>  这个时候，我们可以使用构造者模式来把对象内部组成的创建和组装来划分开，达到解耦合。同时对外部隐藏了对象内部的具体实现。</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">  <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GaiFan</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String cai;</div><div class="line">    <span class="keyword">private</span> String rice;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCai</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> cai;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCai</span><span class="params">(String cai)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.cai = cai;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getRice</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> rice;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setRice</span><span class="params">(String rice)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.rice = rice;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"GaiFan&#123;"</span> +</div><div class="line">                <span class="string">"cai='"</span> + cai + <span class="string">'\''</span> +</div><div class="line">                <span class="string">", rice='"</span> + rice + <span class="string">'\''</span> +</div><div class="line">                <span class="string">'&#125;'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NoUserBuilder</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">      GaiFan gaifan = <span class="keyword">new</span> GaiFan();</div><div class="line">      gaifan.setCai(<span class="string">"宫保鸡丁"</span>);</div><div class="line">      gaifan.setRice(<span class="string">"宫保鸡丁米饭"</span>);</div><div class="line">      System.out.println(<span class="string">"gaifan="</span>+gaifan);</div><div class="line">      gaifan = <span class="keyword">new</span> GaiFan();</div><div class="line">      gaifan.setCai(<span class="string">"鱼香肉丝"</span>);</div><div class="line">      gaifan.setRice(<span class="string">"鱼香肉丝米饭"</span>);</div><div class="line">      System.out.println(<span class="string">"gaifan="</span>+gaifan);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code class="java">  public class GaiFan {
+    private String cai;
+    private String rice;
+
+    public String getCai() {
+        return cai;
+    }
+
+    public void setCai(String cai) {
+        this.cai = cai;
+    }
+
+    public String getRice() {
+        return rice;
+    }
+
+    public void setRice(String rice) {
+        this.rice = rice;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;GaiFan{&quot; +
+                &quot;cai=&#39;&quot; + cai + &#39;\&#39;&#39; +
+                &quot;, rice=&#39;&quot; + rice + &#39;\&#39;&#39; +
+                &#39;}&#39;;
+    }
+}
+</code></pre>
+<pre><code class="java">  public class NoUserBuilder {
+    public static void main(String[] args) {
+        GaiFan gaifan = new GaiFan();
+        gaifan.setCai(&quot;宫保鸡丁&quot;);
+        gaifan.setRice(&quot;宫保鸡丁米饭&quot;);
+        System.out.println(&quot;gaifan=&quot;+gaifan);
+        gaifan = new GaiFan();
+        gaifan.setCai(&quot;鱼香肉丝&quot;);
+        gaifan.setRice(&quot;鱼香肉丝米饭&quot;);
+        System.out.println(&quot;gaifan=&quot;+gaifan);
+    }
+  }
+</code></pre>
 <p>  在这里我们使用盖饭来表示要构造的对象。盖饭由两个重要部分组成，菜和米饭，在没有使用建造者模式的时候直接创建盖饭对象<br>  同时设置对应的属性，在这里首先是暴露了盖饭内部的做法实现，同时如果菜和米饭的创建十分复杂的时候这里的逻辑会很混乱<br>  再如果要调整盖饭制作顺序的话，这个单独的创建对象显然无法胜任。这个时候我们可以使用建造者模式来帮组我们解决问题。</p>
 <h2 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h2><p>  建造者模式是一种对象创建模式，不同于工厂和抽象工厂模式，建造者模式主要着眼于对象的内部组成创建和构造顺序。建造者模式由4个主要角色构成：<br>  要创建的对象（Product），抽象的构造对象（Builder），具体的构造对象（concrete builder），导演类（Derector）。其中Builder抽象定义了对象<br>  的构造顺序，具体的构造对象内部实现具体要构造对象的各个组成的创建，导演类负责根据不同创建者来生成不同的对象。</p>
 <p><img src="/images/2016/05/design_pattern_builder.png" alt="builder pattern"><br><a id="more"></a><br>  下面是一个盖饭创建的demo实现：</p>
-<p>  抽象的盖饭建造者，定义了盖饭创建过程<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">GaiFanBuilder</span> </span>&#123;</div><div class="line"></div><div class="line">  <span class="keyword">public</span> GaiFan gaiFan;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">createCai</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">createRice</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> GaiFan <span class="title">getGaiFan</span><span class="params">()</span></span>&#123;</div><div class="line">      <span class="keyword">return</span> gaiFan;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>  具体的盖饭创建者继承抽象创建者<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GongbaoJidingBuilder</span> <span class="keyword">extends</span> <span class="title">GaiFanBuilder</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">GongbaoJidingBuilder</span><span class="params">()</span> </span>&#123;</div><div class="line">      gaiFan = <span class="keyword">new</span> GaiFan();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createCai</span><span class="params">()</span> </span>&#123;</div><div class="line">      gaiFan.setCai(<span class="string">"炒菜 ---- 宫保鸡丁"</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createRice</span><span class="params">()</span> </span>&#123;</div><div class="line">      gaiFan.setRice(<span class="string">"米饭  ------ 宫保鸡丁米饭"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">YuXiangRouSiBuilder</span> <span class="keyword">extends</span> <span class="title">GaiFanBuilder</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">YuXiangRouSiBuilder</span><span class="params">()</span> </span>&#123;</div><div class="line">      gaiFan = <span class="keyword">new</span> GaiFan();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createCai</span><span class="params">()</span> </span>&#123;</div><div class="line">      gaiFan.setCai(<span class="string">"炒菜 ---- 鱼香肉丝"</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createRice</span><span class="params">()</span> </span>&#123;</div><div class="line">      gaiFan.setRice(<span class="string">"米饭  ------ 普通米饭"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  抽象的盖饭建造者，定义了盖饭创建过程</p>
+<pre><code class="java">  public abstract class GaiFanBuilder {
+
+    public GaiFan gaiFan;
+
+    public abstract void createCai();
+
+    public abstract void createRice();
+
+    public GaiFan getGaiFan(){
+        return gaiFan;
+    }
+  }
+</code></pre>
+<p>  具体的盖饭创建者继承抽象创建者</p>
+<pre><code class="java">  public class GongbaoJidingBuilder extends GaiFanBuilder {
+    public GongbaoJidingBuilder() {
+        gaiFan = new GaiFan();
+    }
+
+    @Override
+    public void createCai() {
+        gaiFan.setCai(&quot;炒菜 ---- 宫保鸡丁&quot;);
+    }
+
+    @Override
+    public void createRice() {
+        gaiFan.setRice(&quot;米饭  ------ 宫保鸡丁米饭&quot;);
+    }
+  }
+</code></pre>
+<pre><code class="java">  public class YuXiangRouSiBuilder extends GaiFanBuilder {
+    public YuXiangRouSiBuilder() {
+        gaiFan = new GaiFan();
+    }
+
+    @Override
+    public void createCai() {
+        gaiFan.setCai(&quot;炒菜 ---- 鱼香肉丝&quot;);
+    }
+
+    @Override
+    public void createRice() {
+        gaiFan.setRice(&quot;米饭  ------ 普通米饭&quot;);
+    }
+  }
+</code></pre>
 <p>  导演类负责构造盖饭的顺序并提供盖饭对象</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Director</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> GaiFan <span class="title">order</span><span class="params">(GaiFanBuilder gaiFanBuilder)</span> </span>&#123;</div><div class="line">      <span class="comment">//这里可以调整顺序</span></div><div class="line">      gaiFanBuilder.createCai();</div><div class="line">      gaiFanBuilder.createRice();</div><div class="line">      <span class="keyword">return</span> gaiFanBuilder.getGaiFan();</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>  测试类<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">      Director director = <span class="keyword">new</span> Director();</div><div class="line">      System.out.println(<span class="string">"gaifan="</span> + director.order(<span class="keyword">new</span> YuXiangRouSiBuilder()));</div><div class="line">      System.out.println(<span class="string">"gaifan="</span> + director.order(<span class="keyword">new</span> GongbaoJidingBuilder()));</div><div class="line"></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>  输出：<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gaifan=GaiFan&#123;cai=<span class="string">'炒菜 ---- 鱼香肉丝'</span>, rice=<span class="string">'米饭  ------ 普通米饭'</span>&#125;</div><div class="line">gaifan=GaiFan&#123;cai=<span class="string">'炒菜 ---- 宫保鸡丁'</span>, rice=<span class="string">'米饭  ------ 宫保鸡丁米饭'</span>&#125;</div></pre></td></tr></table></figure></p>
+<pre><code class="java">  public class Director {
+    public GaiFan order(GaiFanBuilder gaiFanBuilder) {
+        //这里可以调整顺序
+        gaiFanBuilder.createCai();
+        gaiFanBuilder.createRice();
+        return gaiFanBuilder.getGaiFan();
+    }
+  }
+</code></pre>
+<p>  测试类</p>
+<pre><code class="java">  public class Test {
+    public static void main(String[] args) {
+        Director director = new Director();
+        System.out.println(&quot;gaifan=&quot; + director.order(new YuXiangRouSiBuilder()));
+        System.out.println(&quot;gaifan=&quot; + director.order(new GongbaoJidingBuilder()));
+
+    }
+  }
+</code></pre>
+<p>  输出：</p>
+<pre><code class="java">  gaifan=GaiFan{cai=&#39;炒菜 ---- 鱼香肉丝&#39;, rice=&#39;米饭  ------ 普通米饭&#39;}
+  gaifan=GaiFan{cai=&#39;炒菜 ---- 宫保鸡丁&#39;, rice=&#39;米饭  ------ 宫保鸡丁米饭&#39;}
+</code></pre>
 <h2 id="对象内部builder实现"><a href="#对象内部builder实现" class="headerlink" title="对象内部builder实现"></a>对象内部builder实现</h2><p>  在平时我们会经常用到的内部builder实现，如果对象内部属性有很多，但是有一部分是可以通过外部赋值，有一部分可以默认定义的话，我们可以把要外部赋值的属性交给内部builder来实现，同时在builder内部完成链式设置属性。这样在一定程度可以精简代码，参看《effect in java》。</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">InnerBuilder</span></span>&#123;</div><div class="line">      <span class="keyword">private</span> String cai;</div><div class="line">      <span class="keyword">private</span> String rice;</div><div class="line"></div><div class="line">      <span class="function"><span class="keyword">public</span> InnerBuilder <span class="title">setCai</span><span class="params">(String cai)</span> </span>&#123;</div><div class="line">          <span class="keyword">this</span>.cai = cai;</div><div class="line">          <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">      &#125;</div><div class="line"></div><div class="line"></div><div class="line">      <span class="function"><span class="keyword">public</span> InnerBuilder <span class="title">setRice</span><span class="params">(String rice)</span> </span>&#123;</div><div class="line">          <span class="keyword">this</span>.rice = rice;</div><div class="line">          <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">      &#125;</div><div class="line">      <span class="function"><span class="keyword">public</span> GaiFan <span class="title">build</span><span class="params">()</span></span>&#123;</div><div class="line">          GaiFan gaiFan = <span class="keyword">new</span> GaiFan();</div><div class="line">          gaiFan.setCai(cai);</div><div class="line">          gaiFan.setRice(rice);</div><div class="line">          <span class="keyword">return</span> gaiFan;</div><div class="line">      &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<pre><code class="java">  public static class InnerBuilder{
+        private String cai;
+        private String rice;
+
+        public InnerBuilder setCai(String cai) {
+            this.cai = cai;
+            return this;
+        }
+
+
+        public InnerBuilder setRice(String rice) {
+            this.rice = rice;
+            return this;
+        }
+        public GaiFan build(){
+            GaiFan gaiFan = new GaiFan();
+            gaiFan.setCai(cai);
+            gaiFan.setRice(rice);
+            return gaiFan;
+        }
+    }
+</code></pre>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  可以看到，通过builder类来分离了对象组成，通过Director来完成对象组装。这个就是建者模式的核心所在。在要考虑对象各个组成部分的顺序的时候<br>  可以尝试使用创建者模式。</p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="http://www.cnblogs.com/java-my-life/archive/2012/04/07/2433939.html" title="《JAVA与模式》之建造模式" target="_blank" rel="external">《JAVA与模式》之建造模式</a></p>
 <p><a href="http://www.tutorialspoint.com/design_pattern/builder_pattern.htm" title="Design Patterns - Builder Pattern" target="_blank" rel="external">Design Patterns - Builder Pattern</a></p>
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/05/26/2016/java design pattern/java design pattern-memento pattern/" rel="next" title="java design pattern-memento pattern">
-                <i class="fa fa-chevron-left"></i> java design pattern-memento pattern
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/28/2016/java design pattern/java design pattern - facade pattern/" rel="prev" title="java design pattern - facade pattern">
-                java design pattern - facade pattern <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-          
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
-    
-  </div>
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Inhaltsverzeichnis
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            Übersicht
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
-               alt="yanyi" />
-          <p class="site-author-name" itemprop="name">yanyi</p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">62</span>
-                <span class="site-state-item-name">Artikel</span>
-              </a>
-            </div>
-          
-
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">7</span>
-                <span class="site-state-item-name">Tags</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#场景"><span class="nav-number">1.</span> <span class="nav-text">场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建造者模式"><span class="nav-number">2.</span> <span class="nav-text">建造者模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象内部builder实现"><span class="nav-number">3.</span> <span class="nav-text">对象内部builder实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2017</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">yanyi</span>
-</div>
-
-
-<div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
-</div>
-
-<div class="theme-info">
-  Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
-  </a>
-</div>
-
-
-        
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-    
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
-
-
-
-  
-
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-</body>
-</html>
+</div></article><div></div></div></div><div id="bottom-outer"><div id="bottom-inner"><span>Site construction by</span><span> JustYan </span><span>using</span><a href="http://hexo.io"><span>hexo blog framework</span></a><span>.</span><br><a href="/">Home</a></div></div><script src="/js/justyan.js"></script><script src="/highlight/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script></body></html>
