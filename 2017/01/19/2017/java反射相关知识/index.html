@@ -1,4 +1,308 @@
-<!DOCTYPE html><html class="has-navbar-fixed-top" lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><title></title><script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script><link rel="stylesheet" type="text/css" href="/css/bulma.css"><link rel="stylesheet" type="text/css" href="/css/justyan.css"><link rel="stylesheet" type="text/css" href="/highlight/styles/dracula.css"><link rel="icon" href="/img/favicon.png"></head><body><section class="hero is-info is-medium"><div class="hero-head"><nav class="navbar is-fixed-top is-info"><div class="container"><div class="navbar-brand"><a class="navbar-item"><img class="navbar-circle" src="https://avatars2.githubusercontent.com/u/9360264?s=50&amp;u=5e88482f7319a8ce65ed618bcede72ea97a7f5aa&amp;v=4"></a><span class="navbar-burger burger" data-target="navbarMenuHeroA"><span></span><span></span><span></span></span></div><div class="navbar-menu" id="navbarMenuHeroA"><div class="navbar-end"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/category">Categories</a><a class="navbar-item" href="/contact">Contact</a><span class="navbar-item"><a class="button is-info is-inverted" href="https://github.com/PHEOBUSYY"><span class="icon"><i class="fab fa-github"></i></span><span>Github</span></a></span></div></div></div></nav></div><div class="hero-body"><div class="has-text-centered"><h1 class="title">java反射相关知识</h1><h2 class="subtitle">2017-01-19</h2></div></div><div class="hero-foot"></div></section><div id="content-outer"><div id="content-inner"><article id="post"><div id="toc"><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#java反射相关知识"><span class="toc-number">1.</span> <span class="toc-text">java反射相关知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Class-getDeclaringClass-和-Class-getEnclosingClass的区别"><span class="toc-number">1.1.</span> <span class="toc-text">Class.getDeclaringClass 和 Class.getEnclosingClass的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打印出继承关系"><span class="toc-number">1.2.</span> <span class="toc-text">打印出继承关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Class-getGenericInterfaces方法和Class-getInterfaces方法的区别"><span class="toc-number">1.3.</span> <span class="toc-text">Class.getGenericInterfaces方法和Class.getInterfaces方法的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Class-getTypeParameters-方法"><span class="toc-number">1.4.</span> <span class="toc-text">Class.getTypeParameters 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Class-getDeclaredMethods-和-Class-getMethods-区别"><span class="toc-number">1.5.</span> <span class="toc-text">Class.getDeclaredMethods 和 Class.getMethods 区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Class-getFields和Class-getDeclaredFields"><span class="toc-number">1.6.</span> <span class="toc-text">Class.getFields和Class.getDeclaredFields</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反射中获取method参数的相关属性"><span class="toc-number">1.7.</span> <span class="toc-text">反射中获取method参数的相关属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#isImplicit-和-isSynthetic"><span class="toc-number">1.7.1.</span> <span class="toc-text">isImplicit 和 isSynthetic</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Method-isVarArgs"><span class="toc-number">1.8.</span> <span class="toc-text">Method.isVarArgs()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Method的isSynthetic和isBridge"><span class="toc-number">1.9.</span> <span class="toc-text">Method的isSynthetic和isBridge</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#method反射调用注意事项"><span class="toc-number">1.10.</span> <span class="toc-text">method反射调用注意事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-number">1.11.</span> <span class="toc-text">参考资料</span></a></li></ol></li></ol></div></div><div class="post-text"><h2 id="java反射相关知识"><a href="#java反射相关知识" class="headerlink" title="java反射相关知识"></a>java反射相关知识</h2><h3 id="Class-getDeclaringClass-和-Class-getEnclosingClass的区别"><a href="#Class-getDeclaringClass-和-Class-getEnclosingClass的区别" class="headerlink" title="Class.getDeclaringClass 和 Class.getEnclosingClass的区别"></a>Class.getDeclaringClass 和 Class.getEnclosingClass的区别</h3><p>getDeclaringClass表示这个内的声明类是那个,常用于获取在当前中声明的内部类<br>getEnclosingClass表示获取当前类的外部调用类,也可以用于在内部类中获取外部类.<br>二者的区别在于匿名内部类,如果这个类不是在当前类中声明,那么getDeclaringClass返回null,而getEnclosingClass返回外层类</p>
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="欢迎来到JustinYan的个人blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="java反射相关知识Class.getDeclaringClass 和 Class.getEnclosingClass的区别getDeclaringClass表示这个内的声明类是那个,常用于获取在当前中声明的内部类getEnclosingClass表示获取当前类的外部调用类,也可以用于在内部类中获取外部类.二者的区别在于匿名内部类,如果这个类不是在当前类中声明,那么getDeclaringClas">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java反射相关知识">
+<meta property="og:url" content="http://pheobusyy.github.io/2017/01/19/2017/java反射相关知识/index.html">
+<meta property="og:site_name" content="欢迎来到JustinYan的个人blog">
+<meta property="og:description" content="java反射相关知识Class.getDeclaringClass 和 Class.getEnclosingClass的区别getDeclaringClass表示这个内的声明类是那个,常用于获取在当前中声明的内部类getEnclosingClass表示获取当前类的外部调用类,也可以用于在内部类中获取外部类.二者的区别在于匿名内部类,如果这个类不是在当前类中声明,那么getDeclaringClas">
+<meta property="og:image" content="http://pheobusyy.github.io/images/2017/01/method的modifiers属性说明.png">
+<meta property="og:updated_time" content="2017-02-25T01:12:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java反射相关知识">
+<meta name="twitter:description" content="java反射相关知识Class.getDeclaringClass 和 Class.getEnclosingClass的区别getDeclaringClass表示这个内的声明类是那个,常用于获取在当前中声明的内部类getEnclosingClass表示获取当前类的外部调用类,也可以用于在内部类中获取外部类.二者的区别在于匿名内部类,如果这个类不是在当前类中声明,那么getDeclaringClas">
+<meta name="twitter:image" content="http://pheobusyy.github.io/images/2017/01/method的modifiers属性说明.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://pheobusyy.github.io/2017/01/19/2017/java反射相关知识/"/>
+
+
+
+
+
+  <title>java反射相关知识 | 欢迎来到JustinYan的个人blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">欢迎来到JustinYan的个人blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">永远不要因为你觉得某个目标无法实现就否决它-《原则》</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2017/01/19/2017/java反射相关知识/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JustinYan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="欢迎来到JustinYan的个人blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">java反射相关知识</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-19T15:16:00+08:00">
+                2017-01-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="java反射相关知识"><a href="#java反射相关知识" class="headerlink" title="java反射相关知识"></a>java反射相关知识</h2><h3 id="Class-getDeclaringClass-和-Class-getEnclosingClass的区别"><a href="#Class-getDeclaringClass-和-Class-getEnclosingClass的区别" class="headerlink" title="Class.getDeclaringClass 和 Class.getEnclosingClass的区别"></a>Class.getDeclaringClass 和 Class.getEnclosingClass的区别</h3><p>getDeclaringClass表示这个内的声明类是那个,常用于获取在当前中声明的内部类<br>getEnclosingClass表示获取当前类的外部调用类,也可以用于在内部类中获取外部类.<br>二者的区别在于匿名内部类,如果这个类不是在当前类中声明,那么getDeclaringClass返回null,而getEnclosingClass返回外层类</p>
 <pre><code class="java">class TestClassReflection{
 
   public static void main(String[] args) throws NoSuchFieldException {
@@ -181,4 +485,385 @@ Object o = Array.newInstance(int.class, 3);
         Array.set(o,1,2);
         Array.set(o,2,3);
 </code></pre><h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="https://docs.oracle.com/javase/tutorial/reflect/TOC.html" title="java reflect tutorial" target="_blank" rel="external">java reflect tutorial</a></p>
-</div></article><div></div></div></div><div id="bottom-outer"><div id="bottom-inner"><span>Site construction by</span><span> JustYan </span><span>using</span><a href="http://hexo.io"><span>hexo blog framework</span></a><span>.</span><br><a href="/">Home</a></div></div><script src="/js/justyan.js"></script><script src="/highlight/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script></body></html>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/19/2017/android asyncTask源码分析/" rel="next" title="android asyncTask源码分析">
+                <i class="fa fa-chevron-left"></i> android asyncTask源码分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/23/2017/读书笔记/富爸爸 穷爸爸读书笔记/" rel="prev" title="富爸爸 穷爸爸 读书笔记">
+                富爸爸 穷爸爸 读书笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">JustinYan</p>
+              <p class="site-description motion-element" itemprop="description">JustinYan的个人blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">96</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#java反射相关知识"><span class="nav-number">1.</span> <span class="nav-text">java反射相关知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Class-getDeclaringClass-和-Class-getEnclosingClass的区别"><span class="nav-number">1.1.</span> <span class="nav-text">Class.getDeclaringClass 和 Class.getEnclosingClass的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打印出继承关系"><span class="nav-number">1.2.</span> <span class="nav-text">打印出继承关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Class-getGenericInterfaces方法和Class-getInterfaces方法的区别"><span class="nav-number">1.3.</span> <span class="nav-text">Class.getGenericInterfaces方法和Class.getInterfaces方法的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Class-getTypeParameters-方法"><span class="nav-number">1.4.</span> <span class="nav-text">Class.getTypeParameters 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Class-getDeclaredMethods-和-Class-getMethods-区别"><span class="nav-number">1.5.</span> <span class="nav-text">Class.getDeclaredMethods 和 Class.getMethods 区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Class-getFields和Class-getDeclaredFields"><span class="nav-number">1.6.</span> <span class="nav-text">Class.getFields和Class.getDeclaredFields</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反射中获取method参数的相关属性"><span class="nav-number">1.7.</span> <span class="nav-text">反射中获取method参数的相关属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#isImplicit-和-isSynthetic"><span class="nav-number">1.7.1.</span> <span class="nav-text">isImplicit 和 isSynthetic</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Method-isVarArgs"><span class="nav-number">1.8.</span> <span class="nav-text">Method.isVarArgs()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Method的isSynthetic和isBridge"><span class="nav-number">1.9.</span> <span class="nav-text">Method的isSynthetic和isBridge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#method反射调用注意事项"><span class="nav-number">1.10.</span> <span class="nav-text">method反射调用注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">1.11.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JustinYan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>欢迎来到JustYan的个人blog</title>
+  <title>欢迎来到JustinYan的个人blog</title>
   
   <subtitle>永远不要因为你觉得某个目标无法实现就否决它-《原则》</subtitle>
   <link href="/atom.xml" rel="self"/>
@@ -10,7 +10,7 @@
   <id>http://pheobusyy.github.io/</id>
   
   <author>
-    <name>JustYan</name>
+    <name>JustinYan</name>
     
   </author>
   
