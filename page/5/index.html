@@ -233,6 +233,170 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/06/01/2016/java design pattern/java design pattern - flyweight pattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JustinYan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="欢迎来到JustinYan的个人blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/06/01/2016/java design pattern/java design pattern - flyweight pattern/" itemprop="url">java design pattern - flyweight pattern</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-01T13:49:00+08:00">
+                2016-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<ul>
+<li><a href="#场景">场景</a></li>
+<li><a href="#享元模式">享元模式</a></li>
+<li><a href="#总结">总结</a></li>
+<li><a href="#参考资料">参考资料</a></li>
+</ul>
+<!-- /TOC -->
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>  在编程中如果某些对象数目过多会对系统性能造成很大的影响，比如在java中如果只是一味的创建新的对象话，对内存会有很大的压力<br>  这个时候我们可以考虑通过共享数据对象的方法来缓解这一问题，在这里就用到了享元模式。</p>
+<p>  下面是正常的没有使用享元模式的demo：</p>
+<pre><code class="java">  public class NoUserFlyWeight {
+    private String state;
+
+    public NoUserFlyWeight(String state) {
+        this.state = state;
+    }
+
+    public void operator() {
+        System.out.println(&quot;NoUserFlyWeight state =&quot; + state);
+    }
+
+    public static void main(String[] args) {
+        NoUserFlyWeight noUserFlyWeight = new NoUserFlyWeight(&quot;state1&quot;);
+        noUserFlyWeight.operator();
+        noUserFlyWeight = new NoUserFlyWeight(&quot;state2&quot;);
+        noUserFlyWeight.operator();
+
+        noUserFlyWeight = new NoUserFlyWeight(&quot;state3&quot;);
+        noUserFlyWeight.operator();
+
+        noUserFlyWeight = new NoUserFlyWeight(&quot;state1&quot;);
+        noUserFlyWeight.operator();
+
+        noUserFlyWeight = new NoUserFlyWeight(&quot;state3&quot;);
+        noUserFlyWeight.operator();
+    }
+  }
+</code></pre>
+<p>  在这里每次使用noUserFlyWeight的时候都创建了新的对象，对系统性能会有很大的影响，同时不太满足单例的情景，因为需要使用不同状态“state”。</p>
+<h2 id="享元模式"><a href="#享元模式" class="headerlink" title="享元模式"></a>享元模式</h2><p>  享元模式是一样结构化模式，旨在通过共享技术来重复利用相同或相似的对象。比如在java中String字符串是final的，就是通过享元模式来利用相同字符的字符串，在常量池中<br>  共享相同的字符串来达到减少内存的目的。<br>  享元模式里面有两个概念，外部状态和内部状态。<br>  对象要共享的话就涉及到如何归纳那些对象属性可以共享，就是创建出来打大家都一样，这样就可以共享。那些属性不能共享，需要把它转换成外部状态，通过方法调用来实现，也就是从细粒度上来划分对象的属性。可以共享的就内部状态，对外开放通过方法调用就是外部状态。</p>
+<p><img src="/images/2016/06/flyweight_pattern_uml.png" alt="flyweight pattern"><br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/06/01/2016/java design pattern/java design pattern - flyweight pattern/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/05/30/2016/java design pattern/java design pattern - bridge pattern/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2078,131 +2242,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/02/19/VIM学习笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="JustinYan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="欢迎来到JustinYan的个人blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/02/19/VIM学习笔记/" itemprop="url">VIM学习笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-19T16:00:00+08:00">
-                2016-02-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>  vim作为强大的编程工具，可以最大程度的解放鼠标，把更多的关注点放在键盘编程上，本文主要介绍了vim的三种模式<br>以及vim的常用的命令，更多的介绍和教程请查看官方文档</p>
-<p><img src="/images/2016/04/vim_sample.png" alt="vim sample"><br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/02/19/VIM学习笔记/#more" rel="contents">
-              Weiterlesen &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/02/19/java中保留两位小数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2277,6 +2316,140 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2016/02/19/java中保留两位小数/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/02/19/android的clean架构分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JustinYan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="欢迎来到JustinYan的个人blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/02/19/android的clean架构分析/" itemprop="url">android的clean架构分析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-19T16:00:00+08:00">
+                2016-02-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="结构分层"><a href="#结构分层" class="headerlink" title="结构分层"></a>结构分层</h2><p><img src="/images/2016/02/clean_architecture1.png" alt="  clean-architecture1"></p>
+<p>  首先是分层，分层的目的就是为了解耦合，把整个程序根据一定的方式来划分为不同的层次，每个层次相互独立。<br>  在clean-architecture(以下简称clean)中，把程序分为了四层，分别是：</p>
+<ul>
+<li><p>Frameworks and Drivers:简称UI层，这里是所有具体实现：包括UI,工具类,框架,等等</p>
+</li>
+<li><p>Interface Adapters:适配层，顾名思义就是用来为上层UI层和下层将要说到的用例层做通讯的，并且把上下两层中对象做相互转化，比如我们底层的数据库表结构和服务器传过来的数据结构不太一致的时候<br>就需要我们做相互的转化来达成数据流动</p>
+</li>
+<li><p>Use Cases:简称用例层，这一层主要是处理底层的业务对象的，比如数据库的CRUD等操作，网络请求等等</p>
+</li>
+<li><p>Entities:简称实例层，主要是业务逻辑对象（纯java逻辑对象）</p>
+<p>实际上核心分层思想还是将UI和逻辑分离了，这里的UI层和接口适配层实际上就是干这事儿的，常用的实现是通过MVP来完成的，这里的UI层对应view层，Entities对应module层，中间的适配层和用例层对应Presenter层，核心的业务逻辑应该尽量交给纯java来实现，这样的好处是可以不依赖于环境，内部可以通过各种设计模式来重构和迭代等等。同时在分工上也可以根据不同人员的能力来完成不同的层次逻辑。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/02/19/android的clean架构分析/#more" rel="contents">
               Weiterlesen &raquo;
             </a>
           </div>
@@ -2582,7 +2755,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/02/19/android的clean架构分析/">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/02/19/VIM学习笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JustinYan">
@@ -2601,7 +2774,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/02/19/android的clean架构分析/" itemprop="url">android的clean架构分析</a></h1>
+                <a class="post-title-link" href="/2016/02/19/VIM学习笔记/" itemprop="url">VIM学习笔记</a></h1>
         
 
         <div class="post-meta">
@@ -2652,20 +2825,11 @@
 
       
         
-          <h2 id="结构分层"><a href="#结构分层" class="headerlink" title="结构分层"></a>结构分层</h2><p><img src="/images/2016/02/clean_architecture1.png" alt="  clean-architecture1"></p>
-<p>  首先是分层，分层的目的就是为了解耦合，把整个程序根据一定的方式来划分为不同的层次，每个层次相互独立。<br>  在clean-architecture(以下简称clean)中，把程序分为了四层，分别是：</p>
-<ul>
-<li><p>Frameworks and Drivers:简称UI层，这里是所有具体实现：包括UI,工具类,框架,等等</p>
-</li>
-<li><p>Interface Adapters:适配层，顾名思义就是用来为上层UI层和下层将要说到的用例层做通讯的，并且把上下两层中对象做相互转化，比如我们底层的数据库表结构和服务器传过来的数据结构不太一致的时候<br>就需要我们做相互的转化来达成数据流动</p>
-</li>
-<li><p>Use Cases:简称用例层，这一层主要是处理底层的业务对象的，比如数据库的CRUD等操作，网络请求等等</p>
-</li>
-<li><p>Entities:简称实例层，主要是业务逻辑对象（纯java逻辑对象）</p>
-<p>实际上核心分层思想还是将UI和逻辑分离了，这里的UI层和接口适配层实际上就是干这事儿的，常用的实现是通过MVP来完成的，这里的UI层对应view层，Entities对应module层，中间的适配层和用例层对应Presenter层，核心的业务逻辑应该尽量交给纯java来实现，这样的好处是可以不依赖于环境，内部可以通过各种设计模式来重构和迭代等等。同时在分工上也可以根据不同人员的能力来完成不同的层次逻辑。</p>
+          <p>  vim作为强大的编程工具，可以最大程度的解放鼠标，把更多的关注点放在键盘编程上，本文主要介绍了vim的三种模式<br>以及vim的常用的命令，更多的介绍和教程请查看官方文档</p>
+<p><img src="/images/2016/04/vim_sample.png" alt="vim sample"><br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/02/19/android的clean架构分析/#more" rel="contents">
+            <a class="btn" href="/2016/02/19/VIM学习笔记/#more" rel="contents">
               Weiterlesen &raquo;
             </a>
           </div>
@@ -2753,7 +2917,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">97</span>
+                  <span class="site-state-item-count">98</span>
                   <span class="site-state-item-name">Artikel</span>
                 </a>
               </div>
