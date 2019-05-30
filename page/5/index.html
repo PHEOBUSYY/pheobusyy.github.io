@@ -1969,154 +1969,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/03/01/android 知识点/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="JustinYan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="欢迎来到JustinYan的个人blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/03/01/android 知识点/" itemprop="url">android知识点</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-01T22:00:00+08:00">
-                2016-03-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>android知识点汇总</p>
-<h2 id="ActivityLifecycleCallbacks的使用"><a href="#ActivityLifecycleCallbacks的使用" class="headerlink" title="ActivityLifecycleCallbacks的使用"></a>ActivityLifecycleCallbacks的使用</h2><p>  ActivityLifecycleCallbacks用来在application中统一监听activity的生命周期回调</p>
-<h2 id="为什么在theme设置layoutmargin等以layout开头的属性无效"><a href="#为什么在theme设置layoutmargin等以layout开头的属性无效" class="headerlink" title="为什么在theme设置layoutmargin等以layout开头的属性无效"></a>为什么在theme设置layout<em>margin等以layout</em>开头的属性无效</h2><p>  这是因为以layout_开头的属性是用来告诉父控件如何放置该控件位置的，必须明确了外部viewGroup的类型之后才可以生效，   所以在theme中设置无效，需要在具体调用的xml中设置对应的style才可以生效</p>
-<p>  <a href="http://stackoverflow.com/questions/3775587/to-use-layout-marginleft-in-a-button-style-applied-as-a-theme" title="To use layout_marginLeft in a button style applied as a theme?">  To use layout_marginLeft in a button style applied as a theme?</a></p>
-<h2 id="如何修改全局的view属性，比如改变当前activity或者application的button背景"><a href="#如何修改全局的view属性，比如改变当前activity或者application的button背景" class="headerlink" title="如何修改全局的view属性，比如改变当前activity或者application的button背景"></a>如何修改全局的view属性，比如改变当前activity或者application的button背景</h2><p>  方法一.theme中引用style，然后设置为当前activity的theme</p>
-<pre><code class="xml">  &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;resources&gt;
-  &lt;style name=&quot;MyRedTheme&quot; parent=&quot;android:Theme.Light&quot;&gt;
-    &lt;item name=&quot;android:textAppearance&quot;&gt;@style/MyRedTextAppearance&lt;/item&gt;
-  &lt;/style&gt;
-  &lt;style name=&quot;MyRedTextAppearance&quot; parent=&quot;@android:style/TextAppearance&quot;&gt;
-    &lt;item name=&quot;android:textColor&quot;&gt;#F00&lt;/item&gt;
-    &lt;item name=&quot;android:textStyle&quot;&gt;bold&lt;/item&gt;
-  &lt;/style&gt;
-&lt;/resources&gt;
-</code></pre>
-<p>  方法二.自定义一个view</p>
-<pre><code class="java">  public class RedTextView extends TextView{
-    public RedTextView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        setTextColor(Color.RED);
-    }
-  }
-</code></pre>
-<p>  <a href="http://stackoverflow.com/questions/3078081/setting-global-styles-for-views-in-android" title="Setting global styles for Views in Android">  Setting global styles for Views in Android</a><br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/03/01/android 知识点/#more" rel="contents">
-              Weiterlesen &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/03/01/Linux常用命令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2242,7 +2094,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/02/19/java中保留两位小数/">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/03/01/android 知识点/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JustinYan">
@@ -2261,7 +2113,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/02/19/java中保留两位小数/" itemprop="url">JAVA中的保留两位小数</a></h1>
+                <a class="post-title-link" href="/2016/03/01/android 知识点/" itemprop="url">android知识点</a></h1>
         
 
         <div class="post-meta">
@@ -2273,8 +2125,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-19T16:00:00+08:00">
-                2016-02-19
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-01T22:00:00+08:00">
+                2016-03-01
               </time>
             
 
@@ -2312,10 +2164,34 @@
 
       
         
-          <p>在java中，保留两位小数有很多种方法，其中主要思路有痛过NumberFormat等格式化数字或者通过BigDecimal来设置精度处理，下面列出了常用的4种方法。</p>
+          <p>android知识点汇总</p>
+<h2 id="ActivityLifecycleCallbacks的使用"><a href="#ActivityLifecycleCallbacks的使用" class="headerlink" title="ActivityLifecycleCallbacks的使用"></a>ActivityLifecycleCallbacks的使用</h2><p>  ActivityLifecycleCallbacks用来在application中统一监听activity的生命周期回调</p>
+<h2 id="为什么在theme设置layoutmargin等以layout开头的属性无效"><a href="#为什么在theme设置layoutmargin等以layout开头的属性无效" class="headerlink" title="为什么在theme设置layoutmargin等以layout开头的属性无效"></a>为什么在theme设置layout<em>margin等以layout</em>开头的属性无效</h2><p>  这是因为以layout_开头的属性是用来告诉父控件如何放置该控件位置的，必须明确了外部viewGroup的类型之后才可以生效，   所以在theme中设置无效，需要在具体调用的xml中设置对应的style才可以生效</p>
+<p>  <a href="http://stackoverflow.com/questions/3775587/to-use-layout-marginleft-in-a-button-style-applied-as-a-theme" title="To use layout_marginLeft in a button style applied as a theme?">  To use layout_marginLeft in a button style applied as a theme?</a></p>
+<h2 id="如何修改全局的view属性，比如改变当前activity或者application的button背景"><a href="#如何修改全局的view属性，比如改变当前activity或者application的button背景" class="headerlink" title="如何修改全局的view属性，比如改变当前activity或者application的button背景"></a>如何修改全局的view属性，比如改变当前activity或者application的button背景</h2><p>  方法一.theme中引用style，然后设置为当前activity的theme</p>
+<pre><code class="xml">  &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;resources&gt;
+  &lt;style name=&quot;MyRedTheme&quot; parent=&quot;android:Theme.Light&quot;&gt;
+    &lt;item name=&quot;android:textAppearance&quot;&gt;@style/MyRedTextAppearance&lt;/item&gt;
+  &lt;/style&gt;
+  &lt;style name=&quot;MyRedTextAppearance&quot; parent=&quot;@android:style/TextAppearance&quot;&gt;
+    &lt;item name=&quot;android:textColor&quot;&gt;#F00&lt;/item&gt;
+    &lt;item name=&quot;android:textStyle&quot;&gt;bold&lt;/item&gt;
+  &lt;/style&gt;
+&lt;/resources&gt;
+</code></pre>
+<p>  方法二.自定义一个view</p>
+<pre><code class="java">  public class RedTextView extends TextView{
+    public RedTextView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        setTextColor(Color.RED);
+    }
+  }
+</code></pre>
+<p>  <a href="http://stackoverflow.com/questions/3078081/setting-global-styles-for-views-in-android" title="Setting global styles for Views in Android">  Setting global styles for Views in Android</a><br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/02/19/java中保留两位小数/#more" rel="contents">
+            <a class="btn" href="/2016/03/01/android 知识点/#more" rel="contents">
               Weiterlesen &raquo;
             </a>
           </div>
@@ -2500,7 +2376,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/02/19/android的flux架构分析/">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/02/19/java中保留两位小数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JustinYan">
@@ -2519,7 +2395,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/02/19/android的flux架构分析/" itemprop="url">android的flux架构分析</a></h1>
+                <a class="post-title-link" href="/2016/02/19/java中保留两位小数/" itemprop="url">JAVA中的保留两位小数</a></h1>
         
 
         <div class="post-meta">
@@ -2570,14 +2446,135 @@
 
       
         
-          <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>flux是facebook在14年提出的前端框架，旨在从架构层面来解决MVC的在复杂场景下越来越复杂内部逻辑繁重等问题。<br>我们知道在MVC中，通过Controler来控制Modle,view,比如用户点击了view之后，view通知controler，controler来控制model做状态变换，最后再更新view。如图：</p>
-<p><img src="/images/2016/02/flux_mvc.png" alt=""></p>
-<p>当逻辑比较复杂或者层次比较复杂的时候就会出现下面这种情况</p>
-<p><img src="/images/2016/02/flux_mvc_complex.png" alt=""></p>
-<p>flux架构就是在这种情况下提出的。<br>
+          <p>在java中，保留两位小数有很多种方法，其中主要思路有痛过NumberFormat等格式化数字或者通过BigDecimal来设置精度处理，下面列出了常用的4种方法。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/02/19/android的flux架构分析/#more" rel="contents">
+            <a class="btn" href="/2016/02/19/java中保留两位小数/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/02/19/VIM学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JustinYan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="欢迎来到JustinYan的个人blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/02/19/VIM学习笔记/" itemprop="url">VIM学习笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-19T16:00:00+08:00">
+                2016-02-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>  vim作为强大的编程工具，可以最大程度的解放鼠标，把更多的关注点放在键盘编程上，本文主要介绍了vim的三种模式<br>以及vim的常用的命令，更多的介绍和教程请查看官方文档</p>
+<p><img src="/images/2016/04/vim_sample.png" alt="vim sample"><br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/02/19/VIM学习笔记/#more" rel="contents">
               Weiterlesen &raquo;
             </a>
           </div>
@@ -2755,7 +2752,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/02/19/VIM学习笔记/">
+    <link itemprop="mainEntityOfPage" href="http://pheobusyy.github.io/2016/02/19/android的flux架构分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JustinYan">
@@ -2774,7 +2771,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/02/19/VIM学习笔记/" itemprop="url">VIM学习笔记</a></h1>
+                <a class="post-title-link" href="/2016/02/19/android的flux架构分析/" itemprop="url">android的flux架构分析</a></h1>
         
 
         <div class="post-meta">
@@ -2825,11 +2822,14 @@
 
       
         
-          <p>  vim作为强大的编程工具，可以最大程度的解放鼠标，把更多的关注点放在键盘编程上，本文主要介绍了vim的三种模式<br>以及vim的常用的命令，更多的介绍和教程请查看官方文档</p>
-<p><img src="/images/2016/04/vim_sample.png" alt="vim sample"><br>
+          <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>flux是facebook在14年提出的前端框架，旨在从架构层面来解决MVC的在复杂场景下越来越复杂内部逻辑繁重等问题。<br>我们知道在MVC中，通过Controler来控制Modle,view,比如用户点击了view之后，view通知controler，controler来控制model做状态变换，最后再更新view。如图：</p>
+<p><img src="/images/2016/02/flux_mvc.png" alt=""></p>
+<p>当逻辑比较复杂或者层次比较复杂的时候就会出现下面这种情况</p>
+<p><img src="/images/2016/02/flux_mvc_complex.png" alt=""></p>
+<p>flux架构就是在这种情况下提出的。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/02/19/VIM学习笔记/#more" rel="contents">
+            <a class="btn" href="/2016/02/19/android的flux架构分析/#more" rel="contents">
               Weiterlesen &raquo;
             </a>
           </div>
